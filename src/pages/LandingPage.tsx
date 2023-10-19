@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useState } from 'react'
 import './styles.css'
-import { AuthContext } from '../context/authContext/authContext';
-import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/authContext/authContext'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -10,8 +10,9 @@ export function LandingPage() {
   const navigate = useNavigate()
   const { login } = useContext(AuthContext);
   const handleLogin = () => {
+    
     login(username);
-    navigate("/home"); 
+    navigate("HOME"); 
 
   };
 
