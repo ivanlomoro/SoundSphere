@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { useContext } from 'react'
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext/authContext';
+import { LANDINGPAGE } from './paths';
 
 
 export const PrivateRoutes = ({ children }: { children: ReactNode }) => {
@@ -10,7 +11,7 @@ export const PrivateRoutes = ({ children }: { children: ReactNode }) => {
   return isLogged ? (
     <>{children}</>
   ) : (
-    <Navigate to={"/landingPage"} />
+    <Navigate to={LANDINGPAGE} />
   );
 };
 

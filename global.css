@@ -1,0 +1,31 @@
+/*====== Custom Fonts =====*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,700&display=swap');
+
+
+
+/*====== Custom Variables =====*/
+:root{
+    /* Colors */
+    --clr-bg-primary: #000;
+    --cl-text-primary: #d6d6d6;
+    --clr-accent: #0BD8AB;
+
+    /* Typography */
+    --ff-primary: 'Montserrat', sans-serif;
+
+    /* Font size */
+    --fs-md: 0.75rem;
+    --fs-ml: 0.875rem;
+    --fs-lg: 1rem;
+
+    /* Spaces */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-xl: 2rem;
+
+    /* Border Radius */
+    --radius-full: 50%;
+    --radius-sm: 0.5rem;
+}
+

@@ -17,7 +17,7 @@ export const RouterPaths: FC= () => {
                 <Route path={USERPAGE} element={<UserPage/>} />
                 {/* <Route path="/" element={} /> */}
              
-                <Route path="/" element={<Navigate to="HOME" />} />
+                <Route path="/" element={<Navigate to={HOME} />} />
             </Routes>
      
 

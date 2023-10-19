@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import './styles.css'
 import { AuthContext } from '../context/authContext/authContext'
 import { useNavigate } from 'react-router-dom'
+import { HOME } from '../routes/paths';
 
 
 
@@ -12,7 +13,7 @@ export function LandingPage() {
   const handleLogin = () => {
     
     login(username);
-    navigate("HOME"); 
+    navigate(HOME); 
 
   };
 
@@ -21,7 +22,7 @@ export function LandingPage() {
     <div className="container green">
       <input className='form-input'
             type="text"
-            placeholder="Chanchito Feliz"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
