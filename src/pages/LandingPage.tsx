@@ -6,7 +6,7 @@ import { HOME } from '../routes/paths';
 
 
 
-export function LandingPage() {
+export const LandingPage = () => {
   const [username, setUsername] = useState('');
   const navigate = useNavigate()
   const { login } = useContext(AuthContext);

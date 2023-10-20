@@ -1,6 +1,6 @@
 import './styles.css'
 
-export function LoginPage() {
+export const LoginPage = () => {
   return (
     <div>LoginPage
       

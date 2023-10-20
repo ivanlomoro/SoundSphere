@@ -3,7 +3,7 @@ import { AuthContext } from '../context/authContext/authContext';
 import { useContext } from 'react';
 import './styles.css'
 
-export function Home() {
+export const Home = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate()
   const handleLogout = () => {

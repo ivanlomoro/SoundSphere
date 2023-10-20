@@ -17,7 +17,7 @@ export type AuthAction = {
 };
 
 
-const authReducer = (state: AuthState, action: AuthAction): AuthState => {
+export const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     switch (action.type) {
         case loginType.login:
             return {
@@ -35,4 +35,3 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     }
 }
 
-export default authReducer;

@@ -1,5 +1,5 @@
 import './styles.css'
-export  function UserPage() {
+export const UserPage = () => {
   return (
     <div>UserPage</div>
   )
