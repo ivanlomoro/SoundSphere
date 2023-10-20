@@ -18,16 +18,21 @@ export const LandingPage = () => {
   };
 
   return (<>
-
-    <div className="container green">
-      <input className='form-input'
+<div className='layout'>
+    <div >
+      <img/>
+      <h1>SoundSphere</h1>
+      <h2>Bienvenido a SoundSphere</h2>
+      <input 
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+      
 
       <button onClick={handleLogin}>Ferran Mierda</button>
+    </div>
     </div>
   </>
   )
