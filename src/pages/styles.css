@@ -1,0 +1,13 @@
+.container{
+    height: 200px;
+    width : 200px;
+
+}
+
+.red{
+    background-color: darkred;
+}
+
+.green{
+    background-color: green;
+}

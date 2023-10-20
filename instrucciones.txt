@@ -1,35 +1,9 @@
-Run ESLint: Use the following command to run ESLint on your codebase. This will list out all the linting issues as per the configuration:Run ESLint: Use the following command to run ESLint on your codebase. This will list out all the linting issues as per the configuration:
-
-powershell
 
 npm run lint
 Auto-Fix Linting Issues: Run the following command to auto-fix linting issues that ESLint can handle automatically:
 
 
 
-npm run lint:fix
-Commit ESLint Setup to GitHub:
+npm run lint:fix 
+fix every suggestion from linter 
 
-
-
-git add .
-git commit -m "Added ESLint setup"
-git push origin master
-Now you have ESLint integrated into your Vite, React, and TypeScript project, and you can see the linting issues directly in your code editor like VS Code. This will help you maintain a consistent coding style and potentially catch bugs early on.
-
-powershell
-Copy code
-npm run lint
-Auto-Fix Linting Issues: Run the following command to auto-fix linting issues that ESLint can handle automatically:
-
-powershell
-Copy code
-npm run lint:fix
-Commit ESLint Setup to GitHub:
-
-powershell
-Copy code
-git add .
-git commit -m "Added ESLint setup"
-git push origin master
-Now you have ESLint integrated into your Vite, React, and TypeScript project, and you can see the linting issues directly in your code editor like VS Code. This will help you maintain a consistent coding style and potentially catch bugs early on.
