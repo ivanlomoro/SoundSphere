@@ -8,6 +8,7 @@
     /* Colors */
     --clr-bg-primary: #000;
     --cl-text-primary: #d6d6d6;
+    --cl-text-secondary: #FFF;
     --clr-accent: #0BD8AB;
 
     /* Typography */
@@ -17,6 +18,7 @@
     --fs-md: 0.75rem;
     --fs-ml: 0.875rem;
     --fs-lg: 1rem;
+    --fs-xlg: 1.5rem;
 
     /* Spaces */
     --space-xs: 0.25rem;
