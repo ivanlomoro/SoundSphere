@@ -34,10 +34,12 @@ const StyledButtonPlay = styled.button`
 
 type ButtonProps = {
     variant?: "StyledButtonPill" | "StyledButtonPlay",
-    text: string
+    text?: string
+    onClick: () => void
+
 }
 
-export const Button = ({variant, text}:ButtonProps) =>{
+export const Button = ({variant, text, onClick}:ButtonProps) =>{
 
     const variants = {
         StyledButtonPill,
@@ -46,6 +48,6 @@ export const Button = ({variant, text}:ButtonProps) =>{
 
     const SelectedButton =  variant? variants[variant] : StyledButton
 
-    return <SelectedButton>{text}</SelectedButton>
+    return <SelectedButton onClick={onClick}>{text}</SelectedButton>
     
 }
