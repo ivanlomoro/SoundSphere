@@ -95,7 +95,7 @@ export const SongList: React.FC = () => {
                 <button onClick={() => toggleFavorite(song)}>{/* esto va a ser un componente independiente */}
                     {isFavorite(song.id) ? "❤️" : "♡"}
                 </button>
-                <Button variant="StyledButtonPlay" onClick={() => addToRecents(song)} text="play"/>
+                <Button variant="StyledButtonPlay" onClick={() => addToRecents(song)} text="play" />
             </li>
         );
     };
@@ -118,9 +118,9 @@ export const SongList: React.FC = () => {
                 <ul className="row">
                     {favorites.length === 0 && <h1>No favorites yet</h1>}
                     {favorites.map((song) => (
-       <Card key={song.id} song={song} />
- 
-))}
+                        <Card key={song.id} song={song} />
+
+                    ))}
                 </ul></div>
             <div className="container">
                 <h1>Song List</h1>
