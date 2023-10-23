@@ -96,7 +96,7 @@ export const SongList: React.FC = () => {
                 <div className="categoryButtonWrapper">
                     <ul className="row">
                         {categories.map((category) => (
-                            <Button variant="StyledButtonPill" key={category.id} text={`${category.name}`} onClick={handleClick} />
+                            <Button variant="StyledButtonPill" key={category.id} content={`${category.name}`} onClick={handleClick} />
                         ))}
                     </ul>
                 </div>
