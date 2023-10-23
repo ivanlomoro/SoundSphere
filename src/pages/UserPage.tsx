@@ -1,3 +1,4 @@
+import { NavBar } from "../components/NavBar/NavBar"
 import { Button } from "../components/button/Button"
 import { Container } from "../components/container/Container"
 import { EditUserForm } from "../components/editUserForm/EditUserForm"
@@ -9,7 +10,8 @@ export const UserPage = () => {
       <main>
         <WelcomeUserSection />
         <EditUserForm />
-        <Button text="Log out"/>
+        <Button content="Log out"/>
+        <NavBar />
       </main>
     </Container>
   )
