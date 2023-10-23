@@ -1,0 +1,7 @@
+.active svg{
+    color: var(--clr-accent);
+}
+
+.active button::before{
+    display: block;
+}

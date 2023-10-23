@@ -7,7 +7,9 @@
 :root{
     /* Colors */
     --clr-bg-primary: #000;
-    --cl-text-primary: #d6d6d6;
+    --clr-bg-tertiary: #767676; 
+    --clr-text-primary: #d6d6d6;
+    --clr-text-secondary: #fff;
     --clr-accent: #0BD8AB;
 
     /* Typography */
@@ -17,6 +19,7 @@
     --fs-md: 0.75rem;
     --fs-ml: 0.875rem;
     --fs-lg: 1rem;
+    --fs-xlg: 1.5rem;
 
     /* Spaces */
     --space-xs: 0.25rem;
@@ -26,6 +29,17 @@
 
     /* Border Radius */
     --radius-full: 50%;
+    --radius-md: 200px;
     --radius-sm: 0.5rem;
+
+    /* Width */
+    --w-full: 100%;
+}
+
+body{
+    background-color: var(--clr-bg-primary);
+    color: var(--clr-text-primary);
+    font-family: var(--ff-primary);
+    font-size: var(--fs-md);
 }
 
