@@ -1,11 +1,11 @@
 
-import { NavbarHome } from '../components/NavBar/NavbarHome'
+import { NavBar } from "../components"
 import { SongList } from './Songs'
 
 export const Home = () => {
   return (
     <>
-      <NavbarHome/>
+      <NavBar/>
       <SongList/></>
     )
 }
