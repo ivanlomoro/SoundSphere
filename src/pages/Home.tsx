@@ -1,12 +1,7 @@
-import './styles.css'
-import { SongList } from './Songs';
+import { NavbarHome } from '../components/navbar'
 
 export const Home = () => {
-  
   return (
-   
-   <SongList/>
-      
-
-  )
+      <NavbarHome/>
+    )
 }

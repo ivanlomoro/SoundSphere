@@ -19,6 +19,7 @@
     --fs-md: 0.75rem;
     --fs-ml: 0.875rem;
     --fs-lg: 1rem;
+    --fs-xlg: 1.5rem;
 
     /* Spaces */
     --space-xs: 0.25rem;
@@ -33,5 +34,12 @@
 
     /* Width */
     --w-full: 100%;
+}
+
+body{
+    background-color: var(--clr-bg-primary);
+    color: var(--clr-text-primary);
+    font-family: var(--ff-primary);
+    font-size: var(--fs-md);
 }
 
