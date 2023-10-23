@@ -34,7 +34,7 @@ const StyledButtonTransparent = styled.button`
 type ButtonProps = {
     variant?: "StyledButtonPill" | "StyledButtonTransparent",
     ariaLabel?: string, 
-    onClick: () => void,
+    onClick?: () => void,
     content: string | ReactNode
 }
 
@@ -47,6 +47,10 @@ export const Button = ({variant, content, onClick, ariaLabel}:ButtonProps) =>{
 
     const SelectedButton =  variant? variants[variant] : StyledButton
 
-    return <SelectedButton aria-label={ariaLabel} onClick={onClick}>{content}</SelectedButton>
+    return (
+    onClick
+    ? <SelectedButton aria-label={ariaLabel} onClick={onClick}>{content}</SelectedButton>
+    : <SelectedButton aria-label={ariaLabel}>{content}</SelectedButton>
+    )
     
 }
