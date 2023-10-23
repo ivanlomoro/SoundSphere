@@ -18,7 +18,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://soundsphere23.github.io/SoundSphere/
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
