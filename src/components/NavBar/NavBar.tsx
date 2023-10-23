@@ -5,6 +5,8 @@ import { AiOutlineSearch } from "react-icons/ai"
 import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import './navbar.css'
+import { IconType } from "react-icons";
+
 
 const StyledNavBar = styled.div`
     position: fixed;
@@ -20,7 +22,11 @@ const StyledNav= styled.nav`
     width: var(--w-full);
 `
 
-const StyledNavIcon = styled(({ icon: Icon, ...props }) => <Icon {...props} />)`
+type StyledNavIconProps = {
+    icon: IconType
+}
+
+const StyledNavIcon = styled(({ icon: Icon, ...props }:StyledNavIconProps) => <Icon {...props} />)`
     position: relative;
     height: 30px;
     width: 30px;
@@ -32,7 +38,7 @@ const StyledNavIcon = styled(({ icon: Icon, ...props }) => <Icon {...props} />)`
     }
     `
 
-const NavIcon = ({icon}) =>{
+const NavIcon = ({icon}:StyledNavIconProps) =>{
     return <StyledNavIcon icon={icon} />
 }
 

@@ -22,12 +22,12 @@ export const EditUserForm = () => {
   });
 
   type BasicInputProps = {
-    label: string;
-    name: string;
-    register: any; // Type https://react-hook-form.com/ts
-    placeholder?: string;
-    type: string;
-    id: string;
+    label: string
+    name: string
+    register: any // Type https://react-hook-form.com/ts
+    placeholder?: string
+    type: string
+    id: string
   };
 
   const BasicInput = ({
