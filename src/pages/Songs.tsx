@@ -6,22 +6,7 @@ import { Button } from "../components/button/Button";
 import { RecentGrid } from "../components/homeContainers/FavoritesGrid";
 import { ScrollableRowComponent } from "../components/homeContainers/ScrollableRow";
 import { GridSongCard } from "../components/card/GridCard";
-
-
-//esto lo voy a poner en el types cuando se hara el fetch
-type Songs = {
-    id: number;
-    name: string;
-    artist: string;
-    url: string;
-    thumbnail: string;
-    genre: string;
-    liked: boolean;
-}
-type Category = {
-    name: string;
-    id: number;
-}
+import { Songs, Category } from "../Types/SongsTypes";
 
 
 //  MIRA! NI UNA PUTA PROP! 
@@ -93,13 +78,13 @@ export const SongList: React.FC = () => {
     return (
         <>
             <div className="songList">
-                <div className="categoryButtonWrapper">
-                    <ul className="row">
+                
+                    <ScrollableRowComponent>
                         {categories.map((category) => (
                             <Button variant="StyledButtonPill" key={category.id} content={`${category.name}`} onClick={handleClick} />
                         ))}
-                    </ul>
-                </div>
+                    </ScrollableRowComponent>
+             
 
 
                 <div className="container">
