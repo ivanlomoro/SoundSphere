@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext/authContext";
 import styled from 'styled-components';
 
@@ -32,13 +31,7 @@ const WelcomeText = styled.h1`
 
 
 export const NavbarHome = () => {
-    const { user, logout } = useContext(AuthContext)
-    const navigate = useNavigate()
-
-    const handleLogout = () => {
-        logout();
-        navigate("/")
-    }
+    const { user } = useContext(AuthContext)
 
     return (
         <NavbarContainer>
@@ -46,7 +39,6 @@ export const NavbarHome = () => {
                 <UserIcon src="src/assets/imgs/jason_mamoa.gif" alt="User" />
                 <WelcomeText>Welcome {user && user?.name || 'Guest'}</WelcomeText>
             </UserInfo>
-            <button onClick={handleLogout}>Logout</button>
         </NavbarContainer>
     );
 };
