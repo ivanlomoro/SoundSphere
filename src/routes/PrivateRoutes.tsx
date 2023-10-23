@@ -1,5 +1,4 @@
-import { ReactNode } from 'react'
-import { useContext } from 'react'
+import { ReactNode, useContext } from 'react'
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext/authContext';
 import { LANDINGPAGE } from './paths';

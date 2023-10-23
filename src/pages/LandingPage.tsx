@@ -1,5 +1,6 @@
-import { LandingComponent } from '../components/landing/LandingComponent';
+import { LandingComponent } from "../components"
 
+LandingComponent
 export const LandingPage = () => {
   return <LandingComponent />
 }

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import db from "../data/db.json";
 import "./styles.css";
-import { SongCard } from "../components/card/SongCard";
-import { Button } from "../components/button/Button";
-import { RecentGrid } from "../components/homeContainers/FavoritesGrid";
-import { ScrollableRowComponent } from "../components/homeContainers/ScrollableRow";
-import { GridSongCard } from "../components/card/GridCard";
+
 import { Songs, Category } from "../Types/SongsTypes";
+import { Button, GridSongCard, RecentGrid, ScrollableRowComponent, SongCard } from "../components";
+
 
 
 //  MIRA! NI UNA PUTA PROP! 

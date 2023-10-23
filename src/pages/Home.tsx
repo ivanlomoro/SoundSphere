@@ -1,4 +1,4 @@
-import { NavbarHome } from '../components/Navbar'
+import { NavbarHome } from '../components'
 import { SongList } from './Songs'
 
 export const Home = () => {

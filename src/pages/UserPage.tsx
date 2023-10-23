@@ -1,9 +1,5 @@
-import { NavBar } from "../components/NavBar/NavBar"
-import { HeaderSection } from "../components/header/Header"
-import { Button } from "../components/button/Button"
-import { Container } from "../components/container/Container"
-import { EditUserForm } from "../components/editUserForm/EditUserForm"
-import { WelcomeUserSection } from "../components/welcomeUserSection/WelcomeUserSection"
+import { Button, Container, EditUserForm, HeaderSection, NavBar, WelcomeUserSection } from "../components"
+
 
 export const UserPage = () => {
   return (
