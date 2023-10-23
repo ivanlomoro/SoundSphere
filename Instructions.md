@@ -24,7 +24,7 @@ create login feature
 
 ### Keywords
 
-- K************nown issues:************ The commit has known issues (add issue description and create issue in repo project)
+- K************known issues:************ The commit has known issues (add issue description and create issue in repo project)
 
 ## Values
 
