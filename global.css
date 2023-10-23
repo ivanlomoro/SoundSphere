@@ -34,6 +34,12 @@
 
     /* Width */
     --w-full: 100%;
+
+    /* Font Weights */
+    --weight-regular: 400;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
 }
 
 body{

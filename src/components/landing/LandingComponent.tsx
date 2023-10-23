@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/authContext/authContext';
 import { HOME } from '../../routes/paths';
 import { Paragraph } from '../paragraph/Paragraph';
 import { TermsContainer } from '../terms/TermsContainer';
+import { Button } from '../button/Button';
 
 
 
@@ -26,7 +27,7 @@ export const LandingComponent = () => {
                     <LogoComponent textTitle='SoundSphere' textSlogan='Be connected' />
                 </header>
                 <main>
-                    <button onClick={handleLogin}>Registrarse</button>
+                    <Button content="Login" onClick={handleLogin} />
                 </main>
                 <footer>
                     <TermsContainer>
