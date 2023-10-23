@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
@@ -20,32 +21,32 @@ const StyledButtonPill = styled(StyledButton)`
     }
 `
 
-const StyledButtonPlay = styled.button`
-    border-radius: var(--w-full);
-    border: none;
-    background: var(--clr-bg-primary);
-    color: var(--clr-text-secondary);
-    width: 40px;
-    height: 40px;
+const StyledButtonTransparent = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    color: var(--clr-text-secondary);
 `
 
 type ButtonProps = {
-    variant?: "StyledButtonPill" | "StyledButtonPlay",
-    text: string
+    variant?: "StyledButtonPill" | "StyledButtonTransparent",
+    ariaLabel?: string, 
+    onClick: () => void,
+    content: string | ReactNode
 }
 
-export const Button = ({variant, text}:ButtonProps) =>{
+export const Button = ({variant, content, onClick, ariaLabel}:ButtonProps) =>{
 
     const variants = {
         StyledButtonPill,
-        StyledButtonPlay
+        StyledButtonTransparent
     }
 
     const SelectedButton =  variant? variants[variant] : StyledButton
 
-    return <SelectedButton>{text}</SelectedButton>
+    return <SelectedButton aria-label={ariaLabel} onClick={onClick}>{content}</SelectedButton>
     
 }
