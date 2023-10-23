@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import db from "../data/db.json";
 import "./styles.css";
+import { SongCard } from "../components/card/SongCard";
 import { Button } from "../components/button/Button";
-
+import { RecentGrid } from "../components/homeContainers/FavoritesGrid";
+import { ScrollableRowComponent } from "../components/homeContainers/ScrollableRow";
+import { GridSongCard } from "../components/card/GridCard";
 
 
 //esto lo voy a poner en el types cuando se hara el fetch
@@ -41,7 +44,7 @@ export const SongList: React.FC = () => {
     const loadMoreSongs = () => {
         setIndexCounter(prevIndex => prevIndex + 4)
         if (indexCounter > songs.length)
-            return <h1>No moxre songs to load</h1>
+            return <h1>No more songs to load</h1>
     }
 
     //canciones favoritas sin guardarlas al usuario ni nada 
@@ -50,20 +53,20 @@ export const SongList: React.FC = () => {
         return !!favorites.some((song) => song.id === id);
     }
 
-    function addToFavorites(song: Songs) {
+    const addToFavorites = (song: Songs) => {
         const { id } = song;
         if (!favorites.some((item: Songs) => item.id === id)) {
             setFavorites([...favorites, song]);
         }
     }
 
-    function removeFromFavorites(id: number) {
+    const removeFromFavorites = (id: number) => {
         setFavorites((currentFavorites) =>
             currentFavorites.filter((item) => item.id !== id)
         );
     }
 
-    function toggleFavorite(song: Songs) {
+    const toggleFavorite = (song: Songs) => {
         if (isFavorite(song.id)) {
             removeFromFavorites(song.id);
         } else {
@@ -75,70 +78,80 @@ export const SongList: React.FC = () => {
     const [recents, setRecents] = useState<Songs[]>([])
 
 
-    function addToRecents(song: Songs) {
+    const addToRecents = (song: Songs) => {
         const { id } = song;
         if (!recents.some((item: Songs) => item.id === id)) {
-            setRecents([...favorites, song]);
+            setRecents([...recents, song]);
         }
     }
 
     // Esto va a ser un componente independiente
-    type CardProps = {
-        song: Songs;
-    };
-
-    const Card: React.FC<CardProps> = ({ song }) => {
-        return (
-            <li className="card">
-                <img className="card-img" src={song.thumbnail} alt={song.name} />
-                <p className="card-description">{song.name} by {song.artist}</p>
-                <button onClick={() => toggleFavorite(song)}>{/* esto va a ser un componente independiente */}
-                    {isFavorite(song.id) ? "❤️" : "♡"}
-                </button>
-                <Button variant="StyledButtonPlay" onClick={() => addToRecents(song)} text="play" />
-            </li>
-        );
-    };
-
-
+    const handleClick = () => {
+        alert("clicked");
+    }
 
     return (
+        <>
+            <div className="songList">
+                <div className="categoryButtonWrapper">
+                    <ul className="row">
+                        {categories.map((category) => (
+                            <Button variant="StyledButtonPill" key={category.id} text={`${category.name}`} onClick={handleClick} />
+                        ))}
+                    </ul>
+                </div>
 
 
-        <div className="songList">
-            <div className="container">
-                <h1> Recently Played</h1>{/* esto va a ser un componente independiente */}
-                <ul className="row">
-                    {recents.length === 0 && <h1>No recents yet</h1>}
-                    {recents.map((song) => (
-                        <Card key={song.id} song={song} />
-                    ))}
-                </ul>
-                <h1>Favorites</h1> {/* esto va a ser un componente independiente */}
-                <ul className="row">
-                    {favorites.length === 0 && <h1>No favorites yet</h1>}
-                    {favorites.map((song) => (
-                        <Card key={song.id} song={song} />
-
-                    ))}
-                </ul></div>
-            <div className="container">
-                <h1>Song List</h1>
-                <ul className="row">
-                    {songs.slice(0, indexCounter).map((song) => (
-                        <Card key={song.id} song={song} />
-                    ))}
-                    <button onClick={loadMoreSongs}>Load More</button>
-                </ul>
+                <div className="container">
+                    <h1>Song List</h1>
+                    <ScrollableRowComponent>
+                        {songs.slice(0, indexCounter).map((song) => (
+                            <SongCard
+                                key={song.id}
+                                song={song}
+                                toggleFavorite={toggleFavorite}
+                                isFavorite={isFavorite}
+                                addToRecents={addToRecents}
+                            />
+                        ))}
+                        <button onClick={loadMoreSongs}>Load More</button>
+                    </ScrollableRowComponent>
+                </div>
+                <div style={{ padding: 0 }}>
+                    <h1>Recently Played</h1>
+                    <RecentGrid>
+                        {recents.length === 0 && <h1>No recents yet</h1>}
+                        {recents.map((song) => (
+                            <GridSongCard
+                                key={song.id}
+                                song={song}
+                                toggleFavorite={toggleFavorite}
+                                isFavorite={isFavorite}
+                                addToRecents={addToRecents}
+                            />
+                        ))}
+                    </RecentGrid>
+                    <div className="container">
+                        <h1>Favorites</h1>
+                        <ul className="row">
+                            {favorites.length === 0 && <h1>No favorites yet</h1>}
+                            {favorites.map((song) => (
+                                <SongCard
+                                    key={song.id}
+                                    song={song}
+                                    toggleFavorite={toggleFavorite}
+                                    isFavorite={isFavorite}
+                                    addToRecents={addToRecents}
+                                />
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
 
-
-    )
-
-
-
-}
+    );
+};
 
 
 //esto va a ser el card del grid si se que es CSS, gracias! ;)

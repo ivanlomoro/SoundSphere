@@ -9,6 +9,8 @@ const StyledButton = styled.button`
     font-size: var(--fs-lg);
     width: var(--w-full);
     margin-bottom: 1em;
+
+
 `
 const StyledButtonPill = styled(StyledButton)`
     background-color: var(--clr-bg-tertiary);
@@ -25,11 +27,10 @@ const StyledButtonPlay = styled.button`
     border: none;
     background: var(--clr-bg-primary);
     color: var(--clr-text-secondary);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 17px;
+    height: 17px;
+   
+
 `
 
 type ButtonProps = {

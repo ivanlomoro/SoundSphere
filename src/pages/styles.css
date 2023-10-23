@@ -9,32 +9,18 @@
 
 
 *{
-   Color: #D6D6D6;
+   Color: #d6d6d6;
    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 .row {
     width: auto;
-    display: flex;    
-}
-
-/* .card {
-    border: #D6D6D6 1px solid;
-    width: 25vw;
-    height: 40vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1vh 0;
-    margin-right: 1vw;  
-}
-
-.card-img{
-    height: calc(0.85 * 25vw);
-    width: calc(0.85 * 25vw);
+    display: flex;   
+    overflow-x: scroll; 
+    justify-content: space-evenly;
+    padding: 0;
 
 }
 
-.card-description{
-    font-size: small;
-} */
+
+
 
