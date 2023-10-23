@@ -1,7 +1,6 @@
 
 export { RecentGrid } from "./homeContainers/FavoritesGrid";
 export { NavBar } from "./NavBar/NavBar";
-export { NavbarHome } from "./NavBar/NavbarHome";
 export { ArrowBackSection } from "./arrowback/Arrowback";
 export { Button } from "./button/Button";
 export { GridSongCard } from "./card/GridCard";
