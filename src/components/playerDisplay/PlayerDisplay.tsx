@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { AiOutlineStepBackward, AiOutlineStepForward } from 'react-icons/ai';
 import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components';
 import { Button } from '../button/Button';
 import { ProgressBar } from '../progressBar/ProgressBar';
-import db from "../../data/db.json";
 import { Songs } from '../../pages/Songs';
+import { useNavigate } from 'react-router-dom';
 
-const [songs, setSongs] = useState<Songs[]>([])
-    useEffect(() => {
-        setSongs(db.songData);
-    }, [])
 
 const HiddenPlayer = styled.div`
   z-index: -5;
@@ -45,14 +41,18 @@ const CenteredDiv = styled.div`
     margin-top: var(--space-xl);
 `
 
-
 type PlayerDisplayProps = {
-    media: string[];
+    songs: Songs[];
+    currentSong: Songs
 }
 
-export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
+export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     const [playing, setPlaying] = useState(false)
-    const [currentSongIndex, setCurrentSongIndex] = useState(0)
+
+    const initialSongIndex = songs.findIndex((song)=> song.id === currentSong.id)
+
+    const [currentSongIndex, setCurrentSongIndex] = useState(initialSongIndex)
+
     const [progress, setProgress] = useState({
         currentSeconds: 0,
         currentPercentage: 0,
@@ -64,6 +64,8 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
     })
 
     const playerRef = useRef(null)
+
+    const navigate = useNavigate()
 
     type handleProgressPropsType = {
         playedSeconds: number
@@ -100,22 +102,35 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
     };
 
     const handleNext = () => {
-        if (currentSongIndex < media.length - 1) {
-            setCurrentSongIndex(currentSongIndex + 1);
+        if (currentSongIndex < songs.length - 1) {
+            setCurrentSongIndex(currentSongIndex + 1)
+            navigate(`/displaypage/${songs[currentSongIndex + 1].name}`) 
         }
     };
 
     const handlePrevious = () => {
         if (currentSongIndex > 0) {
-            setCurrentSongIndex(currentSongIndex - 1);
+            setCurrentSongIndex(currentSongIndex - 1)
+            navigate(`/displaypage/${songs[currentSongIndex - 1].name}`) 
         }
-    };
+    }
+
+
+    const StyledSongName = styled.p`
+        font-size: var(--fs-xl);
+        max-width: 300px;
+        min-height: 2.5em;
+        margin-bottom: 0;
+    `
+    const StyledArtistName = styled.p`
+        font-size: var(--fs-lg);
+    `
 
     return (
         <>
             <HiddenPlayer>
                 <StyledPlayer
-                    url={media[currentSongIndex]}
+                    url={songs[currentSongIndex].url}
                     playing={playing}
                     ref={playerRef}
                     controls={false}
@@ -126,9 +141,9 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
                 />
             </HiddenPlayer>
             <CenteredDiv >
-            <StyledCover src="https://placehold.co/350" alt="Song Cover" />
-            <h1>Nombre Cancion</h1>
-            <p>Nombre del artista</p>
+            <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
+            <StyledSongName>{currentSong.name}</StyledSongName>
+            <StyledArtistName>{currentSong.artist}</StyledArtistName>
             <ProgressBar progress={progress} duration={duration}/>
             <ButtonContainer>
                 <Button

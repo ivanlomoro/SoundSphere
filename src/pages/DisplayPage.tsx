@@ -1,13 +1,22 @@
 import { PlayerDisplay } from "../components/playerDisplay/PlayerDisplay"
+import db from "../data/db.json";
 
-const example =[
-  "https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3",
-  "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587961/tracks-dev/Kuzinmuzin_-_Sax_Is_My_Cardio_fqmvwb.mp3",
-  "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644602494/tracks-dev/D_JAY_KOI_-_We_got_the_vibes___Feat_Fil_Straughan__uz9qw7.mp3"
-];
+import { useParams } from 'react-router-dom';
+import { Songs } from "./Songs";
+
+
 
 export const DisplayPage = () => {
+  const songs = db.songData
+
+    const { name } = useParams()
+
+    const selectedSong = name? songs?.find((song:Songs)=> song.name === name) : null
+
+    const defaultSong = songs[0]
+
+
   return (
-    <PlayerDisplay media={example}/>
+    <PlayerDisplay songs={songs} currentSong={selectedSong? selectedSong : defaultSong }/>
   )
 }

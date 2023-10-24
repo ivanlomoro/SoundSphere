@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -96,7 +97,9 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents }: Par
 
             
             <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-            <StyledButtonPlay onClick={() => addToRecents(song)}>Play</StyledButtonPlay>
+            <Link to={`/displaypage/${song.name}`}>
+                <StyledButtonPlay onClick={() => addToRecents(song)}>Play</StyledButtonPlay>
+            </Link>
             <FavoriteButton onClick={() => toggleFavorite(song)}>
                 {isFavorite(song.id) ? "❤️" : "♡"}
             </FavoriteButton>       
