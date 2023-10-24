@@ -1,10 +1,11 @@
+export { GridSongCard } from './card/GridSongCard';
+export { SongCard } from './card/SongCard.1';
 
 export { RecentGrid } from "./homeContainers/FavoritesGrid";
 export { NavBar } from "./NavBar/NavBar";
 export { ArrowBackSection } from "./arrowback/Arrowback";
 export { Button } from "./button/Button";
-export { GridSongCard } from "./card/GridCard";
-export { SongCard } from "./card/SongCard";
+
 export { Container } from "./containers/Container";
 export { EditUserForm } from "./editUserForm/EditUserForm";
 export { HeaderSection } from "./header/Header";

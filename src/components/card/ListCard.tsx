@@ -3,7 +3,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 
 
-export const GridCard = styled.li`
+export const ListCard = styled.li`
     width: 45vw;
     height: 15vw;
     display: flex;
@@ -34,16 +34,16 @@ export const FavoriteButton = styled.button`
 
 
 
-export const GridCardImage = styled.img`
+export const ListCardImage = styled.img`
     width: 15vw;
     border-radius: 8px;
 `
 
-export const GridCardDescription = styled.div`
+export const ListCardDescription = styled.div`
     padding: 0.4rem;
    position: relative;
-   width: 25vw;
-   height: 15vw;
+   width: 75vw;
+   height: 25vw;
  
   `
 export const SongName = styled.h3`
