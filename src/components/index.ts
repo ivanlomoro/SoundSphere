@@ -5,7 +5,7 @@ export { ArrowBackSection } from "./arrowback/Arrowback";
 export { Button } from "./button/Button";
 export { GridSongCard } from "./card/GridCard";
 export { SongCard } from "./card/SongCard";
-export { Container } from "./container/Container";
+export { Container } from "./containers/Container";
 export { EditUserForm } from "./editUserForm/EditUserForm";
 export { HeaderSection } from "./header/Header";
 export { ScrollableRowComponent } from "./homeContainers/ScrollableRow";

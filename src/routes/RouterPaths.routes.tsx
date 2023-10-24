@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { DisplayPage, Home, LandingPage, UserPage } from "../pages"
 import { DISPLAYPAGE, HOME, LANDINGPAGE, USERPAGE } from "./paths"
 import { NavLayout } from "../components/layouts/NavLayout"
-import { DisplayPage } from "../pages/DisplayPage"
+
 
 
 
