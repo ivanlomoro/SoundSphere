@@ -7,6 +7,7 @@
 :root{
     /* Colors */
     --clr-bg-primary: #000;
+    --clr-bg-elements: #111111;
     --clr-bg-tertiary: #767676; 
     --clr-text-primary: #d6d6d6;
     --clr-text-secondary: #fff;
