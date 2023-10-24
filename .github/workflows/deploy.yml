@@ -25,7 +25,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: https://github.com/SoundSphere23/SoundSphere
+      url: https://soundsphere23.github.io/SoundSphere/
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
