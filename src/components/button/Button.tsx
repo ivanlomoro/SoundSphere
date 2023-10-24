@@ -12,8 +12,6 @@ const StyledButton = styled.button`
     font-size: var(--fs-lg);
     width: var(--w-full);
     margin-bottom: 1em;
-
-
 `
 const StyledButtonPill = styled(StyledButton)`
     background-color: var(--clr-bg-tertiary);
