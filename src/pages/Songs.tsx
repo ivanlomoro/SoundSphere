@@ -9,7 +9,7 @@ import { GridSongCard } from "../components/card/GridCard";
 
 
 //esto lo voy a poner en el types cuando se hara el fetch
-type Songs = {
+export type Songs = {
     id: number;
     name: string;
     artist: string;

@@ -4,12 +4,20 @@ import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components';
 import { Button } from '../button/Button';
+import { ProgressBar } from '../progressBar/ProgressBar';
+import db from "../../data/db.json";
+import { Songs } from '../../pages/Songs';
 
-const StyledPlayerContainer = styled.div`
-  position: relative;
-  padding-top: 60%; 
-  max-width: 100%;
-  background-color: white;
+const [songs, setSongs] = useState<Songs[]>([])
+    useEffect(() => {
+        setSongs(db.songData);
+    }, [])
+
+const HiddenPlayer = styled.div`
+  z-index: -5;
+  width: 0;
+  height: 0;
+  visibility: hidden;
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
@@ -26,6 +34,18 @@ const ButtonContainer = styled.div`
   gap: 20px; 
 `;
 
+const StyledCover = styled.img`
+    border-radius: 15px; 
+`
+
+const CenteredDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: var(--space-xl);
+`
+
+
 type PlayerDisplayProps = {
     media: string[];
 }
@@ -35,9 +55,13 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
     const [currentSongIndex, setCurrentSongIndex] = useState(0)
     const [progress, setProgress] = useState({
         currentSeconds: 0,
-        currentPercentage: 0
+        currentPercentage: 0,
+        currentFormattedTime: ""
     })
-    const [duration, setDuration] = useState(0)
+    const [duration, setDuration] = useState({
+        duration: 0,
+        formattedDuration: ""
+    })
 
     const playerRef = useRef(null)
 
@@ -45,19 +69,30 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
         playedSeconds: number
     }
 
+    const getFormattedTime = (currentSeconds:number) => {
+        const date = new Date(0)
+        date.setSeconds(currentSeconds)
+        const formattedTime = date.toISOString().substring(14,19)
+        return formattedTime
+    }
+
     const getPercentage = (currentSeconds:number) => {
-        return currentSeconds > 0 ? currentSeconds / duration : 0
+        return currentSeconds > 0 ? currentSeconds / duration.duration : 0
     }
 
     const handleProgress = ({playedSeconds}:handleProgressPropsType) => {
         setProgress({
             currentSeconds: playedSeconds,
-            currentPercentage: getPercentage(playedSeconds)
+            currentPercentage: getPercentage(playedSeconds),
+            currentFormattedTime: getFormattedTime(playedSeconds),
         })
     }
 
     const handleDuration = (duration:number) => {
-        setDuration(duration)
+        setDuration({
+            duration: duration,
+            formattedDuration: getFormattedTime(duration)
+        })
     }
 
     const handlePlayPause = () => {
@@ -78,18 +113,23 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
 
     return (
         <>
-            <StyledPlayerContainer>
+            <HiddenPlayer>
                 <StyledPlayer
                     url={media[currentSongIndex]}
                     playing={playing}
                     ref={playerRef}
-                    controls={true}
+                    controls={false}
                     width="100%"
                     height="100%"
                     onProgress={handleProgress}
                     onDuration={handleDuration}
                 />
-            </StyledPlayerContainer>
+            </HiddenPlayer>
+            <CenteredDiv >
+            <StyledCover src="https://placehold.co/350" alt="Song Cover" />
+            <h1>Nombre Cancion</h1>
+            <p>Nombre del artista</p>
+            <ProgressBar progress={progress} duration={duration}/>
             <ButtonContainer>
                 <Button
                     variant='StyledButtonDisplay'
@@ -107,9 +147,7 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
                     onClick={handleNext}
                 />
             </ButtonContainer>
-            <p>{progress.currentSeconds/60}</p>
-            <p>{duration}</p>
-            <progress value={progress.currentPercentage}/>
+            </CenteredDiv>
         </>
     )
 }
