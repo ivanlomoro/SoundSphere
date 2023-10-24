@@ -73,13 +73,6 @@ export const NavBar = () => {
                         ariaLabel="Music Player"    
                     />
                 </NavLink>
-                <NavLink to="/displaypage">
-                    <Button
-                        variant="StyledButtonNav"
-                        content={<NavIcon icon={AiOutlinePlayCircle} />}
-                        ariaLabel="Music Player"    
-                    />
-                </NavLink>
                 <NavLink to="/favorites">
                     <Button
                         variant="StyledButtonNav"

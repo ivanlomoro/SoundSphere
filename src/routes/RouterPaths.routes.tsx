@@ -7,11 +7,9 @@ import { DisplayPage } from "../pages/DisplayPage"
 import { SearchPage } from "../pages/SearchPage"
 
 
-
 export const RouterPaths: FC = () => {
     return (
         <>
-
             <Routes>
                 <Route element={<NavLayout />}>
                     <Route path= {HOME} element={<Home />} />
@@ -22,8 +20,6 @@ export const RouterPaths: FC = () => {
                 <Route path={LANDINGPAGE} element={<LandingPage/>} />    
                 <Route path="/" element={<Navigate to={HOME} />} />
             </Routes>
-
-
         </>
     )
 }

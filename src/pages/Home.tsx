@@ -6,9 +6,6 @@ export const Home = () => {
     <>
       <NavbarHome/>
       <SongList/>
-      <NavBar/>
-      </>
-
-    //<SearchBar/>
+    </>
     )
 }
