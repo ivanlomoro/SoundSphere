@@ -5,30 +5,44 @@ import db from "../../data/db.json"
 import { Songs } from "../../Types/SongsTypes"
 import styled from "styled-components"
 
+
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [songs, setSongs] = useState<Songs[]>([])
 
-  //aplicar estilos...
   const StyledDivSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
-    with: 100%;
+    width: 100%;
     margin: 10px; 
     outline: 1px solid red;
+`
+
+const StyledDivSection2 = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+margin: 10px; 
+outline: 1px solid red;
 `
   const StyledInputSection = styled.input `
     margin: 10px;
     padding: 10px;
     padding-right: 150px;
+    background-color: #747474;
+    color: white;
   `
+
+
+
 
   useEffect(() => {
     setSongs(db.songData)
+    console.log(songs)
   }, [])
-
-  console.log(songs)
 
   const handleQuery = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchParams({ q: e.target.value })
@@ -41,14 +55,14 @@ export const SearchBar = () => {
       <div>
         <BiSearch />
         <StyledInputSection
-          type="text"
+          type="search"
           placeholder="Enter song name..."
           value={query}
           onChange={handleQuery}
         />
+
         {query && (
-          //Aqui cambios 
-          <StyledDivSection>  
+          <StyledDivSection>
             {songs
               .filter((song: Songs) => {
                 return (
@@ -57,11 +71,13 @@ export const SearchBar = () => {
               })
               .map((song: Songs) => (
                 <Link key={song.id} to={`/songs/${song.name}`}>
-                  <div>
-                    <img src={song.thumbnail} alt="miscojones" />
-                    <p>{song.name}</p>
-                    <p>{song.artist}</p>
-                  </div>
+                  <StyledDivSection2>
+                    <img style={{width: 50}} src={song.thumbnail} alt="miscojones"/> 
+                     <StyledDivSection>
+                      <p>{song.name}</p>
+                      <p>{song.artist}</p>
+                      </StyledDivSection>
+                  </StyledDivSection2>
                 </Link>
               ))}
           </StyledDivSection>
