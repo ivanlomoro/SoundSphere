@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import db from "../data/db.json";
-
-
+import { useFavorites } from "../context/FavoriteProvider";
 import { Songs, Category, Artist } from "../Types/SongsTypes";
 import { Button, GridSongCard, RecentGrid, ScrollableRowComponent, SongCard } from "../components";
+
 
 
 
 //  MIRA! NI UNA PUTA PROP! 
 export const SongList: React.FC = () => {
 
-
+    const { favorites,isFavorite, toggleFavorite } = useFavorites()
     //si no sabes que estoy haciendo aqui, mal vamos 
     const [songs, setSongs] = useState<Songs[]>([])
     useEffect(() => {
@@ -38,32 +38,7 @@ export const SongList: React.FC = () => {
             return <h1>No more songs to load</h1>
     }
 
-    //canciones favoritas sin guardarlas al usuario ni nada 
-    const [favorites, setFavorites] = useState<Songs[]>([])
-    function isFavorite(id: number) {
-        return !!favorites.some((song) => song.id === id);
-    }
 
-    const addToFavorites = (song: Songs) => {
-        const { id } = song;
-        if (!favorites.some((item: Songs) => item.id === id)) {
-            setFavorites([...favorites]);
-        }
-    }
-
-    const removeFromFavorites = (id: number) => {
-        setFavorites((currentFavorites) =>
-            currentFavorites.filter((item) => item.id !== id)
-        );
-    }
-
-    const toggleFavorite = (song: Songs) => {
-        if (isFavorite(song.id)) {
-            removeFromFavorites(song.id);
-        } else {
-            addToFavorites(song);
-        }
-    }
 
     //canciones recientes sin guardarlas al usuario ni nada 
     const [recents, setRecents] = useState<Songs[]>([])
@@ -72,7 +47,8 @@ export const SongList: React.FC = () => {
     const addToRecents = (song: Songs) => {
         const { id } = song;
         const newRecents= [...recents];
-               
+      
+     
         if (!recents.some((item: Songs) => item.id === id)) {
             newRecents.unshift(song);
         setRecents(newRecents);
