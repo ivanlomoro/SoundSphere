@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import db from "../data/db.json";
-import "./styles.css";
 
-import { Songs, Category } from "../Types/SongsTypes";
+
+import { Songs, Category, Artist } from "../Types/SongsTypes";
 import { Button, GridSongCard, RecentGrid, ScrollableRowComponent, SongCard } from "../components";
 
 
@@ -16,6 +16,14 @@ export const SongList: React.FC = () => {
     useEffect(() => {
         setSongs(db.songData);
     }, []);
+
+    const [artists, setArtists] = useState<Artist[]>([])
+    useEffect(() => {
+        setArtists(db.artists);
+        console.log(artists)
+    }, []);
+
+    
 
     const [categories, setCategories] = useState<Category[]>([])
     useEffect(() => {
@@ -39,7 +47,7 @@ export const SongList: React.FC = () => {
     const addToFavorites = (song: Songs) => {
         const { id } = song;
         if (!favorites.some((item: Songs) => item.id === id)) {
-            setFavorites([...favorites, song]);
+            setFavorites([...favorites]);
         }
     }
 
@@ -63,11 +71,14 @@ export const SongList: React.FC = () => {
 
     const addToRecents = (song: Songs) => {
         const { id } = song;
+        const newRecents= [...recents];
+               
         if (!recents.some((item: Songs) => item.id === id)) {
-            setRecents([...recents, song]);
+            newRecents.unshift(song);
+        setRecents(newRecents);
         }
     }
-
+ 
     // Esto va a ser un componente independiente
     const handleClick = () => {
         alert("clicked");

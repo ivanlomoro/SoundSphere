@@ -12,3 +12,12 @@ export type Category = {
     name: string;
     id: number;
 };
+
+
+export type Artist= {
+id: number;
+    name: string;
+    genres: string[];
+    popularity: number;
+    photoUrl: string;
+}

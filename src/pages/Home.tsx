@@ -5,6 +5,10 @@ export const Home = () => {
   return (
     <>
       <NavbarHome/>
-      <SongList/></>
+      <SongList/>
+      <NavBar/>
+      </>
+
+    //<SearchBar/>
     )
 }

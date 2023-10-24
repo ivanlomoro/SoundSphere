@@ -14,18 +14,22 @@ const StyledNavBar = styled.div`
     bottom: 0;
     width: var(--w-full);
     margin-inline: auto;
-    background-color: var(--clr-bg-primary);
+    background-color: var(--clr-bg-elements);
 `
 
 const StyledNav= styled.nav`
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     width: var(--w-full);
+    background-color: var(--clr-elements);
+   
 `
 
 type StyledNavIconProps = {
     icon: IconType
+    onClick? : () => void
 }
+
 
 const StyledNavIcon = styled(({ icon: Icon, ...props }:StyledNavIconProps) => <Icon {...props} />)`
     position: relative;
@@ -39,7 +43,7 @@ const StyledNavIcon = styled(({ icon: Icon, ...props }:StyledNavIconProps) => <I
     }
     `
 
-const NavIcon = ({icon}:StyledNavIconProps) =>{
+export const NavIcon = ({icon}:StyledNavIconProps) =>{
     return <StyledNavIcon icon={icon} />
 }
 
@@ -59,6 +63,14 @@ export const NavBar = () => {
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlineSearch} />}
                         ariaLabel="Search"    
+                    
+                    />
+                </NavLink>
+                <NavLink to="/displaypage">
+                    <Button
+                        variant="StyledButtonNav"
+                        content={<NavIcon icon={AiOutlinePlayCircle} />}
+                        ariaLabel="Music Player"    
                     />
                 </NavLink>
                 <NavLink to="/displaypage">

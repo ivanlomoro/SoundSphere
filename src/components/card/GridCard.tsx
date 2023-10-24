@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../button/Button";
-
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
+import { NavIcon } from "../NavBar/NavBar";
 
 const GridCard = styled.li`
     width: 45vw;
@@ -24,9 +25,10 @@ const GridCardDescription = styled.div`
    position: relative;
    width: 25vw;
    height: 15vw;
+ 
   `
 const SongName = styled.h3`
-font-size: 1rem;
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -79,6 +81,9 @@ export function GridSongCard({ song, toggleFavorite, isFavorite, addToRecents }:
                 <div style={{position: 'absolute', right: '0', top: '50%'}}>             
                 <Button variant="StyledButtonPlay" onClick={() => addToRecents(song)} />
                 </div>
+             <div >
+             {isFavorite(song.id) ? <NavIcon icon={AiFillHeart} onClick={()=>toggleFavorite(song)}/> : <NavIcon icon={AiOutlineHeart} onClick={()=>toggleFavorite(song)} />}
+             </div>
              </GridCardDescription>
         </GridCard>
     );
