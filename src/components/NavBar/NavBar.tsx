@@ -1,24 +1,25 @@
 import { Button } from "../button/Button"
-import { AiOutlineHome, AiOutlineUser } from "react-icons/ai"
+import { AiOutlineHome, AiOutlinePlayCircle, AiOutlineUser } from "react-icons/ai"
 import { AiOutlineHeart } from "react-icons/ai"
 import { AiOutlineSearch } from "react-icons/ai"
 import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import './navbar.css'
-import { IconType } from "react-icons";
+import { IconType } from "react-icons"
 
 
 const StyledNavBar = styled.div`
-    position: fixed;
+    position: sticky;
     left: 0;
     bottom: 0;
     width: var(--w-full);
     margin-inline: auto;
+    background-color: var(--clr-bg-primary);
 `
 
 const StyledNav= styled.nav`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     width: var(--w-full);
 `
 
@@ -58,6 +59,13 @@ export const NavBar = () => {
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlineSearch} />}
                         ariaLabel="Search"    
+                    />
+                </NavLink>
+                <NavLink to="/displaypage">
+                    <Button
+                        variant="StyledButtonNav"
+                        content={<NavIcon icon={AiOutlinePlayCircle} />}
+                        ariaLabel="Music Player"    
                     />
                 </NavLink>
                 <NavLink to="/favorites">

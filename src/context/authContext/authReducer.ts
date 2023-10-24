@@ -5,6 +5,9 @@ export interface AuthState {
     user: {
         id: number;
         name: string;
+        email: string
+        birthdate: string
+        gender: string
     } | null;
 }
 
@@ -13,6 +16,9 @@ export type AuthAction = {
     payload?: {
         id: number;
         name: string;
+        email: string
+        birthdate: string
+        gender: string
     };
 };
 

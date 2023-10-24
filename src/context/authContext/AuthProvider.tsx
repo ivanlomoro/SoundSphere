@@ -25,17 +25,20 @@ const init = () => {
     };
 }
 
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const [authState, dispatch] = useReducer(authReducer, {}, init)
 
     console.log(authState)
 
-    const login = (name = '') => {
+    const login = (name = 'Jason Momoa') => {
         const user = {
             id: 1,
-            name,
+            name: name,
+            email: "jasonmomoa@aquaman.com",
+            birthdate: "01-09-1979",
+            gender: "Male",
+            password: "jason123"
         }
         localStorage.setItem('user', JSON.stringify(user))
         dispatch({ type: loginType.login, payload: user })
@@ -53,6 +56,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         logout: logout }}>         
         {children} 
         </AuthContext.Provider>
-
 }
 

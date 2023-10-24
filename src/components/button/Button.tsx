@@ -32,6 +32,21 @@ const StyledButtonPlay = styled.button`
     width: 17px;
     height: 17px;`
    
+// Create positioned variant
+const StyledInvisibleButton = styled(StyledButton)`   
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    color: var(--clr-text-secondary);
+    border: none;
+    padding: 1rem;
+    width: fit-content;
+    color: var(--clr-text-primary);
+`
 
 const StyledButtonNav = styled.button`
     position: relative;
@@ -59,7 +74,7 @@ const StyledButtonNav = styled.button`
 `
 
 type ButtonProps = {
-    variant?: "StyledButtonPill" | "StyledButtonNav" | "StyledButtonPlay",
+    variant?: "StyledButtonPill" | "StyledButtonNav" | "StyledButtonPlay" | "StyledInvisibleButton",
     ariaLabel?: string, 
     onClick?: () => void,
     content?: string | ReactNode
@@ -69,7 +84,8 @@ export const Button = ({variant, content, onClick, ariaLabel}:ButtonProps) =>{
     const variants = {
         StyledButtonPill,
         StyledButtonNav,
-        StyledButtonPlay
+        StyledButtonPlay,
+        StyledInvisibleButton
     }
 
     const SelectedButton =  variant? variants[variant] : StyledButton
