@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlineStepBackward, AiOutlineStepForward } from 'react-icons/ai';
 import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs'
 import ReactPlayer from 'react-player'
@@ -31,9 +31,34 @@ type PlayerDisplayProps = {
 }
 
 export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
-    const [playing, setPlaying] = useState(false);
-    const [currentSongIndex, setCurrentSongIndex] = useState(0);
-    const playerRef = useRef(null);
+    const [playing, setPlaying] = useState(false)
+    const [currentSongIndex, setCurrentSongIndex] = useState(0)
+    const [progress, setProgress] = useState({
+        currentSeconds: 0,
+        currentPercentage: 0
+    })
+    const [duration, setDuration] = useState(0)
+
+    const playerRef = useRef(null)
+
+    type handleProgressPropsType = {
+        playedSeconds: number
+    }
+
+    const getPercentage = (currentSeconds:number) => {
+        return currentSeconds > 0 ? currentSeconds / duration : 0
+    }
+
+    const handleProgress = ({playedSeconds}:handleProgressPropsType) => {
+        setProgress({
+            currentSeconds: playedSeconds,
+            currentPercentage: getPercentage(playedSeconds)
+        })
+    }
+
+    const handleDuration = (duration:number) => {
+        setDuration(duration)
+    }
 
     const handlePlayPause = () => {
         setPlaying(!playing);
@@ -61,6 +86,8 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
                     controls={true}
                     width="100%"
                     height="100%"
+                    onProgress={handleProgress}
+                    onDuration={handleDuration}
                 />
             </StyledPlayerContainer>
             <ButtonContainer>
@@ -80,6 +107,9 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
                     onClick={handleNext}
                 />
             </ButtonContainer>
+            <p>{progress.currentSeconds/60}</p>
+            <p>{duration}</p>
+            <progress value={progress.currentPercentage}/>
         </>
     )
 }
