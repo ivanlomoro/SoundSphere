@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
-import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai';
+import { AiOutlineStepBackward, AiOutlineStepForward } from 'react-icons/ai';
+import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components';
+import { Button } from '../button/Button';
 
 const StyledPlayerContainer = styled.div`
   position: relative;
@@ -18,34 +20,10 @@ const StyledPlayer = styled(ReactPlayer)`
   height: 100%;
 `;
 
-const CustomPlayButton = styled.button`
-  background-color: var(--clr-accent);
-  color: var(--clr-text-secondary);
-  font-size: 24px;
-  border: none;
-  margin: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
-`;
-
-const CustomForwardButton = styled.button`
-  background-color: var(--clr-bg-primary);
-  color: var(--clr-text-secondary);
-  font-size: 24px;
-  border: none;
-  margin: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
-`;
-
-const CustomBackwardButton = styled.button`
-  background-color: var(--clr-bg-primary);
-  color: var(--clr-text-secondary);
-  font-size: 24px;
-  border: none;
-  margin: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px; 
 `;
 
 type PlayerDisplayProps = {
@@ -74,23 +52,34 @@ export const PlayerDisplay = ({ media }: PlayerDisplayProps) => {
     };
 
     return (
-        <div>
+        <>
             <StyledPlayerContainer>
                 <StyledPlayer
                     url={media[currentSongIndex]}
                     playing={playing}
                     ref={playerRef}
-                    controls={false}
+                    controls={true}
                     width="100%"
                     height="100%"
                 />
             </StyledPlayerContainer>
-
-            <CustomBackwardButton onClick={handlePrevious}>Back</CustomBackwardButton>
-            <CustomPlayButton onClick={handlePlayPause}>
-                {playing ? <AiOutlinePauseCircle /> : <AiOutlinePlayCircle />}
-            </CustomPlayButton>
-            <CustomForwardButton onClick={handleNext}>Next</CustomForwardButton>
-        </div>
+            <ButtonContainer>
+                <Button
+                    variant='StyledButtonDisplay'
+                    content={<AiOutlineStepBackward />}
+                    onClick={handlePrevious}
+                />
+                <Button
+                    variant='StyledButtonDisplayPlay'
+                    content={playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
+                    onClick={handlePlayPause}
+                />
+                <Button
+                    variant='StyledButtonDisplay'
+                    content={<AiOutlineStepForward />}
+                    onClick={handleNext}
+                />
+            </ButtonContainer>
+        </>
     )
 }
