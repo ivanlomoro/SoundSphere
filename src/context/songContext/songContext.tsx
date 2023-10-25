@@ -2,9 +2,9 @@ import React, { useState, useEffect, createContext, ReactNode } from "react";
 import type { Songs, Category  } from '../../Types/SongsTypes';
 import db from '../../data/db.json';
 
-import { SongCard } from "../../components/card/FinalCardForMerge";
-import { RecentGrid,} from '../../components/homeContainers/FavoritesGrid'
-import { ScrollableRowComponent } from "../../components";
+// import { SongCard } from "../../components/card/FinalCardForMerge";
+// import { RecentGrid,} from '../../components/homeContainers/FavoritesGrid'
+// import { ScrollableRowComponent } from "../../components";
 
 
 
@@ -21,9 +21,9 @@ type SongsContextType = {
   removeFromFavorites: (id: number) => void;
   isFavorite: (id: number) => boolean;
   toggleFavorite: (song: Songs) => void;
-  renderGridSongs: (inputSongs: Songs[], count: number) => JSX.Element;
-  renderRowSongs: (inputSongs: Songs[]) => JSX.Element;
-  renderListSongs: (inputSongs: Songs[]) => JSX.Element;
+  // renderGridSongs: (inputSongs: Songs[], count: number) => JSX.Element;
+  // renderRowSongs: (inputSongs: Songs[]) => JSX.Element;
+  // renderListSongs: (inputSongs: Songs[]) => JSX.Element;
 };
 
 const SongsContext = createContext<SongsContextType | null>(null);
@@ -71,31 +71,31 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     isFavorite(song.id) ? removeFromFavorites(song.id) : addToFavorites(song);
   };
 
-  const renderGridSongs = (inputSongs: Songs[], count: number = 4) => (
-    <RecentGrid>
-      {inputSongs.slice(0, count).map((song) => (
-        <SongCard variant='grid' key={song.id} song={song} />
-      ))}
-  </RecentGrid>
-  );
+  // const renderGridSongs = (inputSongs: Songs[], count: number = 4) => (
+  //   <RecentGrid>
+  //     {inputSongs.slice(0, count).map((song) => (
+  //       <SongCard variant='grid' key={song.id} song={song} />
+  //     ))}
+  // </RecentGrid>
+  // );
 
-  const renderRowSongs = (inputSongs: Songs[]) => (
-    <ScrollableRowComponent>
-      {inputSongs.map((song) => (
+  // const renderRowSongs = (inputSongs: Songs[]) => (
+  //   <ScrollableRowComponent>
+  //     {inputSongs.map((song) => (
       
-          <SongCard variant='card' key={song.id} song={song} />
+  //         <SongCard variant='card' key={song.id} song={song} />
 
-      ))}
-      </ScrollableRowComponent>
-  );
+  //     ))}
+  //     </ScrollableRowComponent>
+  // );
 
-  const renderListSongs = (inputSongs: Songs[]) => (
-    <div>
-      {inputSongs.map((song) => (
-        <SongCard variant='list' key={song.id} song={song}/>
-      ))}
-    </div>
-  );
+  // const renderListSongs = (inputSongs: Songs[]) => (
+  //   <div>
+  //     {inputSongs.map((song) => (
+  //       <SongCard variant='list' key={song.id} song={song}/>
+  //     ))}
+  //   </div>
+  // );
 
   return (
     <SongsContext.Provider
@@ -109,9 +109,9 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         removeFromFavorites,
         isFavorite,
         toggleFavorite,
-        renderGridSongs,
-        renderRowSongs,
-        renderListSongs 
+        // renderGridSongs,
+        // renderRowSongs,
+        // renderListSongs 
       }}
     >
       {children}

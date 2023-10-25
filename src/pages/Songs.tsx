@@ -122,69 +122,58 @@
 // //esto va a ser el card del grid si se que es CSS, gracias! ;)
 
 
-import db from '../data/db.json';
-import { ScrollableRowComponent } from '../components';
+// import db from '../data/db.json';
+// import { ScrollableRowComponent } from '../components';
+
+// import { Button, RecentGrid } from '../components';
+// import { useEffect, useState } from 'react';
+// import { Songs } from '../Types/SongsTypes';
+import { RecentGrid, ScrollableRowComponent } from '../components';
+import { SongCard } from '../components/card/FinalCardForMerge';
 import { useSongs } from '../context/songContext/songContext';
-import { Button, RecentGrid } from '../components';
-import { useEffect, useState } from 'react';
-import { Songs } from '../Types/SongsTypes';
-
 export const SongList = () => {
-    const {
-        // songs,
-        recents,
-        favorites,
-        categories,
-        // setSongs,
-        renderGridSongs,
-        renderRowSongs,
-        renderListSongs,
-    } = useSongs();
-
-    const [indexCounter, setIndexCounter] = useState(4); //usado metodo .slice, no mira el index
-    const loadMoreSongs = () => {
-            setIndexCounter(prevIndex => prevIndex + 4)
-                     if (indexCounter > songs.length)
-              return <h1>No more songs to load</h1>
-     }
-     const [songs, setSongs] = useState<Songs[]>([])
-     useEffect(() => {
-        setSongs(db.songData);
-        console.log(songs);
-    }, []);
+    const { songs, isFavorite, toggleFavorite, addToRecents, favorites, recents } = useSongs();
 
     return (
-        <>
-            <div className="songList">
-                <ScrollableRowComponent>
-                    {categories.map((category) => (
-                        <Button variant="StyledButtonPill" key={category.id} content={`${category.name}`}  />
-                    ))}
-                </ScrollableRowComponent>
-
-                <div className="container">
-                    <h1>Song List</h1>
-                    <ScrollableRowComponent>
-                        {renderRowSongs(songs.slice(0, indexCounter))} {/* Utilizing renderRowSongs */}
-                        <button onClick={loadMoreSongs}>Load More</button>
-                    </ScrollableRowComponent>
-                </div>
-
-                <div style={{ padding: 0 }}>
-                    <h1>Recently Played</h1>
-                    <RecentGrid>
-                        {recents.length === 0 ? <h1>No recents yet</h1> : renderGridSongs(recents, 4)} {/* Utilizing renderGridSongs */}
-                    </RecentGrid>
-                    
-                    <div className="container">
-                        <h1>Favorites</h1>
-                        <ul className="row">
-                            {favorites.length === 0 ? <h1>No favorites yet</h1> : renderListSongs(favorites)} {/* Utilizing renderListSongs */}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </>
+      <div> 
+        
+         <h1>Song List</h1>
+        <ScrollableRowComponent>      
+        {songs.map((song) => (
+          <SongCard
+            key={song.id}
+            song={song}
+            toggleFavorite={toggleFavorite}
+            isFavorite={isFavorite}
+            addToRecents={addToRecents}
+          />
+        ))}</ScrollableRowComponent>
+         <h1>Recently Played</h1>
+        <RecentGrid>      
+        {recents.map((song) => (
+          <SongCard
+          variant='grid'
+            key={song.id}
+            song={song}
+            toggleFavorite={toggleFavorite}
+            isFavorite={isFavorite}
+            addToRecents={addToRecents}
+          />
+        ))}</RecentGrid>
+         <h1>Favorites</h1>
+        <ScrollableRowComponent>      
+        {favorites.map((song) => (
+          <SongCard
+            key={song.id}
+            song={song}
+            toggleFavorite={toggleFavorite}
+            isFavorite={isFavorite}
+            addToRecents={addToRecents}
+          />
+        ))}</ScrollableRowComponent>
+        {/* Add more sections for recents and favorites similarly */}
+      </div>
     );
-};
+  };
+  
 
