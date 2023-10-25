@@ -7,8 +7,8 @@
 
 
 
-// //  MIRA! NI UNA PUTA PROP! 
-// export const SongList: React.FC = () => {
+//  MIRA! NI UNA PUTA PROP! 
+
 
 //     const { favorites,isFavorite, toggleFavorite } = useSongs()
 //     //si no sabes que estoy haciendo aqui, mal vamos 

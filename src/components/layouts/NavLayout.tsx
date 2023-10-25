@@ -12,7 +12,9 @@ const StyledNavLayout = styled.div`
 export const NavLayout = ()=>{
     return (
         <StyledNavLayout className="min-h-screen">
-            <Outlet />
+            <div>
+                <Outlet />
+            </div>
             <NavBar />
         </StyledNavLayout>
     )

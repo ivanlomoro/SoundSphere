@@ -70,9 +70,36 @@ const StyledButtonNav = styled.button`
         z-index: 1;
     }
 `
+const StyledButtonDisplayPlay = styled.button`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    width: 150px;
+    height: 60px;
+    background-color: var(--clr-accent);
+    color: var(--clr-text-secondary);
+    border: none;
+    border-radius: var(--radius-full);
+`
+
+const StyledButtonDisplay = styled.button`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    width: var(--w-full);
+    height: 60px;
+    background: transparent;
+    color: var(--clr-text-secondary);
+    border: none;
+`
+
 
 type ButtonProps = {
-    variant?: "StyledButtonPill" | "StyledButtonNav" | "StyledButtonPlay" | "StyledInvisibleButton",
+    variant?: "StyledButtonPill" | "StyledButtonNav" | "StyledButtonPlay" | "StyledInvisibleButton" | "StyledButtonDisplay" | "StyledButtonDisplayPlay",
     ariaLabel?: string, 
     onClick?: () => void,
     content?: string | ReactNode
@@ -83,7 +110,9 @@ export const Button = ({variant, content, onClick, ariaLabel}:ButtonProps) =>{
         StyledButtonPill,
         StyledButtonNav,
         StyledButtonPlay,
-        StyledInvisibleButton
+        StyledInvisibleButton,
+        StyledButtonDisplay,
+        StyledButtonDisplayPlay
     }
 
     const SelectedButton =  variant? variants[variant] : StyledButton
