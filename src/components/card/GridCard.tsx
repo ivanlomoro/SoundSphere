@@ -4,7 +4,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 
 export const GridCard = styled.li`
-    width: 45vw;
+  
     height: 15vw;
     display: flex;
     flex-direction: row;

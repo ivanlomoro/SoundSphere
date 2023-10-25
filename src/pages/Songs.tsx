@@ -78,16 +78,16 @@ export const SongList: React.FC = () => {
         <>
             <div className="songList">
                 
-                    <ScrollableRowComponent>
+                    <div style={{display:'flex', justifyContent:'space-between', width:'93vw'}}>
                         {categories.map((category) => (
                             <Button variant="StyledButtonPill" key={category.id} content={`${category.name}`} onClick={handleClick} />
                         ))}
-                    </ScrollableRowComponent>
+                    </div>
              
 
 
                 <div className="container">
-                    <h1>Song List</h1>
+                    <h2>Song List</h2>
                     <ScrollableRowComponent>
                         {songs.slice(0, indexCounter).map((song) => (
                             <SongCard
@@ -102,9 +102,10 @@ export const SongList: React.FC = () => {
                     </ScrollableRowComponent>
                 </div>
                 <div style={{ padding: 0 }}>
-                    <h1>Recently Played</h1>
+                    
                     <RecentGrid>
-                        {recents.length === 0 && <h1>No recents yet</h1>}
+                   {recents.length === 1 && <h2>Your Recently Played</h2>}
+                        
                         {recents.map((song) => (
                             <GridSongCard
                                 key={song.id}
@@ -115,10 +116,12 @@ export const SongList: React.FC = () => {
                             />
                         ))}
                     </RecentGrid>
-                    <div className="container">
-                        <h1>Favorites</h1>
-                        <ul className="row">
-                            {favorites.length === 0 && <h1>No favorites yet</h1>}
+                     <h2>Favorites</h2>
+                    <ScrollableRowComponent>
+                 
+                       
+             
+                            {favorites.length === 0 && <h3>No favorites yet</h3>}
                             {favorites.map((song) => (
                                 <SongCard
                                     key={song.id}
@@ -128,8 +131,8 @@ export const SongList: React.FC = () => {
                                     addToRecents={addToRecents}
                                 />
                             ))}
-                        </ul>
-                    </div>
+                 
+                    </ScrollableRowComponent>
                 </div>
             </div>
         </>

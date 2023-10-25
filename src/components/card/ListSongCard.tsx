@@ -23,7 +23,7 @@ export function ListSongCard({ song, toggleFavorite, isFavorite, addToRecents }:
                 <SongName>{song.name}</SongName>
                 <SongArtist>{song.artist}</SongArtist>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <div style={{ marginLeft: '13vw', display: 'flex', justifyContent: 'space-between', width: '35%' }}>
                     <Link to={`/displaypage/${song.name}`}>
                         <Button
                             variant="StyledButtonNav"
@@ -35,7 +35,7 @@ export function ListSongCard({ song, toggleFavorite, isFavorite, addToRecents }:
                     
                     <div style={{color: "var(--clr-accent)"} as React.CSSProperties}> {/* Define the variable somewhere in your styles */}
       <FavoriteButton onClick={() => toggleFavorite(song)}>
-        {isFavorite(song.id) ? <AiFillHeart style={{ color: "var(--clr-accent)" }} /> : <AiOutlineHeart />}
+        {isFavorite(song.id) ? <AiFillHeart style={{ color: "var(--clr-accent)", width: "2rem",marginTop: "0.5rem",  height: "2rem"  }} /> : <AiOutlineHeart />}
       </FavoriteButton>
     </div>
 

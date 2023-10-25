@@ -14,12 +14,18 @@ const StyledButton = styled.button`
     margin-bottom: 1em;
 `
 const StyledButtonPill = styled(StyledButton)`
+margin-top: 1em;
+font-size: var(--fs-md);
     background-color: var(--clr-bg-tertiary);
-    padding-inline: 1em;
+    padding-inline: 1.4em;
     width: fit-content;
+    height: 2rem;
+    &&:hover{background-color: var(--clr-accent);
+    transform: scale(1.2); }
 
     &&:focus{
         background-color: var(--clr-accent);
+
     }`
 
 const StyledButtonPlay = styled.button`
@@ -28,7 +34,9 @@ const StyledButtonPlay = styled.button`
     background: var(--clr-bg-primary);
     color: var(--clr-text-secondary);
     width: 17px;
-    height: 17px;`
+    height: 17px;
+    &&:hover{background-color: var(--clr-accent);
+        transform: scale(1.2); }`
    
 // Create positioned variant
 const StyledInvisibleButton = styled(StyledButton)`   

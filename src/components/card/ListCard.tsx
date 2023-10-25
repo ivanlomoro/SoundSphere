@@ -4,22 +4,23 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 
 export const ListCard = styled.li`
-    width: 45vw;
-    height: 15vw;
+    width: 90vw;
+    height: vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     background-color: #6a6a6a;
     color: white;
     border-radius: 10px;
-    margin: 10px;
+    margin: 2rem;
+    margin-left: -2rem;
 `;
 
 
 
 export const FavoriteButton = styled.button`
   position: relative;
-  height: 30px;
+  height: 50px;
   width: 30px;
   background: none;
   border: none;
@@ -35,8 +36,9 @@ export const FavoriteButton = styled.button`
 
 
 export const ListCardImage = styled.img`
-    width: 15vw;
+    width: 25vw;
     border-radius: 8px;
+    margin: 0.5rem;
 `
 
 export const ListCardDescription = styled.div`
@@ -44,10 +46,11 @@ export const ListCardDescription = styled.div`
    position: relative;
    width: 75vw;
    height: 25vw;
+   
  
   `
 export const SongName = styled.h3`
-  font-size: 1rem;
+  font-size: 1.5rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,7 +62,7 @@ white-space: nowrap;
   width: 20vw;
   text-overflow: ellipsis;
   Color: #aaaaaa;
-  font-size: .5rem;
+  font-size: 0.8rem;
   margin: 0;
 `
 

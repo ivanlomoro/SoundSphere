@@ -21,6 +21,7 @@ const ScrollableRow = styled.ul`
 // Define a type for the component props
 interface ScrollableRowProps {
   children: ReactNode;
+  style?: React.CSSProperties;
 }
 
 // Main Component
