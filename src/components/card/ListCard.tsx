@@ -51,9 +51,11 @@ export const ListCardDescription = styled.div`
   `
 export const SongName = styled.h3`
   font-size: 1.5rem;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 1.5rem;
   overflow: hidden;
-  text-overflow: ellipsis;
   margin: 0;
 `
 export const SongArtist = styled.p`
