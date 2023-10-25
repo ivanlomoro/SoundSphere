@@ -5,7 +5,6 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 export const ListCard = styled.li`
     width: 90vw;
-    height: vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -63,7 +62,7 @@ white-space: nowrap;
   overflow: hidden;
   width: 20vw;
   text-overflow: ellipsis;
-  Color: #aaaaaa;
+  color: #aaaaaa;
   font-size: 0.8rem;
   margin: 0;
 `
