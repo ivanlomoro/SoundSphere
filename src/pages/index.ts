@@ -1,4 +1,4 @@
-export { FavoriteSongs } from "./FavoriteSOngs";
+export { FavoritesSongs } from "./FavoriteSongs";
 export {Home} from "./Home";
 export {UserPage} from "./UserPage";
 export {LandingPage} from "./LandingPage";

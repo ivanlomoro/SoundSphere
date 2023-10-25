@@ -1,8 +1,11 @@
 import React, { useState, useEffect, createContext, ReactNode } from "react";
 import type { Songs, Category  } from '../../Types/SongsTypes';
 import db from '../../data/db.json';
-import { Grid, RowCard } from "../../components/card/CardComponents";
+
 import { SongCard } from "../../components/card/FinalCardForMerge";
+import { RecentGrid,} from '../../components/homeContainers/FavoritesGrid'
+import { ScrollableRowComponent } from "../../components";
+
 
 
 
@@ -69,27 +72,27 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   };
 
   const renderGridSongs = (inputSongs: Songs[], count: number = 4) => (
-    <Grid>
+    <RecentGrid>
       {inputSongs.slice(0, count).map((song) => (
         <SongCard variant='grid' key={song.id} song={song} />
       ))}
-    </Grid>
+  </RecentGrid>
   );
 
   const renderRowSongs = (inputSongs: Songs[]) => (
-    <div style={{ overflowX: 'scroll', whiteSpace: 'nowrap' }}>
+    <ScrollableRowComponent>
       {inputSongs.map((song) => (
-        <RowCard key={song.id}>
-          <SongCard variant='row' song={song} />
-        </RowCard>
+      
+          <SongCard variant='card' key={song.id} song={song} />
+
       ))}
-    </div>
+      </ScrollableRowComponent>
   );
 
   const renderListSongs = (inputSongs: Songs[]) => (
     <div>
       {inputSongs.map((song) => (
-        <SongCard variant='list' key={song.id} song={song} /> // 'variant' is set to 'list'
+        <SongCard variant='list' key={song.id} song={song}/>
       ))}
     </div>
   );
@@ -108,7 +111,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         toggleFavorite,
         renderGridSongs,
         renderRowSongs,
-        renderListSongs // Added renderListSongs here
+        renderListSongs 
       }}
     >
       {children}

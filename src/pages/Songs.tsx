@@ -122,18 +122,20 @@
 // //esto va a ser el card del grid si se que es CSS, gracias! ;)
 
 
-
+import db from '../data/db.json';
 import { ScrollableRowComponent } from '../components';
 import { useSongs } from '../context/songContext/songContext';
 import { Button, RecentGrid } from '../components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Songs } from '../Types/SongsTypes';
 
 export const SongList = () => {
     const {
-        songs,
+        // songs,
         recents,
         favorites,
         categories,
+        // setSongs,
         renderGridSongs,
         renderRowSongs,
         renderListSongs,
@@ -145,6 +147,12 @@ export const SongList = () => {
                      if (indexCounter > songs.length)
               return <h1>No more songs to load</h1>
      }
+     const [songs, setSongs] = useState<Songs[]>([])
+     useEffect(() => {
+        setSongs(db.songData);
+        console.log(songs);
+    }, []);
+
     return (
         <>
             <div className="songList">

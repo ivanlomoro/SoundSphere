@@ -1,5 +1,4 @@
-export { GridSongCard } from './card/GridSongCard';
-export { SongCard } from './card/SongCard.1';
+
 
 export { RecentGrid } from "./homeContainers/FavoritesGrid";
 export { NavBar } from "./NavBar/NavBar";
