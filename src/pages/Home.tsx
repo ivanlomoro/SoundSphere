@@ -1,11 +1,11 @@
-import { NavbarHome } from '../components/NavBar/NavbarHome'
-import { SongList } from './Songs'
+import { NavbarHome } from "../components/NavBar/NavbarHome";
+import { SongList } from "./Songs";
 
 export const Home = () => {
   return (
     <>
-      <NavbarHome/>
-      <SongList/>
+      <NavbarHome />
+      <SongList />
     </>
-    )
-}
+  );
+};

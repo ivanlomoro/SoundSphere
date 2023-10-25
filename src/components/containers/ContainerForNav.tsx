@@ -1,13 +1,8 @@
-import { ReactNode } from "react"
-import styled from "styled-components"
-
+import styled from "styled-components";
 
 export const StyledContainerForNav = styled.nav`
-    position: relative;
-    min-height: 95vh;
-`
+  position: relative;
+  min-height: 95vh;
+`;
 
-type ContainerForNavProps = {
-    children: ReactNode
-}
 

@@ -1,6 +1,5 @@
 import { AuthProvider } from "./context/authContext/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
 import { AppRouter } from "./routes/AppRouter";
 import { FavoritesProvider } from "./context/FavoriteProvider";
 

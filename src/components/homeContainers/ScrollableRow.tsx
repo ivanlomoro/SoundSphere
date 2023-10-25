@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+import React, { ReactNode } from "react";
+import styled from "styled-components";
 
-// Styled component for the horizontal-scrolling row
 const ScrollableRow = styled.ul`
   display: flex;
   padding-inline-start: 0px;
@@ -18,15 +17,13 @@ const ScrollableRow = styled.ul`
   -ms-overflow-style: none;
 `;
 
-// Define a type for the component props
 interface ScrollableRowProps {
   children: ReactNode;
   style?: React.CSSProperties;
 }
 
-// Main Component
-export const ScrollableRowComponent: React.FC<ScrollableRowProps> = ({ children }) => {
+export const ScrollableRowComponent: React.FC<ScrollableRowProps> = ({
+  children,
+}) => {
   return <ScrollableRow>{children}</ScrollableRow>;
 };
-
-
