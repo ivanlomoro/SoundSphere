@@ -4,7 +4,7 @@ import { Link, useSearchParams } from "react-router-dom"
 import db from "../../data/db.json"
 import { Songs } from "../../Types/SongsTypes"
 import styled from "styled-components"
-
+import './styles.css'
 
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -14,9 +14,8 @@ export const SearchBar = () => {
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 100%;
+    max-width: 100%;
     margin: 10px; 
-    outline: 1px solid red;
 `
 
 const StyledDivSection2 = styled.div`
@@ -26,18 +25,7 @@ justify-content: space-between;
 align-items: center;
 width: 100%;
 margin: 10px; 
-outline: 1px solid red;
 `
-  const StyledInputSection = styled.input `
-    margin: 10px;
-    padding: 10px;
-    padding-right: 150px;
-    background-color: #747474;
-    color: white;
-  `
-
-
-
 
   useEffect(() => {
     setSongs(db.songData)
@@ -51,18 +39,20 @@ outline: 1px solid red;
   const query = searchParams.get("q") ?? ""
 
   return (
-    <div>
-      <div>
-        <BiSearch />
+    <div className="search">
+      <div className="input__container">
+        
         <input
+          className="search__input"
           type="search"
           placeholder="Enter song name..."
           value={query}
           onChange={handleQuery}
         />
+        <BiSearch className="search__icon" />
 
         {query && (
-          <StyledDivSection>
+          <StyledDivSection className="search__results__container">
             {songs
               .filter((song: Songs) => {
                 return (
