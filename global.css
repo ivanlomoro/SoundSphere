@@ -11,7 +11,7 @@
     --clr-bg-tertiary: #767676; 
     --clr-text-primary: #d6d6d6;
     --clr-text-secondary: #fff;
-    --clr-accent: #0BD8AB;
+    --clr-accent: #bd00ff;
 
     /* Typography */
     --ff-primary: 'Montserrat', sans-serif;
@@ -55,4 +55,9 @@ body{
 a {
     color: inherit;
     text-decoration: none;
+}
+
+button, 
+input{
+    font-family: inherit;
 }
