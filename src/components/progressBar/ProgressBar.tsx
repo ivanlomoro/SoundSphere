@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { CustomEventType } from "../playerDisplay/PlayerDisplay"
 
 type ProgressBarPropsType = {
     progress: {
@@ -9,7 +10,8 @@ type ProgressBarPropsType = {
     duration: {
         duration: number
         formattedDuration: string
-    }
+    },
+    onClick: (event:CustomEventType) => void
 }
 
 const StyledProgressBar = styled.div`
@@ -40,10 +42,10 @@ const StyledAlignedItems = styled.div`
     margin-inline: auto;
 `
 
-export const ProgressBar = ({progress, duration}:ProgressBarPropsType) => {
+export const ProgressBar = ({progress, duration, onClick}:ProgressBarPropsType) => {
     return (
             <StyledProgressBar>
-            <StyledProgress value={progress.currentPercentage}/>
+            <StyledProgress value={progress.currentPercentage} onClick={onClick}/>
             <StyledAlignedItems>
                 <p>{progress.currentFormattedTime}</p>
                 <p>{duration.formattedDuration}</p>

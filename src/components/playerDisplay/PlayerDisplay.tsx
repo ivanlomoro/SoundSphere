@@ -9,6 +9,13 @@ import { Songs } from '../../pages/Songs';
 import { useNavigate } from 'react-router-dom';
 
 
+export type CustomEventType = {
+    target: HTMLProgressElement,
+    nativeEvent: {
+        offsetX: number
+    }
+}
+
 const HiddenPlayer = styled.div`
   z-index: -5;
   width: 0;
@@ -63,7 +70,8 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
         formattedDuration: ""
     })
 
-    const playerRef = useRef(null)
+
+    const playerRef = useRef()
 
     const navigate = useNavigate()
 
@@ -115,6 +123,14 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
         }
     }
 
+    const handleProgressClick = (event:CustomEventType) => {
+        const progressBar = event.target
+        const clickPosition = event.nativeEvent.offsetX 
+        const progressBarWidth = progressBar.clientWidth
+        const fraction = (clickPosition / progressBarWidth) 
+        console.log( playerRef )
+        playerRef.current && playerRef.current.seekTo(fraction, 'fraction')
+    }
 
     const StyledSongName = styled.p`
         font-size: var(--fs-xl);
@@ -144,7 +160,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
             <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
             <StyledSongName>{currentSong.name}</StyledSongName>
             <StyledArtistName>{currentSong.artist}</StyledArtistName>
-            <ProgressBar progress={progress} duration={duration}/>
+            <ProgressBar progress={progress} duration={duration} onClick={handleProgressClick}/>
             <ButtonContainer>
                 <Button
                     variant='StyledButtonDisplay'
