@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from "react";
 import db from "../data/db.json";
 import { useFavorites } from "../context/FavoriteProvider";
-import { Songs, Category, Artist } from "../Types/SongsTypes";
+import { Artist } from "../Types/SongsTypes";
 import { Button, GridSongCard, RecentGrid, ScrollableRowComponent, SongCard } from "../components";
 
 
+//esto lo voy a poner en el types cuando se hara el fetch
+export type Songs = {
+    id: number;
+    name: string;
+    artist: string;
+    url: string;
+    thumbnail: string;
+    genre: string;
+    liked: boolean;
+}
+type Category = {
+    name: string;
+    id: number;
+}
 
 
 //  MIRA! NI UNA PUTA PROP! 
@@ -59,7 +73,7 @@ export const SongList: React.FC = () => {
     const handleClick = () => {
         alert("clicked");
     }
-
+    console.log('init-songs')
     return (
         <>
             <div className="songList">

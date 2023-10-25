@@ -14,7 +14,9 @@ export const RouterPaths: FC = () => {
                 <Route element={<NavLayout />}>
                     <Route path= {HOME} element={<Home />} />
                     <Route path={USERPAGE} element={<UserPage/>} />
-                    <Route path={DISPLAYPAGE} element={<DisplayPage />} />
+                    <Route path={DISPLAYPAGE} element={<DisplayPage />} >
+                        <Route path=":name" element={<DisplayPage />} ></Route>
+                    </Route>
                     <Route path={SEARCHPAGE} element ={<SearchPage />} />
                     <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
                 </Route>

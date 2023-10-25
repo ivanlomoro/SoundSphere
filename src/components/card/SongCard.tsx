@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -76,4 +77,33 @@ export type SongCardProps = {
 
 
 
-
+export function SongCard({ song, toggleFavorite, isFavorite, addToRecents }: Partial<SongCardProps>) {
+    console.log('init-song-card')
+    // La mierda esa del undefined la he resuelto con partial y esto, pero no estoy seguro
+    if (!song) {
+        return null;  
+    }
+    if (!toggleFavorite || !isFavorite || !addToRecents) {
+        return null;
+    }
+  
+    return (
+        <Card>
+            <CardImage className="card-img" src={song.thumbnail} alt={song.name} />
+            <CardDescription>                
+                    <SongName>{song.name}</SongName>
+                    <SongArtist>{song.artist}</SongArtist>             
+            </CardDescription>
+            
+            <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
+            <Link to={`/displaypage/${song.name}`}>
+                <StyledButtonPlay onClick={() => addToRecents(song)}>Play</StyledButtonPlay>
+            </Link>
+            <FavoriteButton onClick={() => toggleFavorite(song)}>
+                {isFavorite(song.id) ? "❤️" : "♡"}
+            </FavoriteButton>       
+                
+                 </div>
+        </Card>
+    );
+}
