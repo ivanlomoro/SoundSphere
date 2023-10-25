@@ -5,12 +5,14 @@ import { WelcomeUserSection } from "../components/welcomeUserSection/WelcomeUser
 import { AuthContext } from "../context/authContext/authContext"
 import { UserDetails } from "../components/userDetails/UserDetails"
 import { UserContainer } from "../components/containers/UserContainer"
+import { HeaderSection } from "../components"
 
 export const UserPage = () => {
   const { logout } = useContext(AuthContext)
 
   return (
       <Container>
+          <HeaderSection text="Profile"/>
           <UserContainer>
           <WelcomeUserSection />
           <UserDetails />

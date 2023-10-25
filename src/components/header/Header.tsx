@@ -3,18 +3,23 @@ import { WelcomeUserMessage } from "../welcomeUserSection/WelcomeUserMessage";
 import { ArrowBackSection } from "../arrowback/Arrowback";
 
 const StyledHeaderSection = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   background-color: var(--clr-bg-primary); 
   padding: var(--fs-md);
 `;
 
-export const HeaderSection = () => {
+type HeaderPropsType = {
+    text?: string
+}
+
+export const HeaderSection = ({text = "SoundSphere"}:HeaderPropsType) => {
     return (
         <StyledHeaderSection>
             <ArrowBackSection />
-            <WelcomeUserMessage text="Profile" />
+            <WelcomeUserMessage text={text} />
         </StyledHeaderSection>
     )
 }
