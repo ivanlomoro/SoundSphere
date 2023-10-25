@@ -26,7 +26,6 @@ export const FavoriteButton = styled.button`
   cursor: pointer;
   color: inherit;
 
-  /* Hover effect */
   &:hover ${AiOutlineHeart} {
     color: var(--clr-accent);
   }

@@ -78,8 +78,6 @@ export type SongCardProps = {
 
 
 export function SongCard({ song, toggleFavorite, isFavorite, addToRecents }: Partial<SongCardProps>) {
-    console.log('init-song-card')
-    // La mierda esa del undefined la he resuelto con partial y esto, pero no estoy seguro
     if (!song) {
         return null;  
     }

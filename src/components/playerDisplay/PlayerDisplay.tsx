@@ -128,7 +128,6 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
         const clickPosition = event.nativeEvent.offsetX 
         const progressBarWidth = progressBar.clientWidth
         const fraction = (clickPosition / progressBarWidth) 
-        console.log( playerRef )
         playerRef.current && playerRef.current.seekTo(fraction, 'fraction')
     }
 

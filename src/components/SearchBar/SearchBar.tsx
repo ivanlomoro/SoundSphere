@@ -29,7 +29,6 @@ margin: 10px;
 
   useEffect(() => {
     setSongs(db.songData)
-    console.log(songs)
   }, [])
 
   const handleQuery = (e: ChangeEvent<HTMLInputElement>) => {

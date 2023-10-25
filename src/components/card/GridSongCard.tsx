@@ -29,7 +29,7 @@ export function GridSongCard({ song, toggleFavorite, isFavorite, addToRecents }:
                         ariaLabel="Music Player"
                         onClick={()=> addToRecents(song)}
                     />
-                    <div style={{color: "var(--clr-accent)"} as React.CSSProperties}> {/* Define the variable somewhere in your styles */}
+                    <div style={{color: "var(--clr-accent)"} as React.CSSProperties}> 
       <FavoriteButton onClick={() => toggleFavorite(song)}>
         {isFavorite(song.id) ? <AiFillHeart style={{ color: "var(--clr-accent)" }} /> : <AiOutlineHeart />}
       </FavoriteButton>

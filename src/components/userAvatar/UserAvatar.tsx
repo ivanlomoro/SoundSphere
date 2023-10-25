@@ -9,6 +9,5 @@ const StyledUserAvatar = styled.img`
 
 
 export const UserAvatar = () => {
-    {/* Upload image in webp and replace url  */}
     return (<StyledUserAvatar src={jason} alt="User avatar" />)
 }

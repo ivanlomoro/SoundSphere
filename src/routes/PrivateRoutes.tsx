@@ -6,7 +6,6 @@ import { LANDINGPAGE } from './paths';
 
 export const PrivateRoutes = ({ children }: { children: ReactNode }) => {
   const { isLogged } = useContext(AuthContext);
-  console.log("isLogged:", isLogged);
   return isLogged ? (
     <>{children}</>
   ) : (

@@ -37,7 +37,7 @@ const StyledNavIcon = styled(({ icon: Icon, ...props }:StyledNavIconProps) => <I
     width: 30px;
     color: inherit;
     
-    &:hover, /* Demostration only. The style is added to the active NavLink inside the global.css as well */ 
+    &:hover, 
     &:active {
         color: var(--clr-accent);
     }

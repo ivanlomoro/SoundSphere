@@ -7,7 +7,6 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import styled from "styled-components";
 
 
-//esto lo voy a poner en el types cuando se hara el fetch
 export type Songs = {
     id: number;
     name: string;
@@ -34,11 +33,9 @@ const StyledButton = styled.button`
 `
 
 
-//  MIRA! NI UNA PUTA PROP! 
 export const SongList: React.FC = () => {
 
     const { favorites,isFavorite, toggleFavorite } = useFavorites()
-    //si no sabes que estoy haciendo aqui, mal vamos 
     const [songs, setSongs] = useState<Songs[]>([])
     useEffect(() => {
         setSongs(db.songData);
@@ -47,7 +44,6 @@ export const SongList: React.FC = () => {
     const [artists, setArtists] = useState<Artist[]>([])
     useEffect(() => {
         setArtists(db.artists);
-        console.log(artists)
     }, []);
 
     
@@ -57,8 +53,7 @@ export const SongList: React.FC = () => {
         setCategories(db.categories);
     }, [])
 
-    //counter para paginacion rudimentario y mucho 
-    const [indexCounter, setIndexCounter] = useState(4); //usado metodo .slice, no mira el index
+    const [indexCounter, setIndexCounter] = useState(4);
     const loadMoreSongs = () => {
         setIndexCounter(prevIndex => prevIndex + 4)
         if (indexCounter > songs.length)
@@ -67,7 +62,6 @@ export const SongList: React.FC = () => {
 
 
 
-    //canciones recientes sin guardarlas al usuario ni nada 
     const [recents, setRecents] = useState<Songs[]>([])
 
 
@@ -82,11 +76,9 @@ export const SongList: React.FC = () => {
         }
     }
  
-    // Esto va a ser un componente independiente
     const handleClick = () => {
         alert("clicked");
     }
-    console.log('init-songs')
     return (
         <>
             <div className="songList">
@@ -154,9 +146,3 @@ export const SongList: React.FC = () => {
 };
 
 
-//esto va a ser el card del grid si se que es CSS, gracias! ;)
-
-
-// {songs.map((song) => (
-//     <p key={song.id}>{song.name} by {song.artist}</p>
-//     ))}

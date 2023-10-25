@@ -6,7 +6,7 @@ export const FAVORITEPAGE= "/favorites"
 export const SEARCHPAGE = "/search"
 
 
-/* Poner profile page de toda la puta vida */
+
 
 
 

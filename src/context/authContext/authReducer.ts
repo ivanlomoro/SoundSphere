@@ -8,6 +8,7 @@ export interface AuthState {
         email: string
         birthdate: string
         gender: string
+        password: string
     } | null;
 }
 
@@ -18,7 +19,8 @@ export type AuthAction = {
         name: string;
         email: string
         birthdate: string
-        gender: string
+        gender: string,
+        password: string
     };
 };
 
