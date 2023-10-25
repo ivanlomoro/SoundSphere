@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AiOutlineStepBackward, AiOutlineStepForward } from 'react-icons/ai';
 import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs'
 import ReactPlayer from 'react-player'
@@ -13,7 +13,7 @@ export type CustomEventType = {
     target: HTMLProgressElement,
     nativeEvent: {
         offsetX: number
-    }
+    },
 }
 
 const HiddenPlayer = styled.div`
@@ -71,7 +71,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     })
 
 
-    const playerRef = useRef()
+    const playerRef = useRef<ReactPlayer>(null)
 
     const navigate = useNavigate()
 

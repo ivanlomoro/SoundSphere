@@ -42,10 +42,19 @@ const StyledAlignedItems = styled.div`
     margin-inline: auto;
 `
 
+
+type ProgressPropsType = {
+    onClick: any
+    value: number
+}
+
+const Progress = ({onClick, value}:ProgressPropsType) => <StyledProgress value={value} onClick={onClick}/>
+
+
 export const ProgressBar = ({progress, duration, onClick}:ProgressBarPropsType) => {
     return (
             <StyledProgressBar>
-            <StyledProgress value={progress.currentPercentage} onClick={onClick}/>
+            <Progress value={progress.currentPercentage} onClick={onClick}/>
             <StyledAlignedItems>
                 <p>{progress.currentFormattedTime}</p>
                 <p>{duration.formattedDuration}</p>
