@@ -10,8 +10,8 @@ export const Card = styled.li`
     background-color: #282828;
     color: white;
     border-radius: 10px;
-    width: 20vh;
-    min-width: 20vh;
+    width: 10rem;
+    min-width: 10rem;
     margin: 10px;
 `;
 

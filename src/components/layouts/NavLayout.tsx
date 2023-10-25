@@ -6,7 +6,7 @@ const StyledNavLayout = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 97vh;
+    min-height: 100vh;
 `
 
 export const NavLayout = ()=>{

@@ -3,6 +3,8 @@ import db from "../data/db.json";
 import { useFavorites } from "../context/FavoriteProvider";
 import { Artist } from "../Types/SongsTypes";
 import { Button, GridSongCard, RecentGrid, ScrollableRowComponent, SongCard } from "../components";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import styled from "styled-components";
 
 
 //esto lo voy a poner en el types cuando se hara el fetch
@@ -19,6 +21,17 @@ type Category = {
     name: string;
     id: number;
 }
+
+const StyledButton = styled.button`
+    background-color: #282828;
+    border: none;
+    color: var(--clr-text-primary);
+    border-radius: 10px;
+    height: fit-content;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    margin-block: auto;
+`
 
 
 //  MIRA! NI UNA PUTA PROP! 
@@ -98,7 +111,7 @@ export const SongList: React.FC = () => {
                                 addToRecents={addToRecents}
                             />
                         ))}
-                        <button onClick={loadMoreSongs}>Load More</button>
+                        <StyledButton onClick={loadMoreSongs}><AiOutlineArrowRight /></StyledButton>
                     </ScrollableRowComponent>
                 </div>
                 <div style={{ padding: 0 }}>

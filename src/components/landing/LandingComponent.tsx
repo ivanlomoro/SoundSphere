@@ -26,15 +26,22 @@ export const LandingComponent = () => {
         margin-top: var(--space-sm);
     `
 
+    const StyledDiv = styled.div`
+        width: 100%;
+        margin-block: auto;
+    `
+
     return (
         <>
             <LandingContainer>
-                <header>
-                    <LogoComponent textTitle='SoundSphere' textSlogan='Be connected' />
-                </header>
-                <StyledMain>
-                    <Button content="Login" onClick={handleLogin} />
-                </StyledMain>
+                <StyledDiv>
+                    <header>
+                        <LogoComponent textTitle='SoundSphere' textSlogan='Be connected' />
+                    </header>
+                    <StyledMain>
+                        <Button content="Login" onClick={handleLogin} />
+                    </StyledMain>
+                </StyledDiv>
                 <footer>
                     <TermsContainer>
                         <Paragraph text='Al crear la cuenta o iniciar sesión, aceptas los ' /><Span text='Términos y Condiciones legales' /><Paragraph text=' y la ' /><Span text='Política de Privacidad' />

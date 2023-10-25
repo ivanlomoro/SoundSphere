@@ -3,7 +3,6 @@ import styled from 'styled-components'
 const StyledImage = styled.img`
     width: 100px;
     height: 110px;
-    margin-top: 5rem;
     margin-bottom: var(--space-sm);
 `
 const StyledTitle = styled.h2`
@@ -19,6 +18,10 @@ const StyledSlogan = styled.h3`
     font-family: var(--ff-primary);
     color: var(--cl-text-secondary);
 `
+const StyledLogoComponent = styled.div`
+    margin-bottom: 3rem;
+`
+
 type LogoComponentProps = {
     textTitle: string;
     textSlogan?: string;
@@ -26,11 +29,11 @@ type LogoComponentProps = {
 
 export const LogoComponent = ({ textTitle, textSlogan }: LogoComponentProps) => {
     return (
-        <>
+        <StyledLogoComponent>
             <StyledImage src="src/assets/imgs/iconoSound.jpg" alt="Icono Page" />
             <StyledTitle>{textTitle}</StyledTitle>
             <StyledSlogan>{textSlogan}</StyledSlogan>
-        </>
+        </StyledLogoComponent>
     )
 }
 

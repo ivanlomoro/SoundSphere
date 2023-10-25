@@ -49,6 +49,7 @@ body{
     color: var(--clr-text-primary);
     font-family: var(--ff-primary);
     font-size: var(--fs-md);
+    margin-block: 0;
 }
 
 /* Esto es para el reset  */
@@ -61,3 +62,4 @@ button,
 input{
     font-family: inherit;
 }
+

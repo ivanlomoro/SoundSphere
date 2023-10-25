@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    margin-top: 15rem;
+    margin-bottom: 2rem;
     bottom: 0;
 `;
 
