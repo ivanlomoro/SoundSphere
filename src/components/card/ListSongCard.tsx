@@ -3,6 +3,7 @@ import { AiOutlineHeart, AiOutlinePlayCircle, AiFillHeart } from 'react-icons/ai
 import { SongCardProps,  SongName, SongArtist, ListCard, ListCardImage, ListCardDescription } from "./ListCard";
 import { FavoriteButton } from "./SongCard";
 import { NavIcon } from '../NavBar/NavBar';
+import { Link } from "react-router-dom";
 
 
 
@@ -23,12 +24,15 @@ export function ListSongCard({ song, toggleFavorite, isFavorite, addToRecents }:
                 <SongArtist>{song.artist}</SongArtist>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <Button
-                        variant="StyledButtonNav"
-                        content={<NavIcon icon={AiOutlinePlayCircle} />}
-                        ariaLabel="Music Player"
-                        onClick={()=> addToRecents(song)}
-                    />
+                    <Link to={`/displaypage/${song.name}`}>
+                        <Button
+                            variant="StyledButtonNav"
+                            content={<NavIcon icon={AiOutlinePlayCircle} />}
+                            ariaLabel="Music Player"
+                            onClick={() => addToRecents(song)}
+                        />
+                    </Link>
+                    
                     <div style={{color: "var(--clr-accent)"} as React.CSSProperties}> {/* Define the variable somewhere in your styles */}
       <FavoriteButton onClick={() => toggleFavorite(song)}>
         {isFavorite(song.id) ? <AiFillHeart style={{ color: "var(--clr-accent)" }} /> : <AiOutlineHeart />}
