@@ -2,7 +2,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlinePlayCircle } from 'react-icons/ai
 import {  Card, CardImage, CardDescription, SongName, SongArtist, FavoriteButton } from "./SongCard";
 import { Button } from '../button/Button';
 import { NavIcon } from '../NavBar/NavBar';
-import { SongCardProps } from './GridCard';
+import { SongCardProps } from './SongCard';
 
 
 
