@@ -2,7 +2,7 @@ import { AuthProvider } from "./context/authContext/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { AppRouter } from "./routes/AppRouter";
-import { FavoritesProvider } from "./context/FavoriteProvider";
+import SongsProvider from "./context/songContext/songContext";
 
 
 AppRouter;
@@ -10,11 +10,11 @@ AppRouter;
 export const App = () => {
   return (
     <AuthProvider>
-      <FavoritesProvider>
+      <SongsProvider>
         <BrowserRouter>
           <AppRouter />
         </BrowserRouter>
-      </FavoritesProvider>
+      </SongsProvider>
     </AuthProvider>
   );
 };

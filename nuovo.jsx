@@ -1,82 +1,4 @@
-import styled from "styled-components";
-
-
-export const Card = styled.li`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    background-color: #282828;
-    color: white;
-    border-radius: 10px;
-    width: 20vh;
-    min-width: 20vh;
-    margin: 10px;
-`;
-
-export const CardImage = styled.img`
-    width: 100%;
-    border-radius: 8px;
-`;
-
-export const CardDescription = styled.div`
-   width: 100%;
-   padding: 0.4rem;
- 
-`;
-export const SongName = styled.h3`
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-`
-export const SongArtist = styled.p`
-white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  Color: #aaaaaa;
-  font-size: 12px;
-  margin: 0;
-`
-export const FavoriteButton = styled.button`
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    margin-top: 5px;
-`;
-
-export const StyledButtonPlay = styled.button`
-    background: #1DB954;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 5px;
-    cursor: pointer;
-`;
-type Songs = {
-    id: number;
-    name: string;
-    artist: string;
-    url: string;
-    thumbnail: string;
-    genre: string;
-    liked: boolean;
-}
-export type SongCardProps = {
-    song: Songs;
-    toggleFavorite: (song: Songs) => void;
-    isFavorite: (id: number) => boolean;
-    addToRecents: (song: Songs) => void;
-}
-
-
-
-import { AiOutlineHeart } from "react-icons/ai";
+alright then, now please using this import { AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
 
 
@@ -202,15 +124,6 @@ export const FavoriteButton = styled.button`
     }
 `;
 
-export const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
-`;
-
-export const GridItem = styled.div`
-
-`;
 
 type Songs = {
     id: number;
@@ -227,4 +140,56 @@ export type SongCardProps = {
     toggleFavorite: (song: Songs) => void;
     isFavorite: (id: number) => boolean;
     addToRecents: (song: Songs) => void;
+}; 
+
+
+import styled from "styled-components";
+
+
+export const RecentGrid = styled.ul`
+width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(2, 45vw);
+    grid-template-rows: repeat(2, 1fr);
+   margin: 0;
+   padding: 0;
+   list-style: none;
+   gap: .2rem;
+`
+
+
+
+
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+
+// Styled component for the horizontal-scrolling row
+const ScrollableRow = styled.ul`
+  display: flex;
+  padding-inline-start: 0px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+`;
+
+// Define a type for the component props
+interface ScrollableRowProps {
+  children: ReactNode;
+}
+
+// Main Component
+export const ScrollableRowComponent: React.FC<ScrollableRowProps> = ({ children }) => {
+  return <ScrollableRow>{children}</ScrollableRow>;
 };
+
+
+
+

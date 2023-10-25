@@ -77,6 +77,7 @@ export type SongCardProps = {
     toggleFavorite: (song: Songs) => void;
     isFavorite: (id: number) => boolean;
     addToRecents: (song: Songs) => void;
+    variant: 'grid' | 'row' | 'list';
 }
 
 
