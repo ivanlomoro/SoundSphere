@@ -54,7 +54,7 @@ outline: 1px solid red;
     <div>
       <div>
         <BiSearch />
-        <StyledInputSection
+        <input
           type="search"
           placeholder="Enter song name..."
           value={query}
