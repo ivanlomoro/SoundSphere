@@ -60,7 +60,7 @@ margin: 10px;
                 )
               })
               .map((song: Songs) => (
-                <Link key={song.id} to={`/songs/${song.name}`}>
+                <Link key={song.id} to={`/displaypage/${song.name}`}>
                   <StyledDivSection2>
                     <img style={{width: 50}} src={song.thumbnail} alt="miscojones"/> 
                      <StyledDivSection>
