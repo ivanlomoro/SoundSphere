@@ -43,9 +43,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     setSongs(db.songData);
   }, []);
 
-
-  useEffect(() => {       setCategories(db.categories);    }, [])
-
+  useEffect(() => {setCategories(db.categories)}, [])
 
   const songExists = (arr: Songs[], id:number) => arr.some((song:Songs) => song.id === id);
 
