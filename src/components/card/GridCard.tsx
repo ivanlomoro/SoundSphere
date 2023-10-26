@@ -10,6 +10,7 @@ export const GridCard = styled.li`
   color: white;
   border-radius: 10px;
   margin: 10px;
+  user-select: none;
 `;
 
 export const FavoriteButton = styled.button`

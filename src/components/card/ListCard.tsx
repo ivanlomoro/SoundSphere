@@ -11,6 +11,7 @@ export const ListCard = styled.li`
   border-radius: 10px;
   margin: 2rem;
   margin-left: -2rem;
+  user-select: none;
 `;
 
 export const FavoriteButton = styled.button`

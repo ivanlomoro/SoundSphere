@@ -43,6 +43,7 @@ export function SongCard({
           justifyContent: "space-between",
           width: "50%",
           color: "var(--clr-accent)",
+         userSelect: "none"
         }}
       >
         <Link to={`/displaypage/${song.name}`}>

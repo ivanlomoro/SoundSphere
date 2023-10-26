@@ -21,12 +21,7 @@ export function GridSongCard({
   isFavorite,
   addToRecents,
 }: Partial<SongCardProps>) {
-  if (!song) {
-    return null;
-  }
-  if (!toggleFavorite || !isFavorite || !addToRecents) {
-    return null;
-  }
+                                                                                                                                                                                                          
 
   return (
     <GridCard>
