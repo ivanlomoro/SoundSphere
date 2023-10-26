@@ -14,7 +14,8 @@ export type Category = {
 };
 
 
-export type Artist= {
+export type Artists= {
+    
 id: number;
     name: string;
     genres: string[];
