@@ -2,8 +2,7 @@ import { PlayerDisplay } from "../components/playerDisplay/PlayerDisplay"
 import db from "../data/db.json";
 
 import { useParams } from 'react-router-dom';
-import { Songs } from "./Songs";
-
+import type { Songs} from "../Types/SongsTypes"
 
 
 export const DisplayPage = () => {

@@ -7,7 +7,7 @@ export const StyledContainerForNav = styled.nav`
     min-height: 95vh;
 `
 
-type ContainerForNavProps = {
+export type ContainerForNavProps = {
     children: ReactNode
 }
 

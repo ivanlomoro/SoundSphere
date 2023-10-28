@@ -1,20 +1,18 @@
-
-
-export { RecentGrid } from "./homeContainers/FavoritesGrid";
-export { NavBar } from "./NavBar/NavBar";
-export { ArrowBackSection } from "./arrowback/Arrowback";
-export { Button } from "./button/Button";
-
-export { Container } from "./containers/Container";
-export { EditUserForm } from "./editUserForm/EditUserForm";
-export { HeaderSection } from "./header/Header";
-export { ScrollableRowComponent } from "./homeContainers/ScrollableRow";
+export { WelcomeUserMessage } from "./welcomeUserSection/WelcomeUserMessage";
 export { LandingComponent, LandingContainer } from "./landing";
+export { RecentGrid } from "./homeContainers/FavoritesGrid";
+export { ArrowBackSection } from "./arrowback/Arrowback";
 export { LogoComponent } from "./logo/LogoComponent";
 export { Paragraph } from "./paragraph/Paragraph";
+export { SongCard } from "./card/SongCard";
+export { NavBar } from "./NavBar/NavBar";
 export { Span } from "./span/Span";
-export { TermsContainer} from './terms/TermsContainer';
+export { Button } from "./button/Button";
+export { HeaderSection } from "./header/Header";
+export { Container } from "./containers/Container";
 export { UserAvatar } from "./userAvatar/UserAvatar";
-export { WelcomeUserMessage } from "./welcomeUserSection/WelcomeUserMessage";
+export { TermsContainer} from './terms/TermsContainer';
+export { EditUserForm } from "./editUserForm/EditUserForm";
+export { ScrollableRowComponent } from "./homeContainers/ScrollableRow";
 export { WelcomeUserSection } from "./welcomeUserSection/WelcomeUserSection";
 

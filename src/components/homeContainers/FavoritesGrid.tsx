@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const RecentGrid = styled.ul`
-width: 100vw;
+width: 90vw;
     display: grid;
     grid-template-columns: repeat(2, 45vw);
     grid-template-rows: repeat(2, 1fr);

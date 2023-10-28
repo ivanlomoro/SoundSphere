@@ -1,10 +1,11 @@
 import React, { useState, useEffect, createContext, ReactNode } from "react";
 import type { Songs, Category  } from '../../Types/SongsTypes';
 import db from '../../data/db.json';
-
+import useLocalStorage from '../../hooks/useLocalStorage';
 // import { SongCard } from "../../components/card/FinalCardForMerge";
 // import { RecentGrid,} from '../../components/homeContainers/FavoritesGrid'
 // import { ScrollableRowComponent } from "../../components";
+
 
 
 
@@ -34,8 +35,8 @@ type SongsProviderProps = {
 
 const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [songs, setSongs] = useState<Songs[]>([]);
-  const [recents, setRecents] = useState<Songs[]>([]);
-  const [favorites, setFavorites] = useState<Songs[]>([]);
+  const [recents, setRecents] = useLocalStorage<Songs[]>('recents', []);
+  const [favorites, setFavorites] = useLocalStorage<Songs[]>('favorites', []);
   const [categories, setCategories] = useState<Category[]>([])
   
   

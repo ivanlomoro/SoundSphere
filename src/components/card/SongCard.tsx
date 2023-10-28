@@ -1,8 +1,31 @@
-import { Link } from "react-router-dom";
+import { AiFillHeart, AiOutlineHeart, AiOutlinePlayCircle } from 'react-icons/ai';
 import styled from "styled-components";
+import { Button } from '..';
+import { NavIcon } from '../NavBar/NavBar';
+import { Link } from 'react-router-dom';
 
 
-export const Card = styled.li`
+type Songs = {
+  id: number;
+  name: string;
+  artist: string;
+  url: string;
+  thumbnail: string;
+  genre: string;
+  liked: boolean;
+}
+
+type SongCardProps = {
+  song: Songs;
+  toggleFavorite?: (song: Songs) => void;
+  isFavorite?: (id: number) => boolean;
+  addToRecents?: (song: Songs) => void;
+  variant?: "grid" | "list" | "card"; 
+}
+
+
+
+const Card = styled.li`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,32 +38,33 @@ export const Card = styled.li`
     margin: 10px;
 `;
 
-export const CardImage = styled.img`
+const CardImage = styled.img`
     width: 100%;
     border-radius: 8px;
 `;
 
-export const CardDescription = styled.div`
+const CardDescription = styled.div`
    width: 100%;
    padding: 0.4rem;
- 
 `;
-export const SongName = styled.h3`
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-`
-export const SongArtist = styled.p`
-white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  Color: #aaaaaa;
-  font-size: 12px;
-  margin: 0;
-`
-export const FavoriteButton = styled.button`
+// const SongName = styled.h3`
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   margin: 0;
+// `;
+
+
+ const ListCardDescription = styled.div`
+    padding: 0.4rem;
+   position: relative;
+   width: 75vw;
+   height: 25vw;
+ 
+  `
+
+const FavoriteButton = styled.button`
     background: transparent;
     border: none;
     color: white;
@@ -49,62 +73,79 @@ export const FavoriteButton = styled.button`
     margin-top: 5px;
 `;
 
-export const StyledButtonPlay = styled.button`
-    background: #1DB954;
+// const StyledButtonPlay = styled.button`
+//     background: #1DB954;
+//     color: white;
+//     border: none;
+//     border-radius: 20px;
+//     padding: 10px 20px;
+//     font-size: 16px;
+//     margin-top: 5px;
+//     cursor: pointer;
+// `;
+
+ const ListCardImage = styled.img`
+    width: 15vw;
+    border-radius: 8px;
+`
+
+
+const GridCard = styled.li`
+    width: 45vw;
+    height: 15vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #6a6a6a;
     color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 5px;
-    cursor: pointer;
+    border-radius: 10px;
+    margin: 10px;
 `;
-type Songs = {
-    id: number;
-    name: string;
-    artist: string;
-    url: string;
-    photoUrl?: string;
-    thumbnail: string;
-    genre: string;
-    liked: boolean;
-}
-export type SongCardProps = {
-    song: Songs;
-    toggleFavorite: (song: Songs) => void;
-    isFavorite: (id: number) => boolean;
-    addToRecents: (song: Songs) => void;
-}
 
+const GridCardImage = styled.img`
+    width: 15vw;
+    border-radius: 8px;
+`;
 
-
-export function SongCard({ song, toggleFavorite, isFavorite, addToRecents }: Partial<SongCardProps>) {
-    console.log('init-song-card')
-    // La mierda esa del undefined la he resuelto con partial y esto, pero no estoy seguro
-    if (!song) {
-        return null;  
-    }
-    if (!toggleFavorite || !isFavorite || !addToRecents) {
-        return null;
-    }
+const GridCardDescription = styled.div`
+    padding: 0.4rem;
+    position: relative;
+    width: 25vw;
+    height: 15vw;
+`;
+export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, variant = "card" }: SongCardProps) {
   
-    return (
-        <Card>
-            <CardImage className="card-img" src={song.thumbnail} alt={song.name} />
-            <CardDescription>                
-                    <SongName>{song.name}</SongName>
-                    <SongArtist>{song.artist}</SongArtist>             
-            </CardDescription>
-            
-            <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-            <Link to={`/displaypage/${song.name}`}>
-                <StyledButtonPlay onClick={() => addToRecents(song)}>Play</StyledButtonPlay>
-            </Link>
-            <FavoriteButton onClick={() => toggleFavorite(song)}>
-                {isFavorite(song.id) ? "❤️" : "♡"}
-            </FavoriteButton>       
-                
-                 </div>
-        </Card>
-    );
+
+  const CardComponent = variant === "grid" ? GridCard : variant === "list" ? Card : Card;
+  const ImageComponent = variant === "grid" ? GridCardImage : variant === "list" ? ListCardImage : CardImage;
+  const DescriptionComponent = variant === "grid" ? GridCardDescription : variant === "list" ? ListCardDescription : CardDescription;
+
+  if (!song || !toggleFavorite || !isFavorite || !addToRecents) {
+    return null;
+  }
+
+  return (
+    <CardComponent>
+      <ImageComponent src={song.thumbnail} alt={song.name} />
+      <DescriptionComponent>
+        <div>
+        <h3>{song.name}</h3>
+        <p>{song.artist}</p>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                  <Link to={`/displaypage/${song.name}`}><Button
+                        variant="StyledButtonNav"
+                        content={<NavIcon icon={AiOutlinePlayCircle} />}
+                        ariaLabel="Music Player"
+                    /></Link>
+                    <div style={{color: "var(--clr-accent)"} as React.CSSProperties}> {/* Define the variable somewhere in your styles */}
+      <FavoriteButton onClick={() => toggleFavorite(song)}>
+        {isFavorite(song.id) ? <AiFillHeart style={{ color: "var(--clr-accent)" }} /> : <AiOutlineHeart />}
+      </FavoriteButton>
+    </div>
+
+                </div>
+      </DescriptionComponent>
+    </CardComponent>
+  );
 }
