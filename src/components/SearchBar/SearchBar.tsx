@@ -1,82 +1,74 @@
-import { ChangeEvent, useEffect, useState } from "react"
-import { BiSearch } from "react-icons/bi"
-import { Link, useSearchParams } from "react-router-dom"
-import db from "../../data/db.json"
-import { Songs } from "../../Types/SongsTypes"
-import styled from "styled-components"
-
+import { ChangeEvent, useEffect, useState } from "react";
+import { BiSearch } from "react-icons/bi";
+import { Link, useSearchParams } from "react-router-dom";
+import db from "../../data/db.json";
+import { Songs } from "../../Types/SongsTypes";
+import styled from "styled-components";
+import "./styles.css";
 
 export const SearchBar = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [songs, setSongs] = useState<Songs[]>([])
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [songs, setSongs] = useState<Songs[]>([]);
 
   const StyledDivSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 100%;
-    margin: 10px; 
-    outline: 1px solid red;
-`
-
-const StyledDivSection2 = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-width: 100%;
-margin: 10px; 
-outline: 1px solid red;
-`
-  const StyledInputSection = styled.input `
+    max-width: 100%;
     margin: 10px;
-    padding: 10px;
-    padding-right: 150px;
-    background-color: #747474;
-    color: white;
-  `
+  `;
 
-
-
+  const StyledDivSection2 = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+  `;
 
   useEffect(() => {
-    setSongs(db.songData)
-    console.log(songs)
-  }, [])
+    setSongs(db.songData);
+  }, []);
 
   const handleQuery = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchParams({ q: e.target.value })
-  }
+    setSearchParams({ q: e.target.value });
+  };
 
-  const query = searchParams.get("q") ?? ""
+  const query = searchParams.get("q") ?? "";
 
   return (
-    <div>
-      <div>
-        <BiSearch />
+    <div className="search">
+      <div className="input__container">
         <input
+          className="search__input"
           type="search"
           placeholder="Enter song name..."
           value={query}
           onChange={handleQuery}
         />
+        <BiSearch className="search__icon" />
 
         {query && (
-          <StyledDivSection>
+          <StyledDivSection className="search__results__container">
             {songs
               .filter((song: Songs) => {
                 return (
                   song && song.name.toLowerCase().includes(query.toLowerCase())
-                )
+                );
               })
               .map((song: Songs) => (
-                <Link key={song.id} to={`/songs/${song.name}`}>
+                <Link key={song.id} to={`/displaypage/${song.name}`}>
                   <StyledDivSection2>
-                    <img style={{width: 50}} src={song.thumbnail} alt="miscojones"/> 
-                     <StyledDivSection>
+                    <img
+                      style={{ width: 50 }}
+                      src={song.thumbnail}
+                      alt="miscojones"
+                    />
+                    <StyledDivSection>
                       <p>{song.name}</p>
                       <p>{song.artist}</p>
-                      </StyledDivSection>
+                    </StyledDivSection>
                   </StyledDivSection2>
                 </Link>
               ))}
@@ -84,5 +76,5 @@ outline: 1px solid red;
         )}
       </div>
     </div>
-  )
-}
+  );
+};

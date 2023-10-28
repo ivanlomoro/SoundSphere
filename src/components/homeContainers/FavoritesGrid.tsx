@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const RecentGrid = styled.ul`
 width: 90vw;
     display: grid;
@@ -11,4 +10,5 @@ width: 90vw;
    list-style: none;
    gap: .2rem;
 `
+
 

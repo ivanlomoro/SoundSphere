@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
-import styled from 'styled-components';
+import { ReactNode } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
-    margin-top: 15rem;
-    bottom: 0;
+  margin-bottom: 2rem;
+  bottom: 0;
 `;
 
 type TermsContainerProps = {
-    children: ReactNode;
-}
+  children: ReactNode;
+};
 
 export const TermsContainer = ({ children }: TermsContainerProps) => {
-    return <Container>{children}</Container>;
+  return <Container>{children}</Container>;
 };

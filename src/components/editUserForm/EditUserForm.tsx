@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegister } from "react-hook-form";
 
 type Inputs = {
   email: string;
@@ -21,14 +21,14 @@ export const EditUserForm = () => {
     },
   });
 
-  type BasicInputProps = {
-    label: string
-    name: string
-    register: any // Type https://react-hook-form.com/ts
-    placeholder?: string
-    type: string
-    id: string
-  };
+type BasicInputProps = {
+  label: string;
+  name:keyof Inputs;
+  register: UseFormRegister<Inputs>;
+  placeholder?: string;
+  type: string;
+  id: string;
+};
 
   const BasicInput = ({
     label,
@@ -139,4 +139,3 @@ export const EditUserForm = () => {
     </form>
   );
 };
-

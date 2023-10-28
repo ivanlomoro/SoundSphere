@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+import React, { ReactNode } from "react";
+import styled from "styled-components";
 
 const ScrollableRow = styled.ul`
   display: flex;
@@ -20,10 +20,11 @@ width: 95vw;
 
 interface ScrollableRowProps {
   children: ReactNode;
+  style?: React.CSSProperties;
 }
 
-export const ScrollableRowComponent: React.FC<ScrollableRowProps> = ({ children }) => {
+export const ScrollableRowComponent: React.FC<ScrollableRowProps> = ({
+  children,
+}) => {
   return <ScrollableRow>{children}</ScrollableRow>;
 };
-
-

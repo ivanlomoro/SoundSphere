@@ -49,3 +49,8 @@ button,
 input {
   font-family: inherit;
 }
+
+ul{
+  margin: 0;
+  padding: 0;
+}

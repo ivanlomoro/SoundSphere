@@ -1,6 +1,6 @@
 import React from 'react';
 import { SongCard, Songs } from '../components/card/FinalCardForMerge';
-import { ScrollableRowComponent } from '../components';
+
 
 type MagicInput<T> = {
     songs: Songs[];
@@ -17,8 +17,8 @@ type MagicInput<T> = {
 
   const renderSongs = React.useCallback(() => {
     return (
-    
-      <ScrollableRowComponent>
+    <>
+     
         {songs.map((song) => (
           <SongCard
             variant={layout}
@@ -30,8 +30,8 @@ type MagicInput<T> = {
           />
           
         ))}
-        </ScrollableRowComponent>
- 
+       
+ </>
     );
   }, [songs, toggleFavorite, isFavorite, addToRecents, layout]);
 

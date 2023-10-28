@@ -1,40 +1,24 @@
-import { useState } from "react";
-import { ListSongCard } from "../components/card/ListSongCard";
-import { useSongs} from "../context/songContext/songContext";
-import { Songs } from "../Types/SongsTypes";
+import { useSongs } from "../context/songContext/songContext";
 import { HeaderSection } from "../components";
+import { useMagic } from '../hooks/useMagic';
+
+
 
 export const FavoriteSongs = () => {
-  const { favorites, isFavorite, toggleFavorite } = useSongs();
+  const { favorites, addToRecents, toggleFavorite, isFavorite } = useSongs();
+  const { renderSongs: renderFavoriteSongs } = useMagic({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "list" });
 
-  const [recents, setRecents] = useState<Songs[]>([]);
 
-  const addToRecents = (song: Songs) => {
-    const { id } = song;
-    const newRecents = [...recents];
-    if (!recents.some((item: Songs) => item.id === id)) {
-      newRecents.unshift(song);
-      setRecents(newRecents);
-    }
-  };
+
 
   return (
     <>
       <HeaderSection text="Favorites" />
-      <div>
-        <ul>
-          {favorites.length === 0 && <h1>No favorites yet</h1>}
-          {favorites.map((song) => (
-            <ListSongCard
-              key={song.id}
-              song={song}
-              toggleFavorite={toggleFavorite}
-              isFavorite={isFavorite}
-              addToRecents={addToRecents}
-            />
-          ))}
-        </ul>
-      </div>
+
+      <ul>
+        <h2>Favorites</h2>
+        {renderFavoriteSongs()}
+      </ul>
     </>
   );
 };

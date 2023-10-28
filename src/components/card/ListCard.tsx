@@ -40,7 +40,7 @@ export const ListCardDescription = styled.div`
   width: 75vw;
   height: 25vw;
 `;
-export const SongName = styled.h3`
+export const ListSongName = styled.h3`
   font-size: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -49,7 +49,7 @@ export const SongName = styled.h3`
   overflow: hidden;
   margin: 0;
 `;
-export const SongArtist = styled.p`
+export const ListSongArtist = styled.p`
   white-space: nowrap;
   overflow: hidden;
   width: 20vw;
