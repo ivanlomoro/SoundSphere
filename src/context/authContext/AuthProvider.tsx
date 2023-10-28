@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const [authState, dispatch] = useReducer(authReducer, {}, init)
 
-    console.log(authState)
 
     const login = (name = 'Jason Momoa') => {
         const user = {

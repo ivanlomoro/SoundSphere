@@ -40,12 +40,14 @@ const Card = styled.li`
 
 const CardImage = styled.img`
     width: 100%;
-    border-radius: 8px;
-`;
+    border-radius: 8px;`
+
+
 
 const CardDescription = styled.div`
    width: 100%;
    padding: 0.4rem;
+
 `;
 
 // const SongName = styled.h3`
@@ -70,8 +72,23 @@ const FavoriteButton = styled.button`
     color: white;
     font-size: 24px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 5px;`
+
+export const SongName = styled.h3`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 `;
+export const SongArtist = styled.p`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #aaaaaa;
+  font-size: 12px;
+  margin: 0;
+`;
+
 
 // const StyledButtonPlay = styled.button`
 //     background: #1DB954;

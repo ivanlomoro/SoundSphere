@@ -1,16 +1,9 @@
-import { ReactNode, useContext } from 'react'
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../context/authContext/authContext';
-import { LANDINGPAGE } from './paths';
-
+import { ReactNode, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext/authContext";
+import { LANDINGPAGE } from "./paths";
 
 export const PrivateRoutes = ({ children }: { children: ReactNode }) => {
   const { isLogged } = useContext(AuthContext);
-  console.log("isLogged:", isLogged);
-  return isLogged ? (
-    <>{children}</>
-  ) : (
-    <Navigate to={LANDINGPAGE} />
-  );
+  return isLogged ? <>{children}</> : <Navigate to={LANDINGPAGE} />;
 };
-

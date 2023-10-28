@@ -70,31 +70,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     isFavorite(song.id) ? removeFromFavorites(song.id) : addToFavorites(song);
   };
 
-  // const renderGridSongs = (inputSongs: Songs[], count: number = 4) => (
-  //   <RecentGrid>
-  //     {inputSongs.slice(0, count).map((song) => (
-  //       <SongCard variant='grid' key={song.id} song={song} />
-  //     ))}
-  // </RecentGrid>
-  // );
 
-  // const renderRowSongs = (inputSongs: Songs[]) => (
-  //   <ScrollableRowComponent>
-  //     {inputSongs.map((song) => (
-      
-  //         <SongCard variant='card' key={song.id} song={song} />
-
-  //     ))}
-  //     </ScrollableRowComponent>
-  // );
-
-  // const renderListSongs = (inputSongs: Songs[]) => (
-  //   <div>
-  //     {inputSongs.map((song) => (
-  //       <SongCard variant='list' key={song.id} song={song}/>
-  //     ))}
-  //   </div>
-  // );
 
   return (
     <SongsContext.Provider

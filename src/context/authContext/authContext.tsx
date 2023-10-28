@@ -7,7 +7,7 @@ export interface AuthContextType {
         name: string
         email: string
         birthdate: string,
-        gender: "Male" | "Female" | "No binary",
+        gender: string,
         password: string
     } | null;
     login: (username: string) => void
