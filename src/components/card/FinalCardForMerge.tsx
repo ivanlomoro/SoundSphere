@@ -38,8 +38,8 @@ const Card = styled.li`
   color: white;
   border-radius: 10px;
   padding: 15px;
-  width: 20vh;
-  min-width: 20vh;
+  width: 10rem;
+  min-width: 10rem;
   margin: 10px;
 `;
 
@@ -80,7 +80,7 @@ const ListCardDescription = styled(CardDescription)`
 
 // Grid Styles
 const GridCard = styled(Card)`
-  width: 45vw;
+
   height: 15vw;
   flex-direction: row;
   background-color: #6a6a6a;

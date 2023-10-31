@@ -3,10 +3,20 @@ import { RecentGrid, ScrollableRowComponent } from '../components';
 import { useSongs } from '../context/songContext/songContext';
 import { useMagic } from '../hooks/useMagic';
 
+
 export const SongList = () => {
-  const { songs, isFavorite, toggleFavorite, addToRecents, favorites, recents } = useSongs();
+  const { songs, isFavorite, toggleFavorite, addToRecents, favorites, recents, toggleFollowed,isFollowed,  artists  } = useSongs();
 
-
+  const {renderArtists } = useMagic({
+    songs,
+    artists,
+    toggleFavorite,
+    toggleFollowed,
+    isFavorite,
+    isFollowed,
+    addToRecents,
+    layout : 'card',
+  });
   const { renderSongs: renderNormalSongs } = useMagic({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
   const { renderSongs: renderFavoriteSongs } = useMagic({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "card" });
   const { renderSongs: renderRecentSongs } = useMagic({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
@@ -30,6 +40,12 @@ export const SongList = () => {
         <h2>Favorites</h2>
         <ScrollableRowComponent>
           {renderFavoriteSongs()}
+        </ScrollableRowComponent>
+      </div>
+      <div>
+        <h2>Artists</h2>
+        <ScrollableRowComponent>
+          {renderArtists()}
         </ScrollableRowComponent>
       </div>
     </div>

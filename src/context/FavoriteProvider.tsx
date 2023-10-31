@@ -48,26 +48,6 @@
 //         }
 //     }
      
-//     function addToFollowed(artist: Artist) {
-//         const { id } = artist;
-//         if (!followed.some((item: Artist) => item.id === id)) {
-//             setFollowed([...followed, artist]);
-//         }
-//     }
-
-//     function removeFromFollowed(id: number) {
-//         setFollowed((currentFollowed) =>
-//             currentFollowed.filter((item) => item.id !== id)
-//         );
-//     }
-
-//     function toggleFollowed(artist: Artist) {
-//         if (isFollowed(artist.id)) {
-//             removeFromFollowed(artist.id);
-//         } else {
-//             addToFollowed(artist);
-//         }
-//     }
 
 //     return (
 //         <FavoritesContext.Provider value={{ favorites, setFavorites, isFavorite, removeFromFavorites, toggleFavorite, addToFavorites, followed, 

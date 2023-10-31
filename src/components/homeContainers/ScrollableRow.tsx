@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ScrollableRow = styled.ul`
   display: flex;
   padding-inline-start: 0px;
-width: 95vw;
+  width: 95vw;
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
