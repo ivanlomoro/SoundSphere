@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Artists } from '../../Types/SongsTypes';
+import { Artist } from '../../Types/SongsTypes';
 
 
 export const Card = styled.li`
@@ -62,8 +62,8 @@ export const StyledButtonPlay = styled.button`
 `;
 
 export type ArtistCardProps = {
-    artist: Artists;
-    toggleFollowed: (artist: Artists) => void;
+    artist: Artist;
+    toggleFollowed: (artist: Artist) => void;
     isFollowed: (id: number) => boolean;
    
     

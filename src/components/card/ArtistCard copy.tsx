@@ -17,8 +17,7 @@ export function ArtistCard({ artist, toggleFollowed, isFollowed}:Partial<ArtistC
             <CardDescription>
                 <SongName>{artist.name}</SongName>
                
-            </CardDescription>
-          
+            </CardDescription>       
 
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '50%',color: "var(--clr-accent)" }}>
 
