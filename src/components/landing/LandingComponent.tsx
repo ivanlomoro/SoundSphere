@@ -1,22 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import { LogoComponent } from "../logo/LogoComponent";
 import { Span } from "../span/Span";
 import { LandingContainer } from "./LandingContainer";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext/authContext";
-import { HOME } from "../../routes/paths";
 import { Paragraph } from "../paragraph/Paragraph";
 import { TermsContainer } from "../terms/TermsContainer";
 import { Button } from "../button/Button";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const LandingComponent = () => {
-  const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
-  const handleLogin = () => {
-    login("Jason Momoa");
-    navigate(HOME);
-  };
+  const { loginWithRedirect } = useAuth0();
+
   const StyledMain = styled.main`
     width: var(--w-full);
     margin-top: var(--space-sm);
@@ -35,7 +28,10 @@ export const LandingComponent = () => {
             <LogoComponent textTitle="SoundSphere" textSlogan="Be connected" />
           </header>
           <StyledMain>
-            <Button content="Login" onClick={handleLogin} />
+            <Button
+              content="Login"
+              onClick={(): Promise<void> => loginWithRedirect()}
+            />
           </StyledMain>
         </StyledDiv>
         <footer>

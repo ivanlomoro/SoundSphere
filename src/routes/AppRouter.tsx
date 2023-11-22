@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { PrivateRoutes } from "./PrivateRoutes";
 import { LandingPage } from "../pages";
 import { RouterPaths } from "./RouterPaths.routes";
 import { FC, useContext } from "react";
@@ -18,11 +17,9 @@ export const AppRouter: FC = () => {
         <Route
           path="/*"
           element={
-            <PrivateRoutes>
-              <Routes>
-                <Route path="/*" element={<RouterPaths />} />
-              </Routes>
-            </PrivateRoutes>
+            <Routes>
+              <Route path="/*" element={<RouterPaths />} />
+            </Routes>
           }
         />
       </Routes>
