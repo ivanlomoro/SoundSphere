@@ -30,6 +30,7 @@ const WelcomeText = styled.h1`
 
 export const NavbarHome = () => {
   const { user, isLoading } = useAuth0();
+  console.log(user);
 
   return (
     <NavbarContainer>
