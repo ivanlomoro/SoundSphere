@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext/authContext";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const NavbarContainer = styled.div`
   display: flex;
@@ -30,13 +29,17 @@ const WelcomeText = styled.h1`
 `;
 
 export const NavbarHome = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useAuth0();
 
   return (
     <NavbarContainer>
       <UserInfo>
         <UserIcon src="src/assets/imgs/jason_mamoa.gif" alt="User" />
-        <WelcomeText>Welcome {(user && user?.name) || "Guest"}</WelcomeText>
+        {isLoading ? (
+          "Loading..."
+        ) : user ? (
+          <WelcomeText>Welcome {(user && user?.name) || "Guest"}</WelcomeText>
+        ) : null}
       </UserInfo>
     </NavbarContainer>
   );

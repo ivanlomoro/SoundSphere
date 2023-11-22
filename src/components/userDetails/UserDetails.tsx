@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { UserDetail } from "../userDetail/UserDetail";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext/authContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const StyledUserDetailsContainer = styled.div`
   display: flex;
@@ -11,10 +10,11 @@ const StyledUserDetailsContainer = styled.div`
 `;
 
 export const UserDetails = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth0();
+
   return user ? (
     <StyledUserDetailsContainer>
-      <UserDetail label="Name" info={user.name} />
+      <UserDetail label="Name" info={user.nickname} />
       <UserDetail label="Email" info={user.email} />
       <UserDetail label="Date of Birth" info={user.birthdate} />
       <UserDetail label="Gender" info={user.gender} />
