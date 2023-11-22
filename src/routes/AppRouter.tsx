@@ -3,6 +3,7 @@ import { LandingPage } from "../pages";
 import { RouterPaths } from "./RouterPaths.routes";
 import { FC, useContext } from "react";
 import { AuthContext } from "../context/authContext/authContext";
+import { PrivateRoutes } from "./PrivateRoutes";
 
 export const AppRouter: FC = () => {
   const { isLogged } = useContext(AuthContext);
@@ -17,9 +18,11 @@ export const AppRouter: FC = () => {
         <Route
           path="/*"
           element={
-            <Routes>
-              <Route path="/*" element={<RouterPaths />} />
-            </Routes>
+            <PrivateRoutes>
+              <Routes>
+                <Route path="/*" element={<RouterPaths />} />
+              </Routes>
+            </PrivateRoutes>
           }
         />
       </Routes>
