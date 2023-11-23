@@ -3,18 +3,13 @@ import { Button } from "../button/Button";
 import { UserDetail } from "../userDetail/UserDetail";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const StyledUserDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 `;
-
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
 
 const resetPassword = async (userEmail: string) => {
   console.log(userEmail);
@@ -27,6 +22,11 @@ const resetPassword = async (userEmail: string) => {
         client_id: "3eb0bceRj7012DEV06qrZ2AyUZdQX04L",
       }
     );
+    if (response) {
+      toast.success(
+        "A message was sent to your email address to reset your password."
+      );
+    }
     console.log(response);
   } catch {
     console.log("That didn't work");
