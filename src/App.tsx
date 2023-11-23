@@ -3,7 +3,6 @@ import { AppRouter } from "./routes/AppRouter";
 import SongsProvider from "./context/songContext/songContext";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Toaster } from "react-hot-toast";
-import { BiColor } from "react-icons/bi";
 
 const {
   VITE_AUTH0_DOMAIN: domain,
