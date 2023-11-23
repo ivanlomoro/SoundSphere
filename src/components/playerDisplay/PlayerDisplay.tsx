@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
@@ -26,32 +26,39 @@ const HiddenPlayer = styled.div`
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
- 
+ position: absolute;
+  top: 50%;
+  left: 50%;
 
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 20px;
-`;
+  border: 3px solid red;
+ `;
 
 const StyledCover = styled.img`
   border-radius: 15px;
+  object-fit: contain;
+  max-width: 55%;
 `;
 
 const PlayerContainer = styled.div`
+
   display: flex;
    border-radius: var(--radius-sm);
   font-size:clamp(0.8rem, 1.5rem, 2rem);
   background-color: var(--clr-bg-elements);
-  padding-bottom: var(--space-xl);
-  padding-top: var(--space-xl);
-  margin: var(--space-md);
+  padding: var(--space-sm);
+  max-height: 65vh;
+  margin: var(--space-sm);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   position: relative;
+ 
+  gap:none;
+  
 
 `;
 
@@ -151,15 +158,12 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     min-height: 2.5em;
     
   `;
-  const PageContainer = styled.div`
-  border: 3px solid var(--clr-accent);
-  
-  `
+
 
   return (
-   <PageContainer>
+    <>
       <HiddenPlayer>
-       
+
         <StyledPlayer
           url={songs[currentSongIndex].url}
           playing={playing}
@@ -171,7 +175,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
           onDuration={handleDuration}
         />
       </HiddenPlayer> <PlayerContainer>
-   
+
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong.name}</StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
@@ -198,7 +202,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
           />
         </ButtonContainer>
       </PlayerContainer>
-    </PageContainer>
- 
+    </>
+
   );
 };
