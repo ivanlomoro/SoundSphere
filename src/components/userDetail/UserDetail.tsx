@@ -4,7 +4,7 @@ import { Button } from "../button/Button";
 
 type UserDetailPropsType = {
   label: string;
-  info: string;
+  info: string | undefined;
 };
 
 const StyledUserDetailContainer = styled.div`
@@ -21,6 +21,7 @@ const StyledDetailInfo = styled.p`
 `;
 
 export const UserDetail = ({ label, info }: UserDetailPropsType) => {
+  if (!info) return null;
   return (
     <StyledUserDetailContainer>
       <StyledDetailLabel>{label}</StyledDetailLabel>

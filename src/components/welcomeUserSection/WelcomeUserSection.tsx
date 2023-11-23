@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { UserAvatar } from "../userAvatar/UserAvatar";
 import { WelcomeUserMessage } from "./WelcomeUserMessage";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext/authContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const StyledWelcomeUserSection = styled.div`
   display: flex;
@@ -11,7 +10,8 @@ const StyledWelcomeUserSection = styled.div`
 `;
 
 export const WelcomeUserSection = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth0();
+  console.log(user);
 
   return user ? (
     <StyledWelcomeUserSection>

@@ -1,19 +1,19 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { PrivateRoutes } from "./PrivateRoutes";
 import { LandingPage } from "../pages";
 import { RouterPaths } from "./RouterPaths.routes";
-import { FC, useContext } from "react";
-import { AuthContext } from "../context/authContext/authContext";
+import { FC } from "react";
+import { PrivateRoutes } from "./PrivateRoutes";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const AppRouter: FC = () => {
-  const { isLogged } = useContext(AuthContext);
+  const { isAuthenticated } = useAuth0();
 
   return (
     <>
       <Routes>
         <Route
           path="landingPage"
-          element={isLogged ? <Navigate to="/" /> : <LandingPage />}
+          element={isAuthenticated ? <Navigate to="/" /> : <LandingPage />}
         />
         <Route
           path="/*"
