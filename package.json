@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
-    "server": "json-server --watch ./src/assets/db/db.json"
+    "server": "json-server --watch ./src/data/db.json"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.29",

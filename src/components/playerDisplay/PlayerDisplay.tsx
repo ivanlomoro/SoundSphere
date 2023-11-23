@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import ReactPlayer from "react-player";
+import ReactPlayer from 'react-player';
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
@@ -15,6 +15,9 @@ export type CustomEventType = {
   };
 };
 
+
+
+
 const HiddenPlayer = styled.div`
   z-index: -5;
   width: 0;
@@ -23,11 +26,8 @@ const HiddenPlayer = styled.div`
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+ 
+
 `;
 
 const ButtonContainer = styled.div`
@@ -40,11 +40,19 @@ const StyledCover = styled.img`
   border-radius: 15px;
 `;
 
-const CenteredDiv = styled.div`
+const PlayerContainer = styled.div`
   display: flex;
+   border-radius: var(--radius-sm);
+  font-size:clamp(0.8rem, 1.5rem, 2rem);
+  background-color: var(--clr-bg-elements);
+  padding-bottom: var(--space-xl);
+  padding-top: var(--space-xl);
+  margin: var(--space-md);
   flex-direction: column;
   align-items: center;
-  margin-top: var(--space-xl);
+  justify-content: center;
+  position: relative;
+
 `;
 
 type PlayerDisplayProps = {
@@ -139,11 +147,19 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
   `;
   const StyledArtistName = styled.p`
     font-size: var(--fs-lg);
+    max-width: 100vw;
+    min-height: 2.5em;
+    
   `;
+  const PageContainer = styled.div`
+  border: 3px solid var(--clr-accent);
+  
+  `
 
   return (
-    <>
+   <PageContainer>
       <HiddenPlayer>
+       
         <StyledPlayer
           url={songs[currentSongIndex].url}
           playing={playing}
@@ -154,8 +170,8 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
           onProgress={handleProgress}
           onDuration={handleDuration}
         />
-      </HiddenPlayer>
-      <CenteredDiv>
+      </HiddenPlayer> <PlayerContainer>
+   
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong.name}</StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
@@ -181,7 +197,8 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
             onClick={handleNext}
           />
         </ButtonContainer>
-      </CenteredDiv>
-    </>
+      </PlayerContainer>
+    </PageContainer>
+ 
   );
 };

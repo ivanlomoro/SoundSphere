@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,700&display=swap');
 
 :root{
+    
     --clr-bg-primary: #000;
     --clr-bg-elements: #111111;
     --clr-bg-tertiary: #767676; 
@@ -10,9 +11,9 @@
     --ff-primary: 'Montserrat', sans-serif;
     --fs-md: 0.75rem;
     --fs-ml: 0.875rem;
-    --fs-lg: 1rem;
+    --fs-lg: 3rem;
     --fs-xlg: 1.5rem;
-    --space-xs: 0.25rem;
+    --space-xs: 0.15rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-xl: 2rem;
@@ -23,6 +24,7 @@
     --weight-regular: 400;
     --weight-semibold: 600;
     --weight-bold: 700;
+
 }
 
 body{

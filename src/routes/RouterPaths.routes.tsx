@@ -22,7 +22,7 @@ export const RouterPaths: FC = () => {
           <Route path={USERPAGE} element={<UserPage />} />
           <Route path={DISPLAYPAGE} element={<DisplayPage />}>
             <Route path=":name" element={<DisplayPage />}></Route>
-          </Route>
+          </Route> 
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
         </Route>
