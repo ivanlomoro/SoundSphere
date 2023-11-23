@@ -26,9 +26,8 @@ const HiddenPlayer = styled.div`
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
- position: absolute;
-  top: 50%;
-  left: 50%;
+
+
 
 `;
 
@@ -39,26 +38,24 @@ const ButtonContainer = styled.div`
  `;
 
 const StyledCover = styled.img`
-  border-radius: 15px;
-  object-fit: contain;
-  max-width: 55%;
+max-height: 60%;
+max-width: 60%;
+
 `;
 
-const PlayerContainer = styled.div`
-
+const ResponsiveContainer = styled.div`
+max-height: 75%;
+max-width: 90%;
+margin-top: 0;
   display: flex;
-   border-radius: var(--radius-sm);
+  border-radius: var(--radius-sm);
   font-size:clamp(0.8rem, 1.5rem, 2rem);
   background-color: var(--clr-bg-elements);
   padding: var(--space-sm);
-  max-height: 65vh;
   margin: var(--space-sm);
   flex-direction: column;
   align-items: center;
-  position: relative;
- 
-  gap:none;
-  
+
 
 `;
 
@@ -148,14 +145,13 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
 
   const StyledSongName = styled.p`
     font-size: var(--fs-xl);
-    max-width: 300px;
-    min-height: 2.5em;
+    max-width: 85%;
     margin-bottom: 0;
   `;
   const StyledArtistName = styled.p`
     font-size: var(--fs-lg);
-    max-width: 100vw;
-    min-height: 2.5em;
+    max-width: 85%;
+  
     
   `;
 
@@ -174,7 +170,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
           onProgress={handleProgress}
           onDuration={handleDuration}
         />
-      </HiddenPlayer> <PlayerContainer>
+      </HiddenPlayer> <ResponsiveContainer>
 
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong.name}</StyledSongName>
@@ -201,7 +197,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
             onClick={handleNext}
           />
         </ButtonContainer>
-      </PlayerContainer>
+      </ResponsiveContainer>
     </>
 
   );
