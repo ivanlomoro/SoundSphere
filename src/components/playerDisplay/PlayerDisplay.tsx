@@ -15,6 +15,9 @@ export type CustomEventType = {
   };
 };
 
+
+
+
 const HiddenPlayer = styled.div`
   z-index: -5;
   width: 0;
@@ -23,28 +26,37 @@ const HiddenPlayer = styled.div`
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+
+
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 20px;
-`;
+  border: 3px solid red;
+ `;
 
 const StyledCover = styled.img`
-  border-radius: 15px;
+max-height: 60%;
+max-width: 60%;
+
 `;
 
-const CenteredDiv = styled.div`
+const ResponsiveContainer = styled.div`
+max-height: 75%;
+max-width: 90%;
+margin-top: 0;
   display: flex;
+  border-radius: var(--radius-sm);
+  font-size:clamp(0.8rem, 1.5rem, 2rem);
+  background-color: var(--clr-bg-elements);
+  padding: var(--space-sm);
+  margin: var(--space-sm);
   flex-direction: column;
   align-items: center;
-  margin-top: var(--space-xl);
+
+
 `;
 
 type PlayerDisplayProps = {
@@ -133,17 +145,21 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
 
   const StyledSongName = styled.p`
     font-size: var(--fs-xl);
-    max-width: 300px;
-    min-height: 2.5em;
+    max-width: 85%;
     margin-bottom: 0;
   `;
   const StyledArtistName = styled.p`
     font-size: var(--fs-lg);
+    max-width: 85%;
+  
+    
   `;
+
 
   return (
     <>
       <HiddenPlayer>
+
         <StyledPlayer
           url={songs[currentSongIndex].url}
           playing={playing}
@@ -154,8 +170,8 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
           onProgress={handleProgress}
           onDuration={handleDuration}
         />
-      </HiddenPlayer>
-      <CenteredDiv>
+      </HiddenPlayer> <ResponsiveContainer>
+
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong.name}</StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
@@ -181,7 +197,8 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
             onClick={handleNext}
           />
         </ButtonContainer>
-      </CenteredDiv>
+      </ResponsiveContainer>
     </>
+
   );
 };
