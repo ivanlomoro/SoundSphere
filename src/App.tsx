@@ -4,6 +4,7 @@ import SongsProvider from "./context/songContext/songContext";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext/UserContext";
+import UserInteractionProvider from "./context/userContext/InteractionContext";
 
 const {
   VITE_AUTH0_DOMAIN: domain,
@@ -24,6 +25,7 @@ export const App = () => {
       }}
     >
       <UserContextProvider>
+        <UserInteractionProvider>
         <SongsProvider>
           <BrowserRouter>
             <AppRouter />
@@ -39,6 +41,7 @@ export const App = () => {
             />
           </BrowserRouter>
         </SongsProvider>
+        </UserInteractionProvider>
       </UserContextProvider>
     </Auth0Provider>
   );

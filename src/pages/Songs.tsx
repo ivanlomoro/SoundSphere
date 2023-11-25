@@ -1,11 +1,13 @@
 // SongList.tsx
 import { RecentGrid, ScrollableRowComponent } from '../components';
 import { useSongs } from '../context/songContext/songContext';
+import { useInteractions } from '../context/userContext/InteractionContext';
 import { useMagic } from '../hooks/useMagic';
 
 
 export const SongList = () => {
-  const { songs, isFavorite, toggleFavorite, addToRecents, favorites, recents, toggleFollowed,isFollowed,  artists  } = useSongs();
+  const { songs,  artists  } = useSongs();
+  const { favorites, recents, toggleFavorite, isFavorite, toggleFollowed, isFollowed, addToRecents } =useInteractions()
 
   const {renderArtists } = useMagic({
     songs,

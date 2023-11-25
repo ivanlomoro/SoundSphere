@@ -3,7 +3,7 @@
 import { Button } from '..'
 import { NavIcon } from '../NavBar/NavBar'
 import { Link } from 'react-router-dom'
-import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FavoriteButton, FullHeart, EmptyHeart, PlayButton, FaveButton } from './card.styled.components'
+import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton } from './card.styled.components'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 
 export interface Songs {
@@ -20,10 +20,6 @@ interface SongCardProps {
   song: Songs
   toggleFavorite?: (song: Songs) => void
   isFavorite?: (id: number) => boolean
-
-
-
-
   addToRecents?: (song: Songs) => void
   variant?: 'grid' | 'list' | 'card'
 }
