@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Home, LandingPage, UserPage, FavoriteSongs } from "../pages";
+import { Home, LandingPage, UserPage, FavoriteSongs, AddMusicPage } from "../pages";
 import {
   DISPLAYPAGE,
   HOME,
@@ -8,6 +8,7 @@ import {
   USERPAGE,
   FAVORITEPAGE,
   SEARCHPAGE,
+  ADDMUSICPAGE
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
@@ -25,6 +26,7 @@ export const RouterPaths: FC = () => {
           </Route> 
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
+          <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />
         <Route path="/" element={<Navigate to={HOME} />} />

@@ -46,7 +46,7 @@ export const UserDetails = () => {
         <Button
           content="Change password"
           variant="StyledButtonPill"
-          onClick={() => resetPassword(user.email)}
+          onClick={() => resetPassword(user.email!)}
         />
       )}
     </StyledUserDetailsContainer>
