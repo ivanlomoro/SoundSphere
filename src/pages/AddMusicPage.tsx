@@ -83,14 +83,15 @@ const ButtonSummit = styled.div`
 
 export const AddMusicPage = () => {
   const { uploadSong } = useApiCalls();
-  const [imageSrc, setImageSrc] = useState<string>('');
-  const [soundSrc, setSoundSrc] = useState<string | null>(null);
+  const [imageSrc, setImageSrc] = useState<string>("");
+  const [soundSrc, setSoundSrc] = useState<string>("");
   const [songName, setSongName] = useState<string>("");
   const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [isPrivate, setIsPrivate] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>("existing");
   const [newAlbumName, setNewAlbumName] = useState<string>("");
-  const [imageToUpload, setImageToUpload] = useState<string>('');
+  const [imageToUpload, setImageToUpload] = useState<string>("");
+  const [songToUpload, setSongToUpload] = useState<string>("");
 
   // Para el genero
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -105,8 +106,10 @@ export const AddMusicPage = () => {
   // Para subir la musica
   const soundUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file){
-      return null
+
+    setSongToUpload(file);
+    if (!file) {
+      return null;
     }
 
     if (file) {
@@ -123,12 +126,10 @@ export const AddMusicPage = () => {
   const imageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
-      return null
+      return null;
     }
-   
 
-    if (file) { 
-
+    if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc(reader.result as string);
@@ -159,15 +160,30 @@ export const AddMusicPage = () => {
   ];
 
   const Submit = async () => {
-    const formData = new FormData();
-    formData.append("file", imageToUpload);
-    formData.append("upload_preset", "UploadImages");
+    const imageData = new FormData();
+    imageData.append("file", imageToUpload);
+    imageData.append("upload_preset", "UploadImages");
+
+    console.log("IMAGE DATA:", imageData);
 
     const imageUploadedResponse = await axios.post(
       "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
-      formData
+      imageData
     );
     console.log(imageUploadedResponse);
+
+    const songData = new FormData();
+    songData.append("file", songToUpload);
+    songData.append("upload_preset", "UploadAudio");
+    console.log("SONG FILE", songToUpload);
+
+    console.log("SONG DATA:", songData);
+
+    const songUploadedResponse = await axios.post(
+      "https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload",
+      songData
+    );
+    console.log(songUploadedResponse);
 
     const requestData = {
       thumbnail: imageSrc,
