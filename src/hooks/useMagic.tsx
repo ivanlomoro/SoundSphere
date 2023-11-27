@@ -40,7 +40,6 @@ type MagicInput<T> = {
       return (
         <>
           {artists?.map((artist) => (
-            // Your ArtistCard component here
             <ArtistCard
               key={artist.id}
               artist={artist}

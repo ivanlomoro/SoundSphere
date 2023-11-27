@@ -5,6 +5,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext/UserContext";
 import UserInteractionProvider from "./context/userContext/InteractionContext";
+import ApiCallsProvider from "./context/songContext/ApiCalls";
 
 const {
   VITE_AUTH0_DOMAIN: domain,
@@ -25,23 +26,25 @@ export const App = () => {
       }}
     >
       <UserContextProvider>
-        <UserInteractionProvider>
-        <SongsProvider>
-          <BrowserRouter>
-            <AppRouter />
-            <Toaster
-              toastOptions={{
-                success: {
-                  style: {
-                    background: "#282828",
-                    color: "#fff",
-                  },
-                },
-              }}
-            />
-          </BrowserRouter>
-        </SongsProvider>
-        </UserInteractionProvider>
+        <ApiCallsProvider>
+          <UserInteractionProvider>
+            <SongsProvider>
+              <BrowserRouter>
+                <AppRouter />
+                <Toaster
+                  toastOptions={{
+                    success: {
+                      style: {
+                        background: "#282828",
+                        color: "#fff",
+                      },
+                    },
+                  }}
+                />
+              </BrowserRouter>
+            </SongsProvider>
+          </UserInteractionProvider>
+        </ApiCallsProvider>
       </UserContextProvider>
     </Auth0Provider>
   );

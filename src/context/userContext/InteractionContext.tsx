@@ -10,6 +10,7 @@ export interface UserInteractionProps {
     followed: Artist[];
     recents: Songs[];
     favorites: Songs[];
+    addToUploadedSongs: (song: Songs) => void;
     addToRecents: (song: Songs) => void;
     addToFavorites: (song: Songs) => void;
     removeFromFavorites: (id: number) => void;
@@ -103,6 +104,7 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
             customPlaylists: [],
             followedArtists: followed,
             followed,
+            addToUploadedSongs,
             recents,
             favorites,
             addToRecents,

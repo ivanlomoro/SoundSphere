@@ -1,11 +1,12 @@
-import { useSongs } from "../context/songContext/songContext";
+
 import { HeaderSection } from "../components";
 import { useMagic } from '../hooks/useMagic';
+import { useInteractions } from "../context/userContext/InteractionContext";
 
 
 
 export const FavoriteSongs = () => {
-  const { favorites, addToRecents, toggleFavorite, isFavorite } = useSongs();
+  const { favorites, addToRecents, toggleFavorite, isFavorite } = useInteractions();
   const { renderSongs: renderFavoriteSongs } = useMagic({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "list" });
 
 
