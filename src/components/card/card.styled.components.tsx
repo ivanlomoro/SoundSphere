@@ -204,7 +204,7 @@ export const GridCard = styled.li`
 `
 
 
-export const GridImageContainer= styled.div`
+export const GridImageContainer = styled.div`
 position: relative;
 
 `
@@ -253,7 +253,7 @@ export const FavoriteButton = styled.button`
   background: transparent;
   border: none;
   color: var(--clr-text-secondary);
-  font-size: var(--fs-lg)
+  font-size: var(--fs-lg);
   cursor: pointer;
   &:hover{
     color: var(--clr-accent);
@@ -263,18 +263,21 @@ export const FavoriteButton = styled.button`
 export const FullHeart = styled(AiFillHeart)`
 color: var(--clr-accent);
 width: 30px;
-height: 30px`
+height: 30px;
+`
+
 export const EmptyHeart = styled(AiOutlineHeart)`
 width: 30px;
-height: 30px`
+height: 30px;
+`
 
 export const FaveButton = styled.button`
 background: transparent;
 border: none;
 color: var(--clr-text-secondary);
-&: hover {
-  color : var(--clr-accent);
-}
+&:hover{
+    color: var(--clr-accent);
+   }
 `
 
 export const FollowedButton = styled.button`

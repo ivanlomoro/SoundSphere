@@ -8,7 +8,7 @@ import { UserContext } from "../context/userContext/UserContext";
 const MySongsPage = () => {
     const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
-    const { renderSongs } = useMagic({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
+    const { renderSongs } = useMagic({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid", isMySong:true });
     const { user } = useContext(UserContext)
 
     useEffect(() => {

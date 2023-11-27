@@ -13,12 +13,13 @@ type MagicInput<T> = {
   isFollowed?: (id: number) => boolean;
   addToRecents?: (song: Songs) => void;
   layout: T;
+  isMySong?:boolean
 };
   
   type LayoutVariant = "grid" | "list" | "card" | undefined;
   
   export const useMagic = (input: MagicInput<LayoutVariant>) => {
-    const { mySongs, songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout } = input;
+    const { mySongs, songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout, isMySong } = input;
   
     const renderSongs = React.useCallback(() => {
       const songsToRender = mySongs || songs;
@@ -32,6 +33,7 @@ type MagicInput<T> = {
               toggleFavorite={toggleFavorite}
               isFavorite={isFavorite}
               addToRecents={addToRecents}
+              isMySong={isMySong}
             />
           ))}
         </>
