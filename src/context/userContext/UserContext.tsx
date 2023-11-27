@@ -10,7 +10,7 @@ import UserFromAuthInterface from "../../interfaces/UserInterface";
 import { useAuth0 } from "@auth0/auth0-react";
 import postData from "../../api/postApi";
 
-type UserContextType = {
+export type UserContextType = {
   user: UserFromAuthInterface | null;
   isLogged: boolean;
   setIsLogged: Dispatch<SetStateAction<boolean>>;
