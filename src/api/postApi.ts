@@ -18,7 +18,7 @@ const postData = async (url: string, data: {}, getToken: () => void) => {
       fullUrl,
       data,
       config
-    );
+    )
     return { userData, statusText };
   } catch (error) {
     return error;
