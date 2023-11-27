@@ -9,7 +9,7 @@ const MySongsPage = () => {
     const { getMySongs, songs } = useSongs()
     const [isLoading, setLoading] = useState<boolean>(true)
     const { renderSongs } = useMagic({ songs, layout: "grid" });
-    const user = useContext(UserContext)
+    const {user} = useContext(UserContext)
     
     useEffect(() => {
         const loadData = async () => {

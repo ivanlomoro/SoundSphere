@@ -4,7 +4,7 @@ import db from '../../data/db.json';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
-import { UserContext, UserContextType } from "../userContext/UserContext";
+import { UserContext } from "../userContext/UserContext";
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -29,7 +29,7 @@ type SongsContextType = {
   addToFollowed: (artist: Artist) => void;
   removeFromFollowed: (id: number) => void;
   toggleFollowed: (artist: Artist) => void;
-  getMySongs: (user: UserContextType | null) => void;
+  getMySongs: (user: UserInterface | null) => void;
 };
 
 const SongsContext = createContext<SongsContextType | null>(null);
@@ -38,8 +38,12 @@ type SongsProviderProps = {
   children: ReactNode;
 };
 
+export type UserInterface = {
+  userId: string
+}
+
 const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   console.log("User traido de context", user)
   const [songs, setSongs] = useState<Songs[]>([]);
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -60,12 +64,10 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
   const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
 
-  const getMySongs = async (user: UserContextType | null) => {
-    
+  const getMySongs = async (user: UserInterface | null) => {
+
     if (user != null) {
-      console.log("User que pilla", user)
-      console.log("User.user", user.user)
-      const userId = user.user
+      const userId = user.userId
       const URL = `${apiUrl}/song/user/${userId}`
       console.log("URL usada:", URL)
 
