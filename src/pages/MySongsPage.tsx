@@ -6,9 +6,9 @@ import { UserContext } from "../context/userContext/UserContext";
 
 
 const MySongsPage = () => {
-    const { mySongs, songs, getMySongs, isFavorite, toggleFavorite, addToRecents } = useSongs();
+    const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
-    const { renderSongs } = useMagic({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+    const { renderSongs } = useMagic({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
     const { user } = useContext(UserContext)
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const MySongsPage = () => {
             console.log("Estas en el setLoading")
         };
         loadData();
-        console.log("MySongs", mySongs)
+        console.log("MySongs", mySongs);
     }, []);
 
     return (
@@ -32,12 +32,11 @@ const MySongsPage = () => {
             <div>
                 <h2>My Songs</h2>
                 {isLoading ? <p>Loading...</p> :
-                    (mySongs.length > 0) //mysongs
-                     ?
-                    <RecentGrid>
-                        {renderSongs()}
-                    </RecentGrid>
-                      : <p>You don´t have upload songs. </p>
+                    (mySongs.length > 0) ?
+                        <RecentGrid>
+                            {renderSongs()}
+                        </RecentGrid>
+                        : <p>You don´t have upload songs. </p>
                 }
             </div>
         </>
