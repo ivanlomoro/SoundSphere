@@ -83,14 +83,14 @@ const ButtonSummit = styled.div`
 
 export const AddMusicPage = () => {
   const { uploadSong } = useApiCalls();
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [imageSrc, setImageSrc] = useState<string>('');
   const [soundSrc, setSoundSrc] = useState<string | null>(null);
   const [songName, setSongName] = useState<string>("");
   const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [isPrivate, setIsPrivate] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>("existing");
   const [newAlbumName, setNewAlbumName] = useState<string>("");
-  const [imageToUpload, setImageToUpload] = useState(null);
+  const [imageToUpload, setImageToUpload] = useState<string>('');
 
   // Para el genero
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -105,6 +105,9 @@ export const AddMusicPage = () => {
   // Para subir la musica
   const soundUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (!file){
+      return null
+    }
 
     if (file) {
       const reader = new FileReader();
@@ -119,13 +122,17 @@ export const AddMusicPage = () => {
 
   const imageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (!file) {
+      return null
+    }
+   
 
-    setImageToUpload(file);
+    if (file) { 
 
-    if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc(reader.result as string);
+        setImageToUpload(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -164,7 +171,7 @@ export const AddMusicPage = () => {
 
     const requestData = {
       thumbnail: imageSrc,
-      url: soundSrc,
+      url: imageSrc,
       name: songName,
       genreId: selectedGenre,
       isPublic: !isPrivate,
