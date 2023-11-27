@@ -1,15 +1,14 @@
 import React, {  createContext, ReactNode, useContext } from "react";
 import axios from "axios";
 
-interface SongUploadData {
+type SongUploadData = {
+    thumbnail: string | null;
+    url: string | null;
     name: string;
-    artistId: string;
     genreId: string;
-    url: string;
-    isPublic: boolean;
-    userCreator: string;
-    thumbnail: string;
-}
+    isPublic: boolean; 
+    userCreator: string; 
+  };
 
 interface ApiCallContextType {
     uploadSong: (songData: SongUploadData) => Promise<void>;

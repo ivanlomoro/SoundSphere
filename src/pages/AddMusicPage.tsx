@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Container, HeaderSection } from '../components'
 import { AiOutlineCamera } from "react-icons/ai";
+import { useApiCalls } from "../context/songContext/ApiCalls";
+
 
 const ImageContainer = styled.div`
   width: 300px;
@@ -80,6 +82,7 @@ const ButtonSummit = styled.div`
 `;
 
 export const AddMusicPage = () => {
+  const { uploadSong } = useApiCalls();
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [soundSrc, setSoundSrc] = useState<string | null>(null);
   const [songName, setSongName] = useState<string>('');
@@ -145,6 +148,44 @@ export const AddMusicPage = () => {
     'Electronic',
   ]
   
+
+
+  const Submit = async () => {
+
+
+    const requestData = {
+      thumbnail: imageSrc,
+      url: soundSrc,
+      name: songName,
+      genreId: selectedGenre,
+      isPublic: !isPrivate, 
+      userCreator: 'user123', 
+    };
+
+    try {
+  
+      await uploadSong(requestData);
+
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
 
     <section>
@@ -222,7 +263,7 @@ export const AddMusicPage = () => {
     </SwitchContainer>
     <Text>{isPrivate ? 'Private' : 'Public'}</Text>
 
-    <ButtonSummit>Submit</ButtonSummit>
+    <ButtonSummit onClick={Submit }>Submit</ButtonSummit>
       </Container>
     </section>
   )

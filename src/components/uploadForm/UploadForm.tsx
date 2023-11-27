@@ -9,8 +9,7 @@ export const UploadForm = () => {
 
         
         const testData = {
-            name: "Cold Summer",
-            artistId: "Oasis",
+            name: "Pan",
             isPublic: true,
             genreId: "6560712d54a3139491bfad8f",
             userCreator: "6562012b45ac8690c4290edc",
