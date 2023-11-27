@@ -6,27 +6,25 @@ import { UserContext } from "../context/userContext/UserContext";
 
 
 const MySongsPage = () => {
-    const { getMySongs, songs } = useSongs()
+    const { mySongs, songs, getMySongs, isFavorite, toggleFavorite, addToRecents } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
-    const { renderSongs } = useMagic({ songs, layout: "grid" });
-    const {user} = useContext(UserContext)
-    
+    const { renderSongs } = useMagic({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+    const { user } = useContext(UserContext)
+
     useEffect(() => {
         const loadData = async () => {
             console.log("ENTRA O NOOOOOOO")
             try {
                 await getMySongs(user);
                 console.log("Muestra getMySongs:", getMySongs)
-            }catch (error){
+            } catch (error) {
                 console.log(error)
-            } finally {
-                setTimeout(() => {
-                    setLoading(false);
-                    console.log("Estas en el setLoading")
-                }, 1000);
             }
+            setLoading(false);
+            console.log("Estas en el setLoading")
         };
         loadData();
+        console.log("MySongs", mySongs)
     }, []);
 
     return (
@@ -34,12 +32,12 @@ const MySongsPage = () => {
             <div>
                 <h2>My Songs</h2>
                 {isLoading ? <p>Loading...</p> :
-                    (songs.length > 0)
-                        ?
-                        <RecentGrid>
-                            {renderSongs()}
-                        </RecentGrid>
-                        : <p>You don´t have upload songs. </p>
+                    (mySongs.length > 0) //mysongs
+                     ?
+                    <RecentGrid>
+                        {renderSongs()}
+                    </RecentGrid>
+                      : <p>You don´t have upload songs. </p>
                 }
             </div>
         </>

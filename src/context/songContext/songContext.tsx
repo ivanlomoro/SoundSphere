@@ -79,7 +79,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const songs: Songs[] = response.data
 
         setMySongs(songs)
-
+        console.log("Estamos en api songs:",songs)
       } catch (error) {
         console.log(error)
       }
