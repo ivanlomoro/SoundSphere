@@ -84,7 +84,7 @@ const StyledButtonDisplayPlay = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 45px;
+  font-size: 2em;
   width: 150px;
   height: 60px;
   background-color: var(--clr-accent);

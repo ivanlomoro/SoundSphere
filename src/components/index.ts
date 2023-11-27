@@ -4,7 +4,6 @@ export { RecentGrid } from "./homeContainers/FavoritesGrid";
 export { ArrowBackSection } from "./arrowback/Arrowback";
 export { LogoComponent } from "./logo/LogoComponent";
 export { Paragraph } from "./paragraph/Paragraph";
-export { SongCard } from "./card/SongCard";
 export { NavBar } from "./NavBar/NavBar";
 export { Span } from "./span/Span";
 export { Button } from "./button/Button";

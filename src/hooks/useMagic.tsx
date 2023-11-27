@@ -1,7 +1,7 @@
 import React from 'react';
 import { SongCard, Songs } from '../components/card/FinalCardForMerge';
 import { Artist } from '../Types/SongsTypes';
-import { ArtistCard } from '../components/card/ArtistCard copy';
+import { ArtistCard } from '../components/card/ArtistCard';
 
 type MagicInput<T> = {
   songs?: Songs[];
@@ -40,7 +40,6 @@ type MagicInput<T> = {
       return (
         <>
           {artists?.map((artist) => (
-            // Your ArtistCard component here
             <ArtistCard
               key={artist.id}
               artist={artist}

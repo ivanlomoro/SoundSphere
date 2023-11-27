@@ -1,11 +1,14 @@
 // SongList.tsx
 import { RecentGrid, ScrollableRowComponent } from '../components';
+import { UploadForm } from '../components/uploadForm/UploadForm';
 import { useSongs } from '../context/songContext/songContext';
+import { useInteractions } from '../context/userContext/InteractionContext';
 import { useMagic } from '../hooks/useMagic';
 
 
 export const SongList = () => {
-  const { songs, isFavorite, toggleFavorite, addToRecents, favorites, recents, toggleFollowed,isFollowed,  artists  } = useSongs();
+  const { songs,  artists  } = useSongs();
+  const { favorites, recents, toggleFavorite, isFavorite, toggleFollowed, isFollowed, addToRecents } =useInteractions()
 
   const {renderArtists } = useMagic({
     songs,
@@ -17,6 +20,7 @@ export const SongList = () => {
     addToRecents,
     layout : 'card',
   });
+  
   const { renderSongs: renderNormalSongs } = useMagic({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
   const { renderSongs: renderFavoriteSongs } = useMagic({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "card" });
   const { renderSongs: renderRecentSongs } = useMagic({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
@@ -30,6 +34,7 @@ export const SongList = () => {
         </ScrollableRowComponent>
 
       </div>
+      <UploadForm/>
       <div>
         <h2>Recently Played</h2>
         <RecentGrid>

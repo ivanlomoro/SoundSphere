@@ -1,3 +1,4 @@
 node_modules/
 src/pages/styles.css
 .env
+.vercel
