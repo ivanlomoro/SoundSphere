@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Container, HeaderSection } from '../components'
+import { AiOutlineCamera } from "react-icons/ai";
 
 const ImageContainer = styled.div`
   width: 300px;
@@ -9,6 +10,17 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  background-color: #767677;
+`
+
+const ButtonContainer = styled.div`
+  width: 350px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
 `
 
 const Image = styled.img`
@@ -25,12 +37,54 @@ const Button = styled.div`
   border-radius: 10px;
 `
 
+const SwitchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 20px;
+  width: 35px;
+  background-color: #ccc;
+  border-radius: 15px;
+  padding: 2px;
+  cursor: pointer;
+`;
+
+const Slider = styled.div<{ isPrivate: boolean }>`
+  height: 20px;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 13px;
+  transform: translateX(${({ isPrivate }) => (isPrivate ? '100%' : '0')});
+  transition: transform 0.3s ease-in-out;
+`;
+
+const Text = styled.span`
+  text-align: center;
+  color: white;
+  position: absolute;
+  top: 51.35em;
+  left: 8em;
+`;
+
+const Input = styled.input`
+height: 26px;
+`;
+const Select = styled.select`
+height: 26px;
+`;
+const ButtonSummit = styled.div`
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: white;
+  border: none;
+  border-radius: 10px;
+`;
+
 export const AddMusicPage = () => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [soundSrc, setSoundSrc] = useState<string | null>(null);
   const [songName, setSongName] = useState<string>('');
   const [selectedGenre, setSelectedGenre] = useState<string>('');
-  const [isPrivate, setIsPrivate] = useState<boolean>(false);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('existing'); 
   const [newAlbumName, setNewAlbumName] = useState<string>('');
 
@@ -75,7 +129,6 @@ export const AddMusicPage = () => {
   const togglePrivacy = () => {
     setIsPrivate(!isPrivate);
   };
-
   // Esto pilla el cambio en el select del album y si seleccionas crear uno nuevo te abre un imput para ponerle nombre
 
   const optionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -101,10 +154,13 @@ export const AddMusicPage = () => {
           {imageSrc ? (
             <Image src={imageSrc} alt="uploaded image" />
           ) : (
-            <p>There is no image</p>
+            <AiOutlineCamera size={70} />
           )}
         </ImageContainer>
-        <input
+
+        <ButtonContainer>
+
+        <Input
           type="file"
           accept="image/*"
           onChange={imageUpload}
@@ -113,10 +169,10 @@ export const AddMusicPage = () => {
         />
 
         <label htmlFor="image-upload">
-          <Button as="span">Add cover</Button>
+          <Button as="span">Add Image</Button>
         </label>
 
-        <input
+        <Input
           type="file"
           accept="audio/mpeg, audio/mp3"
           onChange={soundUpload}
@@ -128,39 +184,45 @@ export const AddMusicPage = () => {
           <Button as="span">Add sound</Button>
         </label>
 
-        <input
+        </ButtonContainer>
+
+        <Input
           type="text"
           placeholder="Enter song name"
           value={songName}
           onChange={songNameChange}
         />
 
-        <select value={selectedGenre} onChange={handleGenreChange}>
+        <Select value={selectedGenre} onChange={handleGenreChange}>
           <option value="">Select a genre</option>
           {availableGenres.map((genre) => (
             <option key={genre} value={genre}>
               {genre}
             </option>
           ))}
-        </select>
-
-        <button onClick={togglePrivacy}>
-          {isPrivate ? 'Make Public' : 'Make Private'}
-        </button>
+        </Select>
 
 
-        <select value={selectedOption} onChange={optionChange}>
+
+        <Select value={selectedOption} onChange={optionChange}>
           <option value="existing">Select Existing Album</option>
           <option value="new">Create New Album</option>
-        </select>
+        </Select>
         {selectedOption === 'new' && (
-          <input
+          <Input
             type="text"
             placeholder="Enter new album name"
             value={newAlbumName}
             onChange={(e) => setNewAlbumName(e.target.value)}
           />
         )}
+
+<SwitchContainer onClick={togglePrivacy}>
+      <Slider isPrivate={isPrivate} />
+    </SwitchContainer>
+    <Text>{isPrivate ? 'Private' : 'Public'}</Text>
+
+    <ButtonSummit>Submit</ButtonSummit>
       </Container>
     </section>
   )
