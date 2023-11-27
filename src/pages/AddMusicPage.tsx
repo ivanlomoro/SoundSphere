@@ -90,6 +90,7 @@ export const AddMusicPage = () => {
   const [isPrivate, setIsPrivate] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>("existing");
   const [newAlbumName, setNewAlbumName] = useState<string>("");
+  const [imageToUpload, setImageToUpload] = useState(null);
 
   // Para el genero
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -119,22 +120,9 @@ export const AddMusicPage = () => {
   const imageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
-    console.log(file);
+    setImageToUpload(file);
 
     if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "UploadImages");
-
-      axios
-        .post(
-          "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
-          formData
-        )
-        .then((response) => {
-          console.log(response);
-        });
-
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc(reader.result as string);
@@ -164,6 +152,16 @@ export const AddMusicPage = () => {
   ];
 
   const Submit = async () => {
+    const formData = new FormData();
+    formData.append("file", imageToUpload);
+    formData.append("upload_preset", "UploadImages");
+
+    const imageUploadedResponse = await axios.post(
+      "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
+      formData
+    );
+    console.log(imageUploadedResponse);
+
     const requestData = {
       thumbnail: imageSrc,
       url: soundSrc,
