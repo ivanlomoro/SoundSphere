@@ -3,9 +3,11 @@ import axios from "axios";
 
 interface SongUploadData {
     name: string;
-    artist: string;
-    genre: string;
+    artistId: string;
+    genreId: string;
     url: string;
+    isPublic: boolean;
+    userCreator: string;
     thumbnail: string;
 }
 

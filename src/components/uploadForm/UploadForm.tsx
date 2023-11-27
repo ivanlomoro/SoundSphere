@@ -9,9 +9,11 @@ export const UploadForm = () => {
 
         
         const testData = {
-            name: "Wonder Wall",
-            artist: "Oasis",
-            genre: "Rock",
+            name: "Cold Summer",
+            artistId: "Oasis",
+            isPublic: true,
+            genreId: "6560712d54a3139491bfad8f",
+            userCreator: "6562012b45ac8690c4290edc",
             url: "https://example.com/song-url",
             thumbnail: "https://example.com/thumbnail-url",
         };
