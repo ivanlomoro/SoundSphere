@@ -1,8 +1,14 @@
 // SongList.tsx
+import { useEffect, useState } from 'react';
 import { RecentGrid, ScrollableRowComponent } from '../components';
 import { useSongs } from '../context/songContext/songContext';
 import { useInteractions } from '../context/userContext/InteractionContext';
 import { useRenderer } from '../hooks/useRenderer';
+import axios from 'axios';
+import { Songs } from '../Types/SongsTypes';
+
+
+
 
 
 export const SongList = () => {
@@ -20,25 +26,49 @@ export const SongList = () => {
     layout : 'card',
   });
   
-  const { renderSongs: renderNormalSongs } = useRenderer({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+   
   const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "card" });
-  const { renderSongs: renderRecentSongs } = useRenderer({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
+  
+  
+  
+  const [fetchedSongs, setFetchedSongs] = useState<Songs[]>([]);
+  const { renderSongs: renderRecentSongs } = useRenderer({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+  const { renderSongs: renderPublicSongs } = useRenderer({ songs: fetchedSongs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+  useEffect(() => {
+    
+    const fetchSongs = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/song/public'); 
+        if (response.status === 200) {
+          setFetchedSongs(response.data); 
+        } else {
+          console.error('Failed to fetch songs from the API');
+        }
+      } catch (error) {
+        console.error('Error fetching songs:', error);
+      }
+    };
+
+   
+    fetchSongs();
+  }, []);
+
 
   return (
     <div>
       <div>
         <h2>Song List</h2>
         <ScrollableRowComponent>
-          {renderNormalSongs()}
+          {renderPublicSongs()}
         </ScrollableRowComponent>
 
       </div>
       
       <div>
         <h2>Recently Played</h2>
-        <RecentGrid>
+        <ScrollableRowComponent>
           {renderRecentSongs()}
-        </RecentGrid>
+        </ScrollableRowComponent>
       </div>
       <div>
         <h2>Favorites</h2>
