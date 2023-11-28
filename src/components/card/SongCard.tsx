@@ -7,6 +7,7 @@ import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardIm
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useSongs } from '../../context/songContext/songContext'
+import Swal from 'sweetalert2';
 
 
 export interface Songs {
@@ -38,6 +39,38 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 	if (!song || !toggleFavorite || !isFavorite || !addToRecents) {
 		return null
 	}
+
+	const handleDeleteMovie = async (songId: string) => {
+        try {
+            const result = await Swal.fire({
+                title: 'Are you sure delete this movie?',
+                text: 'You won\'t be able to revert this.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF3B4B',
+                cancelButtonColor: '#677580',
+                confirmButtonText: 'Yes, delete it!',
+				background:'#111111',
+				color:'white'
+            });
+
+            if (result.isConfirmed) {
+                await deleteSong(songId);
+                Swal.fire(
+                    'Deleted!',
+                    'Your movie has been deleted.',
+                    'success'
+                );
+            }
+        } catch (error) {
+            console.error('Error deleting movie', error);
+            Swal.fire(
+                'Error',
+                'There was an error trying to delete the movie.',
+                'error'
+            );
+        }
+    };
 
 	return (
 		<CardComponent>
@@ -91,7 +124,7 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 						content={<FaTrash />}
 						// onClick={deleteSong}
 						variant="StyledBackButton"
-						onClick={() => { deleteSong(song.id)}}
+						onClick={() => { handleDeleteMovie(song.id)}}
 					/>
 				</ArtistActionButtons>}
 		</CardComponent>
