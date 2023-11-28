@@ -1,5 +1,5 @@
 import React from 'react';
-import { SongCard, Songs } from '../components/card/FinalCardForMerge';
+import { SongCard, Songs } from '../components/card/SongCard';
 import { Artist } from '../Types/SongsTypes';
 import { ArtistCard } from '../components/card/ArtistCard';
 
@@ -18,7 +18,7 @@ type MagicInput<T> = {
   
   type LayoutVariant = "grid" | "list" | "card" | undefined;
   
-  export const useMagic = (input: MagicInput<LayoutVariant>) => {
+  export const useRenderer = (input: MagicInput<LayoutVariant>) => {
     const { mySongs, songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout, isMySong } = input;
   
     const renderSongs = React.useCallback(() => {
@@ -58,3 +58,6 @@ type MagicInput<T> = {
     return { renderSongs, renderArtists };
   };
   
+//How to use
+
+// const { renderSongs: renderNormalSongs } = useRenderer({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });

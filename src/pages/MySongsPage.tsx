@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { RecentGrid } from "../components/homeContainers/FavoritesGrid"
-import { useMagic } from "../hooks/useMagic";
+import { useRenderer } from "../hooks/useRenderer";
 import { useSongs } from "../context/songContext/songContext"
 import { UserContext } from "../context/userContext/UserContext";
+import { Link } from "react-router-dom";
 
 
 const MySongsPage = () => {
     const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
-    const { renderSongs } = useMagic({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid", isMySong:true });
+    const { renderSongs } = useRenderer({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid", isMySong:true });
     const { user } = useContext(UserContext)
 
     useEffect(() => {
@@ -36,7 +37,7 @@ const MySongsPage = () => {
                         <RecentGrid>
                             {renderSongs()}
                         </RecentGrid>
-                        : <p>You don´t have upload songs. </p>
+                        : <p>You didn`t upload any songs! <Link to='/ADDMUSICPAGE'> upload song</Link> </p>
                 }
             </div>
         </>

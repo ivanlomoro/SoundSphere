@@ -27,7 +27,6 @@ interface SongCardProps {
 	variant?: 'grid' | 'list' | 'card'
 }
 
-// Main SongCard Component
 export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, variant = 'card', isMySong }: SongCardProps) {
 	const CardComponent = variant === 'grid' ? GridCard : variant === 'list' ? ListCard : Card
 	const ImageComponent = variant === 'grid' ? GridCardImage : variant === 'list' ? ListCardImage : CardImage

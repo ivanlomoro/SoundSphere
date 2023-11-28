@@ -2,14 +2,14 @@
 import { RecentGrid, ScrollableRowComponent } from '../components';
 import { useSongs } from '../context/songContext/songContext';
 import { useInteractions } from '../context/userContext/InteractionContext';
-import { useMagic } from '../hooks/useMagic';
+import { useRenderer } from '../hooks/useRenderer';
 
 
 export const SongList = () => {
   const { songs,  artists  } = useSongs();
   const { favorites, recents, toggleFavorite, isFavorite, toggleFollowed, isFollowed, addToRecents } =useInteractions()
 
-  const {renderArtists } = useMagic({
+  const {renderArtists } = useRenderer({
     songs,
     artists,
     toggleFavorite,
@@ -20,9 +20,9 @@ export const SongList = () => {
     layout : 'card',
   });
   
-  const { renderSongs: renderNormalSongs } = useMagic({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
-  const { renderSongs: renderFavoriteSongs } = useMagic({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "card" });
-  const { renderSongs: renderRecentSongs } = useMagic({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
+  const { renderSongs: renderNormalSongs } = useRenderer({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+  const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "card" });
+  const { renderSongs: renderRecentSongs } = useRenderer({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
 
   return (
     <div>
