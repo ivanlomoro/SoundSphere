@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Container, HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import axios from "axios";
+import postData from "../api/postApi";
+import { UserContext } from "../context/userContext/UserContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ImageContainer = styled.div`
   width: 300px;
@@ -83,6 +86,7 @@ const ButtonSummit = styled.div`
 
 export const AddMusicPage = () => {
   const { uploadSong } = useApiCalls();
+  const { user } = useContext(UserContext);
   const [imageSrc, setImageSrc] = useState<string>("");
   const [soundSrc, setSoundSrc] = useState<string>("");
   const [songName, setSongName] = useState<string>("");
@@ -92,6 +96,7 @@ export const AddMusicPage = () => {
   const [newAlbumName, setNewAlbumName] = useState<string>("");
   const [imageToUpload, setImageToUpload] = useState<string>("");
   const [songToUpload, setSongToUpload] = useState<string>("");
+  const { getAccessTokenSilently: getToken } = useAuth0();
 
   // Para el genero
   const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -151,12 +156,12 @@ export const AddMusicPage = () => {
 
   // Aqui subimos desde la API los generos pero pongo estos de momento
   const availableGenres = [
-    "Pop",
-    "Rock",
-    "Hip Hop",
-    "Jazz",
-    "Classical",
-    "Electronic",
+    { name: "Pop", id: "6564f693cdafe12787660bed" },
+    { name: "Rock", id: "6560712d54a3139491bfad8f" },
+    { name: "Hip Hop", id: "6564f6b1cdafe12787660bee" },
+    { name: "Jazz", id: "6564f6bacdafe12787660bef" },
+    { name: "Classical", id: "6564f6c8cdafe12787660bf0" },
+    { name: "Electronic", id: "6564f6d4cdafe12787660bf1" },
   ];
 
   const Submit = async () => {
@@ -166,11 +171,11 @@ export const AddMusicPage = () => {
 
     console.log("IMAGE DATA:", imageData);
 
-    const imageUploadedResponse = await axios.post(
+    const { data: cloudinaryImage } = await axios.post(
       "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
       imageData
     );
-    console.log(imageUploadedResponse);
+    console.log(cloudinaryImage);
 
     const songData = new FormData();
     songData.append("file", songToUpload);
@@ -179,23 +184,25 @@ export const AddMusicPage = () => {
 
     console.log("SONG DATA:", songData);
 
-    const songUploadedResponse = await axios.post(
+    const { data: cloudinarySong } = await axios.post(
       "https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload",
       songData
     );
-    console.log(songUploadedResponse);
+    console.log(cloudinarySong);
 
     const requestData = {
-      thumbnail: imageSrc,
-      url: imageSrc,
+      thumbnail: cloudinaryImage.secure_url,
+      url: cloudinarySong.secure_url,
       name: songName,
       genreId: selectedGenre,
-      isPublic: !isPrivate,
-      userCreator: "user123",
+      isPublic: true,
+      userCreator: user.userId,
     };
 
+    const requestUrl = `song/${user.userId}`;
+
     try {
-      await uploadSong(requestData);
+      await postData(requestUrl, requestData, getToken);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -249,8 +256,8 @@ export const AddMusicPage = () => {
         <Select value={selectedGenre} onChange={handleGenreChange}>
           <option value="">Select a genre</option>
           {availableGenres.map((genre) => (
-            <option key={genre} value={genre}>
-              {genre}
+            <option key={genre.id} value={genre.id}>
+              {genre.name}
             </option>
           ))}
         </Select>
