@@ -8,26 +8,23 @@ import { ADDMUSICPAGE } from '../routes/paths';
 
 
 const MySongsPage = () => {
-    const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents } = useSongs();
+    const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents, isDeletedSong } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
     const { renderSongs } = useRenderer({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid", isMySong:true });
     const { user } = useContext(UserContext)
 
     useEffect(() => {
         const loadData = async () => {
-            console.log("ENTRA O NOOOOOOO")
             try {
                 await getMySongs(user);
-                console.log("Muestra getMySongs:", getMySongs)
             } catch (error) {
                 console.log(error)
             }
             setLoading(false);
-            console.log("Estas en el setLoading")
         };
         loadData();
-        console.log("MySongs", mySongs);
-    }, []);
+        console.log("Has pasado por el useEffect de MysongPage")
+    }, [isDeletedSong]);
 
     return (
         <>

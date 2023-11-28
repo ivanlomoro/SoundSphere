@@ -30,6 +30,8 @@ type SongsContextType = {
   removeFromFollowed: (id: number) => void;
   toggleFollowed: (artist: Artist) => void;
   getMySongs: (user: UserInterface | null) => void;
+  deleteSong: (songID: string) => void;
+  isDeletedSong: boolean;
 };
 
 const SongsContext = createContext<SongsContextType | null>(null);
@@ -52,6 +54,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [categories, setCategories] = useState<Category[]>([])
   const [followed, setFollowed] = useLocalStorage<Artist[]>('followed', [])
   const [mySongs, setMySongs] = useState<Songs[]>([]);
+  const [isDeletedSong, setIsDeletedSong] = useState<boolean>(false);
 
   useEffect(() => {
     setSongs(db.songData);
@@ -61,6 +64,8 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   useEffect(() => { setCategories(db.categories) }, [])
   useEffect(() => { setArtists(db.artistsData) }, [])
 
+  useEffect(() => { setIsDeletedSong(false) }, [isDeletedSong])
+
   const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
   const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
 
@@ -69,22 +74,35 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     if (user != null) {
       const userId = user.userId
       const URL = `${apiUrl}/song/user/${userId}`
-      console.log("URL usada:", URL)
 
 
       try {
-        console.log(URL)
-        console.log(userId)
         const response = await axios.get(URL)
         const userSongs: Songs[] = response.data
         setMySongs(userSongs)
-        console.log(user)
-        console.log("Estamos en api songs:",songs)
       } catch (error) {
         console.log(error)
       }
     }
   }
+
+  const deleteSong = async (songId: string) => {
+    if (songId != null) {
+      const URL = `${apiUrl}/song/${songId}`;
+
+      try {
+        const response = await axios.delete(URL);
+        if (response.status === 204) {
+          console.log(`Song with ID ${songId} deleted successfully`);
+          setIsDeletedSong(true)
+        } else {
+          console.error(`Error deleting song: ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   const addToRecents = (song: Songs) => {
     if (!songExists(recents, song.id)) {
@@ -152,7 +170,9 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         removeFromFollowed,
         removeFromFavorites,
         mySongs,
-        getMySongs
+        getMySongs,
+        deleteSong,
+        isDeletedSong,
       }}
     >
       {children}

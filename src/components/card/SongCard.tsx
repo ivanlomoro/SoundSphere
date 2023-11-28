@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton, ArtistActionButtons } from './card.styled.components'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useSongs } from '../../context/songContext/songContext'
 
 
 export interface Songs {
-	id: number
+	id: string
 	name: string
 	artist: string
 	url: string
@@ -21,7 +22,7 @@ export interface Songs {
 interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: number) => boolean
+	isFavorite?: (id: string) => boolean
 	isMySong?: boolean
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'
@@ -32,14 +33,11 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 	const ImageComponent = variant === 'grid' ? GridCardImage : variant === 'list' ? ListCardImage : CardImage
 	const DescriptionComponent = variant === 'grid' ? GridCardDescription : variant === 'list' ? ListCardDescription : CardDescription
 
+	const { deleteSong } = useSongs()
 
 	if (!song || !toggleFavorite || !isFavorite || !addToRecents) {
 		return null
 	}
-
-
-
-
 
 	return (
 		<CardComponent>
@@ -93,6 +91,7 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 						content={<FaTrash />}
 						// onClick={deleteSong}
 						variant="StyledBackButton"
+						onClick={() => { deleteSong(song.id)}}
 					/>
 				</ArtistActionButtons>}
 		</CardComponent>
