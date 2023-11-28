@@ -5,6 +5,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
+import { editSongType } from "../../components/card/CardContainerButtons";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
@@ -32,6 +33,7 @@ type SongsContextType = {
   getMySongs: (user: UserInterface | null) => void;
   deleteSong: (songID: string) => void;
   isDeletedSong: boolean;
+  updateSong: (songID: string, editSong: editSongType) => void;
 };
 
 const SongsContext = createContext<SongsContextType | null>(null);
@@ -104,6 +106,23 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   };
 
+  const updateSong = async (songId: string, editSong: editSongType) => {
+    if (songId != null) {
+      const URL = `${apiUrl}/song/${songId}`;
+      try {
+        const response = await axios.patch(URL, editSong);
+        if (response.status === 201) {
+          console.log(`Song with ID ${songId} updated successfully`);
+          //TODO setState
+        } else {
+          console.error(`Error updating song: ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
   const addToRecents = (song: Songs) => {
     if (!songExists(recents, song.id)) {
       setRecents([song, ...recents]);
@@ -173,6 +192,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         getMySongs,
         deleteSong,
         isDeletedSong,
+        updateSong
       }}
     >
       {children}
