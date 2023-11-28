@@ -53,7 +53,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       };
       getUser();
     }
-  }, [isLogged, auth0User]);
+  }, [isLogged]);
 
   return (
     <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged }}>
