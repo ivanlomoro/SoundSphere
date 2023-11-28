@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import postData from "../api/postApi";
@@ -12,7 +12,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 //   const [soundSrc, setSoundSrc] = useState<string>("");
 //  const [imageToUpload, setImageToUpload] = useState<string>("");
 //   const [songToUpload, setSongToUpload] = useState<string>("");
-
 
 //   const soundUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 //     const file = e.target.files?.[0];
@@ -48,7 +47,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 //       reader.readAsDataURL(file);
 //     }
 //   };
-
 
 //   const availableGenres = [
 //     "Pop",
@@ -125,8 +123,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 //           <label htmlFor="image-upload">
 
-
-
 //             <Button as="span">Add Image</Button>
 //           </label>
 //           <Input
@@ -187,24 +183,38 @@ import { useAuth0 } from "@auth0/auth0-react";
 //   );
 // };
 
-import { useForm, } from 'react-hook-form';
-import { SongUploadData } from '../context/songContext/ApiCalls';
+import { useForm } from "react-hook-form";
+import { SongUploadData } from "../context/songContext/ApiCalls";
 
 // LOGICA LISTA PARA FETCH, PERO HARDCODEADO DE MOMENTO
 import { genres } from "../interfaces/uploadTypes";
-import { ImageContainer, Image, ButtonContainer, Input, Button, Select } from "../components/uploadForm/UploadFormComponents";
-
+import {
+  ImageContainer,
+  Image,
+  ButtonContainer,
+  Input,
+  Button,
+  Select,
+} from "../components/uploadForm/UploadFormComponents";
+import getData from "../api/getApi";
 
 export const AddMusicPage = () => {
   const { register, handleSubmit, watch, reset } = useForm<SongUploadData>();
-  const { getAccessTokenSilently: getToken } = useAuth0();
+  const { getAccessTokenSilently: getToken, isAuthenticated } = useAuth0();
   const { user } = useContext(UserContext);
-  const [imageSrc, setImageSrc] = useState<string>('');
-  const [soundSrc, setSoundSrc] = useState<string>('');
-  const selectedGenre = watch('genreId');
-  if (!user) {
-    return console.log('missig user');
-  }
+  const [imageSrc, setImageSrc] = useState<string>("");
+  const [soundSrc, setSoundSrc] = useState<string>("");
+  const selectedGenre = watch("genreId");
+
+  useEffect(() => {
+    if (user) {
+      const getUserAlbums = async () => {
+        const response = await getData(`album/${user.userId}`, getToken);
+        console.log(response);
+      };
+      getUserAlbums();
+    }
+  }, [isAuthenticated]);
 
   // const [isPublic, setIsPublic] = useState(false);
   const imageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -213,45 +223,47 @@ export const AddMusicPage = () => {
       return;
     }
 
+    console.log(file);
+
     const imageData = new FormData();
-    imageData.append('file', file);
-    imageData.append('upload_preset', 'UploadImages');
+    imageData.append("file", file);
+    imageData.append("upload_preset", "UploadImages");
 
     try {
       const response = await axios.post(
-        'https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload',
+        "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
         imageData
       );
       setImageSrc(response.data.url);
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
     }
   };
 
   const soundUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-   
     const file = e.target.files?.[0];
     if (!file) {
       return;
     }
 
+    console.log(file);
     const songData = new FormData();
-    songData.append('file', file);
-    songData.append('upload_preset', 'UploadAudio');
+    songData.append("file", file);
+    songData.append("upload_preset", "UploadAudio");
 
     try {
       const response = await axios.post(
-        'https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload',
+        "https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload",
         songData
       );
       setSoundSrc(response.data.url);
     } catch (error) {
-      console.error('Error uploading song:', error);
+      console.error("Error uploading song:", error);
     }
   };
 
   const submitData = async (data: SongUploadData) => {
-    console.log("clickedSubmit")
+    console.log("clickedSubmit");
     const requestUrl = `song/${user.userId}`;
 
     const requestData = {
@@ -263,29 +275,22 @@ export const AddMusicPage = () => {
       isPublic: true,
       userCreator: "user123",
     };
- 
+
     try {
       await postData(requestUrl, requestData, getToken);
-      setSoundSrc('');
-      setImageSrc('');
-      reset()
+      setSoundSrc("");
+      setImageSrc("");
+      reset();
     } catch (error) {
       console.error("An error occurred:", error);
     }
-  
-    
-   
-   
-
   };
 
-
   return (
-    
-      <section>
-        <Container>
-          <HeaderSection text="Upload" />
-          <form onSubmit={handleSubmit(submitData)}>
+    <section>
+      <Container>
+        <HeaderSection text="Upload" />
+        <form onSubmit={handleSubmit(submitData)}>
           <ImageContainer>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
@@ -310,7 +315,7 @@ export const AddMusicPage = () => {
             <Input
               type="text"
               placeholder="Enter song name"
-              {...register('name')}
+              {...register("name")}
             />
             <Input
               type="file"
@@ -323,10 +328,12 @@ export const AddMusicPage = () => {
               <Button as="span">Add Sound</Button>
             </label>
           </ButtonContainer>
-          <Select {...register('genreId')}>
+          <Select {...register("genreId")}>
             <option value="">Select a genre</option>
-            {genres.map(genre => (
-              <option key={genre.id} value={genre.id}>{genre.name}</option>
+            {genres.map((genre) => (
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
+              </option>
             ))}
           </Select>
           {/* <SwitchContainer onClick={() => setIsPrivate(!isPrivate)}>
@@ -334,10 +341,9 @@ export const AddMusicPage = () => {
           </SwitchContainer>
           <Text>{isPrivate ? "Private" : "Public"}</Text> */}
 
-          <button >Submit</button>
-           </form>
-        </Container>
-      </section>
-   
+          <button>Submit</button>
+        </form>
+      </Container>
+    </section>
   );
 };
