@@ -6,35 +6,35 @@ import {
   useEffect,
   useState,
 } from "react";
-import UserFromAuthInterface from "../../interfaces/UserInterface";
 import { useAuth0 } from "@auth0/auth0-react";
 import postData from "../../api/postApi";
+import { UserInterface } from "../songContext/songContext";
 
-type UserContextType = {
-  user: UserFromAuthInterface | null;
+
+export type UserContextType = {
+  user: UserInterface | null;
   isLogged: boolean;
   setIsLogged: Dispatch<SetStateAction<boolean>>;
-  setUser: Dispatch<SetStateAction<UserFromAuthInterface | null>>;
+  setUser: Dispatch<SetStateAction<UserInterface | null>>;
 };
 
 const initialState = {
   user: {
-    name: "",
-    email: "",
+    userId:""
   },
   setUser: () => {},
   isLogged: false,
   setIsLogged: () => {},
 };
 
-export const UserContext = createContext<UserContextType | null>(initialState);
+export const UserContext = createContext<UserContextType>(initialState);
 
 type UserContextProviderProps = {
   children: ReactNode;
 };
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [user, setUser] = useState<UserFromAuthInterface | null>(null);
+  const [user, setUser] = useState<UserInterface | null>(null);
   const [isLogged, setIsLogged] = useState(false);
   const { user: auth0User, getAccessTokenSilently: getToken } = useAuth0();
 

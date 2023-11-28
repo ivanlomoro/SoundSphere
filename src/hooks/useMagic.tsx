@@ -4,6 +4,7 @@ import { Artist } from '../Types/SongsTypes';
 import { ArtistCard } from '../components/card/ArtistCard';
 
 type MagicInput<T> = {
+  mySongs?: Songs[];
   songs?: Songs[];
   artists?: Artist[];
   toggleFavorite?: (song: Songs) => void;
@@ -12,17 +13,19 @@ type MagicInput<T> = {
   isFollowed?: (id: number) => boolean;
   addToRecents?: (song: Songs) => void;
   layout: T;
+  isMySong?:boolean
 };
   
   type LayoutVariant = "grid" | "list" | "card" | undefined;
   
   export const useMagic = (input: MagicInput<LayoutVariant>) => {
-    const { songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout } = input;
+    const { mySongs, songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout, isMySong } = input;
   
     const renderSongs = React.useCallback(() => {
+      const songsToRender = mySongs || songs;
       return (
         <>
-          {songs?.map((song) => (
+          {songsToRender?.map((song) => (
             <SongCard
               variant={layout}
               key={song.id}
@@ -30,11 +33,12 @@ type MagicInput<T> = {
               toggleFavorite={toggleFavorite}
               isFavorite={isFavorite}
               addToRecents={addToRecents}
+              isMySong={isMySong}
             />
           ))}
         </>
       );
-    }, [songs, toggleFavorite, isFavorite, addToRecents, layout]);
+    }, [mySongs, songs, toggleFavorite, isFavorite, addToRecents, layout]);
   
     const renderArtists = React.useCallback(() => {
       return (
