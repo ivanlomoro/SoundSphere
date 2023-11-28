@@ -78,8 +78,8 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 
 					</CommonButtonContainer>)}
 			</DescriptionComponent>
-			{/* {isMySong &&
-				<CardContainerButtons {...song.id} />} */}
+			{isMySong &&
+				<CardContainerButtons songId={song.id} />}
 		</CardComponent>
 	)
 }
