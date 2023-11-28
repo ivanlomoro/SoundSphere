@@ -1,7 +1,7 @@
 import axios from "axios";
-import UserFromAuthInterface from "../interfaces/UserInterface";
 
-const postData = async (url: string, data: {}, getToken: () => void) => {
+
+const postData = async (url: string, data: any , getToken: () => void) => {
   const token = await getToken();
 
   const fullUrl = `http://localhost:8080/${url}`;
