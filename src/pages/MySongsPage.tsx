@@ -4,6 +4,7 @@ import { useRenderer } from "../hooks/useRenderer";
 import { useSongs } from "../context/songContext/songContext"
 import { UserContext } from "../context/userContext/UserContext";
 import { Link } from "react-router-dom";
+import { ADDMUSICPAGE } from '../routes/paths';
 
 
 const MySongsPage = () => {
@@ -37,7 +38,7 @@ const MySongsPage = () => {
                         <RecentGrid>
                             {renderSongs()}
                         </RecentGrid>
-                        : <p>You didn`t upload any songs! <Link to='/ADDMUSICPAGE'> upload song</Link> </p>
+                        : <p>You didn`t upload any songs! <Link to= {ADDMUSICPAGE} > upload song</Link> </p>
                 }
             </div>
         </>
