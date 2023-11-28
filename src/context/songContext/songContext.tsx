@@ -5,7 +5,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
 
@@ -76,9 +76,9 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         console.log(URL)
         console.log(userId)
         const response = await axios.get(URL)
-        const songs: Songs[] = response.data
-
-        setMySongs(songs)
+        const userSongs: Songs[] = response.data
+        setMySongs(userSongs)
+        console.log(user)
         console.log("Estamos en api songs:",songs)
       } catch (error) {
         console.log(error)

@@ -45,15 +45,13 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
           name: auth0User.nickname,
           email: auth0User.email,
         };
-
         const response: any = await postData("user", userData, getToken);
-        setUser(response.userData);
-
+        setUser(response.userData);        
         setIsLogged(true);
       };
       getUser();
     }
-  }, [isLogged]);
+  }, [isLogged,auth0User]);
 
   return (
     <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged }}>
