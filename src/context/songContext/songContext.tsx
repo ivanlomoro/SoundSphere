@@ -1,14 +1,9 @@
 import React, { useState, useEffect, createContext, ReactNode, useContext } from "react";
 import type { Songs, Category, Artist } from '../../Types/SongsTypes';
 import db from '../../data/db.json';
+import { SongsContextType } from "../../Types/SongsTypes";
 
 
-
-type SongsContextType = {
-  artists: Artist[];
-  songs: Songs[];
-  categories: Category[];
-};
 
 const SongsContext = createContext<SongsContextType | null>(null);
 

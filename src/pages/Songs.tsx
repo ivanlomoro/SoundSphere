@@ -1,6 +1,5 @@
 // SongList.tsx
 import { RecentGrid, ScrollableRowComponent } from '../components';
-import { UploadForm } from '../components/uploadForm/UploadForm';
 import { useSongs } from '../context/songContext/songContext';
 import { useInteractions } from '../context/userContext/InteractionContext';
 import { useMagic } from '../hooks/useMagic';
@@ -34,7 +33,7 @@ export const SongList = () => {
         </ScrollableRowComponent>
 
       </div>
-      <UploadForm/>
+      
       <div>
         <h2>Recently Played</h2>
         <RecentGrid>

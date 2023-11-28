@@ -1,3 +1,5 @@
+
+
 export type Songs = {
   id: number;
   name: string;
@@ -18,4 +20,9 @@ export type Artist = {
   genres: string[];
   popularity: number;
   photoUrl: string;
+};
+export type SongsContextType = {
+  artists: Artist[];
+  songs: Songs[];
+  categories: Category[];
 };

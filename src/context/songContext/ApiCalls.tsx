@@ -1,12 +1,12 @@
 import React, { createContext, ReactNode, useContext } from "react";
 import axios from "axios";
 
-interface SongUploadData {
+export interface SongUploadData {
   thumbnail: string,
   url?: string,
   name: string,
   genreId: string,
-  isPublic: boolean,
+  // isShared: boolean,
   userCreator: string,
 }
 
@@ -52,7 +52,6 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   );
 };
 
-// Custom Hook to use API Calls
 export const useApiCalls = () => {
   const context = useContext(ApiCallsContext);
   if (!context) {
