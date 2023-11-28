@@ -41,36 +41,38 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 	}
 
 	const handleDeleteMovie = async (songId: string) => {
-        try {
-            const result = await Swal.fire({
-                title: 'Are you sure delete this movie?',
-                text: 'You won\'t be able to revert this.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#FF3B4B',
-                cancelButtonColor: '#677580',
-                confirmButtonText: 'Yes, delete it!',
-				background:'#111111',
-				color:'white'
-            });
+		try {
+			const result = await Swal.fire({
+				title: 'Are you sure delete this song?',
+				text: 'You won\'t be able to revert this.',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#FF3B4B',
+				cancelButtonColor: '#677580',
+				confirmButtonText: 'Yes, delete it!',
+				background: '#111111',
+				color: 'white'
+			});
 
-            if (result.isConfirmed) {
-                await deleteSong(songId);
-                Swal.fire(
-                    'Deleted!',
-                    'Your movie has been deleted.',
-                    'success'
-                );
-            }
-        } catch (error) {
-            console.error('Error deleting movie', error);
-            Swal.fire(
-                'Error',
-                'There was an error trying to delete the movie.',
-                'error'
-            );
-        }
-    };
+			if (result.isConfirmed) {
+				await deleteSong(songId);
+				Swal.fire({
+					title: 'Deleted!',
+					text: 'Your song has been deleted.',
+					icon: 'success',
+					background: '#111111',
+					color: 'white'
+				});
+			}
+		} catch (error) {
+			console.error('Error deleting movie', error);
+			Swal.fire(
+				'Error',
+				'There was an error trying to delete the movie.',
+				'error'
+			);
+		}
+	};
 
 	return (
 		<CardComponent>
@@ -124,7 +126,7 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 						content={<FaTrash />}
 						// onClick={deleteSong}
 						variant="StyledBackButton"
-						onClick={() => { handleDeleteMovie(song.id)}}
+						onClick={() => { handleDeleteMovie(song.id) }}
 					/>
 				</ArtistActionButtons>}
 		</CardComponent>
