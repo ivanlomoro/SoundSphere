@@ -17,12 +17,12 @@ import {
   Select,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
-interface Album{
-  id: string,
-  name: string,
-  userId: string,
-  thumbnail: string,
-  isPublic: boolean,
+interface Album {
+  id: string;
+  name: string;
+  userId: string;
+  thumbnail: string;
+  isPublic: boolean;
 }
 export const AddMusicPage = () => {
   const { register, handleSubmit, watch, reset } = useForm<SongUploadData>();
@@ -39,7 +39,10 @@ export const AddMusicPage = () => {
   useEffect(() => {
     if (user) {
       const getUserAlbums = async () => {
-        const response: AxiosResponse['data'] = await getData(`album/user/${user.userId}`, getToken);
+        const response: AxiosResponse["data"] = await getData(
+          `album/user/${user.userId}`,
+          getToken
+        );
         setUserAlbums(response.userData);
       };
       getUserAlbums();
@@ -90,7 +93,7 @@ export const AddMusicPage = () => {
 
     const createOrSelectAlbum = async () => {
       if (!selectedAlbum) {
-        return console.log("No album selected")
+        return console.log("No album selected");
       }
       if (selectedAlbum === "newAlbum") {
         const newAlbumData = {
@@ -99,7 +102,7 @@ export const AddMusicPage = () => {
           genreId: selectedGenre,
           isPublic: data.isPublic,
         };
-        const response: AxiosResponse['data'] = await postData(
+        const response: AxiosResponse["data"] = await postData(
           `album/${user?.userId}`,
           newAlbumData,
           getToken
@@ -111,14 +114,12 @@ export const AddMusicPage = () => {
       if (selectedAlbum !== "newAlbum") setAlbumToUpload(selectedAlbum);
     };
 
-    const albumResponse: AxiosResponse['data'] = await createOrSelectAlbum();
+    const albumResponse: AxiosResponse["data"] = await createOrSelectAlbum();
 
     if (
-      albumResponse.statusText === "Created" ||
+      (albumResponse && albumResponse.statusText === "Created") ||
       selectedAlbum !== "newAlbum"
     ) {
-      const albumId = albumResponse?.userData?.id || albumToUpload;
-
       const requestData = {
         thumbnail: cloudinaryImage.secure_url,
         url: cloudinarySong.secure_url,
@@ -126,7 +127,7 @@ export const AddMusicPage = () => {
         genreId: selectedGenre,
         isPublic: true,
         userCreator: user?.userId,
-        albumId: albumId,
+        albumId: albumToUpload,
       };
 
       try {
@@ -141,9 +142,9 @@ export const AddMusicPage = () => {
 
   return (
     <section>
-      
-        <HeaderSection text="Upload" />
-        <form onSubmit={handleSubmit(submitData)}><Container>
+      <HeaderSection text="Upload" />
+      <form onSubmit={handleSubmit(submitData)}>
+        <Container>
           <ImageContainer>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
@@ -152,10 +153,7 @@ export const AddMusicPage = () => {
             )}
           </ImageContainer>
           <label>
-            <input
-              type="checkbox"
-              {...register("isPublic")}
-            />
+            <input type="checkbox" {...register("isPublic")} />
             Make Public
           </label>
           <ButtonContainer>
@@ -198,23 +196,21 @@ export const AddMusicPage = () => {
             <option value="">Select an album</option>
             <option value="newAlbum">Create new album</option>
 
-            {userAlbums.length > 0 && userAlbums.map((album) => (
-
-
-            <option key={album.id} value={album.id}>
-              {album.name}
-            </option>
-            ))}
+            {userAlbums.length > 0 &&
+              userAlbums.map((album) => (
+                <option key={album.id} value={album.id}>
+                  {album.name}
+                </option>
+              ))}
           </Select>
           <Input
             type="text"
             placeholder="Enter album name"
             {...register("newAlbum")}
           />
-
-          <button>Submit</button>   </Container>
-        </form>
-   
+          <button>Submit</button>{" "}
+        </Container>
+      </form>
     </section>
   );
 };
