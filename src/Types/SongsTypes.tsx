@@ -35,3 +35,12 @@ export interface SongCardProps {
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'
 }
+export interface SongUploadData {
+  thumbnail: string;
+  url?: string;
+  name: string;
+  genreId: string;
+  isPublic: boolean,
+  userCreator: string;
+}
+

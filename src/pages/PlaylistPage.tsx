@@ -62,14 +62,8 @@ import { PlaylistFormData, Playlist } from "../Types/PlaylistFormData";
 
          try {
              const response = await postData(url, requestData, getToken);
-             if (response.userData && response.statusText === 'OK') {
-                 const newPlaylist = {
-                     id: response.userData.id,
-                     playlistName: response.userData.playlistName,
-                     thumbnail: response.userData.thumbnail,
-                     songs: response.userData.songs,
-                     userCreator: response.userData.userCreator,
-                 };
+             if (response.incomingData && response.statusText === 'OK') {
+                 const newPlaylist = response.incomingData;
                  setPlaylist(prevPlaylists => [...(prevPlaylists || []), newPlaylist]);
                  setImageSrc('');
                  reset();

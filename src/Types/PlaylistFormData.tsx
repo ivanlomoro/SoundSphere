@@ -1,4 +1,3 @@
-import toast from 'react-hot-toast';
 import { Songs } from './SongsTypes';
 
 export interface Playlist {

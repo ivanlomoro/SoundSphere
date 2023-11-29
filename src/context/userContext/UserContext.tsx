@@ -41,12 +41,12 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   useEffect(() => {
     if (auth0User) {
       const getUser = async () => {
-        const userData = {
+        const incomingData = {
           name: auth0User.nickname,
           email: auth0User.email,
         };
-        const response: any = await postData("user", userData, getToken);
-        setUser(response.userData);        
+        const response: any = await postData("user", incomingData, getToken);
+        setUser(response.incomingData);        
         setIsLogged(true);
       };
       getUser();

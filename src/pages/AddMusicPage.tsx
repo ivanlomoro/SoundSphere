@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 import { useForm, } from 'react-hook-form';
-import { SongUploadData } from '../context/songContext/ApiCalls';
+import { SongUploadData } from "../Types/SongUploadData";
 
 // LOGICA LISTA PARA FETCH, PERO HARDCODEADO DE MOMENTO
 import { genres } from "../interfaces/uploadTypes";

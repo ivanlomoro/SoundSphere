@@ -7,6 +7,7 @@ import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
 import { Songs } from "../../Types/SongsTypes";
 import { useNavigate } from "react-router-dom";
+import { FaveButton } from "../card/card.styled.components";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -196,6 +197,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
             content={<AiOutlineStepForward />}
             onClick={handleNext}
           />
+          <FaveButton/>
         </ButtonContainer>
       </ResponsiveContainer>
     </>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const postData = async (url: string, data: any, getToken: () => Promise<string>) => {
+const postData = async (url: string, data: JSON, getToken: () => Promise<string>) => {
   const token = await getToken();
   const fullUrl = `http://localhost:8080/${url}`;
   const config = {
@@ -13,7 +13,7 @@ const postData = async (url: string, data: any, getToken: () => Promise<string>)
 
   try {
     const response = await axios.post(fullUrl, data, config);
-    return { userData: response.data, statusText: response.statusText };
+    return { incomingData: response.data, statusText: response.statusText };
   } catch (error) {
     console.error("Error in postData:", error);
     throw error;
