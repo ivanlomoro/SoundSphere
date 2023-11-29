@@ -2,12 +2,14 @@ import React, { createContext, ReactNode, useContext } from "react";
 import axios from "axios";
 
 export interface SongUploadData {
-  thumbnail: string,
-  url?: string,
-  name: string,
-  genreId: string,
-  // isShared: boolean,
-  userCreator: string,
+  thumbnail: string;
+  url?: string;
+  name: string;
+  genreId: string;
+  isPublic: boolean;
+  userCreator: string;
+  albumId?: string;
+  newAlbum?: string;
 }
 
 interface ApiCallContextType {
