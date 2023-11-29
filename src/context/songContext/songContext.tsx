@@ -34,6 +34,9 @@ type SongsContextType = {
   deleteSong: (songID: string) => void;
   isModifiedSong: boolean;
   updateSong: (songID: string, editSong: editSongType) => void;
+  getSongById: (songID: string) => void;
+  editedSong: Songs | null
+  errorEditedSong: boolean
 };
 
 const SongsContext = createContext<SongsContextType | null>(null);
@@ -56,6 +59,11 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [followed, setFollowed] = useLocalStorage<Artist[]>('followed', [])
   const [mySongs, setMySongs] = useState<Songs[]>([]);
   const [isModifiedSong, setIsModifiedSong] = useState<boolean>(false);
+  const [editedSong, setEditedSong] = useState<Songs | null>(null);
+  const [errorEditedSong, setErrorEditedSong] = useState<boolean>(true);
+
+
+
 
 
   useEffect(() => {
@@ -66,7 +74,9 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   useEffect(() => { setCategories(db.categories) }, [])
   useEffect(() => { setArtists(db.artistsData) }, [])
 
-  useEffect(() => { setIsModifiedSong(false)}, [isModifiedSong])
+  useEffect(() => { setIsModifiedSong(false) }, [isModifiedSong])
+  useEffect(() => { setErrorEditedSong(true) }, [errorEditedSong])
+
 
   const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
   const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
@@ -82,6 +92,20 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const response = await axios.get(URL)
         const userSongs: Songs[] = response.data
         setMySongs(userSongs)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  const getSongById = async (songId: string) => {
+    if (songId != null) {
+      const URL = `${apiUrl}/song/${songId}`
+      try {
+        const response = await axios.get(URL)
+        const song: Songs = response.data
+        setEditedSong(song)
+        console.log("Esta es la cancion get songbyid:", song)
       } catch (error) {
         console.log(error)
       }
@@ -112,11 +136,14 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const response = await axios.patch(URL, editSong);
         if (response.status === 201) {
           setIsModifiedSong(true)
+          setErrorEditedSong(false)
         } else {
           console.error(`Error updating song: ${response.statusText}`);
+          setErrorEditedSong(true)
         }
       } catch (error) {
         console.error(error);
+        setErrorEditedSong(true);
       }
     }
   }
@@ -190,7 +217,10 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         getMySongs,
         deleteSong,
         isModifiedSong,
-        updateSong
+        updateSong,
+        getSongById,
+        editedSong,
+        errorEditedSong
       }}
     >
       {children}
