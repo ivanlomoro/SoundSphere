@@ -26,7 +26,6 @@ export const AddMusicPage = () => {
   const { getAccessTokenSilently: getToken, isAuthenticated } = useAuth0();
   const { user } = useContext(UserContext);
   const [imageSrc, setImageSrc] = useState<string>("");
-  const [soundSrc, setSoundSrc] = useState<string>("");
   const [songToUpload, setSongToUpload] = useState<string | File>("");
   const selectedGenre = watch("genreId");
 
@@ -101,7 +100,6 @@ export const AddMusicPage = () => {
 
     try {
       await postData(requestUrl, requestData, getToken);
-      setSoundSrc("");
       setImageSrc("");
       reset();
     } catch (error) {
