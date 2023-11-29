@@ -1,11 +1,9 @@
 import axios from "axios";
 
 
-const postData = async (url: string, data: any , getToken: () => void) => {
+const postData = async (url: string, data: any, getToken: () => Promise<string>) => {
   const token = await getToken();
-
   const fullUrl = `http://localhost:8080/${url}`;
-  console.log(fullUrl);
   const config = {
     headers: {
       authorization: `Bearer ${token}`,
@@ -14,15 +12,13 @@ const postData = async (url: string, data: any , getToken: () => void) => {
   };
 
   try {
-    const { data: userData, statusText } = await axios.post(
-      fullUrl,
-      data,
-      config
-    )
-    return { userData, statusText };
+    const response = await axios.post(fullUrl, data, config);
+    return { userData: response.data, statusText: response.statusText };
   } catch (error) {
-    return error;
+    console.error("Error in postData:", error);
+    throw error;
   }
 };
 
 export default postData;
+

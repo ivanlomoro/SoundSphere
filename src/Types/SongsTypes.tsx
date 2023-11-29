@@ -1,3 +1,4 @@
+import { Songs } from "../components/card/Songs";
 
 
 export type Songs = {
@@ -26,3 +27,11 @@ export type SongsContextType = {
   songs: Songs[];
   categories: Category[];
 };
+export interface SongCardProps {
+	song: Songs
+	toggleFavorite?: (song: Songs) => void
+	isFavorite?: (id: number) => boolean
+	isMySong?: boolean
+	addToRecents?: (song: Songs) => void
+	variant?: 'grid' | 'list' | 'card'
+}

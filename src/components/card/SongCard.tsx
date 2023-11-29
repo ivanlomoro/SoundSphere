@@ -3,29 +3,11 @@
 import { Button } from '..'
 import { NavIcon } from '../NavBar/NavBar'
 import { Link } from 'react-router-dom'
-import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton, ArtistActionButtons } from './card.styled.components'
+import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton } from './card.styled.components'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { SongCardProps } from '../../Types/SongsTypes'
 
-
-export interface Songs {
-	id: number
-	name: string
-	artist: string
-	url: string
-	thumbnail: string
-	genre: string
-	liked: boolean
-}
-
-interface SongCardProps {
-	song: Songs
-	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: number) => boolean
-	isMySong?: boolean
-	addToRecents?: (song: Songs) => void
-	variant?: 'grid' | 'list' | 'card'
-}
 
 export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, variant = 'card', isMySong }: SongCardProps) {
 	const CardComponent = variant === 'grid' ? GridCard : variant === 'list' ? ListCard : Card
@@ -71,7 +53,19 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 								ariaLabel="Music Player"
 								onClick={() => { addToRecents(song) }}
 							/> </Link>
-
+						{isMySong &&(
+							<>
+								<Button
+									content={<FaEdit />}
+									// onClick={editSong}
+									variant="StyledBackButton"
+								/>
+								<Button
+									content={<FaTrash />}
+									// onClick={deleteSong}
+									variant="StyledBackButton"
+								/></>)
+						}
 						<FaveButton onClick={() => { toggleFavorite(song) }}>
 							{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 						</FaveButton>
@@ -82,19 +76,7 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 
 					</CommonButtonContainer>)}
 			</DescriptionComponent>
-			{isMySong &&
-				<ArtistActionButtons>
-					<Button
-						content={<FaEdit />}
-						// onClick={editSong}
-						variant="StyledBackButton"
-					/>
-					<Button
-						content={<FaTrash />}
-						// onClick={deleteSong}
-						variant="StyledBackButton"
-					/>
-				</ArtistActionButtons>}
+
 		</CardComponent>
 	)
 }
