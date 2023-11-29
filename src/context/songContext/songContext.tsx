@@ -32,7 +32,7 @@ type SongsContextType = {
   toggleFollowed: (artist: Artist) => void;
   getMySongs: (user: UserInterface | null) => void;
   deleteSong: (songID: string) => void;
-  isDeletedSong: boolean;
+  isModifiedSong: boolean;
   updateSong: (songID: string, editSong: editSongType) => void;
 };
 
@@ -48,7 +48,6 @@ export type UserInterface = {
 
 const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const { user } = useContext(UserContext)
-  console.log("User traido de context", user)
   const [songs, setSongs] = useState<Songs[]>([]);
   const [artists, setArtists] = useState<Artist[]>([]);
   const [recents, setRecents] = useLocalStorage<Songs[]>('recents', []);
@@ -56,7 +55,8 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [categories, setCategories] = useState<Category[]>([])
   const [followed, setFollowed] = useLocalStorage<Artist[]>('followed', [])
   const [mySongs, setMySongs] = useState<Songs[]>([]);
-  const [isDeletedSong, setIsDeletedSong] = useState<boolean>(false);
+  const [isModifiedSong, setIsModifiedSong] = useState<boolean>(false);
+
 
   useEffect(() => {
     setSongs(db.songData);
@@ -66,7 +66,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   useEffect(() => { setCategories(db.categories) }, [])
   useEffect(() => { setArtists(db.artistsData) }, [])
 
-  useEffect(() => { setIsDeletedSong(false) }, [isDeletedSong])
+  useEffect(() => { setIsModifiedSong(false)}, [isModifiedSong])
 
   const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
   const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
@@ -95,8 +95,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
       try {
         const response = await axios.delete(URL);
         if (response.status === 204) {
-          console.log(`Song with ID ${songId} deleted successfully`);
-          setIsDeletedSong(true)
+          setIsModifiedSong(true)
         } else {
           console.error(`Error deleting song: ${response.statusText}`);
         }
@@ -112,8 +111,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
       try {
         const response = await axios.patch(URL, editSong);
         if (response.status === 201) {
-          console.log(`Song with ID ${songId} updated successfully`);
-          //TODO setState
+          setIsModifiedSong(true)
         } else {
           console.error(`Error updating song: ${response.statusText}`);
         }
@@ -191,7 +189,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         mySongs,
         getMySongs,
         deleteSong,
-        isDeletedSong,
+        isModifiedSong,
         updateSong
       }}
     >

@@ -8,7 +8,7 @@ import { ADDMUSICPAGE } from '../routes/paths';
 
 
 const MySongsPage = () => {
-    const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents, isDeletedSong } = useSongs();
+    const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents, isModifiedSong } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
     const { renderSongs } = useRenderer({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid", isMySong:true });
     const { user } = useContext(UserContext)
@@ -23,8 +23,7 @@ const MySongsPage = () => {
             setLoading(false);
         };
         loadData();
-        console.log("Has pasado por el useEffect de MysongPage")
-    }, [isDeletedSong]);
+    }, [isModifiedSong]);
 
     return (
         <>

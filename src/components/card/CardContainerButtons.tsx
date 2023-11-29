@@ -20,12 +20,11 @@ type Props = {
 
 const CardContainerButtons: FC<Props> = ({ songId }) => {
     const stringId = songId.toString();
-    console.log("Este es el stringId XD", stringId)
 
     const { deleteSong, updateSong } = useSongs()
 
     const editSong: editSongType = {
-        name: "Prueba 3 pa eliminar",
+        name: "Prueba 3 modificado pa eliminar",
         url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583924/tracks-dev/Rxbyn_-_better_off_alone_fvhwp8.mp3",
         thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/better_off_alone_gfmcby.jpg",
         isPublic: true,
@@ -65,20 +64,19 @@ const CardContainerButtons: FC<Props> = ({ songId }) => {
             );
         }
     };
-    
+
     return (
         <ArtistActionButtons>
             <Button
                 content={<FaEdit />}
-                onClick={() => { updateSong(stringId, editSong) }}
                 variant="StyledBackButton"
+                onClick={() => { updateSong(stringId, editSong) }}
             />
             <Button
                 content={<FaTrash />}
                 variant="StyledBackButton"
                 onClick={() => { handleDeleteMovie(stringId) }}
             />
-            <button>hola</button>
         </ArtistActionButtons>
     )
 }
