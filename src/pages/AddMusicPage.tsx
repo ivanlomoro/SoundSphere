@@ -9,7 +9,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useForm } from "react-hook-form";
 import { SongUploadData } from "../context/songContext/ApiCalls";
 
-// LOGICA LISTA PARA FETCH, PERO HARDCODEADO DE MOMENTO
 import { genres } from "../interfaces/uploadTypes";
 import {
   ImageContainer,
@@ -31,6 +30,7 @@ export const AddMusicPage = () => {
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
   const [albumToUpload, setAlbumToUpload] = useState<string>("");
+  const [albumCreated, setAlbumCreated] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
@@ -42,7 +42,6 @@ export const AddMusicPage = () => {
     }
   }, [isAuthenticated, user]);
 
-  // const [isPublic, setIsPublic] = useState(false);
   const imageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
@@ -65,7 +64,7 @@ export const AddMusicPage = () => {
   };
 
   const submitData = async (data: SongUploadData) => {
-    const requestUrl = `song/${user.userId}`;
+    const requestUrl = `song/${user?.userId}`;
 
     const imageData = new FormData();
     imageData.append("file", imageSrc);
@@ -79,15 +78,11 @@ export const AddMusicPage = () => {
     const songData = new FormData();
     songData.append("file", songToUpload);
     songData.append("upload_preset", "UploadAudio");
-    console.log("SONG FILE", songToUpload);
 
     const { data: cloudinarySong } = await axios.post(
       "https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload",
       songData
     );
-
-    // const albumToUpload =
-    //   selectedAlbum !== "newAlbum" ? selectedAlbum : data.newAlbum;
 
     const createOrSelectAlbum = async () => {
       if (selectedAlbum === "newAlbum") {
@@ -103,30 +98,37 @@ export const AddMusicPage = () => {
           getToken
         );
         setAlbumToUpload(response.userData.id);
+        return response;
       }
 
       if (selectedAlbum !== "newAlbum") setAlbumToUpload(selectedAlbum);
     };
 
-    await createOrSelectAlbum();
+    const albumResponse = await createOrSelectAlbum();
 
-    const requestData = {
-      thumbnail: cloudinaryImage.secure_url,
-      url: cloudinarySong.secure_url,
-      name: data.name,
-      // artist: data.artist,
-      genreId: selectedGenre,
-      isPublic: true,
-      userCreator: user?.userId,
-      albumId: albumToUpload,
-    };
+    if (
+      albumResponse.statusText === "Created" ||
+      selectedAlbum !== "newAlbum"
+    ) {
+      const albumId = albumResponse?.userData?.id || albumToUpload;
 
-    try {
-      await postData(requestUrl, requestData, getToken);
-      setImageSrc("");
-      reset();
-    } catch (error) {
-      console.error("An error occurred:", error);
+      const requestData = {
+        thumbnail: cloudinaryImage.secure_url,
+        url: cloudinarySong.secure_url,
+        name: data.name,
+        genreId: selectedGenre,
+        isPublic: true,
+        userCreator: user?.userId,
+        albumId: albumId,
+      };
+
+      try {
+        await postData(requestUrl, requestData, getToken);
+        setImageSrc("");
+        reset();
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
     }
   };
 
@@ -154,7 +156,6 @@ export const AddMusicPage = () => {
             <label htmlFor="image-upload">
               <Button as="span">Add Image</Button>
             </label>
-            {/* <Input type="text" placeholder="Enter artist name" {...register('artist')} /> */}
 
             <Input
               type="text"
@@ -194,11 +195,6 @@ export const AddMusicPage = () => {
             placeholder="Enter album name"
             {...register("newAlbum")}
           />
-
-          {/* <SwitchContainer onClick={() => setIsPrivate(!isPrivate)}>
-            <Slider isPrivate={isPrivate} />
-          </SwitchContainer>
-          <Text>{isPrivate ? "Private" : "Public"}</Text> */}
 
           <button>Submit</button>
         </form>
