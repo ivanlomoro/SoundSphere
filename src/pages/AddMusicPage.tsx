@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import postData from "../api/postApi";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { UserContext } from "../context/userContext/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -30,12 +30,12 @@ export const AddMusicPage = () => {
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
   const [albumToUpload, setAlbumToUpload] = useState<string>("");
-  const [albumCreated, setAlbumCreated] = useState<boolean>(false);
+  // const [albumCreated, setAlbumCreated] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
       const getUserAlbums = async () => {
-        const response = await getData(`album/user/${user.userId}`, getToken);
+        const response: AxiosResponse['data'] = await getData(`album/user/${user.userId}`, getToken);
         setUserAlbums(response.userData);
       };
       getUserAlbums();
@@ -85,6 +85,9 @@ export const AddMusicPage = () => {
     );
 
     const createOrSelectAlbum = async () => {
+      if (!selectedAlbum) {
+        return console.log("No album selected")
+      }
       if (selectedAlbum === "newAlbum") {
         const newAlbumData = {
           name: data.newAlbum,
@@ -92,7 +95,7 @@ export const AddMusicPage = () => {
           genreId: selectedGenre,
           isPublic: true,
         };
-        const response = await postData(
+        const response: AxiosResponse['data'] = await postData(
           `album/${user?.userId}`,
           newAlbumData,
           getToken
@@ -104,7 +107,7 @@ export const AddMusicPage = () => {
       if (selectedAlbum !== "newAlbum") setAlbumToUpload(selectedAlbum);
     };
 
-    const albumResponse = await createOrSelectAlbum();
+    const albumResponse: AxiosResponse['data'] = await createOrSelectAlbum();
 
     if (
       albumResponse.statusText === "Created" ||
@@ -184,10 +187,13 @@ export const AddMusicPage = () => {
           <Select {...register("albumId")}>
             <option value="">Select an album</option>
             <option value="newAlbum">Create new album</option>
-            {userAlbums.map((album) => (
-              <option key={album.id} value={album.id}>
-                {album.name}
-              </option>
+
+            {userAlbums.length > 0 && userAlbums.map((album) => (
+
+
+            <option key={album.id} value={album.id}>
+              {album.name}
+            </option>
             ))}
           </Select>
           <Input
