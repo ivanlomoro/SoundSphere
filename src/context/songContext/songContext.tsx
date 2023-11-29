@@ -5,6 +5,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
+import { editSongType } from "../../components/card/CardContainerButtons";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
@@ -30,6 +31,12 @@ type SongsContextType = {
   removeFromFollowed: (id: number) => void;
   toggleFollowed: (artist: Artist) => void;
   getMySongs: (user: UserInterface | null) => void;
+  deleteSong: (songID: string) => void;
+  isModifiedSong: boolean;
+  updateSong: (songID: string, editSong: editSongType) => void;
+  getSongById: (songID: string) => void;
+  editedSong: Songs | null
+  errorEditedSong: boolean
 };
 
 const SongsContext = createContext<SongsContextType | null>(null);
@@ -44,7 +51,6 @@ export type UserInterface = {
 
 const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const { user } = useContext(UserContext)
-  console.log("User traido de context", user)
   const [songs, setSongs] = useState<Songs[]>([]);
   const [artists, setArtists] = useState<Artist[]>([]);
   const [recents, setRecents] = useLocalStorage<Songs[]>('recents', []);
@@ -52,6 +58,13 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [categories, setCategories] = useState<Category[]>([])
   const [followed, setFollowed] = useLocalStorage<Artist[]>('followed', [])
   const [mySongs, setMySongs] = useState<Songs[]>([]);
+  const [isModifiedSong, setIsModifiedSong] = useState<boolean>(false);
+  const [editedSong, setEditedSong] = useState<Songs | null>(null);
+  const [errorEditedSong, setErrorEditedSong] = useState<boolean>(true);
+
+
+
+
 
   useEffect(() => {
     setSongs(db.songData);
@@ -61,6 +74,10 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   useEffect(() => { setCategories(db.categories) }, [])
   useEffect(() => { setArtists(db.artistsData) }, [])
 
+  useEffect(() => { setIsModifiedSong(false) }, [isModifiedSong])
+  useEffect(() => { setErrorEditedSong(true) }, [errorEditedSong])
+
+
   const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
   const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
 
@@ -69,19 +86,64 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     if (user != null) {
       const userId = user.userId
       const URL = `${apiUrl}/song/user/${userId}`
-      console.log("URL usada:", URL)
 
 
       try {
-        console.log(URL)
-        console.log(userId)
         const response = await axios.get(URL)
         const userSongs: Songs[] = response.data
         setMySongs(userSongs)
-        console.log(user)
-        console.log("Estamos en api songs:",songs)
       } catch (error) {
         console.log(error)
+      }
+    }
+  }
+
+  const getSongById = async (songId: string) => {
+    if (songId != null) {
+      const URL = `${apiUrl}/song/${songId}`
+      try {
+        const response = await axios.get(URL)
+        const song: Songs = response.data
+        setEditedSong(song)
+        console.log("Esta es la cancion get songbyid:", song)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  const deleteSong = async (songId: string) => {
+    if (songId != null) {
+      const URL = `${apiUrl}/song/${songId}`;
+
+      try {
+        const response = await axios.delete(URL);
+        if (response.status === 204) {
+          setIsModifiedSong(true)
+        } else {
+          console.error(`Error deleting song: ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const updateSong = async (songId: string, editSong: editSongType) => {
+    if (songId != null) {
+      const URL = `${apiUrl}/song/${songId}`;
+      try {
+        const response = await axios.patch(URL, editSong);
+        if (response.status === 201) {
+          setIsModifiedSong(true)
+          setErrorEditedSong(false)
+        } else {
+          console.error(`Error updating song: ${response.statusText}`);
+          setErrorEditedSong(true)
+        }
+      } catch (error) {
+        console.error(error);
+        setErrorEditedSong(true);
       }
     }
   }
@@ -152,7 +214,13 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         removeFromFollowed,
         removeFromFavorites,
         mySongs,
-        getMySongs
+        getMySongs,
+        deleteSong,
+        isModifiedSong,
+        updateSong,
+        getSongById,
+        editedSong,
+        errorEditedSong
       }}
     >
       {children}

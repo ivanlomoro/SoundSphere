@@ -5,8 +5,7 @@ import { NavIcon } from '../NavBar/NavBar'
 import { Link } from 'react-router-dom'
 import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton } from './card.styled.components'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { SongCardProps } from '../../Types/SongsTypes'
+import CardContainerButtons from './CardContainerButtons'import { SongCardProps } from '../../Types/SongsTypes'
 
 
 export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, variant = 'card', isMySong }: SongCardProps) {
@@ -18,9 +17,6 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 	if (!song || !toggleFavorite || !isFavorite || !addToRecents) {
 		return null
 	}
-
-
-
 
 
 	return (
@@ -76,7 +72,8 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 
 					</CommonButtonContainer>)}
 			</DescriptionComponent>
-
+			{isMySong &&
+				<CardContainerButtons song={song} />}
 		</CardComponent>
 	)
 }
