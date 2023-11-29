@@ -46,47 +46,47 @@ export const AddMusicPage = () => {
     }
   }, [isAuthenticated, user]);
 
-  const imageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      return;
-    }
+  // const imageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (!file) {
+  //     return;
+  //   }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageSrc(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  };
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setImageSrc(reader.result as string);
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
-  const soundUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      return;
-    }
-    setSongToUpload(file);
-  };
+  // const soundUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (!file) {
+  //     return;
+  //   }
+  //   setSongToUpload(file);
+  // };
 
   const submitData = async (data: SongUploadData) => {
     const requestUrl = `song/${user?.userId}`;
 
-    const imageData = new FormData();
-    imageData.append("file", imageSrc);
-    imageData.append("upload_preset", "UploadImages");
+    // const imageData = new FormData();
+    // // imageData.append("file", imageSrc);
+    // imageData.append("upload_preset", "UploadImages");
 
-    const { data: cloudinaryImage } = await axios.post(
-      "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
-      imageData
-    );
+    // const { data: cloudinaryImage } = await axios.post(
+    //   "https://api.cloudinary.com/v1_1/dnmoqsjh7/image/upload",
+    //   imageData
+    // );
 
-    const songData = new FormData();
-    songData.append("file", songToUpload);
-    songData.append("upload_preset", "UploadAudio");
+    // const songData = new FormData();
+    // songData.append("file", songToUpload);
+    // songData.append("upload_preset", "UploadAudio");
 
-    const { data: cloudinarySong } = await axios.post(
-      "https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload",
-      songData
-    );
+    // const { data: cloudinarySong } = await axios.post(
+    //   "https://api.cloudinary.com/v1_1/dnmoqsjh7/video/upload",
+    //   songData
+    // );
 
     const createOrSelectAlbum = async () => {
       if (!selectedAlbum) {
@@ -94,10 +94,10 @@ export const AddMusicPage = () => {
       }
       if (selectedAlbum === "newAlbum") {
         const newAlbumData = {
-          name: data.newAlbum,
-          thumbnail: cloudinaryImage.secure_url,
-          genreId: selectedGenre,
-          isPublic: data.isPublic,
+          name: data.name,
+          thumbnail: "cloudinaryImage.secure_url",
+          genreId: '6564f6c8cdafe12787660bf0',
+          isPublic: true,
         };
         const response: AxiosResponse['data'] = await postData(
           `album/${user?.userId}`,
@@ -120,10 +120,10 @@ export const AddMusicPage = () => {
       const albumId = albumResponse?.userData?.id || albumToUpload;
 
       const requestData = {
-        thumbnail: cloudinaryImage.secure_url,
-        url: cloudinarySong.secure_url,
+        thumbnail: "cloudinaryImage.secure_url",
+        url:" cloudinarySong.secure_url",
         name: data.name,
-        genreId: selectedGenre,
+        genreId: '6564f6c8cdafe12787660bf0',
         isPublic: true,
         userCreator: user?.userId,
         albumId: albumId,
@@ -141,9 +141,9 @@ export const AddMusicPage = () => {
 
   return (
     <section>
-      
-        <HeaderSection text="Upload" />
-        <form onSubmit={handleSubmit(submitData)}><Container>
+      <form onSubmit={handleSubmit(submitData)}><Container>
+        {/* <HeaderSection text="Upload" />
+     
           <ImageContainer>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
@@ -168,14 +168,14 @@ export const AddMusicPage = () => {
             />
             <label htmlFor="image-upload">
               <Button as="span">Add Image</Button>
-            </label>
+            </label> */}
 
             <Input
               type="text"
               placeholder="Enter song name"
               {...register("name")}
             />
-            <Input
+            {/* <Input
               type="file"
               accept="audio/mpeg, audio/mp3"
               onChange={soundUpload}
@@ -193,7 +193,7 @@ export const AddMusicPage = () => {
                 {genre.name}
               </option>
             ))}
-          </Select>
+          </Select> */}
           <Select {...register("albumId")}>
             <option value="">Select an album</option>
             <option value="newAlbum">Create new album</option>

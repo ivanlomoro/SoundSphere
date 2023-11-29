@@ -15,7 +15,7 @@ export type Category = {
 };
 
 export type Artist = {
-  id: number;
+  id: string;
   name: string;
   genres: string[];
   popularity: number;

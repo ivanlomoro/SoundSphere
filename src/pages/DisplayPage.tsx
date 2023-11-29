@@ -8,18 +8,18 @@ import { useSongs } from "../context/songContext/songContext";
 
 
 export const DisplayPage = () => {
-  const { mySongs} = useSongs();
+  const { songs} = useSongs();
   
   const { name } = useParams();
   const selectedSong = name
-    ? mySongs?.find((song: Songs) => song.name === name)
+    ? songs?.find((song: Songs) => song.name === name)
     : null;
-  const defaultSong = mySongs[0];
+  const defaultSong = songs[0];
   return (
     <>
       <HeaderSection />
       <PlayerDisplay
-        songs={mySongs}
+        songs={songs}
         currentSong={selectedSong ? selectedSong : defaultSong}
       />
     </>
