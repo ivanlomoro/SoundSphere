@@ -19,14 +19,20 @@ import {
   Select,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
-
+interface Album{
+  id: string,
+  name: string,
+  userId: string,
+  thumbnail: string,
+  isPublic: boolean,
+}
 export const AddMusicPage = () => {
   const { register, handleSubmit, watch, reset } = useForm<SongUploadData>();
   const { getAccessTokenSilently: getToken, isAuthenticated } = useAuth0();
   const { user } = useContext(UserContext);
   const [imageSrc, setImageSrc] = useState<string>("");
   const [songToUpload, setSongToUpload] = useState<string | File>("");
-  const [userAlbums, setUserAlbums] = useState([]);
+  const [userAlbums, setUserAlbums] = useState<Album[]>([]);
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
   const [albumToUpload, setAlbumToUpload] = useState<string>("");
