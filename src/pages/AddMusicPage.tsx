@@ -1,15 +1,13 @@
+import { SongUploadData } from "../context/songContext/ApiCalls";
+import { UserContext } from "../context/userContext/UserContext";
 import React, { useState, useContext, useEffect } from "react";
 import { Container, HeaderSection } from "../components";
-import { AiOutlineCamera } from "react-icons/ai";
-import postData from "../api/postApi";
-import axios, { AxiosResponse } from "axios";
-import { UserContext } from "../context/userContext/UserContext";
-import { useAuth0 } from "@auth0/auth0-react";
-
-import { useForm } from "react-hook-form";
-import { SongUploadData } from "../context/songContext/ApiCalls";
-
 import { genres } from "../interfaces/uploadTypes";
+import { AiOutlineCamera } from "react-icons/ai";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios, { AxiosResponse } from "axios";
+import { useForm } from "react-hook-form";
+import postData from "../api/postApi";
 import {
   ImageContainer,
   Image,
@@ -99,7 +97,7 @@ export const AddMusicPage = () => {
           name: data.newAlbum,
           thumbnail: cloudinaryImage.secure_url,
           genreId: selectedGenre,
-          isPublic: true,
+          isPublic: data.isPublic,
         };
         const response: AxiosResponse['data'] = await postData(
           `album/${user?.userId}`,
@@ -153,7 +151,13 @@ export const AddMusicPage = () => {
               <AiOutlineCamera size={70} />
             )}
           </ImageContainer>
-
+          <label>
+            <input
+              type="checkbox"
+              {...register("isPublic")}
+            />
+            Make Public
+          </label>
           <ButtonContainer>
             <Input
               type="file"
