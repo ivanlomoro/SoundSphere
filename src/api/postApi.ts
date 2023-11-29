@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 
-const postData = async (url: string, data: JSON, getToken: () => Promise<string>) => {
+const postData = async (url: string, data: AxiosResponse['data'], getToken: () => Promise<string>) => {
   const token = await getToken();
   const fullUrl = `http://localhost:8080/${url}`;
   const config = {

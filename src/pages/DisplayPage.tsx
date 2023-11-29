@@ -1,22 +1,23 @@
 import { PlayerDisplay } from "../components/playerDisplay/PlayerDisplay";
-import db from "../data/db.json";
+
 
 import { useParams } from "react-router-dom";
 import type { Songs} from "../Types/SongsTypes"
 import { HeaderSection } from "../components";
+import { useApiCalls } from "../context/songContext/ApiCalls";
 
 export const DisplayPage = () => {
-  const songs = db.songData;
+  const { publicSongs } = useApiCalls()
   const { name } = useParams();
   const selectedSong = name
-    ? songs?.find((song: Songs) => song.name === name)
+    ? publicSongs?.find((song: Songs) => song.name === name)
     : null;
-  const defaultSong = songs[0];
+  const defaultSong = publicSongs[0];
   return (
     <>
       <HeaderSection />
       <PlayerDisplay
-        songs={songs}
+        songs={publicSongs}
         currentSong={selectedSong ? selectedSong : defaultSong}
       />
     </>
