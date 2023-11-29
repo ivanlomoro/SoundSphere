@@ -7,11 +7,6 @@ import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
-
-
-
-
-
 type SongsContextType = {
   followed: Artist[];
   artists: Artist[];
@@ -91,8 +86,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
       setRecents([song, ...recents]);
     }
   };
-
-
 
   const addToFavorites = (song: Songs) => {
     if (!songExists(favorites, song.id)) {

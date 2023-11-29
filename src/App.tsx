@@ -7,6 +7,8 @@ import { UserContextProvider } from "./context/userContext/UserContext";
 import UserInteractionProvider from "./context/userContext/InteractionContext";
 import ApiCallsProvider from "./context/songContext/ApiCalls";
 import { MusicPlayerProvider } from './context/musicDisplayContext/musicDisplay';
+import PublicSongProvider from "./context/songContext/publicSongContext";
+
 const {
   VITE_AUTH0_DOMAIN: domain,
   VITE_AUTH0_CLIENT_ID: clientId,
@@ -29,6 +31,7 @@ export const App = () => {
         <ApiCallsProvider>
           <UserInteractionProvider>
             <SongsProvider>
+              <PublicSongProvider>
             <MusicPlayerProvider>
               <BrowserRouter>
                 <AppRouter />
@@ -44,6 +47,7 @@ export const App = () => {
                 />
               </BrowserRouter>
               </MusicPlayerProvider>
+              </PublicSongProvider>
             </SongsProvider>
           </UserInteractionProvider>
         </ApiCallsProvider>
