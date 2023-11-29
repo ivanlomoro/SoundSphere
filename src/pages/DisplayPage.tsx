@@ -1,5 +1,5 @@
 import { PlayerDisplay } from "../components/playerDisplay/PlayerDisplay";
-import db from "../data/db.json";
+
 
 import { useParams } from "react-router-dom";
 import type { Songs} from "../Types/SongsTypes"

@@ -9,7 +9,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import postData from "../../api/postApi";
 import { UserInterface } from "../songContext/songContext";
-
+import { AxiosResponse } from "axios";
 
 export type UserContextType = {
   user: UserInterface | null;
@@ -45,7 +45,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
           name: auth0User.nickname,
           email: auth0User.email,
         };
-        const response: any = await postData("user", userData, getToken);
+        const response: AxiosResponse['data']   = await postData("user", userData, getToken);
         setUser(response.userData);        
         setIsLogged(true);
       };
