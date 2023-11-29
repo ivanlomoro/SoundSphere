@@ -141,9 +141,9 @@ export const AddMusicPage = () => {
 
   return (
     <section>
-      <Container>
+      
         <HeaderSection text="Upload" />
-        <form onSubmit={handleSubmit(submitData)}>
+        <form onSubmit={handleSubmit(submitData)}><Container>
           <ImageContainer>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
@@ -212,9 +212,9 @@ export const AddMusicPage = () => {
             {...register("newAlbum")}
           />
 
-          <button>Submit</button>
+          <button>Submit</button>   </Container>
         </form>
-      </Container>
+   
     </section>
   );
 };

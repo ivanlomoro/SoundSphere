@@ -4,19 +4,22 @@ import db from "../data/db.json";
 import { useParams } from "react-router-dom";
 import type { Songs} from "../Types/SongsTypes"
 import { HeaderSection } from "../components";
+import { useSongs } from "../context/songContext/songContext";
+
 
 export const DisplayPage = () => {
-  const songs = db.songData;
+  const { mySongs} = useSongs();
+  
   const { name } = useParams();
   const selectedSong = name
-    ? songs?.find((song: Songs) => song.name === name)
+    ? mySongs?.find((song: Songs) => song.name === name)
     : null;
-  const defaultSong = songs[0];
+  const defaultSong = mySongs[0];
   return (
     <>
       <HeaderSection />
       <PlayerDisplay
-        songs={songs}
+        songs={mySongs}
         currentSong={selectedSong ? selectedSong : defaultSong}
       />
     </>
