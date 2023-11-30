@@ -3,7 +3,6 @@ import { Songs } from "../components/card/Songs";
 import { UserInterface } from "../context/songContext/songContext";
 import { Artist, Songs, Category } from "./SongsTypes";
 
-
 export type Songs = {
   id: number;
   name: string;
@@ -31,19 +30,19 @@ export type SongsContextType = {
   categories: Category[];
 };
 export interface SongCardProps {
-	song: Songs
-	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: number) => boolean
-	isMySong?: boolean
-	addToRecents?: (song: Songs) => void
-	variant?: 'grid' | 'list' | 'card'
+  song: Songs;
+  toggleFavorite?: (song: Songs) => void;
+  isFavorite?: (id: number) => boolean;
+  isMySong?: boolean;
+  addToRecents?: (song: Songs) => void;
+  variant?: "grid" | "list" | "card";
 }
 export interface SongUploadData {
   thumbnail: string;
-  url?: string;
+  url: string;
   name: string;
   genreId: string;
-  isPublic: boolean,
+  isPublic: boolean;
   userCreator: string;
 }
 export type SongsContextType = {
@@ -72,20 +71,19 @@ export type SongsContextType = {
   errorEditedSong: boolean;
 };
 export interface Songs {
-	id: number
-	name: string
-	artist: string
-	url: string
-	thumbnail: string
-	genre: string
-	liked: boolean
+  id: number;
+  name: string;
+  artist: string;
+  url: string;
+  thumbnail: string;
+  genre: string;
+  liked: boolean;
 }
 export interface SongCardProps {
-	song: Songs
-	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: number) => boolean
-	isMySong?: boolean
-	addToRecents?: (song: Songs) => void
-	variant?: 'grid' | 'list' | 'card'
+  song: Songs;
+  toggleFavorite?: (song: Songs) => void;
+  isFavorite?: (id: number) => boolean;
+  isMySong?: boolean;
+  addToRecents?: (song: Songs) => void;
+  variant?: "grid" | "list" | "card";
 }
-

@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect } from "react";
 import axios from "axios";
+import { Songs } from "../../Types/SongsTypes";
 
 export interface SongUploadData {
   thumbnail: string;
@@ -8,8 +9,8 @@ export interface SongUploadData {
   genreId: string;
   isPublic: boolean;
   userCreator: string;
-  albumId?: string;
-  newAlbum?: string;
+  albumId: string;
+  newAlbum: string;
 }
 
 interface ApiCallContextType {
@@ -21,7 +22,6 @@ const ApiCallsContext = createContext<ApiCallContextType | null>(null);
 type ProviderProps = {
   children: ReactNode;
 };
-
 
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
@@ -48,13 +48,12 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     }
   };
 
-
   const fetchSongs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/song/public');
+      const response = await axios.get("http://localhost:8080/song/public");
       setPublicSongs(response.data);
     } catch (error) {
-      console.error('Failed to fetch Songs:', error);
+      console.error("Failed to fetch Songs:", error);
     }
   };
 

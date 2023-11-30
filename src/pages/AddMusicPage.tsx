@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import postData from "../api/postApi";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { UserContext } from "../context/userContext/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -42,7 +42,10 @@ export const AddMusicPage = () => {
   useEffect(() => {
     if (user) {
       const getUserAlbums = async () => {
-        const response = await getData(`album/user/${user.userId}`, getToken);
+        const response: AxiosResponse["data"] = await getData(
+          `album/user/${user.userId}`,
+          getToken
+        );
         setUserAlbums(response.userData);
       };
       getUserAlbums();
@@ -71,7 +74,7 @@ export const AddMusicPage = () => {
   };
 
   const submitData = async (data: SongUploadData) => {
-    const requestUrl = `song/${user.userId}`;
+    const requestUrl = `song/${user?.userId}`;
 
     const imageData = new FormData();
     imageData.append("file", imageSrc);
