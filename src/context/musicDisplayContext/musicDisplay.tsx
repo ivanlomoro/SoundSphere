@@ -1,45 +1,31 @@
-// MusicPlayerContext.js (or MusicPlayerContext.ts for TypeScript)
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import { Songs } from '../../Types/SongsTypes';
+import React, { ReactNode } from 'react';
 
-// Create a new context
-const MusicPlayerContext = createContext();
 
-// Create a custom hook to access the context
-export function useMusicPlayer() {
-  return useContext(MusicPlayerContext);
+const PlayerContext = createContext<{
+  currentSong: Songs | null;
+  setPlayingSong: (song: Songs | null) => void;
+} | undefined>(undefined);
+
+export const usePlayerContext = () => {
+  return useContext(PlayerContext);
+};
+
+interface PlayerProviderProps {
+  children: ReactNode;
 }
 
-// Create a MusicPlayerProvider component
-export function MusicPlayerProvider({ children }) {
-  const [currentSong, setCurrentSong] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
+  const [currentSong, setCurrentSong] = useState<Songs | null>(null);
 
-  // Add any other relevant state and functions for your music player
-
-  const playSong = (song) => {
-    // Implement logic to play the selected song
+  const setPlayingSong = (song: Songs | null) => {
     setCurrentSong(song);
-    setIsPlaying(true);
   };
-
-  const pauseSong = () => {
-    // Implement logic to pause the currently playing song
-    setIsPlaying(false);
-  };
-
-  // You can provide other functions and state values as needed
 
   return (
-    <MusicPlayerContext.Provider
-      value={{
-        currentSong,
-        isPlaying,
-        playSong,
-        pauseSong,
-        // Provide other values and functions here
-      }}
-    >
+    <PlayerContext.Provider value={{ currentSong, setPlayingSong }}>
       {children}
-    </MusicPlayerContext.Provider>
+    </PlayerContext.Provider>
   );
-}
+};

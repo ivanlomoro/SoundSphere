@@ -6,6 +6,7 @@ import type { Songs} from "../Types/SongsTypes"
 import { HeaderSection } from "../components";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useSongs } from "../context/songContext/songContext";
+import { usePlayerContext } from "../context/musicDisplayContext/musicDisplay";
 
 
 export const DisplayPage = () => {
@@ -15,6 +16,15 @@ export const DisplayPage = () => {
   const selectedSong = name
     ? publicSongs?.find((song: Songs) => song.name === name)
     : null;
+
+
+  const { setPlayingSong } = usePlayerContext();
+
+  
+  if (selectedSong) {
+    setPlayingSong(selectedSong);
+  }
+
   const defaultSong = publicSongs[0];
   return (
     <>

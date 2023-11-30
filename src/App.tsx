@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext/UserContext";
 import UserInteractionProvider from "./context/userContext/InteractionContext";
 import ApiCallsProvider from "./context/songContext/ApiCalls";
-import { MusicPlayerProvider } from './context/musicDisplayContext/musicDisplay';
+import {PlayerProvider } from "./context/musicDisplayContext/musicDisplay";
 const {
   VITE_AUTH0_DOMAIN: domain,
   VITE_AUTH0_CLIENT_ID: clientId,
@@ -29,7 +29,7 @@ export const App = () => {
         <ApiCallsProvider>
           <UserInteractionProvider>
             <SongsProvider>
-            <MusicPlayerProvider>
+            <PlayerProvider>
               <BrowserRouter>
                 <AppRouter />
                 <Toaster
@@ -43,7 +43,7 @@ export const App = () => {
                   }}
                 />
               </BrowserRouter>
-              </MusicPlayerProvider>
+              </PlayerProvider>
             </SongsProvider>
           </UserInteractionProvider>
         </ApiCallsProvider>

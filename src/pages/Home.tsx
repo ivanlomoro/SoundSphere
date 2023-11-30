@@ -1,5 +1,6 @@
 import { ScrollableRowComponent } from "../components";
 import { NavbarHome } from "../components/NavBar/NavbarHome";
+import MiniPlayer from "../components/miniplayer/useMiniPlayer";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
@@ -19,7 +20,7 @@ export const Home = () => {
     <ScrollableRowComponent>
       {renderPublicSongs()}
     </ScrollableRowComponent>
-
+    <MiniPlayer/>
   </div>
       {/* <SongList /> */}
     </>
