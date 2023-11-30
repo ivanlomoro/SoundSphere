@@ -10,6 +10,7 @@ import { useForm, } from 'react-hook-form';
 import { ImageContainer, Image, Input, Button, Select } from '../components/uploadForm/UploadFormComponents';
 import { useSongs } from "../context/songContext/songContext";
 import { PlaylistFormData, Playlist } from "../Types/PlaylistFormData";
+import useLocalStorage from "../hooks/useLocalStorage";
 
  const PlaylistPage = () => {
 
@@ -20,12 +21,12 @@ import { PlaylistFormData, Playlist } from "../Types/PlaylistFormData";
     const { user } = useContext(UserContext);
     const {songs} = useSongs()
     const [imageSrc, setImageSrc] = useState<string>('');
-    const [selectedSongs, setSelectedSongs]= useState<string[]>()
-    const [playlist, setPlaylist] = useState<Playlist[]>()
+     const [selectedSongs, setSelectedSongs] = useState<string[]>()
+     const [playlist, setPlaylist] = useLocalStorage<Playlist[]>('playlists', [])
     if (!user) {
         return console.log('missig user');
     }
-     const playlist1 = ['656464e951b7864e3f0dae90', '656470cacf95ca79f2493b12']
+    const playlist1 = ['656464e951b7864e3f0dae90', '656470cacf95ca79f2493b12']
 
 
     const imageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
