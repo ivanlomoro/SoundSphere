@@ -42,6 +42,7 @@ export const AddMusicPage = () => {
   const [imageSrc, setImageSrc] = useState<string>("");
   const [songToUpload, setSongToUpload] = useState<string | File>("");
   const [userAlbums, setUserAlbums] = useState<Album[]>([]);
+  const [axiosLoading, setAxiosLoading] = useState(false);
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
 
@@ -80,6 +81,7 @@ export const AddMusicPage = () => {
   };
 
   const submitData = async (data: SongUploadData) => {
+    setAxiosLoading(true);
     const requestUrl = `song/${user?.userId}`;
 
     const imageData = new FormData();
@@ -145,6 +147,7 @@ export const AddMusicPage = () => {
 
       try {
         await postData(requestUrl, requestData, getToken);
+        setAxiosLoading(false);
         setImageSrc("");
         toast.success("Song uploaded successfully!");
         reset();
@@ -297,7 +300,7 @@ export const AddMusicPage = () => {
             Public Song
           </label>
 
-          <button>Upload Song</button>
+          <button>{axiosLoading ? "Uploading song..." : "Upload Song"}</button>
         </FormContainer>
       </form>
     </section>
