@@ -4,10 +4,7 @@ import getData from '../../api/getApi';
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from '../userContext/UserContext';
 
-
-const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
-
-type GenreType = {
+export type GenreType = {
     id: string,
     name: string
 }
