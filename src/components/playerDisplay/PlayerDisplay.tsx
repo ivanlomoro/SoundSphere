@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FaveButton } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
-import { useSongs } from "../../context/songContext/songContext";
+import { useInteractions } from "../../context/userContext/InteractionContext";
 
 
 export type CustomEventType = {
@@ -64,7 +64,12 @@ type PlayerDisplayProps = {
 // De donde viene "songs" "currentSong"
 // useSong(): contexto
 export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
+<<<<<<< HEAD
   const {toggleFavorite, isFavorite} = useSongs();
+=======
+  const {toggleFavorite, isFavorite } = useInteractions();
+
+>>>>>>> d6b720f5edb32e7ffd1546b4dc1f109808ab8eff
   const [playing, setPlaying] = useState(false);
 
 // Iniciar cancion index ?? identificar con 'id'

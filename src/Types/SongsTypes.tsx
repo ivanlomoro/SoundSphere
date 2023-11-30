@@ -5,7 +5,7 @@ import { Artist, Songs, Category } from "./SongsTypes";
 
 
 export type Songs = {
-  id: number;
+  id: string;
   name: string;
   artist: string;
   url: string;
@@ -15,11 +15,11 @@ export type Songs = {
 };
 export type Category = {
   name: string;
-  id: number;
+  id: string;
 };
 
 export type Artist = {
-  id: number;
+  id: string;
   name: string;
   genres: string[];
   popularity: number;
@@ -34,7 +34,7 @@ export type Artist = {
 export interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: number) => boolean
+	isFavorite?: (id: string) => boolean
 	isMySong?: boolean
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'
@@ -58,12 +58,12 @@ export type SongsContextType = {
   mySongs: Songs[];
   addToRecents: (song: Songs) => void;
   addToFavorites: (song: Songs) => void;
-  removeFromFavorites: (id: number) => void;
-  isFavorite: (id: number) => boolean;
-  isFollowed: (id: number) => boolean;
+  removeFromFavorites: (id: string) => void;
+  isFavorite: (id: string) => boolean;
+  isFollowed: (id: string) => boolean;
   toggleFavorite: (song: Songs) => void;
   addToFollowed: (artist: Artist) => void;
-  removeFromFollowed: (id: number) => void;
+  removeFromFollowed: (id: string) => void;
   toggleFollowed: (artist: Artist) => void;
   getMySongs: (user: UserInterface | null) => void;
   deleteSong: (songID: string) => void;
@@ -74,7 +74,7 @@ export type SongsContextType = {
   errorEditedSong: boolean;
 };
 export interface Songs {
-	id: number
+	id: string
 	name: string
 	artist: string
 	url: string
@@ -85,7 +85,7 @@ export interface Songs {
 export interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: number) => boolean
+	isFavorite?: (id: string) => boolean
 	isMySong?: boolean
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'

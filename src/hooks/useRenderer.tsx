@@ -10,8 +10,8 @@ type MagicInput<T> = {
   artists?: Artist[];
   toggleFavorite?: (song: Songs) => void;
   toggleFollowed?: (artist: Artist) => void;
-  isFavorite?: (id: number) => boolean;
-  isFollowed?: (id: number) => boolean;
+  isFavorite?: (id: string) => boolean;
+  isFollowed?: (id: string) => boolean;
   addToRecents?: (song: Songs) => void;
   layout: T;
   isMySong?:boolean
