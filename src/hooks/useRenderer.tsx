@@ -1,5 +1,6 @@
 import React from 'react';
-import { SongCard, Songs } from '../components/card/SongCard';
+import { SongCard } from '../components/card/SongCard';
+import { Songs } from '../Types/SongsTypes';
 import { Artist } from '../Types/SongsTypes';
 import { ArtistCard } from '../components/card/ArtistCard';
 

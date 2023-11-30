@@ -4,9 +4,9 @@ import Swal from 'sweetalert2';
 import { useSongs } from "../../context/songContext/songContext";
 import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
-import { Songs } from "./SongCard";
 import "./CardContainerButtons.styles.css"
 import { useGenres } from "../../context/genreContext/genreContext";
+import { Songs } from '../../Types/SongsTypes';
 
 export type editSongType = {
     name: string

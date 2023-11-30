@@ -9,12 +9,14 @@ import {
   FAVORITEPAGE,
   SEARCHPAGE,
   ADDMUSICPAGE,
-  MYSONGSPAGE
+  MYSONGSPAGE,
+  MICHELE
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
 import { SearchPage } from "../pages/SearchPage";
 import MySongsPage from "../pages/MySongsPage";
+import PlaylistPage from "../pages/PlaylistPage";
 
 export const RouterPaths: FC = () => {
   return (
@@ -26,6 +28,7 @@ export const RouterPaths: FC = () => {
           <Route path={DISPLAYPAGE} element={<DisplayPage />}>
             <Route path=":name" element={<DisplayPage />}></Route>
           </Route>
+          <Route path={MICHELE} element={<PlaylistPage />} />
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
