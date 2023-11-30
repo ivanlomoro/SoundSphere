@@ -8,7 +8,7 @@ import { UserContext } from "../userContext/UserContext";
 import { editSongType } from "../../components/card/CardContainerButtons";
 import { useApiCalls } from "./ApiCalls";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
-const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
+
 
 
 
