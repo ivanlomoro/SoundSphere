@@ -64,10 +64,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [errorEditedSong, setErrorEditedSong] = useState<boolean>(true);
   const {publicSongs} = useApiCalls()
 
-
-
-
-
   useEffect(() => {
     setSongs(publicSongs);
     getMySongs(user)
