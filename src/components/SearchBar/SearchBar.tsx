@@ -1,7 +1,6 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 import { BiSearch } from "react-icons/bi";
 import { Link, useSearchParams } from "react-router-dom";
-import db from "../../data/db.json";
 import { Songs } from "../../Types/SongsTypes";
 import styled from "styled-components";
 import "./styles.css";
