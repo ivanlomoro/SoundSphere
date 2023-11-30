@@ -25,11 +25,12 @@ export type Artist = {
   popularity: number;
   photoUrl: string;
 };
-export type SongsContextType = {
-  artists: Artist[];
-  songs: Songs[];
-  categories: Category[];
-};
+// export type SongsContextType = {
+//   artists: Artist[];
+//   songs: Songs[];
+//   categories: Category[];
+// };
+
 export interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void
@@ -38,6 +39,7 @@ export interface SongCardProps {
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'
 }
+
 export interface SongUploadData {
   thumbnail: string;
   url?: string;

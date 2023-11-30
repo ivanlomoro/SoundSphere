@@ -8,6 +8,10 @@ import { ProgressBar } from "../progressBar/ProgressBar";
 import { Songs } from "../../Types/SongsTypes";
 import { useNavigate } from "react-router-dom";
 import { FaveButton } from "../card/card.styled.components";
+import { FullHeart } from "../card/card.styled.components";
+import { EmptyHeart } from "../card/card.styled.components";
+import { useSongs } from "../../context/songContext/songContext";
+
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -15,9 +19,6 @@ export type CustomEventType = {
     offsetX: number;
   };
 };
-
-
-
 
 const HiddenPlayer = styled.div`
   z-index: -5;
@@ -27,9 +28,6 @@ const HiddenPlayer = styled.div`
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
-
-
-
 `;
 
 const ButtonContainer = styled.div`
@@ -56,8 +54,6 @@ margin-top: 0;
   margin: var(--space-sm);
   flex-direction: column;
   align-items: center;
-
-
 `;
 
 type PlayerDisplayProps = {
@@ -66,6 +62,8 @@ type PlayerDisplayProps = {
 };
 
 export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
+  const {toggleFavorite, isFavorite } = useSongs();
+
   const [playing, setPlaying] = useState(false);
 
   const initialSongIndex = songs.findIndex(
@@ -156,7 +154,6 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     
   `;
 
-
   return (
     <>
       <HiddenPlayer>
@@ -174,6 +171,11 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
       </HiddenPlayer> <ResponsiveContainer>
 
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
+
+        <FaveButton onClick={() => { toggleFavorite(currentSong) }}>
+          {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
+        </FaveButton>
+
         <StyledSongName>{currentSong.name}</StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
         <ProgressBar
