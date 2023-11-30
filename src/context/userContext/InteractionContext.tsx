@@ -1,3 +1,22 @@
+//copiar favorites
+//guardarlo a playlist
+//pagina para playlist (todas)
+//pagina de la playlist (unica)
+//guarda en local hasta que se modifique el nombre o token expires
+//luego post
+//cambiar song a una llamada custom para canciones de usuario 
+
+// flow click button=> addtoPlaylist defautl last playlist
+// if new default name my playlist (check, if not increment)
+// toaster added to song (useRender, grid)
+// generate myplaylists in user page/home
+// pencil next to name to modify, when submitting post
+// in back end => owner middleware (checks if userId= OwnerId)
+
+
+
+
+
 import React, { createContext,useEffect, useState, ReactNode, useContext } from 'react';
 import { Artist, Songs } from "../../Types/SongsTypes";
 import { UserContext } from './UserContext';
@@ -29,21 +48,12 @@ const InteractionContext = createContext<UserInteractionProps | null>(null);
 interface UserInteractionProviderProps {
     children: ReactNode;
 }
-//copiar favorites
-//guardarlo a playlist
-//pagina para playlist (todas)
-//pagina de la playlist (unica)
-//guarda en local hasta que se modifique el nombre o token expires
-//luego post  
 
-
-// flow click button=> addtoPlaylist defautl last playlist 
-// if new default name my playlist (check, if not increment)
-// toaster added to song (useRender, grid) 
-// generate myplaylists in user page/home 
-// pencil next to name to modify, when submitting post
-// in back end => owner middleware (checks if userId= OwnerId)
-
+interface Playlist {
+ name: string;
+ songs: Songs[];
+ thumbnail: string;
+}
 
 const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ children }) => {
     const { user } = useContext(UserContext);
@@ -53,6 +63,11 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
     const [followed, setFollowed] = useState<Artist[]>([]);
     const [uploadedSongs, setUploadedSongs] = useState<Songs[]>([]);
     const [selectedSongs, setSelectedSongs] = useState<Songs[]>([]);
+    const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist>();
+    const [playlistName, setPlaylistName] = useState<Playlist['name']>('');
+    const [playlistThumbnail, setPlaylistThumbnail] = useState<Playlist['thumbnail']>('');
+    const [playlists, setPlaylists] = useState<Playlist[]>([]);
+
 
     useEffect(() => {
         localStorage.setItem('recents', JSON.stringify(recents));
@@ -68,9 +83,7 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
         localStorage.setItem('followed', JSON.stringify(followed));
     }, [followed]);
   
-    useEffect(() => {
-        localStorage.setItem('Playlist', JSON.stringify(followed));
-    }, [followed]);
+
 
 
     const songExists = (arr: Songs[], id: string) => arr.some(song => song.id === id);
@@ -94,7 +107,16 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
             setFavorites(prevFavorites => [...prevFavorites, song]);
         }
     };
+    const addToSelected = (song: Songs) => {
+        if (!songExists(selectedSongs, song.id)) {
+            setSelectedSongs(prevSelectedSongs => [...prevSelectedSongs, song]);
+        }
+    };
 
+    const removeFromSelected = (id: string) => {
+        setSelectedSongs(currentSelectedSongs => currentSelectedSongs.filter(song => song.id !== id));
+    };
+    const isSelected = (id: string): boolean => songExists(favorites, id);
     const removeFromFavorites = (id: string) => {
         setFavorites(currentFavorites => currentFavorites.filter(song => song.id !== id));
     };

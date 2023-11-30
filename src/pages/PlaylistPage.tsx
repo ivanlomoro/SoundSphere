@@ -1,10 +1,9 @@
 
 
- const PlaylistPage = () => {
+ export const PlaylistPage = () => {
 return (
 <>page</>
     );
 };
 
 
-export default PlaylistPage;
