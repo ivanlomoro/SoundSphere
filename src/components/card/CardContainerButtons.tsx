@@ -6,6 +6,7 @@ import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
 import { Songs } from "./SongCard";
 import "./CardContainerButtons.styles.css"
+import { useGenres } from "../../context/genreContext/genreContext";
 
 export type editSongType = {
     name: string
@@ -20,10 +21,30 @@ type Props = {
     song: Songs
 }
 
+type GenreForm = {
+    value: string | number
+    label: string
+}
+
 const CardContainerButtons: FC<Props> = ({ song }) => {
     const stringId = song.id.toString();
 
     const { deleteSong, updateSong } = useSongs()
+    const {apiGenres} = useGenres()
+
+    const genreItems = () => {
+        const genres: GenreForm[] = []
+        apiGenres.map((genre) => {
+            const newGenre: GenreForm = {
+                value: genre.id,
+                label: genre.name
+            }
+            genres.push(newGenre)
+        }
+        )
+        console.log("Genres",genres)
+        return genres
+    }
 
     // const editSong: editSongType = {
     //     name: "Prueba 3 modificado pa eliminar",
@@ -32,9 +53,9 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
     //     isPublic: true,
     //     genreId: "6560712d54a3139491bfad8f"
     // }
-
+   
     const handleUpdateSong = async (songId: string, editSong: Songs) => {
-
+        console.log("ApiGenres:",apiGenres)
         const { value: name } = await Swal.fire({
             title: "Enter the new song name",
             input: "text",
@@ -57,12 +78,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                 inputValue: editSong.genre,
                 background: '#111111',
                 color: 'white',
-                inputOptions: {
-                    rock: "Rock",
-                    pop: "Pop",
-                    punk: "Punk",
-                    rap: "Rap"
-                },
+                inputOptions: genreItems(),
                 inputPlaceholder: "Select your genre",
                 customClass: "swal2-select option",
                 showCancelButton: true,
@@ -101,7 +117,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                     }
                     const editedSong = {
                         name: name,
-                        genreId: "6560712d54a3139491bfad8f",
+                        genreId: genre,
                         isPublic: newPrivacity
                     };
 
