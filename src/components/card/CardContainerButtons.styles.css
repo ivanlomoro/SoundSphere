@@ -1,3 +1,7 @@
 .swal2-select option {
     background-color: #111111;
 }
+
+.swal2-radio {
+    background-color: #111111 !important;
+}

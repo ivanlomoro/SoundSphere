@@ -6,6 +6,7 @@ import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
 import { editSongType } from "../../components/card/CardContainerButtons";
+import Swal from "sweetalert2";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
@@ -136,14 +137,26 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const response = await axios.patch(URL, editSong);
         if (response.status === 201) {
           setIsModifiedSong(true)
-          setErrorEditedSong(false)
+          console.log("Llamada a updateSong")
+          Swal.fire({
+            title: 'Updated song!',
+            text: 'Your song has been updated.',
+            icon: 'success',
+            background: '#111111',
+            color: 'white'
+          });
         } else {
           console.error(`Error updating song: ${response.statusText}`);
-          setErrorEditedSong(true)
+          setIsModifiedSong(false)
         }
       } catch (error) {
-        console.error(error);
-        setErrorEditedSong(true);
+        console.error("Error catch updatesong", error);
+        Swal.fire(
+          'Error',
+          'There was an error trying to update the song.',
+          'error'
+        );
+        setIsModifiedSong(false);
       }
     }
   }
