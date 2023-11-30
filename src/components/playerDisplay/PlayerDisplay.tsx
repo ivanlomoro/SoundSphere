@@ -61,22 +61,28 @@ type PlayerDisplayProps = {
   currentSong: Songs;
 };
 
+// De donde viene "songs" "currentSong"
+// useSong(): contexto
 export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
-  const {toggleFavorite, isFavorite } = useSongs();
-
+  const {toggleFavorite, isFavorite} = useSongs();
   const [playing, setPlaying] = useState(false);
 
+// Iniciar cancion index ?? identificar con 'id'
   const initialSongIndex = songs.findIndex(
     (song) => song.id === currentSong.id
   );
 
+    // Status de la currentSongIndex ??? + update
   const [currentSongIndex, setCurrentSongIndex] = useState(initialSongIndex);
 
+    // Status progress ?? + update
   const [progress, setProgress] = useState({
     currentSeconds: 0,
     currentPercentage: 0,
     currentFormattedTime: "",
   });
+
+  // Status duration ?? + update
   const [duration, setDuration] = useState({
     duration: 0,
     formattedDuration: "",
@@ -90,6 +96,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     playedSeconds: number;
   };
 
+  // funcion para formatear el tiempo
   const getFormattedTime = (currentSeconds: number) => {
     const date = new Date(0);
     date.setSeconds(currentSeconds);
@@ -97,10 +104,12 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     return formattedTime;
   };
 
+  // funcion para conseguir porcentage
   const getPercentage = (currentSeconds: number) => {
     return currentSeconds > 0 ? currentSeconds / duration.duration : 0;
   };
 
+  // función para manjera el proceso
   const handleProgress = ({ playedSeconds }: handleProgressPropsType) => {
     setProgress({
       currentSeconds: playedSeconds,
@@ -109,6 +118,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     });
   };
 
+  // funció para la duración
   const handleDuration = (duration: number) => {
     setDuration({
       duration: duration,
@@ -116,10 +126,12 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     });
   };
 
+  // función para "play" "pause"
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
 
+  // functión para next
   const handleNext = () => {
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
@@ -127,6 +139,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     }
   };
 
+  // functión para previous
   const handlePrevious = () => {
     if (currentSongIndex > 0) {
       setCurrentSongIndex(currentSongIndex - 1);

@@ -62,10 +62,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [editedSong, setEditedSong] = useState<Songs | null>(null);
   const [errorEditedSong, setErrorEditedSong] = useState<boolean>(true);
 
-
-
-
-
   useEffect(() => {
     setSongs(db.songData);
     getMySongs(user)

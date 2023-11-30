@@ -59,8 +59,6 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
  &:hover{
     opacity: 1;
    }
-
-  
 `
 
 
