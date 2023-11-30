@@ -15,6 +15,8 @@ import {
   Input,
   Button,
   Select,
+  FormContainer,
+  ErrorMessage,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
@@ -175,7 +177,7 @@ export const AddMusicPage = () => {
     <section>
       <HeaderSection text="Upload" />
       <form onSubmit={handleSubmit(submitData)}>
-        <Container>
+        <FormContainer>
           <ImageContainer>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
@@ -198,26 +200,14 @@ export const AddMusicPage = () => {
                 onChange: imageUpload,
               })}
             />
-            <label htmlFor="image-upload">
-              <Button as="span">Add Image</Button>
-            </label>
-            {errors.thumbnail && <p>{errors.thumbnail.message}</p>}
-
-            <Input
-              type="text"
-              placeholder="Enter song name"
-              {...register("name", {
-                required: {
-                  value: true,
-                  message: "Song name required.",
-                },
-                minLength: {
-                  value: 4,
-                  message: "The song name must be at least 4 characters long.",
-                },
-              })}
-            />
-            {errors.name && <p>{errors.name.message}</p>}
+            <div>
+              <label htmlFor="image-upload">
+                <Button as="span">Add Image</Button>
+              </label>
+              {errors.thumbnail && (
+                <ErrorMessage>{errors.thumbnail.message}</ErrorMessage>
+              )}
+            </div>
             <Input
               type="file"
               accept="audio/mpeg, audio/mp3"
@@ -231,12 +221,29 @@ export const AddMusicPage = () => {
                 onChange: soundUpload,
               })}
             />
-
-            <label htmlFor="sound-upload">
-              <Button as="span">Add Sound</Button>
-            </label>
-            {errors.url && <p>{errors.url.message}</p>}
+            <div>
+              <label htmlFor="sound-upload">
+                <Button as="span">Add Sound</Button>
+              </label>
+              {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
+            </div>
           </ButtonContainer>
+
+          <Input
+            type="text"
+            placeholder="Enter song name"
+            {...register("name", {
+              required: {
+                value: true,
+                message: "Song name required.",
+              },
+              minLength: {
+                value: 4,
+                message: "The song name must be at least 4 characters long.",
+              },
+            })}
+          />
+          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
 
           <Select
             {...register("genreId", {
@@ -250,7 +257,9 @@ export const AddMusicPage = () => {
               </option>
             ))}
           </Select>
-          {errors.genreId && <p>{errors.genreId.message}</p>}
+          {errors.genreId && (
+            <ErrorMessage>{errors.genreId.message}</ErrorMessage>
+          )}
 
           <Select
             {...register("albumId", {
@@ -267,7 +276,9 @@ export const AddMusicPage = () => {
                 </option>
               ))}
           </Select>
-          {errors.albumId && <p>{errors.albumId.message}</p>}
+          {errors.albumId && (
+            <ErrorMessage>{errors.albumId.message}</ErrorMessage>
+          )}
 
           {selectedAlbum === "newAlbum" && (
             <Input
@@ -278,14 +289,16 @@ export const AddMusicPage = () => {
               })}
             />
           )}
-          {errors.newAlbum && <p>{errors.newAlbum.message}</p>}
+          {errors.newAlbum && (
+            <ErrorMessage>{errors.newAlbum.message}</ErrorMessage>
+          )}
           <label>
             <Input type="checkbox" {...register("isPublic")} />
             Public Song
           </label>
 
-          <button>Submit</button>
-        </Container>
+          <button>Upload Song</button>
+        </FormContainer>
       </form>
     </section>
   );
