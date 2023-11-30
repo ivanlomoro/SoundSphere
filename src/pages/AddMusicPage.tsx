@@ -142,9 +142,9 @@ export const AddMusicPage = () => {
 
   return (
     <section>
-      <Container>
-        <HeaderSection text="Upload" />
-        <form onSubmit={handleSubmit(submitData)}>
+      <HeaderSection text="Upload" />
+      <form onSubmit={handleSubmit(submitData)}>
+        <Container>
           <ImageContainer>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
@@ -209,8 +209,8 @@ export const AddMusicPage = () => {
           </label>
 
           <button>Submit</button>
-        </form>
-      </Container>
+        </Container>
+      </form>
     </section>
   );
 };
