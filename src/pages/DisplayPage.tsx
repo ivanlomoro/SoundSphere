@@ -1,4 +1,4 @@
-import { PlayerDisplay } from "../components/playerDisplay/PlayerDisplay";
+import { PlayerDisplay } from "../components/card/card.styled.components";
 
 
 import { useParams } from "react-router-dom";

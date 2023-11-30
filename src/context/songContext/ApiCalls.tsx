@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect } from "react";
 import axios from "axios";
+import { Songs } from '../../Types/SongsTypes';
 
 export interface SongUploadData {
   thumbnail: string;
