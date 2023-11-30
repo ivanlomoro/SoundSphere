@@ -5,10 +5,11 @@ import db from "../../data/db.json";
 import { Songs } from "../../Types/SongsTypes";
 import styled from "styled-components";
 import "./styles.css";
+import { useApiCalls } from "../../context/songContext/ApiCalls";
 
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [songs, setSongs] = useState<Songs[]>([]);
+  const { publicSongs } = useApiCalls();
 
   const StyledDivSection = styled.div`
     display: flex;
@@ -26,10 +27,6 @@ export const SearchBar = () => {
     width: 100%;
     margin: 10px;
   `;
-
-  useEffect(() => {
-    setSongs(db.songData);
-  }, []);
 
   const handleQuery = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchParams({ q: e.target.value });
@@ -51,7 +48,7 @@ export const SearchBar = () => {
 
         {query && (
           <StyledDivSection className="search__results__container">
-            {songs
+            {publicSongs
               .filter((song: Songs) => {
                 return (
                   song && song.name.toLowerCase().includes(query.toLowerCase())
