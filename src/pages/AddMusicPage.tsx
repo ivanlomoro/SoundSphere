@@ -5,10 +5,8 @@ import postData from "../api/postApi";
 import axios, { AxiosResponse } from "axios";
 import { UserContext } from "../context/userContext/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import { useForm } from "react-hook-form";
 import { SongUploadData } from "../context/songContext/ApiCalls";
-
 import { genres } from "../interfaces/uploadTypes";
 import {
   ImageContainer,
@@ -20,6 +18,14 @@ import {
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
+
+interface Album {
+  id: string;
+  name: string;
+  userId: string;
+  thumbnail: string;
+  isPublic: boolean;
+}
 
 export const AddMusicPage = () => {
   const {
@@ -33,11 +39,9 @@ export const AddMusicPage = () => {
   const { user } = useContext(UserContext);
   const [imageSrc, setImageSrc] = useState<string>("");
   const [songToUpload, setSongToUpload] = useState<string | File>("");
-  const [userAlbums, setUserAlbums] = useState([]);
+  const [userAlbums, setUserAlbums] = useState<Album[]>([]);
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
-  const [albumToUpload, setAlbumToUpload] = useState<string>("");
-  const [albumCreated, setAlbumCreated] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
@@ -108,11 +112,8 @@ export const AddMusicPage = () => {
           getToken
         );
         console.log("THIS IS THE NEW RESPONSE:", response);
-        setAlbumToUpload(response.incomingData.id);
         return response;
       }
-
-      if (selectedAlbum !== "newAlbum") setAlbumToUpload(selectedAlbum);
     };
 
     const albumResponse = await createOrSelectAlbum();
