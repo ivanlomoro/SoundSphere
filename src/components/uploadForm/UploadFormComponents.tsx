@@ -1,16 +1,18 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 export const ImageContainer = styled.div`
-  
   border: 1px solid #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   background-color: #767677;
+  aspect-ratio: 1/1;
+  height: 30vh;
 `;
 export const ButtonContainer = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +40,7 @@ export const SwitchContainer = styled.div`
   padding: 2px;
   cursor: pointer;
 `;
-export const Slider = styled.div<{ isPrivate: boolean; }> `
+export const Slider = styled.div<{ isPrivate: boolean }>`
   height: 20px;
   width: 50%;
   background-color: #fff;
@@ -66,3 +68,24 @@ export const ButtonSummit = styled.div`
   border: none;
   border-radius: 10px;
 `;
+
+export const ErrorMessage = styled.p`
+  color: #dc3545;
+`;
+
+const StyledFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+  padding-inline: var(--space-md);
+`;
+
+type ContainerProps = {
+  children: ReactNode;
+};
+
+export const FormContainer = ({ children }: ContainerProps) => {
+  return <StyledFormContainer>{children}</StyledFormContainer>;
+};

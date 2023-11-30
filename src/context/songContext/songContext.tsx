@@ -1,12 +1,12 @@
 import React, { useState, useEffect, createContext, ReactNode, useContext } from "react";
 import type { Songs, Category } from '../../Types/SongsTypes';
-import db from '../../data/db.json';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
 import { editSongType } from "../../components/card/CardContainerButtons";
 import Swal from "sweetalert2";
+import { useApiCalls } from "./ApiCalls";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
