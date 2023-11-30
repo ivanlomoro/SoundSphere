@@ -1,8 +1,10 @@
 import { editSongType } from "../components/card/CardContainerButtons";
-import { Songs } from "../components/card/Songs";
 import { UserInterface } from "../context/songContext/songContext";
-import { Artist, Songs, Category } from "./SongsTypes";
 
+
+
+
+//nuevo tipo user songs id, is owner 
 
 export type Songs = {
   id: string;
@@ -11,6 +13,8 @@ export type Songs = {
   url: string;
   thumbnail: string;
   genre: string;
+  isPublic: boolean;
+
   liked: boolean;
 };
 export type Category = {
@@ -38,6 +42,8 @@ export interface SongCardProps {
 	isMySong?: boolean
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'
+  isSelected? : (id: string) => boolean
+  toggleSelected?: (song: Songs) => void
 }
 
 export interface SongUploadData {
@@ -73,19 +79,13 @@ export type SongsContextType = {
   editedSong: Songs | null;
   errorEditedSong: boolean;
 };
-export interface Songs {
-	id: string
-	name: string
-	artist: string
-	url: string
-	thumbnail: string
-	genre: string
-	liked: boolean
-}
+
 export interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void
 	isFavorite?: (id: string) => boolean
+  isSelected?: (id: string) => boolean
+  toggleSelected?: (song: Songs) => void
 	isMySong?: boolean
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'

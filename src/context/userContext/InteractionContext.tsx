@@ -17,26 +17,29 @@
 
 
 
-import React, { createContext,useEffect, useState, ReactNode, useContext } from 'react';
+import React, { createContext, useEffect, useState, ReactNode, useContext } from 'react';
 import { Artist, Songs } from "../../Types/SongsTypes";
-import { UserContext } from './UserContext';
-import { useSongs } from '../songContext/songContext';
+
 
 export interface UserInteractionProps {
-    uploadedSongs?: Songs[];
-    favoriteSongs?: Songs[];
-    customPlaylists?: Songs[];
-    recentSongs?: Songs[];
-    followedArtists?: Artist[];
+    uploadedSongs: Songs[];
+    favoriteSongs: Songs[];
+    customPlaylists: Songs[];
+    selectedSongs: Songs[];
+    followedArtists: Artist[];
     followed: Artist[];
     recents: Songs[];
     favorites: Songs[];
     addToUploadedSongs: (song: Songs) => void;
     addToRecents: (song: Songs) => void;
+    addToSelected: (song: Songs) => void;
+    removeFromSelected: (id: string) => void;
+    toggleSelected: (song: Songs) => void;
     addToFavorites: (song: Songs) => void;
     removeFromFavorites: (id: string) => void;
     isFavorite: (id: string) => boolean;
     isFollowed: (id: string) => boolean;
+    isSelected: (id: string) => boolean;
     toggleFavorite: (song: Songs) => void;
     addToFollowed: (artist: Artist) => void;
     removeFromFollowed: (id: string) => void;
@@ -50,14 +53,13 @@ interface UserInteractionProviderProps {
 }
 
 interface Playlist {
- name: string;
- songs: Songs[];
- thumbnail: string;
+    name: string;
+    songs: Songs[];
+    thumbnail: string;
 }
 
 const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ children }) => {
-    const { user } = useContext(UserContext);
-    const { songs } = useSongs()
+
     const [recents, setRecents] = useState<Songs[]>([]);
     const [favorites, setFavorites] = useState<Songs[]>([]);
     const [followed, setFollowed] = useState<Artist[]>([]);
@@ -73,20 +75,16 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
         localStorage.setItem('recents', JSON.stringify(recents));
     }, [recents]);
 
-
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
 
-
     useEffect(() => {
         localStorage.setItem('followed', JSON.stringify(followed));
     }, [followed]);
-  
-
-
 
     const songExists = (arr: Songs[], id: string) => arr.some(song => song.id === id);
+
     const artistExists = (arr: Artist[], id: string) => arr.some(artist => artist.id === id);
 
     const addToUploadedSongs = (song: Songs) => {
@@ -94,7 +92,6 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
             setUploadedSongs(prevSongs => [song, ...prevSongs]);
         }
     };
-
 
     const addToRecents = (song: Songs) => {
         if (!songExists(recents, song.id)) {
@@ -107,6 +104,7 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
             setFavorites(prevFavorites => [...prevFavorites, song]);
         }
     };
+
     const addToSelected = (song: Songs) => {
         if (!songExists(selectedSongs, song.id)) {
             setSelectedSongs(prevSelectedSongs => [...prevSelectedSongs, song]);
@@ -116,11 +114,18 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
     const removeFromSelected = (id: string) => {
         setSelectedSongs(currentSelectedSongs => currentSelectedSongs.filter(song => song.id !== id));
     };
-    const isSelected = (id: string): boolean => songExists(favorites, id);
+
+    const isSelected = (id: string): boolean => songExists(selectedSongs, id);
+
+
     const removeFromFavorites = (id: string) => {
         setFavorites(currentFavorites => currentFavorites.filter(song => song.id !== id));
     };
 
+
+    const toggleSelected = (song: Songs) => {
+        isSelected(song.id) ? removeFromSelected(song.id) : addToSelected(song);
+    };
     const isFavorite = (id: string): boolean => songExists(favorites, id);
 
     const toggleFavorite = (song: Songs) => {
@@ -150,6 +155,11 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
             customPlaylists: [],
             followedArtists: followed,
             followed,
+            isSelected,
+            selectedSongs,
+            addToSelected,
+            toggleSelected,
+            removeFromSelected,
             addToUploadedSongs,
             recents,
             favorites,

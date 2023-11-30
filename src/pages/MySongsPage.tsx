@@ -10,7 +10,7 @@ import { ADDMUSICPAGE } from '../routes/paths';
 const MySongsPage = () => {
     const { mySongs, getMySongs, isFavorite, toggleFavorite, addToRecents, isModifiedSong } = useSongs();
     const [isLoading, setLoading] = useState<boolean>(true)
-    const { renderSongs } = useRenderer({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid", isMySong:true });
+    const { renderSongs } = useRenderer({ mySongs, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
     const { user } = useContext(UserContext)
 
     useEffect(() => {

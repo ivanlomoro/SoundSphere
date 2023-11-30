@@ -3,18 +3,17 @@
 import { Button } from '..'
 import { NavIcon } from '../NavBar/NavBar'
 import { Link } from 'react-router-dom'
-import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton } from './card.styled.components'
+import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton, Plus, Minus } from './card.styled.components';
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 import CardContainerButtons from './CardContainerButtons'
 import { SongCardProps } from '../../Types/SongsTypes'
+import { useInteractions } from '../../context/userContext/InteractionContext'
 
-export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, variant = 'card', isMySong }: SongCardProps) {
+export function SongCard({ song,  variant = 'card', isMySong }: SongCardProps) {
 	const CardComponent = variant === 'grid' ? GridCard : variant === 'list' ? ListCard : Card
 	const ImageComponent = variant === 'grid' ? GridCardImage : variant === 'list' ? ListCardImage : CardImage
 	const DescriptionComponent = variant === 'grid' ? GridCardDescription : variant === 'list' ? ListCardDescription : CardDescription
-	if (!song || !toggleFavorite || !isFavorite || !addToRecents) {
-		return null
-	}
+	const { toggleFavorite, isFavorite, addToRecents, toggleSelected, isSelected, } = useInteractions()
 	return (
 		<CardComponent>
 			{variant === 'grid' && (
@@ -49,11 +48,15 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 						<FaveButton onClick={() => { toggleFavorite(song) }}>
 							{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 						</FaveButton>
+						
+
 
 						{/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
 						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 					</FavoriteButton>  */}
-
+						<FaveButton onClick={() => { toggleSelected(song) }}>
+							{isSelected(song.id) ? <Minus /> : <Plus />}
+						</FaveButton>
 					</CommonButtonContainer>)}
 			</DescriptionComponent>
 			{isMySong &&
@@ -61,3 +64,4 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 		</CardComponent>
 	)
 }
+

@@ -7,20 +7,24 @@ import { ArtistCard } from '../components/card/ArtistCard';
 type MagicInput<T> = {
   mySongs?: Songs[];
   songs?: Songs[];
-  artists?: Artist[];
+  artists?: Artist[];  
   toggleFavorite?: (song: Songs) => void;
+  toggleSelected?: (song: Songs) => void;
   toggleFollowed?: (artist: Artist) => void;
   isFavorite?: (id: string) => boolean;
+  isSelected?: (id: string) => boolean;
   isFollowed?: (id: string) => boolean;
   addToRecents?: (song: Songs) => void;
+  
+  
   layout: T;
-  isMySong?:boolean
+
 };
   
-  type LayoutVariant = "grid" | "list" | "card" | undefined;
+type LayoutVariant = "grid" | "list" | "card" | undefined;
   
-  export const useRenderer = (input: MagicInput<LayoutVariant>) => {
-    const { mySongs, songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout, isMySong } = input;
+export const useRenderer = (input: MagicInput<LayoutVariant>) => {
+    const { mySongs, songs, artists, layout} = input;
   
     const renderSongs = React.useCallback(() => {
       const songsToRender = mySongs || songs;
@@ -31,15 +35,13 @@ type MagicInput<T> = {
               variant={layout}
               key={song.id}
               song={song}
-              toggleFavorite={toggleFavorite}
-              isFavorite={isFavorite}
-              addToRecents={addToRecents}
-              isMySong={isMySong}
+   
+           
             />
           ))}
         </>
       );
-    }, [mySongs, songs, toggleFavorite, isFavorite, addToRecents, layout]);
+    }, [mySongs, songs,  layout]);
   
     const renderArtists = React.useCallback(() => {
       return (
@@ -48,13 +50,13 @@ type MagicInput<T> = {
             <ArtistCard
               key={artist.id}
               artist={artist}
-              toggleFollowed={toggleFollowed}
-              isFollowed={isFollowed}
+              
+     
             />
           ))}
         </>
       );
-    }, [artists, toggleFollowed, isFollowed, layout]);
+    }, [artists, layout]);
   
     return { renderSongs, renderArtists };
   };

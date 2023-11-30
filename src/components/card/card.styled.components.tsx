@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { type Artist } from '../../Types/SongsTypes'
 import { AiFillHeart, AiOutlineHeart, AiOutlinePlayCircle } from 'react-icons/ai'
-
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 export interface ArtistCardProps {
   artist: Artist
   toggleFollowed: (artist: Artist) => void
@@ -160,6 +160,15 @@ width: 30px;
 height: 30px;
 `
 
+export const Plus = styled(CiCirclePlus)`
+width: 30px;
+height: 30px;
+`
+export const Minus = styled(CiCircleMinus)`
+width: 30px;
+color: var(--clr-accent);
+height: 30px;
+`
 export const FaveButton = styled.button`
 background: transparent;
 border: none;

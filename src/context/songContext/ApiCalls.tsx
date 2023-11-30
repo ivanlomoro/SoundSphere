@@ -52,7 +52,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/song/public');
+      const response = await axios.get('http://localhost:8080/song/');
       setPublicSongs(response.data);
     } catch (error) {
       console.error('Failed to fetch Songs:', error);
@@ -61,6 +61,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     fetchSongs();
+    console.log(publicSongs);
   }, []);
 
   return (

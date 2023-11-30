@@ -9,11 +9,6 @@ import { editSongType } from "../../components/card/CardContainerButtons";
 import { useApiCalls } from "./ApiCalls";
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
-
-
-
-
-
 type SongsContextType = {
   followed: Artist[];
   artists: Artist[];
@@ -69,13 +64,11 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     getMySongs(user)
   }, []);
 
-
-
   useEffect(() => { setIsModifiedSong(false) }, [isModifiedSong])
   useEffect(() => { setErrorEditedSong(true) }, [errorEditedSong])
 
-
   const songExists = (arr: Songs[], id: string) => arr.some((song: Songs) => song.id === id);
+
   const artistExists = (arr: Artist[], id: string) => arr.some((artist: Artist) => artist.id === id);
 
   const getMySongs = async (user: UserInterface | null) => {

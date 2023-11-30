@@ -6,20 +6,17 @@ import { useInteractions } from "../context/userContext/InteractionContext";
 
 
 export const FavoriteSongs = () => {
-  const { favorites, addToRecents, toggleFavorite, isFavorite } = useInteractions();
-  const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "list" });
-
-
-
+  const { selectedSongs, addToRecents, toggleSelected, isSelected } = useInteractions();
+  const { renderSongs: renderPlaylistSongs } = useRenderer({ songs: selectedSongs, layout: "list", toggleSelected, isSelected, addToRecents });
 
   return (
     <>
-      <HeaderSection text="Favorites" />
-
+      <HeaderSection text="Playlists" />
       <ul>
-        <h2>Favorites</h2>
-        {renderFavoriteSongs()}
+        <h2> Playlists</h2>
+        {renderPlaylistSongs()}
       </ul>
     </>
   );
 };
+  

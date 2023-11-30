@@ -1,11 +1,11 @@
-import React from 'react'
+
 import { useInteractions } from '../context/userContext/InteractionContext'
 import { useRenderer } from '../hooks/useRenderer';
 import { HeaderSection } from '../components';
 
-const PlaylistPage = () => {
-    const { playlists, addToRecents, togglePlaylist, isPlaylist } = useInteractions();
-    const { renderSongs: renderPlaylistSongs } = useRenderer({ songs: playlists, togglePlaylist, isPlaylist, addToRecents, layout: "list" });
+export const PlaylistPage = () => {
+    const { selectedSongs, addToRecents, toggleSelected, isSelected } = useInteractions();
+  const { renderSongs: renderPlaylistSongs } = useRenderer({ songs: selectedSongs,  layout: "list",toggleSelected, isSelected, addToRecents });
 
   return (
     <>
@@ -18,4 +18,3 @@ const PlaylistPage = () => {
   );
 };
 
-export default PlaylistPage
