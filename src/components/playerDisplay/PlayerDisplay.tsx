@@ -63,8 +63,15 @@ type PlayerDisplayProps = {
 
 // De donde viene "songs" "currentSong"
 // useSong(): contexto
+// De donde viene "songs" "currentSong"
+// useSong(): contexto
 export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
-  const {toggleFavorite, isFavorite} = useInteractions();
+<<<<<<< HEAD
+  const {toggleFavorite, isFavorite} = useSongs();
+=======
+  const {toggleFavorite, isFavorite } = useInteractions();
+
+>>>>>>> d6b720f5edb32e7ffd1546b4dc1f109808ab8eff
   const [playing, setPlaying] = useState(false);
 
 // Iniciar cancion index ?? identificar con 'id'
