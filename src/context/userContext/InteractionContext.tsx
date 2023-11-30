@@ -1,5 +1,7 @@
 import React, { createContext,useEffect, useState, ReactNode, useContext } from 'react';
 import { Artist, Songs } from "../../Types/SongsTypes";
+import { UserContext } from './UserContext';
+import { useSongs } from '../songContext/songContext';
 
 export interface UserInteractionProps {
     uploadedSongs?: Songs[];
@@ -27,12 +29,30 @@ const InteractionContext = createContext<UserInteractionProps | null>(null);
 interface UserInteractionProviderProps {
     children: ReactNode;
 }
+//copiar favorites
+//guardarlo a playlist
+//pagina para playlist (todas)
+//pagina de la playlist (unica)
+//guarda en local hasta que se modifique el nombre o token expires
+//luego post  
+
+
+// flow click button=> addtoPlaylist defautl last playlist 
+// if new default name my playlist (check, if not increment)
+// toaster added to song (useRender, grid) 
+// generate myplaylists in user page/home 
+// pencil next to name to modify, when submitting post
+// in back end => owner middleware (checks if userId= OwnerId)
+
 
 const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ children }) => {
+    const { user } = useContext(UserContext);
+    const { songs } = useSongs()
     const [recents, setRecents] = useState<Songs[]>([]);
     const [favorites, setFavorites] = useState<Songs[]>([]);
     const [followed, setFollowed] = useState<Artist[]>([]);
     const [uploadedSongs, setUploadedSongs] = useState<Songs[]>([]);
+    const [selectedSongs, setSelectedSongs] = useState<Songs[]>([]);
 
     useEffect(() => {
         localStorage.setItem('recents', JSON.stringify(recents));
@@ -46,6 +66,10 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
 
     useEffect(() => {
         localStorage.setItem('followed', JSON.stringify(followed));
+    }, [followed]);
+  
+    useEffect(() => {
+        localStorage.setItem('Playlist', JSON.stringify(followed));
     }, [followed]);
 
 

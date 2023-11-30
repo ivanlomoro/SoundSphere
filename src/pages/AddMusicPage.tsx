@@ -2,13 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import postData from "../api/postApi";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { UserContext } from "../context/userContext/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import { useForm } from "react-hook-form";
 import { SongUploadData } from "../context/songContext/ApiCalls";
-
 import { genres } from "../interfaces/uploadTypes";
 import {
   ImageContainer,
@@ -19,6 +17,7 @@ import {
   Select,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
+
 
 export const AddMusicPage = () => {
   const { register, handleSubmit, watch, reset } = useForm<SongUploadData>();
@@ -33,9 +32,10 @@ export const AddMusicPage = () => {
   const [albumCreated, setAlbumCreated] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!user){return console.log('no user')}
     if (user) {
       const getUserAlbums = async () => {
-        const response = await getData(`album/user/${user.userId}`, getToken);
+        const response : AxiosResponse['data'] = await getData(`album/user/${user.userId}`, getToken);
         setUserAlbums(response.userData);
       };
       getUserAlbums();
