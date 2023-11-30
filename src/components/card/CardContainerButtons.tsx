@@ -4,8 +4,8 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { useSongs } from "../../context/songContext/songContext";
 import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
-import { Songs } from "./SongCard";
 import "./CardContainerButtons.styles.css"
+import { Songs } from '../../Types/SongsTypes';
 
 export type editSongType = {
     name: string

@@ -44,9 +44,9 @@ export const CardDescription = styled.div`
 // List Styles
 export const ListCard = styled(Card)`
   width: 85%;
+  max-height: 10vh;
   flex-direction: row;
   align-items: center;
-  background-color: var(--clr-bg-tertiary);
   margin: var(--space-md)
   ;
 `
@@ -66,18 +66,18 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
 
 
 export const ListCardImage = styled(CardImage)`
-  height: auto;
-  width: auto;
+  max-height: 12vh;
+  max-width: 12vh;
   position: relative;
   
 `
 
 export const ListCardDescription = styled(CardDescription)`
-  padding: var(--space-xs);
-  position: relative;
-  width: 75vw;
-  height: 25vw;
-  
+  padding: var(--space-md);
+  font-size: clamp(0.5rem, 10vw, 1rem);
+  overflow: hidden;
+
+ 
 `
 
 
@@ -163,6 +163,14 @@ height: 30px;
 `
 
 export const FaveButton = styled.button`
+background: transparent;
+border: none;
+color: var(--clr-text-secondary);
+&:hover{
+    color: var(--clr-accent);
+   }
+`
+export const PlayListButton = styled.button`
 background: transparent;
 border: none;
 color: var(--clr-text-secondary);

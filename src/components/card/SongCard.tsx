@@ -5,20 +5,16 @@ import { NavIcon } from '../NavBar/NavBar'
 import { Link } from 'react-router-dom'
 import { GridCard, ListCard, Card, GridImageContainer, GridCardImage, ListCardImage, CardImage, GridCardDescription, ListCardDescription, CardDescription, SongName, SongArtist, CommonButtonContainer, FullHeart, EmptyHeart, PlayButton, FaveButton } from './card.styled.components'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
-import CardContainerButtons from './CardContainerButtons'import { SongCardProps } from '../../Types/SongsTypes'
-
+import CardContainerButtons from './CardContainerButtons'
+import { SongCardProps } from '../../Types/SongsTypes'
 
 export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, variant = 'card', isMySong }: SongCardProps) {
 	const CardComponent = variant === 'grid' ? GridCard : variant === 'list' ? ListCard : Card
 	const ImageComponent = variant === 'grid' ? GridCardImage : variant === 'list' ? ListCardImage : CardImage
 	const DescriptionComponent = variant === 'grid' ? GridCardDescription : variant === 'list' ? ListCardDescription : CardDescription
-
-
 	if (!song || !toggleFavorite || !isFavorite || !addToRecents) {
 		return null
 	}
-
-
 	return (
 		<CardComponent>
 			{variant === 'grid' && (
@@ -49,19 +45,7 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 								ariaLabel="Music Player"
 								onClick={() => { addToRecents(song) }}
 							/> </Link>
-						{isMySong &&(
-							<>
-								<Button
-									content={<FaEdit />}
-									// onClick={editSong}
-									variant="StyledBackButton"
-								/>
-								<Button
-									content={<FaTrash />}
-									// onClick={deleteSong}
-									variant="StyledBackButton"
-								/></>)
-						}
+
 						<FaveButton onClick={() => { toggleFavorite(song) }}>
 							{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 						</FaveButton>
