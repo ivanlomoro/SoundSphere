@@ -125,7 +125,7 @@ export const AddMusicPage = () => {
         url: cloudinarySong.secure_url,
         name: data.name,
         genreId: selectedGenre,
-        isPublic: true,
+        isPublic: data.isPublic,
         userCreator: user?.userId,
         albumId: albumId,
       };
@@ -203,6 +203,10 @@ export const AddMusicPage = () => {
             placeholder="Enter album name"
             {...register("newAlbum")}
           />
+          <label>
+            <Input type="checkbox" {...register("isPublic")} />
+            Public Song
+          </label>
 
           <button>Submit</button>
         </form>
