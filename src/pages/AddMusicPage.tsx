@@ -19,9 +19,16 @@ import {
   Select,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
+import toast from "react-hot-toast";
 
 export const AddMusicPage = () => {
-  const { register, handleSubmit, watch, reset } = useForm<SongUploadData>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<SongUploadData>();
   const { getAccessTokenSilently: getToken, isAuthenticated } = useAuth0();
   const { user } = useContext(UserContext);
   const [imageSrc, setImageSrc] = useState<string>("");
@@ -133,11 +140,31 @@ export const AddMusicPage = () => {
       try {
         await postData(requestUrl, requestData, getToken);
         setImageSrc("");
+        toast.success("Song uploaded successfully!");
         reset();
       } catch (error) {
+        toast.error(
+          "An error ocurred while uploading the song. Try again later."
+        );
         console.error("An error occurred:", error);
       }
     }
+  };
+
+  const genreValidation = (value: string) =>
+    value !== "" || "Please select a genre.";
+
+  const albumValidation = (value: string) =>
+    value !== "" || "Please select an album or create a new one.";
+
+  const newAlbumValidation = (value: string) => {
+    if (watch("albumId") == "newAlbum") {
+      return (
+        (value && value.length > 3) ||
+        "New album name should be more than 3 characters long."
+      );
+    }
+    return true;
   };
 
   return (
@@ -157,31 +184,61 @@ export const AddMusicPage = () => {
             <Input
               type="file"
               accept="image/*"
-              onChange={imageUpload}
               style={{ display: "none" }}
               id="image-upload"
+              {...register("thumbnail", {
+                required: {
+                  value: true,
+                  message: "Please upload a thumbnail",
+                },
+                onChange: imageUpload,
+              })}
             />
             <label htmlFor="image-upload">
               <Button as="span">Add Image</Button>
             </label>
+            {errors.thumbnail && <p>{errors.thumbnail.message}</p>}
 
             <Input
               type="text"
               placeholder="Enter song name"
-              {...register("name")}
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "Song name required.",
+                },
+                minLength: {
+                  value: 4,
+                  message: "The song name must be at least 4 characters long.",
+                },
+              })}
             />
+            {errors.name && <p>{errors.name.message}</p>}
             <Input
               type="file"
               accept="audio/mpeg, audio/mp3"
-              onChange={soundUpload}
               style={{ display: "none" }}
               id="sound-upload"
+              {...register("url", {
+                required: {
+                  value: true,
+                  message: "Please upload a song",
+                },
+                onChange: soundUpload,
+              })}
             />
+
             <label htmlFor="sound-upload">
               <Button as="span">Add Sound</Button>
             </label>
+            {errors.url && <p>{errors.url.message}</p>}
           </ButtonContainer>
-          <Select {...register("genreId")}>
+
+          <Select
+            {...register("genreId", {
+              validate: genreValidation,
+            })}
+          >
             <option value="">Select a genre</option>
             {genres.map((genre) => (
               <option key={genre.id} value={genre.id}>
@@ -189,20 +246,35 @@ export const AddMusicPage = () => {
               </option>
             ))}
           </Select>
-          <Select {...register("albumId")}>
+          {errors.genreId && <p>{errors.genreId.message}</p>}
+
+          <Select
+            {...register("albumId", {
+              validate: albumValidation,
+            })}
+          >
             <option value="">Select an album</option>
             <option value="newAlbum">Create new album</option>
-            {userAlbums.map((album) => (
-              <option key={album.id} value={album.id}>
-                {album.name}
-              </option>
-            ))}
+
+            {userAlbums.length > 0 &&
+              userAlbums.map((album) => (
+                <option key={album.id} value={album.id}>
+                  {album.name}
+                </option>
+              ))}
           </Select>
-          <Input
-            type="text"
-            placeholder="Enter album name"
-            {...register("newAlbum")}
-          />
+          {errors.albumId && <p>{errors.albumId.message}</p>}
+
+          {selectedAlbum === "newAlbum" && (
+            <Input
+              type="text"
+              placeholder="Enter album name"
+              {...register("newAlbum", {
+                validate: newAlbumValidation,
+              })}
+            />
+          )}
+          {errors.newAlbum && <p>{errors.newAlbum.message}</p>}
           <label>
             <Input type="checkbox" {...register("isPublic")} />
             Public Song
