@@ -19,7 +19,7 @@ export const DisplayPage = () => {
 
 
   const { setPlayingSong } = usePlayerContext();
-
+  const { currentSong } = usePlayerContext();
   
   if (selectedSong) {
     setPlayingSong(selectedSong);
@@ -33,7 +33,7 @@ export const DisplayPage = () => {
       isFavorite={isFavorite}
         toggleFavorite={toggleFavorite}
         songs={publicSongs}
-        currentSong={selectedSong ? selectedSong : defaultSong}
+        currentSong={currentSong}
       />
     </>
   );
