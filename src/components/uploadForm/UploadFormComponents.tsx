@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 export const ImageContainer = styled.div`
-  border: 1px solid #ffffff;
+  box-shadow: 0 0 10px 0px var(--clr-accent);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,18 +10,21 @@ export const ImageContainer = styled.div`
   background-color: #767677;
   aspect-ratio: 1/1;
   height: 30vh;
+  border-radius: 20px;
+  margin-bottom: 3em;
 `;
 export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto var(--space-xl);
 `;
 export const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  border-radius: 20px;
 `;
 export const Button = styled.div`
   padding: 10px 20px;
@@ -57,6 +60,19 @@ export const Text = styled.span`
 `;
 export const Input = styled.input`
   height: 26px;
+  color: var(--clr-text-secondary);
+  background-color: transparent;
+  border: 1px solid var(--clr-text-secondary);
+  text-align: center;
+  padding-block: 0.25em;
+  font-size: var(--fs-lg);
+  :focus {
+    border-color: blue;
+  }
+  ::placeholder {
+    color: var(--clr-text-secondary);
+    opacity: 1;
+  }
 `;
 export const Select = styled.select`
   height: 26px;

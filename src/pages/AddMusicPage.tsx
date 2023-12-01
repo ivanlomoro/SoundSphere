@@ -13,13 +13,13 @@ import {
   Image,
   ButtonContainer,
   Input,
-  Button,
   Select,
   FormContainer,
   ErrorMessage,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
+import { StyledButtonOutline } from "../components/button/Button";
 
 interface Album {
   id: string;
@@ -205,7 +205,7 @@ export const AddMusicPage = () => {
             />
             <div>
               <label htmlFor="image-upload">
-                <Button as="span">Add Image</Button>
+                <StyledButtonOutline as="span">Add Image</StyledButtonOutline>
               </label>
               {errors.thumbnail && (
                 <ErrorMessage>{errors.thumbnail.message}</ErrorMessage>
@@ -226,7 +226,7 @@ export const AddMusicPage = () => {
             />
             <div>
               <label htmlFor="sound-upload">
-                <Button as="span">Add Sound</Button>
+                <StyledButtonOutline as="span">Add Sound</StyledButtonOutline>
               </label>
               {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
             </div>
