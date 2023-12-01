@@ -24,12 +24,12 @@ type SongsContextType = {
   mySongs: Songs[];
   addToRecents: (song: Songs) => void;
   addToFavorites: (song: Songs) => void;
-  removeFromFavorites: (id: number) => void;
-  isFavorite: (id: number) => boolean;
-  isFollowed: (id: number) => boolean;
+  removeFromFavorites: (id: string) => void;
+  isFavorite: (id: string) => boolean;
+  isFollowed: (id: string) => boolean;
   toggleFavorite: (song: Songs) => void;
   addToFollowed: (artist: Artist) => void;
-  removeFromFollowed: (id: number) => void;
+  removeFromFollowed: (id: string) => void;
   toggleFollowed: (artist: Artist) => void;
   getMySongs: (user: UserInterface | null) => void;
   deleteSong: (songID: string) => void;
@@ -79,8 +79,8 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   useEffect(() => { setErrorEditedSong(true) }, [errorEditedSong])
 
 
-  const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
-  const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
+  const songExists = (arr: Songs[], id: string) => arr.some((song: Songs) => song.id === id);
+  const artistExists = (arr: Artist[], id: string) => arr.some((artist: Artist) => artist.id === id);
 
   const getMySongs = async (user: UserInterface | null) => {
 
@@ -175,11 +175,11 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   };
 
-  const removeFromFavorites = (id: number) => {
+  const removeFromFavorites = (id: string) => {
     setFavorites((currentFavorites) => currentFavorites.filter((song: Songs) => song.id !== id));
   };
 
-  const isFavorite = (id: number): boolean => songExists(favorites, id);
+  const isFavorite = (id: string): boolean => songExists(favorites, id);
 
   const toggleFavorite = (song: Songs) => {
     isFavorite(song.id) ? removeFromFavorites(song.id) : addToFavorites(song);
@@ -192,7 +192,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   }
 
-  function removeFromFollowed(id: number) {
+  function removeFromFollowed(id: string) {
     setFollowed((currentFollowed) =>
       currentFollowed.filter((item) => item.id !== id)
     );
@@ -206,7 +206,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   }
 
-  const isFollowed = (id: number): boolean => artistExists(followed, id);
+  const isFollowed = (id: string): boolean => artistExists(followed, id);
 
   return (
     <SongsContext.Provider

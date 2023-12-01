@@ -5,7 +5,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlinePlayCircle } from 'react-icons/ai
 export interface ArtistCardProps {
   artist: Artist
   toggleFollowed: (artist: Artist) => void
-  isFollowed: (id: number) => boolean
+  isFollowed: (id: string) => boolean
 }
 
 // Common Button Container
