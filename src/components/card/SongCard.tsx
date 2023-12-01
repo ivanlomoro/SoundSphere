@@ -49,6 +49,10 @@ export function SongCard({ song, toggleFavorite, isFavorite, addToRecents, varia
 						<FaveButton onClick={() => { toggleFavorite(song) }}>
 							{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 						</FaveButton>
+						
+						<FaveButton onClick={() => { toggleFavorite(song) }}>
+							{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
+						</FaveButton>
 
 						{/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
 						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
