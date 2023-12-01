@@ -38,14 +38,6 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
     }
 
 
-    // const editSong: editSongType = {
-    //     name: "Prueba 3 modificado pa eliminar",
-    //     url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583924/tracks-dev/Rxbyn_-_better_off_alone_fvhwp8.mp3",
-    //     thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/better_off_alone_gfmcby.jpg",
-    //     isPublic: true,
-    //     genreId: "6560712d54a3139491bfad8f"
-    // }
-
     const handleUpdateSong = async (songId: string, editSong: Songs) => {
         console.log("ApiGenres:", apiGenres)
         const { value: name } = await Swal.fire({
@@ -155,22 +147,10 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
             });
 
             if (result.isConfirmed) {
-                await deleteSong(songId);
-                Swal.fire({
-                    title: 'Deleted!',
-                    text: 'Your song has been deleted.',
-                    icon: 'success',
-                    background: '#111111',
-                    color: 'white'
-                });
+                deleteSong(songId);
             }
         } catch (error) {
             console.error('Error deleting song', error);
-            Swal.fire(
-                'Error',
-                'There was an error trying to delete the song.',
-                'error'
-            );
         }
     };
 
