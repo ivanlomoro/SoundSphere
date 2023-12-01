@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { Songs } from "../../Types/SongsTypes";
 const GenrePage = () => {
 
-  const [songByGenre , setSongByGenre] = useState()
+  const [songByGenre , setSongByGenre] = useState<Songs[]>([])
   const {genreId} = useParams();
 
     useEffect(() =>{
