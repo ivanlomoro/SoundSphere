@@ -10,13 +10,15 @@ import {
   SEARCHPAGE,
   ADDMUSICPAGE,
   MYSONGSPAGE,
-  MICHELE
+  MICHELE,
+  GENRE
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
 import { SearchPage } from "../pages/SearchPage";
 import MySongsPage from "../pages/MySongsPage";
 import PlaylistPage from "../pages/PlaylistPage";
+import GenrePage from "../components/genresGrid/GenrePage";
 
 export const RouterPaths: FC = () => {
   return (
@@ -33,9 +35,11 @@ export const RouterPaths: FC = () => {
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
           <Route path={MYSONGSPAGE} element={<MySongsPage />} />
+          <Route path={GENRE} element={<GenrePage/>}/>
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />
         <Route path="/" element={<Navigate to={HOME} />} />
+        
       </Routes>
     </>
   );

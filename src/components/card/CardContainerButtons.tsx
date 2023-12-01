@@ -5,8 +5,9 @@ import { useSongs } from "../../context/songContext/songContext";
 import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
 import "./CardContainerButtons.styles.css"
-import { GenreType, useGenres } from "../../context/genreContext/genreContext";
+import { useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
+import { GenreType } from "../../Types/GenreTypes";
 
 export type editSongType = {
     name: string
