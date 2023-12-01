@@ -7,6 +7,7 @@ export const SearchPage = () => {
     <>
       <HeaderSection text="Search" />
       <SearchBar />
+      <h3>Your songs genres</h3>
       <GenresGrid />
     </>
   );

@@ -1,6 +1,10 @@
 
 
 const GenreItem = () => {
-  return <div>GenreItem</div>;
+  return(
+    <>
+    
+    </>
+  )
 };
 export default GenreItem;
