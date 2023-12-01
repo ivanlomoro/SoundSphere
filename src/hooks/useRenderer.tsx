@@ -7,7 +7,7 @@ import { Playlist } from '../Types/PlaylistFormData';
 import { PlaylistCard } from '../components/card/PlaylistCard';
 
 type MagicInput<T> = {
-  mySongs?: Songs[];
+  
   songs?: Songs[];
   artists?: Artist[]; 
   playlists?: Playlist[]; 
@@ -16,12 +16,14 @@ type MagicInput<T> = {
 
   
   
-  layout?: T;
+  layout: T;
 
 };
   
 type LayoutVariant = "grid" | "list" | "card" | undefined;
   
+
+
 export const useRenderer = (input: MagicInput<LayoutVariant>) => {
     const {  songs, artists, playlists, layout} = input;
   
@@ -30,7 +32,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
         <>
           {songs?.map((song) => (
             <SongCard
-            variant= 'card'
+            variant={layout}
               key={song.id}
               song={song}
             
@@ -75,9 +77,3 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
   
     return { renderSongs, renderArtists, renderPlaylists };
   };
-
-  
-  
-//How to use
-
-// const { renderSongs: renderNormalSongs } = useRenderer({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
