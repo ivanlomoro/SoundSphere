@@ -2,6 +2,7 @@ import React, { createContext, ReactNode, useContext, useEffect } from "react";
 import axios from "axios";
 import { Songs } from '../../Types/SongsTypes';
 
+
 export interface SongUploadData {
   thumbnail: string;
   url?: string;
@@ -35,7 +36,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     
     useEffect(() => {
       fetchSongs();
-      fetchAllSongs();
+   
 
     }, []);
     try {

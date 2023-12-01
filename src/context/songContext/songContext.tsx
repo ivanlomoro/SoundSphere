@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, ReactNode, useContext } from "react";
+import React, { useState, useEffect, createContext, ReactNode, useContext, Dispatch, SetStateAction } from "react";
 import type { Songs, Category } from '../../Types/SongsTypes';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
@@ -16,13 +16,14 @@ const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
 type SongsContextType = {
-  followed: Artist[];
-  artists: Artist[];
+  followed?: Artist[];
+  artists?: Artist[];
   songs: Songs[];
   recents: Songs[];
   favorites: Songs[];
-  categories: Category[];
+  categories?: Category[];
   mySongs: Songs[];
+  setSongs: Dispatch<SetStateAction<Songs[]>>
   addToRecents: (song: Songs) => void;
   addToFavorites: (song: Songs) => void;
   removeFromFavorites: (id: string) => void;
@@ -220,12 +221,14 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   }
 
   const isFollowed = (id: string): boolean => artistExists(followed, id);
-  const isFollowed = (id: string): boolean => artistExists(followed, id);
+
 
   return (
     <SongsContext.Provider
       value={{
         setSongs, 
+        recents,
+        favorites, 
         songs,
         isFavorite,
         isFollowed,
@@ -250,6 +253,8 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     </SongsContext.Provider>
   );
 };
+
+
 
 export const useSongs = () => {
   const context = useContext(SongsContext);

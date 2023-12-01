@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { RecentGrid } from "../components/homeContainers/FavoritesGrid";
 import { useRenderer } from "../hooks/useRenderer";
 import { useSongs } from "../context/songContext/songContext";
 import { UserContext } from "../context/userContext/UserContext";
@@ -9,20 +8,14 @@ import { ADDMUSICPAGE } from "../routes/paths";
 const MySongsPage = () => {
   const {
     mySongs,
-    getMySongs,
-    isFavorite,
-    toggleFavorite,
-    addToRecents,
     isModifiedSong,
+    getMySongs
   } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
   const { renderSongs } = useRenderer({
     mySongs,
-    toggleFavorite,
-    isFavorite,
-    addToRecents,
-    layout: "list",
-    isMySong: true,
+     layout: "list",
+    isMysong: true,
   });
   const { user } = useContext(UserContext);
 

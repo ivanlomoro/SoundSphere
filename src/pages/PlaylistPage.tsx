@@ -18,3 +18,4 @@ import { HeaderSection } from '../components';
   );
 };
 
+export default PlaylistPage

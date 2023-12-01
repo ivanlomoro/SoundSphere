@@ -1,5 +1,4 @@
 import { RecentGrid, ScrollableRowComponent } from "../components";
-import { RecentGrid, ScrollableRowComponent } from "../components";
 import { NavbarHome } from "../components/NavBar/NavbarHome";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
@@ -15,6 +14,7 @@ export const Home = () => {
   const { renderSongs : renderRecentsSongs} = useRenderer({ songs: recents,  layout: "grid" });
   const { renderSongs : renderFavoriteSongs} = useRenderer({ songs: favorites,  layout: "card" });
   const { renderPlaylists: renderPlaylists } = useRenderer({ playlists: playlists})
+
 
 
   return (
