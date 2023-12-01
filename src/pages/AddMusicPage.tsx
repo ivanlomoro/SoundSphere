@@ -16,6 +16,8 @@ import {
   Select,
   FormContainer,
   ErrorMessage,
+  Submit,
+  InputContainer,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
@@ -203,14 +205,14 @@ export const AddMusicPage = () => {
                 onChange: imageUpload,
               })}
             />
-            <div>
+            <InputContainer>
               <label htmlFor="image-upload">
                 <StyledButtonOutline as="span">Add Image</StyledButtonOutline>
               </label>
               {errors.thumbnail && (
                 <ErrorMessage>{errors.thumbnail.message}</ErrorMessage>
               )}
-            </div>
+            </InputContainer>
             <Input
               type="file"
               accept="audio/mpeg, audio/mp3"
@@ -224,83 +226,87 @@ export const AddMusicPage = () => {
                 onChange: soundUpload,
               })}
             />
-            <div>
+            <InputContainer>
               <label htmlFor="sound-upload">
                 <StyledButtonOutline as="span">Add Sound</StyledButtonOutline>
               </label>
               {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
-            </div>
+            </InputContainer>
           </ButtonContainer>
-
-          <Input
-            type="text"
-            placeholder="Enter song name"
-            {...register("name", {
-              required: {
-                value: true,
-                message: "Song name required.",
-              },
-              minLength: {
-                value: 4,
-                message: "The song name must be at least 4 characters long.",
-              },
-            })}
-          />
-          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-
-          <Select
-            {...register("genreId", {
-              validate: genreValidation,
-            })}
-          >
-            <option value="">Select a genre</option>
-            {genres.map((genre) => (
-              <option key={genre.id} value={genre.id}>
-                {genre.name}
-              </option>
-            ))}
-          </Select>
-          {errors.genreId && (
-            <ErrorMessage>{errors.genreId.message}</ErrorMessage>
-          )}
-
-          <Select
-            {...register("albumId", {
-              validate: albumValidation,
-            })}
-          >
-            <option value="">Select an album</option>
-            <option value="newAlbum">Create new album</option>
-
-            {userAlbums.length > 0 &&
-              userAlbums.map((album) => (
-                <option key={album.id} value={album.id}>
-                  {album.name}
-                </option>
-              ))}
-          </Select>
-          {errors.albumId && (
-            <ErrorMessage>{errors.albumId.message}</ErrorMessage>
-          )}
-
-          {selectedAlbum === "newAlbum" && (
+          <InputContainer>
             <Input
               type="text"
-              placeholder="Enter album name"
-              {...register("newAlbum", {
-                validate: newAlbumValidation,
+              placeholder="Enter song name"
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "Song name required.",
+                },
+                minLength: {
+                  value: 4,
+                  message: "The song name must be at least 4 characters long.",
+                },
               })}
             />
-          )}
-          {errors.newAlbum && (
-            <ErrorMessage>{errors.newAlbum.message}</ErrorMessage>
-          )}
+            {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+          </InputContainer>
+          <InputContainer>
+            <Select
+              {...register("genreId", {
+                validate: genreValidation,
+              })}
+            >
+              <option value="">Select a genre</option>
+              {genres.map((genre) => (
+                <option key={genre.id} value={genre.id}>
+                  {genre.name}
+                </option>
+              ))}
+            </Select>
+            {errors.genreId && (
+              <ErrorMessage>{errors.genreId.message}</ErrorMessage>
+            )}
+          </InputContainer>
+          <InputContainer>
+            <Select
+              {...register("albumId", {
+                validate: albumValidation,
+              })}
+            >
+              <option value="">Select an album</option>
+              <option value="newAlbum">Create new album</option>
+
+              {userAlbums.length > 0 &&
+                userAlbums.map((album) => (
+                  <option key={album.id} value={album.id}>
+                    {album.name}
+                  </option>
+                ))}
+            </Select>
+            {errors.albumId && (
+              <ErrorMessage>{errors.albumId.message}</ErrorMessage>
+            )}
+          </InputContainer>
+          <InputContainer>
+            {selectedAlbum === "newAlbum" && (
+              <Input
+                type="text"
+                placeholder="Enter album name"
+                {...register("newAlbum", {
+                  validate: newAlbumValidation,
+                })}
+              />
+            )}
+            {errors.newAlbum && (
+              <ErrorMessage>{errors.newAlbum.message}</ErrorMessage>
+            )}
+          </InputContainer>
           <label>
             <Input type="checkbox" {...register("isPublic")} />
             Public Song
           </label>
 
-          <button>{axiosLoading ? "Uploading song..." : "Upload Song"}</button>
+          <Submit>{axiosLoading ? "Uploading song..." : "Upload Song"}</Submit>
         </FormContainer>
       </form>
     </section>

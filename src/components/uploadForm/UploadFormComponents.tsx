@@ -62,20 +62,35 @@ export const Input = styled.input`
   height: 26px;
   color: var(--clr-text-secondary);
   background-color: transparent;
-  border: 1px solid var(--clr-text-secondary);
+  border: 1px solid white;
   text-align: center;
   padding-block: 0.25em;
   font-size: var(--fs-lg);
-  :focus {
-    border-color: blue;
+  border-radius: var(--radius-sm);
+
+  &:focus-visible {
+    border-color: var(--clr-accent);
+    outline: none;
   }
-  ::placeholder {
+
+  &::placeholder {
     color: var(--clr-text-secondary);
-    opacity: 1;
+    opacity: 0.8;
   }
 `;
+
 export const Select = styled.select`
   height: 26px;
+  height: var(--space-xxl);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-secondary);
+  background-color: var(--clr-bg-primary);
+  text-align: center;
+  font-size: var(--fs-lg);
+  border: none;
+  &:focus-visible {
+    outline: none;
+  }
 `;
 export const ButtonSummit = styled.div`
   padding: 10px 20px;
@@ -85,8 +100,31 @@ export const ButtonSummit = styled.div`
   border-radius: 10px;
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+  position: relative;
+`;
+
 export const ErrorMessage = styled.p`
   color: #dc3545;
+  position: absolute;
+  top: 2.25em;
+`;
+
+export const Submit = styled.button`
+  position: sticky;
+  bottom: 80px;
+  width: 80vw;
+  margin: auto;
+  padding-block: 0.5em;
+  color: var(--clr-text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: var(--clr-accent);
+  text-transform: uppercase;
+  font-size: var(--fs-xl);
 `;
 
 const StyledFormContainer = styled.div`
