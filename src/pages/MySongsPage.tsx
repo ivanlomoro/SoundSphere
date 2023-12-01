@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { RecentGrid } from "../components/homeContainers/FavoritesGrid";
 import { useRenderer } from "../hooks/useRenderer";
 import { useSongs } from "../context/songContext/songContext";
 import { UserContext } from "../context/userContext/UserContext";
 import { Link } from "react-router-dom";
 import { ADDMUSICPAGE } from "../routes/paths";
+import { Container, HeaderSection, WelcomeUserSection } from "../components";
+import { UserContainer } from "../components/containers/UserContainer";
+
 
 const MySongsPage = () => {
   const {
@@ -40,19 +42,25 @@ const MySongsPage = () => {
 
   return (
     <>
-      <div>
-        <h2>My Songs</h2>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : mySongs.length > 0 ? (
-          renderSongs()
-        ) : (
-          <p>
-            You didn`t upload any songs!{" "}
-            <Link to={ADDMUSICPAGE}> upload song</Link>{" "}
-          </p>
-        )}
-      </div>
+      <Container>
+        <HeaderSection text="My Songs" />
+        <UserContainer>
+          <WelcomeUserSection editUserLogo={true}/>
+        </UserContainer>
+        <div>
+          <h2>My Songs</h2>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : mySongs.length > 0 ? (
+            renderSongs()
+          ) : (
+            <p>
+              You didn`t upload any songs!{" "}
+              <Link to={ADDMUSICPAGE}> upload song</Link>{" "}
+            </p>
+          )}
+        </div>
+      </Container>
     </>
   );
 };

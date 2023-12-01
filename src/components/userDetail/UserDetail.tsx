@@ -1,21 +1,19 @@
-import { FiEdit } from "react-icons/fi";
 import styled from "styled-components";
-import { Button } from "../button/Button";
 
 type UserDetailPropsType = {
   label: string;
   info: string | undefined;
 };
 
-const StyledUserDetailContainer = styled.div`
+export const StyledUserDetailContainer = styled.div`
   position: relative;
 `;
 
-const StyledDetailLabel = styled.p`
+export const StyledDetailLabel = styled.p`
   font-weight: var(--weight-semibold);
 `;
 
-const StyledDetailInfo = styled.p`
+export const StyledDetailInfo = styled.p`
   font-weight: var(--weight-bold);
   color: var(--clr-text-secondary);
 `;
@@ -26,7 +24,7 @@ export const UserDetail = ({ label, info }: UserDetailPropsType) => {
     <StyledUserDetailContainer>
       <StyledDetailLabel>{label}</StyledDetailLabel>
       <StyledDetailInfo>{info}</StyledDetailInfo>
-      <Button content={<FiEdit />} variant="StyledInvisibleButton" />
+      {/* <Button content={<FiEdit />} variant="StyledInvisibleButton" /> */}
     </StyledUserDetailContainer>
   );
 };

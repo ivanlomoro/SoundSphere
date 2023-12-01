@@ -2,11 +2,12 @@ import { FC } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { useSongs } from "../../context/songContext/songContext";
-import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
 import "./CardContainerButtons.styles.css"
 import { GenreType, useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
+import styled from "styled-components";
+
 
 export type editSongType = {
     name: string
@@ -20,6 +21,12 @@ export type editSongType = {
 type Props = {
     song: Songs
 }
+
+const StyledColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 
 const CardContainerButtons: FC<Props> = ({ song }) => {
@@ -155,7 +162,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
     };
 
     return (
-        <ArtistActionButtons>
+        <StyledColumnContainer>
             <Button
                 content={<FaEdit />}
                 variant="StyledBackButton"
@@ -166,7 +173,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                 variant="StyledBackButton"
                 onClick={() => { handleDeleteSong(stringId) }}
             />
-        </ArtistActionButtons>
+        </StyledColumnContainer>
     )
 }
 
