@@ -13,7 +13,7 @@ type MagicInput<T> = {
   playlists?: Playlist[]; 
   isMySong?: true;
 
-
+edit?: boolean;
   
   
   layout: T;
@@ -25,7 +25,7 @@ type LayoutVariant = "grid" | "list" | "card" | undefined;
 
 
 export const useRenderer = (input: MagicInput<LayoutVariant>) => {
-    const {  songs, artists, playlists, layout} = input;
+    const {  songs, artists, playlists, layout, edit} = input;
   
     const renderSongs = React.useCallback(() => {
          return (
@@ -35,12 +35,13 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
             variant={layout}
               key={song.id}
               song={song}
+              edit={input.edit}
             
             />
           ))}
         </>
       );
-    }, [songs,  layout]);
+    }, [songs,  layout, edit]);
   
     const renderArtists = React.useCallback(() => {
       return (
@@ -49,6 +50,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
             <ArtistCard
               key={artist.id}
               artist={artist}
+          
               
      
             />
@@ -73,7 +75,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
           ))}
         </>
       );
-    }, [playlists, layout]);
+    }, [playlists, layout,]);
   
     return { renderSongs, renderArtists, renderPlaylists };
   };

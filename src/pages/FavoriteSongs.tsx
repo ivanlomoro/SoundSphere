@@ -6,15 +6,15 @@ import { useInteractions } from "../context/userContext/InteractionContext";
 
 
 export const FavoriteSongs = () => {
-  const { selectedSongs, addToRecents, toggleSelected, isSelected } = useInteractions();
-  const { renderSongs: renderPlaylistSongs } = useRenderer({ songs: selectedSongs, layout: "list", toggleSelected, isSelected, addToRecents });
+  const { selectedSongs, } = useInteractions();
+  const { renderSongs: renderFavoriteSongs  } = useRenderer({ songs: selectedSongs, layout: "list"});
 
   return (
     <>
       <HeaderSection text="Playlists" />
       <ul>
         <h2> Playlists</h2>
-        {renderPlaylistSongs()}
+        {renderFavoriteSongs()}
       </ul>
     </>
   );

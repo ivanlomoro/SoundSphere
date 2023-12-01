@@ -8,14 +8,15 @@ import { AiOutlinePlayCircle } from 'react-icons/ai'
 import CardContainerButtons from './CardContainerButtons'
 import { SongCardProps } from '../../Types/SongsTypes'
 import { useInteractions } from '../../context/userContext/InteractionContext'
-import { useSongs } from '../../context/songContext/songContext';
 
-export function SongCard({ song,  variant = 'card' }: SongCardProps) {
+
+export function SongCard({ song,  variant = 'card', edit }: SongCardProps) {
+	
 	const CardComponent = variant === 'grid' ? GridCard : variant === 'list' ? ListCard : Card
 	const ImageComponent = variant === 'grid' ? GridCardImage : variant === 'list' ? ListCardImage : CardImage
 	const DescriptionComponent = variant === 'grid' ? GridCardDescription : variant === 'list' ? ListCardDescription : CardDescription
 	const { toggleFavorite, isFavorite, addToRecents, toggleSelected, isSelected, } = useInteractions()
-	const isMySong = useSongs()
+	
 	return (
 		<CardComponent>
 			{variant === 'grid' && (
@@ -61,7 +62,7 @@ export function SongCard({ song,  variant = 'card' }: SongCardProps) {
 						</FaveButton>
 					</CommonButtonContainer>)}
 			</DescriptionComponent>
-			{isMySong &&
+			{edit  &&
 				<CardContainerButtons song={song} />}
 		</CardComponent>
 	)

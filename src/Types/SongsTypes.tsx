@@ -40,11 +40,11 @@ export interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void
 	isFavorite?: (id: string) => boolean
-	isMySong?: boolean
 	addToRecents?: (song: Songs) => void
 	variant?: 'grid' | 'list' | 'card'
   isSelected? : (id: string) => boolean
   toggleSelected?: (song: Songs) => void
+  edit?: boolean
 }
 
 export interface SongUploadData {

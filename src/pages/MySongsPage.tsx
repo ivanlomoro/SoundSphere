@@ -12,7 +12,7 @@ const MySongsPage = () => {
     isModifiedSong,
   } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
-  const { renderSongs: renderMySongs } = useRenderer({songs: mySongs,layout: "list",});
+  const { renderSongs: renderMySongs } = useRenderer({songs: mySongs,layout: "list", edit: true});
   const { user } = useContext(UserContext);
 
   useEffect(() => {

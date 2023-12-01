@@ -44,11 +44,10 @@ export const CardDescription = styled.div`
 // List Styles
 export const ListCard = styled(Card)`
   width: 85%;
-  max-height: 10vh;
-  flex-direction: row;
-  align-items: center;
+  max-height: 10vh
+  flex-direction: row
+  align-items: center
   margin: var(--space-md)
-  ;
 `
 export const PlayButton = styled(AiOutlinePlayCircle)`
   height: 50px;
@@ -66,16 +65,13 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
 export const ListCardImage = styled(CardImage)`
   max-height: 12vh;
   max-width: 12vh;
-  position: relative;
-  
+  position: relative;  
 `
 
 export const ListCardDescription = styled(CardDescription)`
   padding: var(--space-md);
   font-size: clamp(0.5rem, 10vw, 1rem);
-  overflow: hidden;
-
- 
+  overflow: hidden; 
 `
 
 
