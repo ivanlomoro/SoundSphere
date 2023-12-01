@@ -121,11 +121,28 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const response = await axios.delete(URL);
         if (response.status === 204) {
           setIsModifiedSong(true)
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your song has been deleted.',
+            icon: 'success',
+            background: '#111111',
+            color: 'white'
+          });
         } else {
           console.error(`Error deleting song: ${response.statusText}`);
+          Swal.fire(
+            'Error',
+            'There was an error trying to delete the song.',
+            'error'
+          );
         }
       } catch (error) {
         console.error(error);
+        Swal.fire(
+          'Error',
+          'There was an error trying to delete the song.',
+          'error'
+        );
       }
     }
   };
