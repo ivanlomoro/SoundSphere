@@ -22,6 +22,7 @@ import {
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
+import "../components/uploadForm/switch.css";
 
 interface Album {
   id: string;
@@ -190,7 +191,6 @@ export const AddMusicPage = () => {
               <AiOutlineCamera size={70} />
             )}
           </ImageContainer>
-
           <ButtonContainer>
             <Input
               type="file"
@@ -301,11 +301,20 @@ export const AddMusicPage = () => {
               <ErrorMessage>{errors.newAlbum.message}</ErrorMessage>
             )}
           </InputContainer>
-          <label>
-            <Input type="checkbox" {...register("isPublic")} />
-            Public Song
-          </label>
-
+          <div className="switch-container">
+            <Input
+              className="checkbox"
+              type="checkbox"
+              {...register("isPublic")}
+              id="toggle"
+            />
+            <label htmlFor="toggle" className="switch"></label>
+            {watch("isPublic") ? (
+              <p className="switch-text">Public</p>
+            ) : (
+              <p className="switch-text">Private</p>
+            )}
+          </div>
           <Submit>{axiosLoading ? "Uploading song..." : "Upload Song"}</Submit>
         </FormContainer>
       </form>

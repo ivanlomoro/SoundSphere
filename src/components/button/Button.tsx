@@ -16,7 +16,8 @@ const StyledButton = styled.button`
 export const StyledButtonOutline = styled(StyledButton)`
   background: none;
   padding-inline: var(--space-xl);
-  border: 1px solid var(--clr-accent);
+  border: 2px solid var(--clr-accent);
+  font-weight: bold;
 `;
 
 const StyledButtonPill = styled(StyledButton)`

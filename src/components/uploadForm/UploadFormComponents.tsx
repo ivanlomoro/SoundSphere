@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 export const ImageContainer = styled.div`
-  box-shadow: 0 0 10px 0px var(--clr-accent);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,6 +57,7 @@ export const Text = styled.span`
   top: 51.35em;
   left: 8em;
 `;
+
 export const Input = styled.input`
   height: 26px;
   color: var(--clr-text-secondary);
@@ -124,7 +124,8 @@ export const Submit = styled.button`
   border-radius: var(--radius-sm);
   background-color: var(--clr-accent);
   text-transform: uppercase;
-  font-size: var(--fs-xl);
+  font-size: var(--fs-lg);
+  font-weight: bold;
 `;
 
 const StyledFormContainer = styled.div`
