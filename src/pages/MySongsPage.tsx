@@ -10,21 +10,16 @@ import { UserContainer } from "../components/containers/UserContainer";
 
 const MySongsPage = () => {
   const {
-    mySongs,
+       mySongs,
     getMySongs,
-    isFavorite,
-    toggleFavorite,
-    addToRecents,
     isModifiedSong,
   } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
   const { renderSongs } = useRenderer({
-    mySongs,
-    toggleFavorite,
-    isFavorite,
-    addToRecents,
-    layout: "list",
-    isMySong: true,
+
+   songs: mySongs,
+     layout: "list",
+   
   });
   const { user } = useContext(UserContext);
 

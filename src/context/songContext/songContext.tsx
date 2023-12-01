@@ -1,12 +1,13 @@
 import React, { useState, useEffect, createContext, ReactNode, useContext } from "react";
-import type { Songs, Category } from '../../Types/SongsTypes';
-import db from '../../data/db.json';
+import type { Songs,  } from '../../Types/SongsTypes';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
 import { UserContext } from "../userContext/UserContext";
 import { editSongType } from "../../components/card/CardContainerButtons";
 import Swal from "sweetalert2";
+import { useApiCalls } from "./ApiCalls";
+import { SongsContextType } from '../../Types/SongsTypes';
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
@@ -14,31 +15,7 @@ const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
 
-type SongsContextType = {
-  followed: Artist[];
-  artists: Artist[];
-  songs: Songs[];
-  recents: Songs[];
-  favorites: Songs[];
-  categories: Category[];
-  mySongs: Songs[];
-  addToRecents: (song: Songs) => void;
-  addToFavorites: (song: Songs) => void;
-  removeFromFavorites: (id: number) => void;
-  isFavorite: (id: number) => boolean;
-  isFollowed: (id: number) => boolean;
-  toggleFavorite: (song: Songs) => void;
-  addToFollowed: (artist: Artist) => void;
-  removeFromFollowed: (id: number) => void;
-  toggleFollowed: (artist: Artist) => void;
-  getMySongs: (user: UserInterface | null) => void;
-  deleteSong: (songID: string) => void;
-  isModifiedSong: boolean;
-  updateSong: (songID: string, editSong: editSongType) => void;
-  getSongById: (songID: string) => void;
-  editedSong: Songs | null
-  errorEditedSong: boolean
-};
+
 
 const SongsContext = createContext<SongsContextType | null>(null);
 
@@ -53,41 +30,35 @@ export type UserInterface = {
 const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const { user } = useContext(UserContext)
   const [songs, setSongs] = useState<Songs[]>([]);
-  const [artists, setArtists] = useState<Artist[]>([]);
+  // const [artists, setArtists] = useState<Artist[]>([]);
   const [recents, setRecents] = useLocalStorage<Songs[]>('recents', []);
   const [favorites, setFavorites] = useLocalStorage<Songs[]>('favorites', []);
-  const [categories, setCategories] = useState<Category[]>([])
+  // const [categories, setCategories] = useState<Category[]>([])
   const [followed, setFollowed] = useLocalStorage<Artist[]>('followed', [])
   const [mySongs, setMySongs] = useState<Songs[]>([]);
   const [isModifiedSong, setIsModifiedSong] = useState<boolean>(false);
   const [editedSong, setEditedSong] = useState<Songs | null>(null);
   const [errorEditedSong, setErrorEditedSong] = useState<boolean>(true);
-
-
-
-
+  const {publicSongs} = useApiCalls()
 
   useEffect(() => {
-    setSongs(db.songData);
+    setSongs(publicSongs);
     getMySongs(user)
   }, []);
-
-  useEffect(() => { setCategories(db.categories) }, [])
-  useEffect(() => { setArtists(db.artistsData) }, [])
 
   useEffect(() => { setIsModifiedSong(false) }, [isModifiedSong])
   useEffect(() => { setErrorEditedSong(true) }, [errorEditedSong])
 
+  const songExists = (arr: Songs[], id: string) => arr.some((song: Songs) => song.id === id);
 
-  const songExists = (arr: Songs[], id: number) => arr.some((song: Songs) => song.id === id);
-  const artistExists = (arr: Artist[], id: number) => arr.some((artist: Artist) => artist.id === id);
+  const artistExists = (arr: Artist[], id: string) => arr.some((artist: Artist) => artist.id === id);
+  
 
   const getMySongs = async (user: UserInterface | null) => {
 
     if (user != null) {
       const userId = user.userId
       const URL = `${apiUrl}/song/user/${userId}`
-
 
       try {
         const response = await axios.get(URL)
@@ -192,11 +163,12 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   };
 
-  const removeFromFavorites = (id: number) => {
+  const removeFromFavorites = (id: string) => {
     setFavorites((currentFavorites) => currentFavorites.filter((song: Songs) => song.id !== id));
   };
 
-  const isFavorite = (id: number): boolean => songExists(favorites, id);
+  const isFavorite = (id: string): boolean => songExists(favorites, id);
+  const isMySong = (id: string): boolean => songExists(mySongs, id);
 
   const toggleFavorite = (song: Songs) => {
     isFavorite(song.id) ? removeFromFavorites(song.id) : addToFavorites(song);
@@ -209,7 +181,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   }
 
-  function removeFromFollowed(id: number) {
+  function removeFromFollowed(id:string) {
     setFollowed((currentFollowed) =>
       currentFollowed.filter((item) => item.id !== id)
     );
@@ -223,17 +195,17 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     }
   }
 
-  const isFollowed = (id: number): boolean => artistExists(followed, id);
+  const isFollowed = (id: string): boolean => artistExists(followed, id);
+
 
   return (
     <SongsContext.Provider
       value={{
-        artists,
-        followed,
-        songs,
+        setSongs, 
         recents,
-        favorites,
-        categories,
+        isMySong,
+        favorites, 
+        songs,
         isFavorite,
         isFollowed,
         addToRecents,
@@ -257,6 +229,8 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     </SongsContext.Provider>
   );
 };
+
+
 
 export const useSongs = () => {
   const context = useContext(SongsContext);

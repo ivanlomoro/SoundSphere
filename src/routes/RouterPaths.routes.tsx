@@ -15,7 +15,7 @@ import {
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
 import { SearchPage } from "../pages/SearchPage";
-import MySongsPage from "../pages/MySongsPage";
+import MySongsPage from "../pages/MySongsPage"
 import PlaylistPage from "../pages/PlaylistPage";
 
 export const RouterPaths: FC = () => {

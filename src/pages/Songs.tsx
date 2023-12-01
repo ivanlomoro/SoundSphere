@@ -6,23 +6,14 @@ import { useRenderer } from '../hooks/useRenderer';
 
 
 export const SongList = () => {
-  const { songs,  artists  } = useSongs();
-  const { favorites, recents, toggleFavorite, isFavorite, toggleFollowed, isFollowed, addToRecents } =useInteractions()
+  const { songs } = useSongs();
+  const { favorites, recents} = useInteractions()
 
-  const {renderArtists } = useRenderer({
-    songs,
-    artists,
-    toggleFavorite,
-    toggleFollowed,
-    isFavorite,
-    isFollowed,
-    addToRecents,
-    layout : 'card',
-  });
-  
-  const { renderSongs: renderNormalSongs } = useRenderer({ songs, toggleFavorite, isFavorite, addToRecents, layout: "card" });
-  const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites, toggleFavorite, isFavorite, addToRecents, layout: "card" });
-  const { renderSongs: renderRecentSongs } = useRenderer({ songs: recents, toggleFavorite, isFavorite, addToRecents, layout: "grid" });
+
+
+  const { renderSongs: renderNormalSongs } = useRenderer({ songs: songs, layout: "card" });
+  const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites,  layout: "card" });
+  const { renderSongs: renderRecentSongs } = useRenderer({ songs: recents,  layout: "grid" });
 
   return (
     <div>
@@ -33,7 +24,7 @@ export const SongList = () => {
         </ScrollableRowComponent>
 
       </div>
-      
+
       <div>
         <h2>Recently Played</h2>
         <RecentGrid>
@@ -46,12 +37,6 @@ export const SongList = () => {
           {renderFavoriteSongs()}
         </ScrollableRowComponent>
       </div>
-      <div>
-        <h2>Artists</h2>
-        <ScrollableRowComponent>
-          {renderArtists()}
-        </ScrollableRowComponent>
       </div>
-    </div>
   );
 };
