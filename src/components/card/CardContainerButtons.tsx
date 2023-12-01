@@ -1,17 +1,16 @@
 import { FC } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { useSongs } from "../../context/songContext/songContext";
 import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
 import "./CardContainerButtons.styles.css"
-import { useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
 
 export type editSongType = {
     name: string
     url?: string
-    thumbnail?: string
+    thumbnail: string
     isPublic?: boolean
     genreId: string
     artistId?: string
@@ -21,30 +20,10 @@ type Props = {
     song: Songs
 }
 
-type GenreForm = {
-    value: string | number
-    label: string
-}
-
 const CardContainerButtons: FC<Props> = ({ song }) => {
     const stringId = song.id.toString();
 
-    const { deleteSong, updateSong } = useSongs()
-    const {apiGenres} = useGenres()
-
-    const genreItems = () => {
-        const genres: GenreForm[] = []
-        apiGenres.map((genre) => {
-            const newGenre: GenreForm = {
-                value: genre.id,
-                label: genre.name
-            }
-            genres.push(newGenre)
-        }
-        )
-        console.log("Genres",genres)
-        return genres
-    }
+    const { deleteSong, updateSong, errorEditedSong } = useSongs()
 
     // const editSong: editSongType = {
     //     name: "Prueba 3 modificado pa eliminar",
@@ -53,9 +32,10 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
     //     isPublic: true,
     //     genreId: "6560712d54a3139491bfad8f"
     // }
-   
+
     const handleUpdateSong = async (songId: string, editSong: Songs) => {
-        console.log("ApiGenres:",apiGenres)
+        let newName: string
+
         const { value: name } = await Swal.fire({
             title: "Enter the new song name",
             input: "text",
@@ -70,83 +50,128 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                 }
             }
         }) as { value: string };
-
         if (name) {
-            const { value: genre } = await Swal.fire({
-                title: "Select field validation",
-                input: "select",
-                inputValue: editSong.genre,
+            newName = name
+            const { value: thumbnail } = await Swal.fire({
+                title: "Select image",
+                input: "file",
                 background: '#111111',
                 color: 'white',
-                inputOptions: genreItems(),
-                inputPlaceholder: "Select your genre",
-                customClass: "swal2-select option",
+                inputAttributes: {
+                    "accept": "image/*",
+                    "aria-label": "Upload your thumbnail picture"
+                },
+                inputValue: editSong.thumbnail,
                 showCancelButton: true,
                 inputValidator: (value) => {
                     if (!value) {
-                        value = editSong.genre;
-                        return "You need to choose something!";
+                        return "Select your image";
                     }
                 }
-            }) as { value: string };
+            }) as { value: File };
+            if (thumbnail) {
+                const reader = new FileReader();
+                reader.onload = (image) => {
+                    if (image) {
+                        Swal.fire({
+                            title: "Your uploaded picture",
+                            imageUrl: image.target!.result,
+                            imageAlt: "The uploaded picture",
+                            confirmButtonText: `Continue&nbsp;<i class="fa fa-arrow-right"></i>`,
+                            background: '#111111',
+                            color: 'white'
+                        } as SweetAlertOptions)
+                            .then(async () => {
+                                const { value: genre } = await Swal.fire({
+                                    title: "Select field validation",
+                                    input: "select",
+                                    inputValue: editSong.genre,
+                                    background: '#111111',
+                                    color: 'white',
+                                    inputOptions: {
+                                        rock: "Rock",
+                                        pop: "Pop",
+                                        punk: "Punk",
+                                        rap: "Rap"
+                                    },
+                                    inputPlaceholder: "Select your genre",
+                                    customClass: "swal2-select option",
+                                    showCancelButton: true,
+                                    inputValidator: (value) => {
+                                        if (!value) {
+                                            value = editSong.genre
+                                            return "You need to choose something!";
+                                        }
+                                    }
+                                }) as { value: string };
+                                if (genre) {
+                                    Swal.fire({
+                                        title: "Edited Song",
+                                        html: `<p><b>Name:</b> ${name}<p/> <br> <p><b>Genre:</b> ${genre}<p/>`,
+                                        imageUrl: image.target!.result,
+                                        imageAlt: "The uploaded picture",
+                                        background: '#111111',
+                                        color: 'white'
+                                    } as SweetAlertOptions)
+                                        .then(async () => {
+                                            const editSong = {
+                                                name: newName,
+                                                thumbnail: thumbnail.name,
+                                                genreId: "6560712d54a3139491bfad8f",
+                                                // isPublic:private
+                                            }
+                                            console.log("Esto es editSong", editSong);
+                                            await updateSong(songId, editSong);
+                                            if (errorEditedSong) {
+                                                Swal.fire({
+                                                    title: 'Updated song!',
+                                                    text: 'Your song has been updated.',
+                                                    icon: 'success',
+                                                    background: '#111111',
+                                                    color: 'white'
+                                                });
+                                            } else {
+                                                Swal.fire(
+                                                    'Error',
+                                                    'There was an error trying to update the song.',
+                                                    'error'
+                                                );
+                                            }
 
-            if (genre) {
-                const inputOptions = {
-                    true: "Public",
-                    false: "Private"
+                                        });
+                                }
+                            });
+
+                    }
                 };
-                const { value: privacity } = await Swal.fire({
-                    title: "Select privacity",
-                    input: "radio",
-                    inputOptions,
-                    background: '#111111',
-                    customClass: "swal2-radio",
-                    color: 'white',
-                    inputValidator: (value) => {
-                        if (!value) {
-                            return "You need to choose something!";
-                        }
-                    }
-                }) as { value: string };
-                if (privacity) {
-                    let newPrivacity: boolean
-                    if (privacity === "true") {
-                        newPrivacity = true
-                    } else {
-                        newPrivacity = false
-                    }
-                    const editedSong = {
-                        name: name,
-                        genreId: genre,
-                        isPublic: newPrivacity
-                    };
 
-                    console.log("Esto es editedSong", editedSong);
-                    try {
-                        const response = await updateSong(songId, editedSong);
-                        console.log("Estamos en el try");
-                        console.log("Esto es updateSong-response:", response);
-
-                    } catch (error) {
-                        console.error(error);
-                        Swal.fire(
-                            'Error',
-                            'There was an error trying to update the song.',
-                            'error'
-                        );
-                        console.log("Estamos en el catch");
-                    }
-                }
+                reader.readAsDataURL(thumbnail);
             }
 
 
 
-
-            // updateSong(stringId, editSong)
+            // const inputOptions = {
+            //     true: "Public",
+            //     false: "Private"
+            // };
+            // const { value: privacity } = await Swal.fire({
+            //     title: "Select privacity",
+            //     input: "radio",
+            //     inputOptions,
+            //     inputValue: "Private",
+            //     inputValidator: (value) => {
+            //         if (!value) {
+            //             return "You need to choose something!";
+            //         }
+            //     }
+            // });
+            // if (privacity) {
+            //     Swal.fire({ html: `You selected: ${privacity}` });
+            // }
 
         }
+        // updateSong(stringId, editSong)
     }
-
 
     const handleDeleteSong = async (songId: string) => {
         try {
@@ -197,6 +222,5 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         </ArtistActionButtons>
     )
 }
-
 
 export default CardContainerButtons

@@ -76,6 +76,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const songExists = (arr: Songs[], id: string) => arr.some((song: Songs) => song.id === id);
 
   const artistExists = (arr: Artist[], id: string) => arr.some((artist: Artist) => artist.id === id);
+  
 
   const getMySongs = async (user: UserInterface | null) => {
 
