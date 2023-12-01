@@ -21,7 +21,7 @@ type MagicInput<T> = {
   
   export const useRenderer = (input: MagicInput<LayoutVariant>) => {
     const { mySongs, songs, artists, toggleFavorite, toggleFollowed, isFavorite, isFollowed, addToRecents, layout, isMySong } = input;
-  
+    console.log(songs);
     const renderSongs = React.useCallback(() => {
       const songsToRender = mySongs || songs;
       return (

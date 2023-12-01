@@ -2,7 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Songs } from "../../Types/SongsTypes";
+import { useRenderer } from "../../hooks/useRenderer";
 const GenrePage = () => {
+
+ 
 
   const [songByGenre , setSongByGenre] = useState<Songs[]>([])
   const {genreId} = useParams();
@@ -21,6 +24,10 @@ const GenrePage = () => {
       fetchSongsByGenre();
     }, []);
 
+
+    const { renderSongs : renderGenreSongs} = useRenderer({ songs: songByGenre,  layout: "card" });
+
+    
   return(
       <>
       <h3></h3>
@@ -30,7 +37,10 @@ const GenrePage = () => {
           <li key= {song.id}>{song.name}</li>
         )
       })}
+
+      
       </ul>
+      { renderGenreSongs()}
     </>
   )
 };
