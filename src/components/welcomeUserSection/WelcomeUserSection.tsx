@@ -3,15 +3,21 @@ import { UserAvatar } from "../userAvatar/UserAvatar";
 import { WelcomeUserMessage } from "./WelcomeUserMessage";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import { USERPAGE } from "../../routes/paths";
+import { ADDMUSICPAGE, USERPAGE } from "../../routes/paths";
 import { FaUserGear } from "react-icons/fa6";
 import { FC } from "react";
+import { MdFileUpload } from "react-icons/md";
+
 
 const StyledWelcomeUserSection = styled.div`
   display: flex;
   align-items: center;
   gap: var(--space-md);
   cursor: pointer;
+`;
+
+const StyledIconSection = styled.div`
+  margin-left: 3rem;
 `;
 
 type Props = {
@@ -28,7 +34,12 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
         <UserAvatar />
         <WelcomeUserMessage text={`Welcome ${user.given_name} !`} />
         {editUserLogo &&
-          <FaUserGear className="custom-icon" />
+          <StyledIconSection>
+            <FaUserGear className="custom-icon" />
+            <Link to={ADDMUSICPAGE}>
+              <MdFileUpload className="custom-icon" />
+            </Link>
+          </StyledIconSection>
         }
       </StyledWelcomeUserSection >
     </Link>

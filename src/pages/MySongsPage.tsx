@@ -38,12 +38,11 @@ const MySongsPage = () => {
   return (
     <>
       <Container>
-        <HeaderSection text="My Songs" />
+        <HeaderSection text="My Sphere" />
         <UserContainer>
           <WelcomeUserSection editUserLogo={true}/>
         </UserContainer>
         <div>
-          <h2>My Songs</h2>
           {isLoading ? (
             <p>Loading...</p>
           ) : mySongs.length > 0 ? (
