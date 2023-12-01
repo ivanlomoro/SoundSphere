@@ -1,4 +1,3 @@
-
 import { HeaderSection } from "../components";
 import { useRenderer } from '../hooks/useRenderer';
 import { useInteractions } from "../context/userContext/InteractionContext";
@@ -6,17 +5,16 @@ import { useInteractions } from "../context/userContext/InteractionContext";
 
 
 export const FavoriteSongs = () => {
-  const { selectedSongs, addToRecents, toggleSelected, isSelected } = useInteractions();
-  const { renderSongs: renderPlaylistSongs } = useRenderer({ songs: selectedSongs, layout: "list", toggleSelected, isSelected, addToRecents });
+  const { favoriteSongs } = useInteractions();
+  const { renderSongs: renderFavoriteSongs  } = useRenderer({ songs: favoriteSongs, layout: "list"});
 
   return (
     <>
-      <HeaderSection text="Playlists" />
+      <HeaderSection text="Favorites" />
       <ul>
-        <h2> Playlists</h2>
-        {renderPlaylistSongs()}
+        <h2>Favorites</h2>
+        {renderFavoriteSongs()}
       </ul>
     </>
   );
 };
-  
