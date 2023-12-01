@@ -1,6 +1,12 @@
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Home, LandingPage, UserPage, FavoriteSongs, AddMusicPage } from "../pages";
+import {
+  Home,
+  LandingPage,
+  UserPage,
+  FavoriteSongs,
+  AddMusicPage,
+} from "../pages";
 import {
   DISPLAYPAGE,
   HOME,
@@ -11,14 +17,14 @@ import {
   ADDMUSICPAGE,
   MYSONGSPAGE,
   MICHELE,
-  GENRE
+  GENRE,
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
 import { SearchPage } from "../pages/SearchPage";
 import MySongsPage from "../pages/MySongsPage";
 import PlaylistPage from "../pages/PlaylistPage";
-import GenrePage from "../components/genresGrid/GenrePage";
+import GenrePage from "../pages/GenrePage";
 
 export const RouterPaths: FC = () => {
   return (
@@ -35,11 +41,10 @@ export const RouterPaths: FC = () => {
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
           <Route path={MYSONGSPAGE} element={<MySongsPage />} />
-          <Route path={GENRE} element={<GenrePage/>}/>
+          <Route path={GENRE} element={<GenrePage />} />
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />
         <Route path="/" element={<Navigate to={HOME} />} />
-        
       </Routes>
     </>
   );
