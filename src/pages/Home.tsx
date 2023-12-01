@@ -13,7 +13,7 @@ export const Home = () => {
   const { renderSongs: renderPublicSongs } = useRenderer({ songs: publicSongs, layout: "card" });
   const { renderSongs : renderRecentsSongs} = useRenderer({ songs: recents,  layout: "grid" });
   const { renderSongs : renderFavoriteSongs} = useRenderer({ songs: favorites,  layout: "card" });
-  const { renderPlaylists: renderPlaylists } = useRenderer({ playlists: playlists})
+  const { renderPlaylists: renderPlaylists } = useRenderer({ playlists: playlists, layout: "card"})
 
 
 
