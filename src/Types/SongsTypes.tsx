@@ -67,8 +67,12 @@ export type SongsContextType = {
   removeFromFavorites: (id: string) => void;
   isFavorite: (id: string) => boolean;
   isFollowed: (id: string) => boolean;
+  removeFromFavorites: (id: string) => void;
+  isFavorite: (id: string) => boolean;
+  isFollowed: (id: string) => boolean;
   toggleFavorite: (song: Songs) => void;
   addToFollowed: (artist: Artist) => void;
+  removeFromFollowed: (id: string) => void;
   removeFromFollowed: (id: string) => void;
   toggleFollowed: (artist: Artist) => void;
   getMySongs: (user: UserInterface | null) => void;
@@ -79,7 +83,15 @@ export type SongsContextType = {
   editedSong: Songs | null;
   errorEditedSong: boolean;
 };
-
+export interface Songs {
+  id: number;
+  name: string;
+  artist: string;
+  url: string;
+  thumbnail: string;
+  genre: string;
+  liked: boolean;
+}
 export interface SongCardProps {
 	song: Songs
 	toggleFavorite?: (song: Songs) => void

@@ -54,10 +54,10 @@ export type UserInterface = {
 const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const { user } = useContext(UserContext)
   const [songs, setSongs] = useState<Songs[]>([]);
-  const [artists, setArtists] = useState<Artist[]>([]);
+  // const [artists, setArtists] = useState<Artist[]>([]);
   const [recents, setRecents] = useLocalStorage<Songs[]>('recents', []);
   const [favorites, setFavorites] = useLocalStorage<Songs[]>('favorites', []);
-  const [categories, setCategories] = useState<Category[]>([])
+  // const [categories, setCategories] = useState<Category[]>([])
   const [followed, setFollowed] = useLocalStorage<Artist[]>('followed', [])
   const [mySongs, setMySongs] = useState<Songs[]>([]);
   const [isModifiedSong, setIsModifiedSong] = useState<boolean>(false);
@@ -117,11 +117,28 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const response = await axios.delete(URL);
         if (response.status === 204) {
           setIsModifiedSong(true)
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your song has been deleted.',
+            icon: 'success',
+            background: '#111111',
+            color: 'white'
+          });
         } else {
           console.error(`Error deleting song: ${response.statusText}`);
+          Swal.fire(
+            'Error',
+            'There was an error trying to delete the song.',
+            'error'
+          );
         }
       } catch (error) {
         console.error(error);
+        Swal.fire(
+          'Error',
+          'There was an error trying to delete the song.',
+          'error'
+        );
       }
     }
   };
@@ -203,16 +220,13 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   }
 
   const isFollowed = (id: string): boolean => artistExists(followed, id);
+  const isFollowed = (id: string): boolean => artistExists(followed, id);
 
   return (
     <SongsContext.Provider
       value={{
-        artists,
-        followed,
+        setSongs, 
         songs,
-        recents,
-        favorites,
-        categories,
         isFavorite,
         isFollowed,
         addToRecents,

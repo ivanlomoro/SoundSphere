@@ -5,6 +5,7 @@ import { useSongs } from "../../context/songContext/songContext";
 import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
 import "./CardContainerButtons.styles.css"
+import { GenreType, useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
 
 export type editSongType = {
@@ -20,10 +21,22 @@ type Props = {
     song: Songs
 }
 
+
 const CardContainerButtons: FC<Props> = ({ song }) => {
     const stringId = song.id.toString();
 
-    const { deleteSong, updateSong, errorEditedSong } = useSongs()
+    const { deleteSong, updateSong } = useSongs()
+    const { apiGenres } = useGenres()
+
+    const genreItems = () => {
+        const genres: { [key: string]: string } = {};
+        apiGenres.map((genre: GenreType) => {
+            genres[genre.id] = genre.name;
+        });
+        console.log("Genres", genres);
+        return genres;
+    }
+
 
     // const editSong: editSongType = {
     //     name: "Prueba 3 modificado pa eliminar",
@@ -34,8 +47,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
     // }
 
     const handleUpdateSong = async (songId: string, editSong: Songs) => {
-        let newName: string
-
+        console.log("ApiGenres:", apiGenres)
         const { value: name } = await Swal.fire({
             title: "Enter the new song name",
             input: "text",

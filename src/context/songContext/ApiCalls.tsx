@@ -31,7 +31,13 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
     const requestUrl = `${baseUrl}/song/${encodedID}`;
+    
+    
+    useEffect(() => {
+      fetchSongs();
+      fetchAllSongs();
 
+    }, []);
     try {
       const response = await axios.post(requestUrl, songData);
       if (response) {

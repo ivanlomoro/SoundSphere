@@ -40,3 +40,26 @@ const {isLiked, toggleLiked} = useInteractions();
 
 
 }
+
+
+// const handleDeleteSong = async (songId: string) => {
+//     try {
+//         const result = await Swal.fire({
+//             title: 'Are you sure delete this song?',
+//             text: 'You won\'t be able to revert this.',
+//             icon: 'warning',
+//             showCancelButton: true,
+//             confirmButtonColor: '#FF3B4B',
+//             cancelButtonColor: '#677580',
+//             confirmButtonText: 'Yes, delete it!',
+//             background: '#111111',
+//             color: 'white'
+//         });
+
+//         if (result.isConfirmed) {
+//             deleteSong(songId);
+//         }
+//     } catch (error) {
+//         console.error('Error deleting song', error);
+//     }
+// };

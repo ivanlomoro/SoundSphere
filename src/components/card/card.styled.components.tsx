@@ -5,7 +5,7 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 export interface ArtistCardProps {
   artist: Artist
   toggleFollowed: (artist: Artist) => void
-  isFollowed: (id: number) => boolean
+  isFollowed: (id: string) => boolean
 }
 
 // Common Button Container

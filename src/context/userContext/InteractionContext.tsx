@@ -64,6 +64,8 @@ type ProviderProps = {
 
 const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     const { user } = useContext(UserContext)
+   
+   
     if (!user) {
         return <div>Loading...</div>
     }
