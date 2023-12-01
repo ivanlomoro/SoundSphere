@@ -11,7 +11,7 @@ type MagicInput<T> = {
   songs?: Songs[];
   artists?: Artist[]; 
   playlists?: Playlist[]; 
-
+  isMySong?: boolean,
   
   
   layout?: T;

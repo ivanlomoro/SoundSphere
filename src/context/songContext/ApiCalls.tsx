@@ -30,7 +30,13 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
     const requestUrl = `${baseUrl}/song/${encodedID}`;
+    
+    
+    useEffect(() => {
+      fetchSongs();
+      fetchAllSongs();
 
+    }, []);
     try {
       const response = await axios.post(requestUrl, songData);
       if (response) {
@@ -57,9 +63,27 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    fetchSongs();
-  }, []);
+ 
+  const fetchAllSongs = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/song/");
+      setPublicSongs(response.data);
+    } catch (error) {
+      console.error("Failed to fetch Songs:", error);
+    }
+  };
+
+
+  // const fetchAllPlaylists = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:8080/playlist/");
+  //     setPublicSongs(response.data);
+  //   } catch (error) {
+  //     console.error("Failed to fetch Songs:", error);
+  //   }
+  // };
+
+
 
   return (
     <ApiCallsContext.Provider value={{ uploadSong, publicSongs }}>

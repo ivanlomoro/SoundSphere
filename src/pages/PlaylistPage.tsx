@@ -3,7 +3,7 @@ import { useInteractions } from '../context/userContext/InteractionContext'
 import { useRenderer } from '../hooks/useRenderer';
 import { HeaderSection } from '../components';
 
-export const PlaylistPage = () => {
+ const PlaylistPage = () => {
     const { selectedSongs} = useInteractions();
   const { renderSongs: renderPlaylistSongs } = useRenderer({ songs: selectedSongs,  layout: "list" });
 
@@ -18,3 +18,4 @@ export const PlaylistPage = () => {
   );
 };
 
+export default PlaylistPage;

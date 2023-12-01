@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
-import postData from "../../api/postApi";
+
 
 const NavbarContainer = styled.div`
   display: flex;
