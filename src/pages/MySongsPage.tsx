@@ -7,15 +7,16 @@ import { ADDMUSICPAGE } from "../routes/paths";
 
 const MySongsPage = () => {
   const {
-    mySongs,
+       mySongs,
+    getMySongs,
     isModifiedSong,
-    getMySongs
   } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
   const { renderSongs } = useRenderer({
-    mySongs,
+
+   songs: mySongs,
      layout: "list",
-    isMysong: true,
+   
   });
   const { user } = useContext(UserContext);
 

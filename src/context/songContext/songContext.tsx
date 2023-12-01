@@ -1,5 +1,5 @@
-import React, { useState, useEffect, createContext, ReactNode, useContext, Dispatch, SetStateAction } from "react";
-import type { Songs, Category } from '../../Types/SongsTypes';
+import React, { useState, useEffect, createContext, ReactNode, useContext } from "react";
+import type { Songs,  } from '../../Types/SongsTypes';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import type { Artist } from "../../Types/SongsTypes";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { UserContext } from "../userContext/UserContext";
 import { editSongType } from "../../components/card/CardContainerButtons";
 import Swal from "sweetalert2";
 import { useApiCalls } from "./ApiCalls";
+import { SongsContextType } from '../../Types/SongsTypes';
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
@@ -15,32 +16,6 @@ const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 
 
-type SongsContextType = {
-  followed?: Artist[];
-  artists?: Artist[];
-  songs: Songs[];
-  recents: Songs[];
-  favorites: Songs[];
-  categories?: Category[];
-  mySongs: Songs[];
-  setSongs: Dispatch<SetStateAction<Songs[]>>
-  addToRecents: (song: Songs) => void;
-  addToFavorites: (song: Songs) => void;
-  removeFromFavorites: (id: string) => void;
-  isFavorite: (id: string) => boolean;
-  isFollowed: (id: string) => boolean;
-  toggleFavorite: (song: Songs) => void;
-  addToFollowed: (artist: Artist) => void;
-  removeFromFollowed: (id: string) => void;
-  toggleFollowed: (artist: Artist) => void;
-  getMySongs: (user: UserInterface | null) => void;
-  deleteSong: (songID: string) => void;
-  isModifiedSong: boolean;
-  updateSong: (songID: string, editSong: editSongType) => void;
-  getSongById: (songID: string) => void;
-  editedSong: Songs | null
-  errorEditedSong: boolean
-};
 
 const SongsContext = createContext<SongsContextType | null>(null);
 
@@ -84,7 +59,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
     if (user != null) {
       const userId = user.userId
       const URL = `${apiUrl}/song/user/${userId}`
-
 
       try {
         const response = await axios.get(URL)
@@ -194,6 +168,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   };
 
   const isFavorite = (id: string): boolean => songExists(favorites, id);
+  const isMySong = (id: string): boolean => songExists(mySongs, id);
 
   const toggleFavorite = (song: Songs) => {
     isFavorite(song.id) ? removeFromFavorites(song.id) : addToFavorites(song);
@@ -228,6 +203,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
       value={{
         setSongs, 
         recents,
+        isMySong,
         favorites, 
         songs,
         isFavorite,
