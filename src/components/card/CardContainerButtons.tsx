@@ -2,11 +2,12 @@ import { FC } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { useSongs } from "../../context/songContext/songContext";
-import { ArtistActionButtons } from "./card.styled.components";
 import { Button } from "..";
 import "./CardContainerButtons.styles.css"
 import { GenreType, useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
+import styled from "styled-components";
+
 
 export type editSongType = {
     name: string
@@ -20,6 +21,12 @@ export type editSongType = {
 type Props = {
     song: Songs
 }
+
+const StyledColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 
 const CardContainerButtons: FC<Props> = ({ song }) => {
@@ -37,14 +44,6 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         return genres;
     }
 
-
-    // const editSong: editSongType = {
-    //     name: "Prueba 3 modificado pa eliminar",
-    //     url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583924/tracks-dev/Rxbyn_-_better_off_alone_fvhwp8.mp3",
-    //     thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/better_off_alone_gfmcby.jpg",
-    //     isPublic: true,
-    //     genreId: "6560712d54a3139491bfad8f"
-    // }
 
     const handleUpdateSong = async (songId: string, editSong: Songs) => {
         console.log("ApiGenres:", apiGenres)
@@ -155,27 +154,15 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
             });
 
             if (result.isConfirmed) {
-                await deleteSong(songId);
-                Swal.fire({
-                    title: 'Deleted!',
-                    text: 'Your song has been deleted.',
-                    icon: 'success',
-                    background: '#111111',
-                    color: 'white'
-                });
+                deleteSong(songId);
             }
         } catch (error) {
             console.error('Error deleting song', error);
-            Swal.fire(
-                'Error',
-                'There was an error trying to delete the song.',
-                'error'
-            );
         }
     };
 
     return (
-        <ArtistActionButtons>
+        <StyledColumnContainer>
             <Button
                 content={<FaEdit />}
                 variant="StyledBackButton"
@@ -186,7 +173,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                 variant="StyledBackButton"
                 onClick={() => { handleDeleteSong(stringId) }}
             />
-        </ArtistActionButtons>
+        </StyledColumnContainer>
     )
 }
 

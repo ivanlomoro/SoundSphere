@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import jason from "../../assets/imgs/jason_mamoa.gif";
+import { useAuth0 } from '@auth0/auth0-react'
+import { FaUserCircle } from "react-icons/fa";
+
 
 const StyledUserAvatar = styled.img`
   width: 4rem;
@@ -8,5 +10,17 @@ const StyledUserAvatar = styled.img`
 `;
 
 export const UserAvatar = () => {
-  return <StyledUserAvatar src={jason} alt="User avatar" />;
+
+  const { user } = useAuth0()
+  console.log(user?.picture)
+
+    return (
+      <>
+        {user?.picture ?
+          <StyledUserAvatar src={user.picture} alt="User avatar" />
+          : <FaUserCircle />
+        }
+      </>
+    )
+  
 };

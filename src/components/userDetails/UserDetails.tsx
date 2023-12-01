@@ -1,13 +1,20 @@
 import styled from "styled-components";
-import { Button } from "../button/Button";
 import { UserDetail } from "../userDetail/UserDetail";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { FaEdit } from "react-icons/fa";
 
 const StyledUserDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: var(--space-md);
+`;
+
+const StyledRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: var(--space-md);
 `;
 
@@ -38,16 +45,18 @@ export const UserDetails = () => {
 
   return user ? (
     <StyledUserDetailsContainer>
-      <UserDetail label="Name" info={user.nickname} />
+      <UserDetail label="Name" info={user.name} />
+      <UserDetail label="Nickname" info={user.nickname} />
       <UserDetail label="Email" info={user.email} />
-      <UserDetail label="Date of Birth" info={user.birthdate} />
-      <UserDetail label="Gender" info={user.gender} />
+      <UserDetail label="Phone" info={user.phone_number} />
+      {/* <UserDetail label="Location" info={user.locale} /> */}
       {user.email && (
-        <Button
-          content="Change password"
-          variant="StyledButtonPill"
-          onClick={() => resetPassword(user.email!)}
-        />
+        <>
+          <StyledRowContainer>
+            <UserDetail label="Password" info="*******" />
+            <FaEdit className="custom-icon" onClick={() => resetPassword(user.email!)} />
+          </StyledRowContainer>
+        </>
       )}
     </StyledUserDetailsContainer>
   ) : null;

@@ -1,63 +1,107 @@
-import React, { createContext,useEffect, useState, ReactNode, useContext } from 'react';
-import { Artist, Songs } from "../../Types/SongsTypes";
+//copiar favorites
+//guardarlo a playlist
+//pagina para playlist (todas)
+//pagina de la playlist (unica)
+//guarda en local hasta que se modifique el nombre o token expires
+//luego post
+//cambiar song a una llamada custom para canciones de usuario 
+
+// flow click button=> addtoPlaylist defautl last playlist
+// if new default name my playlist (check, if not increment)
+// toaster added to song (useRender, grid)
+// generate myplaylists in user page/home
+// pencil next to name to modify, when submitting post
+// in back end => owner middleware (checks if userId= OwnerId)
+
+
+
+
+
+import React, { createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import { Artist, Songs } from '../../Types/SongsTypes';
+import { Playlist } from '../../Types/PlaylistFormData';
+import { UserContext } from './UserContext';
+
+
 
 export interface UserInteractionProps {
-    uploadedSongs?: Songs[];
-    favoriteSongs?: Songs[];
+    uploadedSongs: Songs[];
+    favoriteSongs: Songs[];
     customPlaylists?: Songs[];
-    recentSongs?: Songs[];
+    selectedSongs: Songs[];
+    playlists: Playlist[];
     followedArtists?: Artist[];
-    followed: Artist[];
+    followed?: Artist[];
     recents: Songs[];
     favorites: Songs[];
     addToUploadedSongs: (song: Songs) => void;
     addToRecents: (song: Songs) => void;
+    addToSelected: (song: Songs) => void;
+    addtoPlaylists: (playlist: Playlist) => void;
+    removeFromPlaylists: (id: string) => void;
+    removeFromSelected: (id: string) => void;
+    toggleSelected: (song: Songs) => void;
+    toggleLiked: (playlist: Playlist) => void;
     addToFavorites: (song: Songs) => void;
-    removeFromFavorites: (id: number) => void;
-    isFavorite: (id: number) => boolean;
-    isFollowed: (id: number) => boolean;
+    removeFromFavorites: (id: string) => void;
+    isFavorite: (id: string) => boolean;
+    selectedPlaylist?: Playlist;
+    isLiked: (id: string) => boolean;
+    isSelected: (id: string) => boolean;
     toggleFavorite: (song: Songs) => void;
-    addToFollowed: (artist: Artist) => void;
-    removeFromFollowed: (id: number) => void;
-    toggleFollowed: (artist: Artist) => void;
+    
+
 }
 
 const InteractionContext = createContext<UserInteractionProps | null>(null);
-
-interface UserInteractionProviderProps {
+type ProviderProps = {
     children: ReactNode;
-}
+};
 
-const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ children }) => {
+
+
+const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
+    const { user } = useContext(UserContext)
+   
+   
+    if (!user) {
+        return <div>Loading...</div>
+    }
     const [recents, setRecents] = useState<Songs[]>([]);
     const [favorites, setFavorites] = useState<Songs[]>([]);
-    const [followed, setFollowed] = useState<Artist[]>([]);
-    const [uploadedSongs, setUploadedSongs] = useState<Songs[]>([]);
+     const [uploadedSongs, setUploadedSongs] = useState<Songs[]>([]);
+    const [selectedSongs, setSelectedSongs] = useState<Playlist['songs']>([]);
+    const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist>();
+    const [playlistName, setPlaylistName] = useState<Playlist['playlistName']>('');
+    const [playlistCreator, setPlaylistCreator] = useState<Playlist['userCreator']>('');
+    const [playlistThumbnail, setPlaylistThumbnail] = useState<Playlist['thumbnail']>('');
+    const [playlists, setPlaylists] = useState<Playlist[]>([]);
+
 
     useEffect(() => {
         localStorage.setItem('recents', JSON.stringify(recents));
     }, [recents]);
 
-
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
 
-
+   
     useEffect(() => {
-        localStorage.setItem('followed', JSON.stringify(followed));
-    }, [followed]);
+        localStorage.setItem('user/playlists', JSON.stringify(playlists));
+    }, [playlists]);
 
 
-    const songExists = (arr: Songs[], id: number) => arr.some(song => song.id === id);
-    const artistExists = (arr: Artist[], id: number) => arr.some(artist => artist.id === id);
+    const songExists = (arr: Songs[], id: string) => arr.some(song => song.id === id);
+    const playlistExists = (arr: Playlist[], id: string) => arr.some(playlist => playlist.id === id);
+
+
 
     const addToUploadedSongs = (song: Songs) => {
         if (!songExists(uploadedSongs, song.id)) {
             setUploadedSongs(prevSongs => [song, ...prevSongs]);
         }
     };
-
 
     const addToRecents = (song: Songs) => {
         if (!songExists(recents, song.id)) {
@@ -71,39 +115,75 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
         }
     };
 
-    const removeFromFavorites = (id: number) => {
+    const addToSelected = (song: Songs) => {
+        
+        
+        if (!songExists(selectedSongs, song.id)) {
+
+            setSelectedSongs(prevSelectedSongs => [...prevSelectedSongs, song]);
+            if (selectedSongs.length === 0) {
+                setPlaylistName("New Playlist")
+                setPlaylistThumbnail(song.thumbnail)
+                console.log(playlistThumbnail)
+                setPlaylistCreator(user.userId)
+                const NewPlaylist: Playlist = {
+                    playlistName: playlistName,
+                    songs: selectedSongs,
+                    thumbnail: playlistThumbnail,
+                    userCreator: playlistCreator,
+                }
+                setSelectedPlaylist(NewPlaylist)
+                setPlaylists(prevPlaylists => [...prevPlaylists, NewPlaylist]);
+            }
+        }
+    }
+    const toggleSelected = (song: Songs) => {
+        isSelected(song.id) ? removeFromSelected(song.id) : addToSelected(song);
+    };
+
+    const removeFromSelected = (id: string) => {
+        setSelectedSongs(currentSelectedSongs => currentSelectedSongs.filter(song => song.id !== id));
+    };
+
+    const isSelected = (id: string): boolean => songExists(selectedSongs, id);
+    const isLiked = (playlistName: string): boolean => playlistExists(playlists, playlistName);
+
+    const removeFromFavorites = (id: string) => {
+        setFavorites(currentFavorites => currentFavorites.filter(song => song.id !== id));
+    };
+    const removeFromPlaylists = (id: string) => {
         setFavorites(currentFavorites => currentFavorites.filter(song => song.id !== id));
     };
 
-    const isFavorite = (id: number): boolean => songExists(favorites, id);
+    const addtoPlaylists = (playlist: Playlist) => {
+        setPlaylists(prevPlaylists => [...prevPlaylists, playlist]);
+    }
+
+
+    const isFavorite = (id: string): boolean => songExists(favorites, id);
 
     const toggleFavorite = (song: Songs) => {
         isFavorite(song.id) ? removeFromFavorites(song.id) : addToFavorites(song);
     };
+    const toggleLiked = (playlist: Playlist) => {
 
-    const addToFollowed = (artist: Artist) => {
-        if (!artistExists(followed, artist.id)) {
-            setFollowed(prevFollowed => [...prevFollowed, artist]);
-        }
+        isLiked(playlist.playlistName) ? removeFromPlaylists(playlist.playlistName) : addtoPlaylists(playlist);
     };
 
-    const removeFromFollowed = (id: number) => {
-        setFollowed(currentFollowed => currentFollowed.filter(artist => artist.id !== id));
-    };
-
-    const toggleFollowed = (artist: Artist) => {
-        isFollowed(artist.id) ? removeFromFollowed(artist.id) : addToFollowed(artist);
-    };
-
-    const isFollowed = (id: number): boolean => artistExists(followed, id);
 
     return (
         <InteractionContext.Provider value={{
             uploadedSongs,
             favoriteSongs: favorites,
-            customPlaylists: [],
-            followedArtists: followed,
-            followed,
+            selectedPlaylist,
+            addtoPlaylists,
+            removeFromPlaylists,
+            playlists,
+            isSelected,
+            selectedSongs,
+            addToSelected,
+            toggleSelected,
+            removeFromSelected,
             addToUploadedSongs,
             recents,
             favorites,
@@ -111,11 +191,10 @@ const UserInteractionProvider: React.FC<UserInteractionProviderProps> = ({ child
             addToFavorites,
             removeFromFavorites,
             isFavorite,
-            isFollowed,
             toggleFavorite,
-            addToFollowed,
-            removeFromFollowed,
-            toggleFollowed,
+            toggleLiked,
+            isLiked,
+
         }}>
             {children}
         </InteractionContext.Provider>
