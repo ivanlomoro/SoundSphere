@@ -59,6 +59,7 @@ margin-top: 0;
 type PlayerDisplayProps = {
   songs: Songs[];
   currentSong: Songs;
+  
 };
 
 // De donde viene "songs" "currentSong"

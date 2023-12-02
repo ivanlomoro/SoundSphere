@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useEffect, useState, useContext } from 'react';
 import { Artist, Songs } from '../../Types/SongsTypes';
 import { Playlist } from '../../Types/PlaylistFormData';
@@ -112,6 +113,8 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
             }
         }
     };
+
+    
     const removeFromSelected = (id: string) => {
         if (isSelected(id)) {
             setSelectedSongs(currentSelectedSongs => {
