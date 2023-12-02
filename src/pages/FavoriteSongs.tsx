@@ -11,9 +11,9 @@ export const FavoriteSongs = () => {
 
   return (
     <>
-      <HeaderSection text="Playlists" />
+      <HeaderSection text="Favorites" />
       <ul>
-        <h2> Playlists</h2>
+        <h2>Favorites</h2>
         {renderFavoriteSongs()}
       </ul>
     </>
