@@ -28,26 +28,32 @@ export const Card = styled.li`
   padding: var(--space-md);
   width: 10rem;
   min-width: 10rem;
-  margin: var(--space-md);
+  margin: var(--space-sm);
 `
 
 export const CardImage = styled.img`
   width: var(--w-full);
+  height: 10rem;
   border-radius: var(--radius-sm);
 `
 
 export const CardDescription = styled.div`
   width: var(--w-full);
-  padding: var(--space-xs);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
 `
 
 // List Styles
 export const ListCard = styled(Card)`
   width: 85%;
-  max-height: 10vh
-  flex-direction: row
-  align-items: center
+  max-height: 10vh;
+  flex-direction: row;
+  align-items: center;
   margin: var(--space-md)
+  ;
 `
 export const PlayButton = styled(AiOutlinePlayCircle)`
   height: 50px;
@@ -65,13 +71,22 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
 export const ListCardImage = styled(CardImage)`
   max-height: 12vh;
   max-width: 12vh;
-  position: relative;  
+  position: relative;
+  
 `
 
 export const ListCardDescription = styled(CardDescription)`
   padding: var(--space-md);
-  font-size: clamp(0.5rem, 10vw, 1rem);
-  overflow: hidden; 
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+   font-size: clamp(0.5rem, 10vw, 1rem);
+  overflow: hidden;
+  text-align: center;
+  gap: var(--space-xl);
+
+ 
 `
 
 
