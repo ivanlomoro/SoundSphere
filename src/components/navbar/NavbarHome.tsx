@@ -8,26 +8,26 @@ const NavbarContainer = styled.div`
   justify-content: space-between;
   background-color: var(--clr-elements);
   padding: var(--fs-md);
-`;
+;`
 
 const UserInfo = styled.div`
   display: flex;
   align-items: center;
-`;
+;`
 
 const UserIcon = styled.img`
   width: var(--space-xl);
   height: var(--space-xl);
   margin-right: var(--fs-md);
   border-radius: var(--radius-full);
-`;
+;`
 
 const WelcomeText = styled.h1`
   font-family: var(--ff-primary);
   font-size: var(--fs-ml);
   font-weight: 500;
   color: var(--cl-text-secondary);
-`;
+;`
 
 export const NavbarHome = () => {
   const { user, isLoading } = useAuth0();

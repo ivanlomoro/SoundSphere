@@ -1,4 +1,3 @@
-
 import { HeaderSection } from "../components";
 import { useRenderer } from '../hooks/useRenderer';
 import { useInteractions } from "../context/userContext/InteractionContext";
@@ -19,4 +18,3 @@ export const FavoriteSongs = () => {
     </>
   );
 };
-  

@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import './navbar.css'
 import { type IconType } from 'react-icons'
+import { DISPLAYPAGE, FAVORITEPAGE, HOME, MYSONGSPAGE, SEARCHPAGE } from '../../routes/paths'
 
 const StyledNavBar = styled.div`
     position: sticky;
@@ -48,14 +49,14 @@ export const NavBar = () => {
     return (
         <StyledNavBar>
             <StyledNav>
-                <NavLink to="/home">
+                <NavLink to={HOME}>
                     <Button
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlineHome} />}
                         ariaLabel="Home"
                     />
                 </NavLink>
-                <NavLink to="/search">
+                <NavLink to={SEARCHPAGE}>
                     <Button
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlineSearch} />}
@@ -63,7 +64,7 @@ export const NavBar = () => {
 
                     />
                 </NavLink>
-                <NavLink to="/displaypage">
+                <NavLink to={DISPLAYPAGE}>
                     <Button
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlinePlayCircle} />}
@@ -71,14 +72,14 @@ export const NavBar = () => {
                     />
                 </NavLink>
 
-                <NavLink to="/favorites">
+                <NavLink to={FAVORITEPAGE}>
                     <Button
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlineHeart} />}
                         ariaLabel="favorites"
                     />
                 </NavLink>
-                <NavLink to="/userpage">
+                <NavLink to={MYSONGSPAGE}>
                     <Button
                         variant="StyledButtonNav"
                         content={<NavIcon icon={AiOutlineUser} />}

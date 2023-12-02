@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 export const ImageContainer = styled.div`
-  border: 1px solid #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,18 +9,21 @@ export const ImageContainer = styled.div`
   background-color: #767677;
   aspect-ratio: 1/1;
   height: 30vh;
+  border-radius: 20px;
+  margin-bottom: 3em;
 `;
 export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto var(--space-xl);
 `;
 export const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  border-radius: 20px;
 `;
 export const Button = styled.div`
   padding: 10px 20px;
@@ -55,11 +57,40 @@ export const Text = styled.span`
   top: 51.35em;
   left: 8em;
 `;
+
 export const Input = styled.input`
   height: 26px;
+  color: var(--clr-text-secondary);
+  background-color: transparent;
+  border: 1px solid white;
+  text-align: center;
+  padding-block: 0.25em;
+  font-size: var(--fs-lg);
+  border-radius: var(--radius-sm);
+
+  &:focus-visible {
+    border-color: var(--clr-accent);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--clr-text-secondary);
+    opacity: 0.8;
+  }
 `;
+
 export const Select = styled.select`
   height: 26px;
+  height: var(--space-xxl);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text-secondary);
+  background-color: var(--clr-bg-primary);
+  text-align: center;
+  font-size: var(--fs-lg);
+  border: none;
+  &:focus-visible {
+    outline: none;
+  }
 `;
 export const ButtonSummit = styled.div`
   padding: 10px 20px;
@@ -69,8 +100,32 @@ export const ButtonSummit = styled.div`
   border-radius: 10px;
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+  position: relative;
+`;
+
 export const ErrorMessage = styled.p`
   color: #dc3545;
+  position: absolute;
+  top: 2.25em;
+`;
+
+export const Submit = styled.button`
+  position: sticky;
+  bottom: 80px;
+  width: 80vw;
+  margin: auto;
+  padding-block: 0.5em;
+  color: var(--clr-text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: var(--clr-accent);
+  text-transform: uppercase;
+  font-size: var(--fs-lg);
+  font-weight: bold;
 `;
 
 const StyledFormContainer = styled.div`

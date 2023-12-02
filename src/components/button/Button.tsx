@@ -13,6 +13,12 @@ const StyledButton = styled.button`
   margin-bottom: 1em;
 `;
 
+export const StyledButtonOutline = styled(StyledButton)`
+  background: none;
+  padding-inline: var(--space-xl);
+  border: 2px solid var(--clr-accent);
+  font-weight: bold;
+`;
 
 const StyledButtonPill = styled(StyledButton)`
   margin-top: 1em;
@@ -129,7 +135,8 @@ type ButtonProps = {
     | "StyledInvisibleButton"
     | "StyledButtonDisplay"
     | "StyledButtonDisplayPlay"
-    | "StyledBackButton";
+    | "StyledBackButton"
+    | "StyledButtonOutline";
   ariaLabel?: string;
   onClick?: () => void;
   content?: string | ReactNode;
@@ -149,6 +156,7 @@ export const Button = ({
     StyledButtonDisplay,
     StyledButtonDisplayPlay,
     StyledBackButton,
+    StyledButtonOutline,
   };
 
   const SelectedButton = variant ? variants[variant] : StyledButton;
