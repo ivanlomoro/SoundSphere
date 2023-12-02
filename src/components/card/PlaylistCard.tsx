@@ -2,6 +2,7 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { Card, CardImage, CardDescription, SongName, FollowedButton, ArtistActionButtons } from './card.styled.components';
 import { Playlist } from '../../Types/PlaylistFormData';
 import { useInteractions } from '../../context/userContext/InteractionContext';
+import { useNavigate } from 'react-router-dom';
 interface PlaylistCardProps {
     playlist: Playlist
 
@@ -11,13 +12,18 @@ interface PlaylistCardProps {
 
 export function PlaylistCard({playlist } :PlaylistCardProps) {
 const {isLiked, toggleLiked} = useInteractions();
+const navigate = useNavigate();
     if (!playlist) {
         return null;
     }
     
+    const handleCardClick = () => {
+
+        navigate(`/playlist/${playlist.playlistName}`);
+    }
 
     return (
-        <Card>
+    <Card onClick={handleCardClick}>
             <CardImage className="card-img" src={playlist.thumbnail} alt={playlist.playlistName} />
             <CardDescription>
                 <SongName>{playlist.playlistName}</SongName>

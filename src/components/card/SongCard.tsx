@@ -100,9 +100,7 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
 
-            {/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
-						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
-					</FavoriteButton>  */}
+        
             <FaveButton
               onClick={() => {
                 toggleSelected(song);
@@ -112,10 +110,10 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
             </FaveButton>
           </CommonButtonContainer>
         )}
-      </DescriptionComponent>
       {location.pathname === MYSONGSPAGE && (
         <CardContainerButtons song={song} />
-      )}
+        )}
+        </DescriptionComponent>
     </CardComponent>
   );
 }

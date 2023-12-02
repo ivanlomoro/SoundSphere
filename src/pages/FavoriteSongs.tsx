@@ -5,8 +5,8 @@ import { useInteractions } from "../context/userContext/InteractionContext";
 
 
 export const FavoriteSongs = () => {
-  const { selectedSongs, } = useInteractions();
-  const { renderSongs: renderFavoriteSongs  } = useRenderer({ songs: selectedSongs, layout: "list"});
+  const { favorites, } = useInteractions();
+  const { renderSongs: renderFavoriteSongs  } = useRenderer({ songs: favorites, layout: "list"});
 
   return (
     <>

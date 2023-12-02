@@ -10,7 +10,7 @@ import {
   SEARCHPAGE,
   ADDMUSICPAGE,
   MYSONGSPAGE,
-  MICHELE
+PLAYLISTPAGE
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
@@ -28,7 +28,7 @@ export const RouterPaths: FC = () => {
           <Route path={DISPLAYPAGE} element={<DisplayPage />}>
             <Route path=":name" element={<DisplayPage />}></Route>
           </Route>
-          <Route path={MICHELE} element={<PlaylistPage />} />
+          <Route path={PLAYLISTPAGE} element={<PlaylistPage />} />
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />

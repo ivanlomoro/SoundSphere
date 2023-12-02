@@ -2,3 +2,4 @@ node_modules/
 src/pages/styles.css
 .env
 .vercel
+src/hooks/useStateManager.tsx

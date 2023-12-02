@@ -19,6 +19,18 @@ export type CustomEventType = {
     offsetX: number;
   };
 };
+const StyledSongName = styled.p`
+    font-size: var(--fs-xl);
+    max-width: 85%;
+    margin-bottom: 0;
+  `;
+const StyledArtistName = styled.p`
+    font-size: var(--fs-lg);
+    max-width: 85%;
+  
+    
+  `;
+
 
 const HiddenPlayer = styled.div`
   z-index: -5;
@@ -157,24 +169,13 @@ const initialSongIndex = songs.findIndex(
     playerRef.current && playerRef.current.seekTo(fraction, "fraction");
   };
 
-  const StyledSongName = styled.p`
-    font-size: var(--fs-xl);
-    max-width: 85%;
-    margin-bottom: 0;
-  `;
-  const StyledArtistName = styled.p`
-    font-size: var(--fs-lg);
-    max-width: 85%;
-  
-    
-  `;
 
   return (
     <>
       <HiddenPlayer>
 
         <StyledPlayer
-          url={songs[currentSongIndex].url}
+          url={currentSong.url}
           playing={playing}
           ref={playerRef}
           controls={false}
@@ -191,7 +192,7 @@ const initialSongIndex = songs.findIndex(
           {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
         </FaveButton>
 
-        <StyledSongName>{currentSong.name}</StyledSongName>
+        <StyledSongName>{currentSong?.name} </StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
         <ProgressBar
           progress={progress}
