@@ -63,10 +63,7 @@ type ProviderProps = {
 const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     const { user } = useContext(UserContext)
    
-   
-    if (!user) {
-        return <div>Loading...</div>
-    }
+
     const [recents, setRecents] = useState<Songs[]>([]);
     const [favorites, setFavorites] = useState<Songs[]>([]);
      const [uploadedSongs, setUploadedSongs] = useState<Songs[]>([]);
@@ -125,7 +122,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
                 setPlaylistName("New Playlist")
                 setPlaylistThumbnail(song.thumbnail)
                 console.log(playlistThumbnail)
-                setPlaylistCreator(user.userId)
+                user && setPlaylistCreator(user.userId)
                 const NewPlaylist: Playlist = {
                     playlistName: playlistName,
                     songs: selectedSongs,
