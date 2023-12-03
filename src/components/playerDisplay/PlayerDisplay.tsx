@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
@@ -11,6 +11,7 @@ import { FaveButton } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { useInteractions } from "../../context/userContext/InteractionContext";
+import { PlayerContext } from "../../context/playerContext/playerContext";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -53,14 +54,18 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
-type PlayerDisplayProps = {
-  songs: Songs[];
-  currentSong: Songs;
-};
-
-export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
+export const PlayerDisplay = () => {
   const { toggleFavorite, isFavorite } = useInteractions();
   const [playing, setPlaying] = useState(false);
+
+  const {
+    currentSong: songFromContext,
+    currentList: songs,
+    setCurrentSong,
+  } = useContext(PlayerContext);
+
+  const currentSong = songFromContext ? songFromContext : songs[0];
+
   // Iniciar cancion index ?? identificar con 'id'
   const initialSongIndex = songs.findIndex(
     (song) => song.id === currentSong.id
@@ -129,7 +134,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
   const handleNext = () => {
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
-      navigate(`/displaypage/${songs[currentSongIndex + 1].name}`);
+      setCurrentSong(songs[currentSongIndex + 1]);
     }
   };
 
@@ -137,7 +142,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
   const handlePrevious = () => {
     if (currentSongIndex > 0) {
       setCurrentSongIndex(currentSongIndex - 1);
-      navigate(`/displaypage/${songs[currentSongIndex - 1].name}`);
+      setCurrentSong(songs[currentSongIndex - 1]);
     }
   };
 
