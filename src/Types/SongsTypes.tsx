@@ -41,7 +41,7 @@ export interface SongCardProps {
 	toggleFavorite?: (song: Songs) => void
 	isFavorite?: (id: string) => boolean
 	addToRecents?: (song: Songs) => void
-	variant?: 'grid' | 'list' | 'card'
+	variant?: 'grid' | 'list' | 'card' | 'fullscreen'
   isSelected? : (id: string) => boolean
   toggleSelected?: (song: Songs) => void
   edit?: boolean

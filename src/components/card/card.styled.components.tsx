@@ -7,7 +7,34 @@ export interface ArtistCardProps {
   toggleFollowed: (artist: Artist) => void
   isFollowed: (id: string) => boolean
 }
+export const FullScreenCard = styled.div`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  user-select: none;
+  margin: 0;
+  width: 100vw;
+  z-index: 3;
 
+`;
+export const FullScreenCardTitle = styled.h2`
+font-size: 2.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  z-index: 3;
+`;
+
+
+export const FullscreenCardDetails = styled.p`
+  color: #aaaaaa;
+  font-size: 1.5rem;
+  margin: 5px 0;
+  text-align:center;
+  z-index: 3;
+`;
 // Common Button Container
 export const CommonButtonContainer = styled.div`
   display: flex;
@@ -16,7 +43,7 @@ export const CommonButtonContainer = styled.div`
   width: var(--w-full);
 `
 
-// Card Styles
+// Card Styles``
 export const Card = styled.li`
   display: flex; 
    align-items: center;
@@ -66,7 +93,7 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
    }
 `
 
-
+export const FullScreenImage = styled(CardImage)``
 
 export const ListCardImage = styled(CardImage)`
   max-height: 12vh;
@@ -188,6 +215,11 @@ color: var(--clr-text-secondary);
     color: var(--clr-accent);
    }
 `
+export const StyledColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 export const PlayListButton = styled.button`
 background: transparent;
 border: none;
@@ -214,3 +246,6 @@ export const ArtistActionButtons = styled.div`
   justify-content: space-between;
   color: var(--clr-accent);
 `
+
+
+

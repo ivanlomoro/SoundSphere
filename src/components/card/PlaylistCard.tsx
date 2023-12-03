@@ -1,71 +1,66 @@
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { Card, CardImage, CardDescription, SongName, FollowedButton, ArtistActionButtons } from './card.styled.components';
+import { useNavigate } from 'react-router-dom';
 import { Playlist } from '../../Types/PlaylistFormData';
 import { useInteractions } from '../../context/userContext/InteractionContext';
-import { useNavigate } from 'react-router-dom';
-interface PlaylistCardProps {
-    playlist: Playlist
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import {
+    Card,
+    CardImage,
+    CardDescription,
+    SongName,
+    FollowedButton,
+    ArtistActionButtons,
+      FullScreenCard,
+    FullScreenImage, 
+    FullscreenCardDetails,
+    FullScreenCardTitle,
+    ListCard,
+    ListCardImage,
+    ListCardDescription, 
+} from './card.styled.components';
+import PlaylistActionButtons from './PlaylistActionButtons';
 
+
+interface PlaylistCardProps {
+    playlist: Playlist;
+    variant?: 'grid' | 'list' | 'card' | 'fullscreen';
 }
 
+export function PlaylistCard({ playlist, variant = "card" }: PlaylistCardProps) {
+    const navigate = useNavigate();
+    const { isLiked, toggleLiked } = useInteractions()
 
 
-export function PlaylistCard({playlist } :PlaylistCardProps) {
-const {isLiked, toggleLiked} = useInteractions();
-const navigate = useNavigate();
-    if (!playlist) {
-        return null;
-    }
-    
+    if (!playlist) return null;
+
+    const CardComponent = variant === "list" ? ListCard : variant === "fullscreen" ? FullScreenCard : Card;
+    const ImageComponent = variant === "list" ? ListCardImage : variant === "fullscreen" ? FullScreenImage : CardImage;
+    const DescriptionComponent = variant === "list" ? ListCardDescription : variant === "fullscreen" ? FullscreenCardDetails : CardDescription;
+
     const handleCardClick = () => {
-
+       
         navigate(`/playlist/${playlist.playlistName}`);
     }
 
     return (
-    <Card onClick={handleCardClick}>
-            <CardImage className="card-img" src={playlist.thumbnail} alt={playlist.playlistName} />
-            <CardDescription>
-                <SongName>{playlist.playlistName}</SongName>
-
-            </CardDescription>
-
-
-            <ArtistActionButtons>
-
+        <CardComponent onClick={handleCardClick}>
+            {variant === "fullscreen" && 
+           ( <>
+            <FullScreenCardTitle> 
+                {playlist.playlistName}
+                <span>{playlist.songs.length} songs</span>
+                </FullScreenCardTitle><PlaylistActionButtons /></>)}
+                
+            <ImageComponent src={playlist.thumbnail} alt={playlist.playlistName} />
+                
+            {variant === "list" && (<>      <ArtistActionButtons>
                 <FollowedButton onClick={() => toggleLiked(playlist)}>
-                    {isLiked(playlist.playlistName) ? <AiOutlineStar style={{
-                        color: "var(--clr-accent)", height: "30px",
-                        width: "30px"
-                    }} /> : <AiFillStar />}
+                    {isLiked(playlist.playlistName) ? <AiOutlineStar style={{ color: "var(--clr-accent)", height: "30px", width: "30px" }} /> : <AiFillStar />}
                 </FollowedButton>
-
-            </ArtistActionButtons>
-        </Card>
+            </ArtistActionButtons>  <DescriptionComponent>
+                <SongName>{playlist.playlistName}</SongName><PlaylistActionButtons /> 
+            </DescriptionComponent></> ) }
+            
+           
+        </CardComponent>
     );
-
-
 }
-
-
-// const handleDeleteSong = async (songId: string) => {
-//     try {
-//         const result = await Swal.fire({
-//             title: 'Are you sure delete this song?',
-//             text: 'You won\'t be able to revert this.',
-//             icon: 'warning',
-//             showCancelButton: true,
-//             confirmButtonColor: '#FF3B4B',
-//             cancelButtonColor: '#677580',
-//             confirmButtonText: 'Yes, delete it!',
-//             background: '#111111',
-//             color: 'white'
-//         });
-
-//         if (result.isConfirmed) {
-//             deleteSong(songId);
-//         }
-//     } catch (error) {
-//         console.error('Error deleting song', error);
-//     }
-// };

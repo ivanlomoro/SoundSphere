@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 import { Artist, Songs } from '../../Types/SongsTypes';
 import { Playlist } from '../../Types/PlaylistFormData';
 import { UserContext } from './UserContext';
@@ -35,7 +35,8 @@ const placeHolderPlaylist: Playlist = {
     userCreator: 'michee',
     thumbnail: 'qualsiasi',
     songs: [],
-    id: 'cvndfb',}
+    id: 'cvndfb',
+}
 
 const InteractionContext = createContext<UserInteractionProps | null>(null);
 
@@ -50,9 +51,9 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     const [recents, setRecents] = useLocalStorage<Songs[]>('recents', []);
     const [favorites, setFavorites] = useLocalStorage<Songs[]>('favorites', []);
     // const [uploadedSongs, setUploadedSongs] = useState<Songs[]>([]);
-    const [selectedSongs, setSelectedSongs] = useLocalStorage<Playlist['songs']>('selected',[]);
+    const [selectedSongs, setSelectedSongs] = useLocalStorage<Playlist['songs']>('selected', []);
     const [selectedPlaylist, setSelectedPlaylist] = useLocalStorage<Playlist>('current', placeHolderPlaylist);
-    const [playlists, setPlaylists] = useLocalStorage<Playlist[]>('playlists',[]);
+    const [playlists, setPlaylists] = useLocalStorage<Playlist[]>('playlists', []);
 
     // const [playlistName, setPlaylistName] = useState<Playlist['playlistName']>('');
     // const [playlistCreator, setPlaylistCreator] = useState<Playlist['userCreator']>('');
@@ -71,8 +72,8 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     const isSelected = (id: string) => songExists(selectedSongs, id)
     const isFavorite = (id: string) => songExists(favorites, id)
     const isLiked = (playlistName: string): boolean => playlists.some(playlist => playlist.playlistName === playlistName);
-    
-    
+
+
     const addToSelected = (song: Songs) => {
         if (selectedPlaylist && selectedPlaylist != placeHolderPlaylist) {
             const updatedPlaylist = {
@@ -82,13 +83,13 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
             setSelectedPlaylist(updatedPlaylist)
             setPlaylists(prevPlaylists =>
                 prevPlaylists.map(p => p.id === updatedPlaylist.id ? updatedPlaylist : p));
-         
+
         }
         if (!songExists(selectedSongs, song.id)) {
             setSelectedSongs(prevSelectedSongs => [...prevSelectedSongs, song]);
 
             if (!selectedSongs.length && user) {
-                
+
                 const defaultPlaylistName = "New Playlist";
                 const defaultThumbnail = song.thumbnail;
                 const userCreatorId = user.userId;
@@ -101,7 +102,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
                 };
                 setSelectedPlaylist(newPlaylist);
                 setPlaylists(prevPlaylists => [...prevPlaylists, selectedPlaylist]);
-               
+
             }
         }
     };
@@ -114,7 +115,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
         setSelectedSongs(playlist.songs);
     };
 
-    
+
 
 
     const removeFromSelected = (id: string) => {
@@ -133,7 +134,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
 
                     if (updatedPlaylist.songs.length === 0) {
                         setPlaylists(currentPlaylists => currentPlaylists.filter(playlist => playlist.id !== selectedPlaylist.id));
-                        setSelectedPlaylist(placeHolderPlaylist);
+                        setSelectedPlaylist(undefined);
                     }
                 }
                 return updatedSelectedSongs;
