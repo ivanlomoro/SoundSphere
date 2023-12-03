@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { Songs } from "../../Types/SongsTypes";
 
 type PlayerContextType = {
-  currentList: Songs[] | never[];
+  currentList: Songs[];
   setCurrentList: Dispatch<SetStateAction<Songs[] | never[]>>;
   currentSong: Songs | null;
   setCurrentSong: Dispatch<SetStateAction<Songs | null>>;
@@ -26,7 +26,7 @@ export const PlayerContextProvider = ({
   children,
 }: PlayerContextProviderProps) => {
   const [currentSong, setCurrentSong] = useState<Songs | null>(null);
-  const [currentList, setCurrentList] = useState([]);
+  const [currentList, setCurrentList] = useState<Songs[]>([]);
 
   return (
     <PlayerContext.Provider
