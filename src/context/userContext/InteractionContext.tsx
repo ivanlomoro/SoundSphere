@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 import { Artist, Songs } from '../../Types/SongsTypes';
 import { Playlist } from '../../Types/PlaylistFormData';
 import { UserContext } from './UserContext';
@@ -100,7 +100,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
                     userCreator: userCreatorId,
                 };
                 setSelectedPlaylist(newPlaylist);
-                setPlaylists(prevPlaylists => [...prevPlaylists, selectedPlaylist]);
+                setPlaylists(prevPlaylists => [...prevPlaylists, newPlaylist]);
                
             }
         }
@@ -133,7 +133,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
 
                     if (updatedPlaylist.songs.length === 0) {
                         setPlaylists(currentPlaylists => currentPlaylists.filter(playlist => playlist.id !== selectedPlaylist.id));
-                        setSelectedPlaylist(placeHolderPlaylist);
+                        setSelectedPlaylist(undefined);
                     }
                 }
                 return updatedSelectedSongs;
