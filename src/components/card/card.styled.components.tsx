@@ -145,14 +145,14 @@ export const GridCardImage = styled.img`
 `
 
 export const GridCardDescription = styled.div`
-  grid-column: 2;
- grid-row: 1/span 2;
-  display: flex;  
-  overflow: hidden;
-   text-overflow: ellipsis;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--space-xs);
+grid-column: 2;
+grid-row: 1/span 2;
+display: flex;  
+overflow: hidden;
+text-overflow: ellipsis;
+flex-direction: column;
+justify-content: space-between;
+padding: var(--space-xs);
 
   
 `

@@ -1,36 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Playlist } from '../Types/PlaylistFormData';
 import { useInteractions } from '../context/userContext/InteractionContext';
 import { useRenderer } from '../hooks/useRenderer'; // Ensure this import is correct
+import PlaylistActionButtons from '../components/card/PlaylistActionButtons';
+
+
 
 const PlaylistDetails = () => {
-    const { playlistName } = useParams<{ playlistName: string }>();
-    const { playlists } = useInteractions();
-    const [playlist, setPlaylist] = useState<Playlist | null>(null);
-
-    useEffect(() => {
-        const foundPlaylist = playlists.find(p => p.playlistName === playlistName);
-        if (!foundPlaylist) {
-            console.log('No selected playlist');
-            return;
-        }
-        setPlaylist(foundPlaylist);
-    }, [playlistName, playlists]);
-
+   
+    const {  selectedPlaylist } = useInteractions();
     const { renderSongs: renderPlaylistSongs } = useRenderer({
-        songs: playlist?.songs,
-        layout: 'list',
-        // Ensure other necessary parameters are passed if required
-    });
+        songs: selectedPlaylist.songs,
+         layout: 'list',    });
 
-    if (!playlist) return <div>No playlist found!</div>;
+
+    const placeHolderPlaylist: Playlist = {
+        playlistName: 'dont show in future',
+        userCreator: 'michee',
+        thumbnail: 'qualsiasi',
+        songs: [],
+        id: 'cvndfb',
+        frontId: 'cvndfb',}
+    
+
+   
+    
+
+    if (!selectedPlaylist || (selectedPlaylist === placeHolderPlaylist)) {
+        return alert('no playlist');
+    }
+
+    
 
     return (
         <div>
-            {/* Render your playlist details here */}
-            <h1>{playlist.playlistName}</h1>
-            {/* Render songs of the playlist */}
+           
+            <h1>{selectedPlaylist?.playlistName}</h1><PlaylistActionButtons/>
+            <h2></h2>
+      
             {renderPlaylistSongs()}
         </div>
     );

@@ -28,14 +28,16 @@ import { HeaderSection } from '../components';
 
 const PlaylistPage = () => {
   const { playlists } = useInteractions();
-  const { renderPlaylists: renderSlectedPlaylist } = useRenderer({ playlists: playlists, layout: "list" });
+  const { renderPlaylists: renderSlectedPlaylist } = useRenderer({ playlists: playlists, layout: "grid" });
 
   return (
     <>
       <HeaderSection text="Playlists" />
       <ul>
         <h2> Playlists</h2>
-        {renderSlectedPlaylist()}
+      {  playlists?.length != 0  ? renderSlectedPlaylist() : <p>No playlists found</p>}       
+        
+        
       </ul>
     </>
   );

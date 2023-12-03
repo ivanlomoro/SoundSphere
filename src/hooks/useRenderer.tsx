@@ -50,7 +50,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
       <>
         {playlists?.map((playlist) => (
           <PlaylistCard
-            key={playlist.playlistName}
+            key={playlist.frontId}
             playlist={playlist}
             variant={layout}
           />

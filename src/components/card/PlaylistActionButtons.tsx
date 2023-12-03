@@ -2,9 +2,14 @@ import { useInteractions } from '../../context/userContext/InteractionContext'
 import { Button } from '../button/Button';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { StyledColumnContainer } from './card.styled.components';
+import { useSwal } from '../../context/userContext/messages';
+
+
+
 
 export default function PlaylistActionButtons() {
-    const { selectedPlaylist, handleDeletePlaylist, handleUpdatePlaylist } = useInteractions()
+    const { selectedPlaylist,  } = useInteractions()
+    const { handleUpdatePlaylist, handleDeletePlaylist } = useSwal()
     if (!selectedPlaylist) {
         console.log('');
         return;
@@ -14,12 +19,12 @@ export default function PlaylistActionButtons() {
           <Button
               content={<FaEdit />}
               variant="StyledBackButton"
-              onClick={() => { handleUpdatePlaylist(selectedPlaylist.playlistName) }}
+              onClick={() => { handleUpdatePlaylist(selectedPlaylist.frontId) }}
           />
           <Button
               content={<FaTrash />}
               variant="StyledBackButton"
-              onClick={() => { handleDeletePlaylist(selectedPlaylist.playlistName) }}
+              onClick={() => { handleDeletePlaylist(selectedPlaylist.frontId) }}
           />
       </StyledColumnContainer></div>
   )

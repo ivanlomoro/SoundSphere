@@ -21,6 +21,8 @@ import {
   EmptyHeart,
   PlayButton,
   FaveButton,
+  Minus,
+  Plus,
 
 } from "./card.styled.components";
 import { AiOutlinePlayCircle } from "react-icons/ai";
@@ -50,7 +52,8 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
     toggleFavorite,
     isFavorite,
     addToRecents,
-    addToSelected,
+    toggleSelected,
+    isSelected,
   } = useInteractions();
 
   return (
@@ -97,17 +100,17 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
-            <Button content="Add To Playlist" onClick={() => addToSelected(song)} />
+            {/* <Button content="Add To Playlist" onClick={() => addToSelected(song)} /> */}
             {/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
 						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 					</FavoriteButton>  */}
-            {/* <FaveButton
+            <FaveButton
               onClick={() => {
                 toggleSelected(song);
               }}
             >
               {isSelected(song.id) ? <Minus /> : <Plus />}
-            </FaveButton> */}
+            </FaveButton>
           </CommonButtonContainer>
         )}
       </DescriptionComponent>
