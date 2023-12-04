@@ -95,6 +95,12 @@ export const PlayerContextProvider = ({
     setCurrentSongIndex(songIndex);
   }, [currentSong]);
 
+  useEffect(() => {
+    if (progress.currentPercentage === 1) {
+      handleNext();
+    }
+  }, [progress]);
+
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
@@ -134,12 +140,20 @@ export const PlayerContextProvider = ({
       setCurrentSongIndex(currentSongIndex + 1);
       setCurrentSong(currentList[currentSongIndex + 1]);
     }
+    if (currentSongIndex === currentList.length - 1) {
+      setCurrentSongIndex(0);
+      setCurrentSong(currentList[0]);
+    }
   };
 
   const handlePrevious = () => {
     if (currentSongIndex && currentSongIndex > 0) {
       setCurrentSongIndex(currentSongIndex - 1);
       setCurrentSong(currentList[currentSongIndex - 1]);
+    }
+    if (currentSongIndex === 0) {
+      setCurrentSongIndex(currentList.length - 1);
+      setCurrentSong(currentList[currentList.length - 1]);
     }
   };
 
