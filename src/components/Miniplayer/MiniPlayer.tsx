@@ -57,7 +57,6 @@ const InlineContainer = styled.div`
 
 export const MiniPlayer = () => {
   const navigate = useNavigate();
-
   const { toggleFavorite, isFavorite } = useInteractions();
   const { publicSongs } = useApiCalls();
 
@@ -76,7 +75,6 @@ export const MiniPlayer = () => {
   if (songs.length === 0) setCurrentList(publicSongs);
 
   const currentSong = songFromContext ? songFromContext : songs[0];
-
   const playerRef = useRef<ReactPlayer>(null);
 
   const handleProgressClick = (event: CustomEventType) => {

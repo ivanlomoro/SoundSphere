@@ -100,6 +100,7 @@ const StyledButtonNav = styled.button`
     z-index: 1;
   }
 `;
+
 const StyledButtonDisplayPlay = styled.button`
   position: relative;
   display: flex;

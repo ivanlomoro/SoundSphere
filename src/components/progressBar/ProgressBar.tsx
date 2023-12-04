@@ -42,10 +42,12 @@ const StyledProgress = styled.progress`
   &::-webkit-progress-bar {
     background-color: #888888;
   }
+
   &::-webkit-progress-value {
     height: 5px;
     background-color: #fff;
   }
+
   border-radius: 20px;
 `;
 
@@ -60,6 +62,7 @@ const StyledMiniProgress = styled.progress`
   &::-webkit-progress-bar {
     background-color: #bb00ff1f;
   }
+  
   &::-webkit-progress-value {
     height: 5px;
     background-color: var(--clr-accent);

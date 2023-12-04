@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext } from 'react';
 import { Songs } from '../../Types/SongsTypes';
 import { Playlist } from '../../Types/PlaylistFormData';
 import { UserContext } from './UserContext';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
-
 export interface UserInteractionProps {
-
     recents: Songs[]
     favorites: Songs[]
     playlists: Playlist[]
@@ -24,7 +21,8 @@ export interface UserInteractionProps {
     addToSelected: (song: Songs) => void
     addToRecents: (song: Songs) => void
     selectedPlaylist: Playlist
-}
+};
+
 const placeHolderPlaylist: Playlist = {
     playlistName: 'dont show in future',
     userCreator: 'michee',
@@ -32,7 +30,7 @@ const placeHolderPlaylist: Playlist = {
     songs: [],
     frontId: "calla",
     id: 'cvndfb',
-}
+};
 
 const InteractionContext = createContext<UserInteractionProps | null>(null);
 
@@ -42,8 +40,6 @@ type ProviderProps = {
 
 const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     const { user } = useContext(UserContext);
-
-
     const isFavorite = (id: string) => songExists(favorites, id)
     const isSelected = (id: string) => songExists(selectedSongs, id)
     const [recents, setRecents] = useLocalStorage<Songs[]>('recents', [])
@@ -95,6 +91,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
             }
         }
     };
+
     const toggleLiked = (playlist: Playlist) => {
         if (isLiked(playlist.frontId)) {
             removeFromPlaylists(playlist.frontId);
@@ -119,12 +116,12 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
             setSelectedPlaylist(newPlaylist);
             setPlaylists(prevPlaylists => [...prevPlaylists, newPlaylist]);
         }
-    }
+    };
 
     const updatePlaylist = (frontId: string, playlistName: Playlist['playlistName']) => {
         setPlaylists(prevPlaylists => prevPlaylists.map(playlist => playlist.frontId === frontId ? { ...playlist, playlistName } : playlist))
         setSelectedPlaylist(prevPlaylist => prevPlaylist.frontId === frontId ? { ...prevPlaylist, playlistName } : prevPlaylist)
-    }
+    };
 
     const removeFromSelected = (id: string) => {
         if (isSelected(id)) {

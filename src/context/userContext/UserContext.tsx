@@ -11,7 +11,6 @@ import postData from "../../api/postApi";
 import { UserInterface } from "../songContext/songContext";
 import { AxiosResponse } from "axios";
 
-
 export type UserContextType = {
   user: UserInterface | null;
   isLogged: boolean;

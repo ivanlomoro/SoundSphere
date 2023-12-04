@@ -12,6 +12,7 @@ export const ImageContainer = styled.div`
   border-radius: 20px;
   margin-bottom: 3em;
 `;
+
 export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
@@ -19,12 +20,14 @@ export const ButtonContainer = styled.div`
   align-items: center;
   margin: 0 auto var(--space-xl);
 `;
+
 export const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   border-radius: 20px;
 `;
+
 export const Button = styled.div`
   padding: 10px 20px;
   background-color: #ccc;
@@ -32,6 +35,7 @@ export const Button = styled.div`
   border: none;
   border-radius: 10px;
 `;
+
 export const SwitchContainer = styled.div`
   display: flex;
   align-items: center;
@@ -42,6 +46,7 @@ export const SwitchContainer = styled.div`
   padding: 2px;
   cursor: pointer;
 `;
+
 export const Slider = styled.div<{ isPrivate: boolean }>`
   height: 20px;
   width: 50%;
@@ -50,6 +55,7 @@ export const Slider = styled.div<{ isPrivate: boolean }>`
   transform: translateX(${({ isPrivate }) => (isPrivate ? "100%" : "0")});
   transition: transform 0.3s ease-in-out;
 `;
+
 export const Text = styled.span`
   text-align: center;
   color: white;
@@ -92,6 +98,7 @@ export const Select = styled.select`
     outline: none;
   }
 `;
+
 export const ButtonSummit = styled.div`
   padding: 10px 20px;
   background-color: #ccc;

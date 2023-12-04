@@ -6,7 +6,9 @@ import {
     CardImage,
     CardDescription,
     SongName,
-GridCardDescription, GridCardImage, GridCard,
+    GridCardDescription, 
+    GridCardImage, 
+    GridCard,
     FullScreenCardTitle,
     ListCard,
     ListCardImage,
@@ -23,8 +25,6 @@ interface PlaylistCardProps {
 export function PlaylistCard({ playlist, variant = "card" }: PlaylistCardProps) {
     const navigate = useNavigate();
     
-
-
     if (!playlist) return null;
 
     const CardComponent = variant === "grid" ? GridCard : variant === "list" ? ListCard : Card;
@@ -32,7 +32,6 @@ export function PlaylistCard({ playlist, variant = "card" }: PlaylistCardProps) 
     const DescriptionComponent =variant === "grid"? GridCardDescription: variant === "list"? ListCardDescription: CardDescription;
 
     const handleCardClick = () => {
-       
         navigate(`/playlist/${playlist.playlistName}`);
     }
 
@@ -52,7 +51,6 @@ export function PlaylistCard({ playlist, variant = "card" }: PlaylistCardProps) 
                 <PlaylistActionButtons /> 
             </DescriptionComponent></> ) }
             
-           
         </CardComponent>
     );
 }

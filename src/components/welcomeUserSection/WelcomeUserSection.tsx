@@ -33,7 +33,6 @@ type Props = {
 
 export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
   const { user } = useAuth0();
-  console.log(user);
 
   return user ? (
     <Link to={USERPAGE}>

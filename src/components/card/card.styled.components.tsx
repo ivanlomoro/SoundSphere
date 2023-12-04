@@ -6,11 +6,13 @@ import {
   AiOutlinePlayCircle,
 } from "react-icons/ai";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+
 export interface ArtistCardProps {
   artist: Artist;
   toggleFollowed: (artist: Artist) => void;
   isFollowed: (id: string) => boolean;
 }
+
 export const FullScreenCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,6 +23,7 @@ export const FullScreenCard = styled.div`
   width: 100vw;
   z-index: 3;
 `;
+
 export const FullScreenCardTitle = styled.h2`
   font-size: 2.5rem;
   white-space: nowrap;
@@ -37,7 +40,7 @@ export const FullscreenCardDetails = styled.p`
   text-align: center;
   z-index: 3;
 `;
-// Common Button Container
+
 export const CommonButtonContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -45,7 +48,6 @@ export const CommonButtonContainer = styled.div`
   width: var(--w-full);
 `;
 
-// Card Styles``
 export const Card = styled.li`
   display: flex;
   align-items: center;
@@ -74,7 +76,6 @@ export const CardDescription = styled.div`
   justify-content: space-between;
 `;
 
-// List Styles
 export const ListCard = styled(Card)`
   width: 85%;
   max-height: 10vh;
@@ -82,6 +83,7 @@ export const ListCard = styled(Card)`
   align-items: center;
   margin: var(--space-md);
 `;
+
 export const PlayButton = styled(AiOutlinePlayCircle)`
   height: 50px;
   width: 50px;
@@ -94,7 +96,6 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
 `;
 
 export const FullScreenImage = styled(CardImage)``;
-
 export const ListCardImage = styled(CardImage)`
   max-height: 12vh;
   max-width: 12vh;
@@ -149,7 +150,6 @@ export const GridCardDescription = styled.div`
   padding: var(--space-xs);
 `;
 
-// Common Song Info Styles
 export const SongName = styled.h3`
   white-space: nowrap;
   overflow: hidden;
@@ -167,7 +167,6 @@ export const SongArtist = styled.p`
   margin: 0;
 `;
 
-// Action Buttons
 export const FavoriteButton = styled.button`
   background: transparent;
   border: none;
@@ -199,11 +198,13 @@ export const Plus = styled(CiCirclePlus)`
   width: 30px;
   height: 30px;
 `;
+
 export const Minus = styled(CiCircleMinus)`
   width: 30px;
   color: var(--clr-accent);
   height: 30px;
 `;
+
 export const FaveButton = styled.button`
   background: transparent;
   border: none;
@@ -212,6 +213,7 @@ export const FaveButton = styled.button`
     color: var(--clr-accent);
   }
 `;
+
 export const MiniFaveButton = styled.button`
   background: transparent;
   border: none;
@@ -220,11 +222,13 @@ export const MiniFaveButton = styled.button`
     color: var(--clr-bg-primary);
   }
 `;
+
 export const StyledColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
 export const PlayListButton = styled.button`
   background: transparent;
   border: none;

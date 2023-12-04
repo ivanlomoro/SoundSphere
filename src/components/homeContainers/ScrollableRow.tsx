@@ -14,7 +14,6 @@ const ScrollableRow = styled.ul`
   }
 
   scrollbar-width: none;
-
   -ms-overflow-style: none;
 `
 

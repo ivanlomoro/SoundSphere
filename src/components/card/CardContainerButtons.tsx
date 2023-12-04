@@ -7,7 +7,7 @@ import "./CardContainerButtons.styles.css"
 import { useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
 import styled from "styled-components";
-
+import { GenreType } from "../../Types/GenreTypes";
 
 export type editSongType = {
     name: string
@@ -28,10 +28,8 @@ const StyledColumnContainer = styled.div`
   align-items: center;
 `;
 
-
 const CardContainerButtons: FC<Props> = ({ song }) => {
     const stringId = song.id.toString();
-
     const { deleteSong, updateSong } = useSongs()
     const { apiGenres } = useGenres()
 
@@ -42,11 +40,9 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         });
         console.log("Genres", genres);
         return genres;
-    }
-
+    };
 
     const handleUpdateSong = async (songId: string, editSong: Songs) => {
-        console.log("ApiGenres:", apiGenres)
         const { value: name } = await Swal.fire({
             title: "Enter the new song name",
             input: "text",
@@ -112,11 +108,8 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                         isPublic: newPrivacity
                     };
 
-                    console.log("Esto es editedSong", editedSong);
                     try {
                         const response = await updateSong(songId, editedSong);
-                        console.log("Estamos en el try");
-                        console.log("Esto es updateSong-response:", response);
 
                     } catch (error) {
                         console.error(error);
@@ -125,16 +118,9 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
                             'There was an error trying to update the song.',
                             'error'
                         );
-                        console.log("Estamos en el catch");
                     }
                 }
             }
-
-
-
-
-            // updateSong(stringId, editSong)
-
         }
     }
 
@@ -176,6 +162,5 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         </StyledColumnContainer>
     )
 }
-
 
 export default CardContainerButtons

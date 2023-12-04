@@ -5,7 +5,6 @@ import { GenreType } from '../../Types/GenreTypes';
 
 
 const Cage = styled.div`
-
   height: 5em;
   padding: 13px;
   background-color: #f0f0f0;
@@ -17,13 +16,10 @@ const Cage = styled.div`
 type genreCageProps = {
   genre:  GenreType,
   color: string,
-  
 }
 
 const Styledh3 = styled.h3`
-
   font-size: 1.5em;
-
 `;
 
 const GenreCage : FC<genreCageProps> = ({genre, color}) => {
@@ -35,5 +31,6 @@ const GenreCage : FC<genreCageProps> = ({genre, color}) => {
       </>
     )
   };
+  
   export default GenreCage;
   

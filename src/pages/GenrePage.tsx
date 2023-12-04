@@ -8,9 +8,7 @@ import { HeaderSection } from "../components";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();
-
   const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
-
   const { renderSongs: renderGenreSongs } = useRenderer({
     songs: songByGenre,
     toggleFavorite,
@@ -26,7 +24,6 @@ const GenrePage = () => {
           `http://localhost:8080/song/public/genre/${genreId}`
         );
         setSongByGenre(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Failed to fetch Songs:", error);
       }

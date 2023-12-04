@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const NavbarContainer = styled.div`
   display: flex;
   align-items: center;

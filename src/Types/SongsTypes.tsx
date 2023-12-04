@@ -2,11 +2,6 @@ import { editSongType } from "../components/card/CardContainerButtons";
 import { UserInterface } from "../context/songContext/songContext";
 import {Dispatch, SetStateAction} from 'react';
 
-
-
-
-//nuevo tipo user songs id, is owner 
-
 export type Songs = {
   id: string;
   name: string;
@@ -15,9 +10,9 @@ export type Songs = {
   thumbnail: string;
   genre: string;
   isPublic: boolean;
-
   liked: boolean;
 };
+
 export type Category = {
   name: string;
   id: string;
@@ -30,11 +25,6 @@ export type Artist = {
   popularity: number;
   photoUrl: string;
 };
-// export type SongsContextType = {
-//   artists: Artist[];
-//   songs: Songs[];
-//   categories: Category[];
-// };
 
 export interface SongCardProps {
 	song: Songs
@@ -46,7 +36,7 @@ export interface SongCardProps {
   isSelected? : (id: string) => boolean
   toggleSelected?: (song: Songs) => void
   edit?: boolean
-}
+};
 
 export interface SongUploadData {
   thumbnail: string;
@@ -55,7 +45,8 @@ export interface SongUploadData {
   genreId: string;
   isPublic: boolean,
   userCreator: string;
-}
+};
+
 export type SongsContextType = {
   isMySong: (id: string) => boolean;
   followed?: Artist[];

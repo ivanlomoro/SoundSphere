@@ -6,6 +6,7 @@ const StyledParagraph = styled.p`
   font-family: var(--ff-primary);
   font-size: var(--fs-md);
 `;
+
 type ParagraphTypes = {
   text: string;
 };

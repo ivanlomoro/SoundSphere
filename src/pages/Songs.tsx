@@ -1,16 +1,11 @@
-// SongList.tsx
 import { RecentGrid, ScrollableRowComponent } from '../components';
 import { useSongs } from '../context/songContext/songContext';
 import { useInteractions } from '../context/userContext/InteractionContext';
 import { useRenderer } from '../hooks/useRenderer';
 
-
 export const SongList = () => {
   const { songs } = useSongs();
   const { favorites, recents} = useInteractions()
-
-
-
   const { renderSongs: renderNormalSongs } = useRenderer({ songs: songs, layout: "card" });
   const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites,  layout: "card" });
   const { renderSongs: renderRecentSongs } = useRenderer({ songs: recents,  layout: "grid" });
@@ -22,7 +17,6 @@ export const SongList = () => {
         <ScrollableRowComponent>
           {renderNormalSongs()}
         </ScrollableRowComponent>
-
       </div>
 
       <div>
@@ -31,12 +25,14 @@ export const SongList = () => {
           {renderRecentSongs()}
         </RecentGrid>
       </div>
+
       <div>
         <h2>Favorites</h2>
         <ScrollableRowComponent>
           {renderFavoriteSongs()}
         </ScrollableRowComponent>
       </div>
+
       </div>
   );
 };

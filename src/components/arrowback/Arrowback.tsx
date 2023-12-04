@@ -24,5 +24,5 @@ export const ArrowBackSection = () => {
         variant="StyledBackButton"
       />
     </StyledArrowBackSection>
-  );
+  )
 };

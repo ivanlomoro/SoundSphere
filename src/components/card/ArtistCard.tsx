@@ -3,7 +3,6 @@ import { ArtistCardProps, Card, CardImage, CardDescription, SongName, FollowedBu
 
 
 export function ArtistCard({ artist, toggleFollowed, isFollowed }: Partial<ArtistCardProps>) {
-
     if (!artist) {
         return null;
     }
@@ -18,7 +17,6 @@ export function ArtistCard({ artist, toggleFollowed, isFollowed }: Partial<Artis
                 <SongName>{artist.name}</SongName>
             </CardDescription>
 
-
             <ArtistActionButtons>
                 <FollowedButton onClick={() => toggleFollowed(artist)}>
                     {isFollowed(artist.id) ? <AiOutlineStar style={{
@@ -29,6 +27,4 @@ export function ArtistCard({ artist, toggleFollowed, isFollowed }: Partial<Artis
             </ArtistActionButtons>
         </Card>
     );
-
-
 }

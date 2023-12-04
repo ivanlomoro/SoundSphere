@@ -19,7 +19,6 @@ const StyledRowContainer = styled.div`
 `;
 
 const resetPassword = async (userEmail: string) => {
-  console.log(userEmail);
   try {
     const response = await axios.post(
       "https://dev-qdcgiaoq1b8m6fe5.us.auth0.com/dbconnections/change_password",
@@ -34,9 +33,8 @@ const resetPassword = async (userEmail: string) => {
         "A message was sent to your email address to reset your password."
       );
     }
-    console.log(response);
   } catch {
-    console.log("That didn't work");
+    console.error("That didn't work");
   }
 };
 
@@ -49,7 +47,6 @@ export const UserDetails = () => {
       <UserDetail label="Nickname" info={user.nickname} />
       <UserDetail label="Email" info={user.email} />
       <UserDetail label="Phone" info={user.phone_number} />
-      {/* <UserDetail label="Location" info={user.locale} /> */}
       {user.email && (
         <>
           <StyledRowContainer>

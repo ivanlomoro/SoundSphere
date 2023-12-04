@@ -1,6 +1,6 @@
 import React from 'react';
 import { SongCard } from '../components/card/SongCard';
-import { Songs, Artist } from '../Types/SongsTypes'; // Combined import for Songs and Artist
+import { Songs, Artist } from '../Types/SongsTypes';
 import { ArtistCard } from '../components/card/ArtistCard';
 import { Playlist } from '../Types/PlaylistFormData';
 import { PlaylistCard } from '../components/card/PlaylistCard';
@@ -11,7 +11,6 @@ type MagicInput<T> = {
   playlists?: Playlist[];
   isMySong?: true;
   layout: T;
- 
 };
 
 type LayoutVariant = "grid" | "list" | "card" | "fullscreen" | undefined;

@@ -6,7 +6,6 @@ import { HeaderSection } from "../components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { styled } from "styled-components";
 
-
 const StyledProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,8 +18,7 @@ const StyledProfileContainer = styled.div`
 
 export const UserPage = () => {
   const { logout } = useAuth0();
-
-
+  
   return (
     <>
       <HeaderSection text="Profile" />

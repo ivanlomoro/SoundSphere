@@ -2,8 +2,6 @@
 npm run lint
 Auto-Fix Linting Issues: Run the following command to auto-fix linting issues that ESLint can handle automatically:
 
-
-
 npm run lint:fix 
 fix every suggestion from linter 
 

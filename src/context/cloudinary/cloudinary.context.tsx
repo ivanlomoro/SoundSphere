@@ -1,22 +1,15 @@
 import React, { createContext, ReactNode, useContext } from "react";
 
-
-
-
 interface NewContextType {
-   
-}
+};
 
 const NewContext = createContext<NewContextType | null>(null);
 
-
 type ProviderProps = {
     children: ReactNode;
-}
+};
 
 const NewContextProvider: React.FC<ProviderProps> = ({ children }) => {
-   
-
     return (
         <NewContext.Provider value={{  }}>
             {children}

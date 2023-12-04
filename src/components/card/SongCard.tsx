@@ -106,10 +106,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
-            {/* <Button content="Add To Playlist" onClick={() => addToSelected(song)} /> */}
-            {/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
-						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
-					</FavoriteButton>  */}
             <FaveButton
               onClick={() => {
                 toggleSelected(song);

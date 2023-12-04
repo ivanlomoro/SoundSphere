@@ -66,6 +66,7 @@ export const NavBar = () => {
             ariaLabel="Home"
           />
         </NavLink>
+        
         <NavLink to={SEARCHPAGE}>
           <Button
             variant="StyledButtonNav"
@@ -73,6 +74,7 @@ export const NavBar = () => {
             ariaLabel="Search"
           />
         </NavLink>
+
         <NavLink to={ADDMUSICPAGE}>
           <Button
             variant="StyledButtonNav"
@@ -88,6 +90,7 @@ export const NavBar = () => {
             ariaLabel="favorites"
           />
         </NavLink>
+
         <NavLink to={MYSONGSPAGE}>
           <Button
             variant="StyledButtonNav"
@@ -95,6 +98,7 @@ export const NavBar = () => {
             ariaLabel="User"
           />
         </NavLink>
+
       </StyledNav>
     </StyledNavBar>
   );

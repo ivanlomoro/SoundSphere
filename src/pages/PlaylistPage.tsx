@@ -1,30 +1,6 @@
-
-// import { useInteractions } from '../context/userContext/InteractionContext'
-// import { useRenderer } from '../hooks/useRenderer';
-// import { HeaderSection } from '../components';
-// import { useParams } from 'react-router-dom';
-
-//  const PlaylistPage = () => {
-//    const {selectedPlaylists} = useInteractions();
-//    const { renderPlaylists: renderSlectedPlaylist } = useRenderer({ lists: selectedPlaylists,  layout: "fullscreen" });
-//    const { playlistName } = useParams<{ playlistName: string }>()
-//   return (
-//     <>
-//           <HeaderSection text="Playlists" />
-//           <ul>
-//             <h2> Playlists</h2>
-//         {renderSlectedPlaylist() }
-//           </ul>
-//     </>
-//   );
-// };
-
-// export default PlaylistPage
-
 import { useInteractions } from '../context/userContext/InteractionContext'
 import { useRenderer } from '../hooks/useRenderer';
 import { HeaderSection } from '../components';
-
 
 const PlaylistPage = () => {
   const { playlists } = useInteractions();
@@ -35,9 +11,7 @@ const PlaylistPage = () => {
       <HeaderSection text="Playlists" />
       <ul>
         <h2> Playlists</h2>
-      {  playlists?.length != 0  ? renderSlectedPlaylist() : <p>No playlists found</p>}       
-        
-        
+      {  playlists?.length != 0  ? renderSlectedPlaylist() : <p>No playlists found</p> }        
       </ul>
     </>
   );

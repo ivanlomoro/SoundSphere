@@ -6,9 +6,9 @@ import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext/UserContext";
 import UserInteractionProvider from "./context/userContext/InteractionContext";
 import ApiCallsProvider from "./context/songContext/ApiCalls";
-import { MusicPlayerProvider } from "./context/musicDisplayContext/musicDisplay";
 import GenreProvider from "./context/genreContext/genreContext";
 import { PlayerContextProvider } from "./context/playerContext/playerContext";
+
 const {
   VITE_AUTH0_DOMAIN: domain,
   VITE_AUTH0_CLIENT_ID: clientId,
@@ -16,7 +16,6 @@ const {
 } = import.meta.env;
 
 const redirectUri: string = window.location.origin + "/home";
-
 export const App = () => {
   return (
     <Auth0Provider

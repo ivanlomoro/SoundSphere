@@ -8,7 +8,6 @@ import { Container, HeaderSection, WelcomeUserSection } from "../components";
 import { UserContainer } from "../components/containers/UserContainer";
 import Loader from "../components/Loader/Loader";
 
-
 const MySongsPage = () => {
   const {
     mySongs,
@@ -24,7 +23,7 @@ const MySongsPage = () => {
       try {
         await getMySongs(user);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
       setLoading(false);
     };

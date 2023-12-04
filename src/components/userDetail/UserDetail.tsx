@@ -24,7 +24,6 @@ export const UserDetail = ({ label, info }: UserDetailPropsType) => {
     <StyledUserDetailContainer>
       <StyledDetailLabel>{label}</StyledDetailLabel>
       <StyledDetailInfo>{info}</StyledDetailInfo>
-      {/* <Button content={<FiEdit />} variant="StyledInvisibleButton" /> */}
     </StyledUserDetailContainer>
   );
 };

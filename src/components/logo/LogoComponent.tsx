@@ -5,6 +5,7 @@ const StyledImage = styled.img`
   height: 110px;
   margin-bottom: var(--space-sm);
 `;
+
 const StyledTitle = styled.h2`
   margin: 0;
   font-size: var(--fs-xlg);
@@ -12,12 +13,14 @@ const StyledTitle = styled.h2`
   font-family: var(--ff-primary);
   color: var(--cl-text-secondary);
 `;
+
 const StyledSlogan = styled.h3`
   font-size: var(--fs-md);
   font-weight: 500;
   font-family: var(--ff-primary);
   color: var(--cl-text-secondary);
 `;
+
 const StyledLogoComponent = styled.div`
   margin-bottom: 3rem;
 `;

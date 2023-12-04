@@ -37,7 +37,6 @@ export const RouterPaths: FC = () => {
         <Route element={<PlayerLayout />}>
           <Route path={HOME} element={<Home />} />
           <Route path={USERPAGE} element={<UserPage />} />
-
           <Route path={PLAYLISTPAGE} element={<PlaylistDetails />} />
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />

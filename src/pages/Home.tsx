@@ -2,11 +2,9 @@ import { HeaderSection, RecentGrid, ScrollableRowComponent, WelcomeUserSection }
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
-// import { SongList } from "./Songs";
 
 export const Home = () => {
   const { publicSongs } = useApiCalls();
-
   const { recents, favorites, playlists } = useInteractions();
   const { renderSongs: renderPublicSongs } = useRenderer({
     songs: publicSongs,
@@ -56,7 +54,6 @@ export const Home = () => {
             </ScrollableRowComponent>
           </>}
       </div>
-      {/* <SongList /> */}
     </>
   );
 };

@@ -73,7 +73,6 @@ export const PlayerDisplay = () => {
   if (songs.length === 0) setCurrentList(publicSongs);
 
   const currentSong = songFromContext ? songFromContext : songs[0];
-
   const playerRef = useRef<ReactPlayer>(null);
 
   const handleProgressClick = (event: CustomEventType) => {
@@ -89,6 +88,7 @@ export const PlayerDisplay = () => {
     max-width: 85%;
     margin-bottom: 0;
   `;
+
   const StyledArtistName = styled.p`
     font-size: var(--fs-lg);
     max-width: 85%;
@@ -107,6 +107,7 @@ export const PlayerDisplay = () => {
           onProgress={handleProgress}
           onDuration={handleDuration}
         />
+        
       </HiddenPlayer>{" "}
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />

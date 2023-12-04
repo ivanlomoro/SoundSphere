@@ -23,7 +23,6 @@ import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
-import Loader from "../components/Loader/Loader";
 
 interface Album {
   id: string;
@@ -119,7 +118,6 @@ export const AddMusicPage = () => {
           newAlbumData,
           getToken
         );
-        console.log("THIS IS THE NEW RESPONSE:", response);
         return response;
       }
     };
@@ -136,8 +134,6 @@ export const AddMusicPage = () => {
         selectedAlbum === "newAlbum"
           ? albumResponse?.incomingData.id
           : selectedAlbum;
-
-      console.log(albumId);
 
       const requestData = {
         thumbnail: cloudinaryImage.secure_url,
