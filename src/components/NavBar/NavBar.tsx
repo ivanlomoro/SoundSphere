@@ -28,6 +28,7 @@ const StyledNavBar = styled.div`
   width: var(--w-full);
   margin-inline: auto;
   background-color: #111111c2;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
   backdrop-filter: blur(6px);
 `;
 
