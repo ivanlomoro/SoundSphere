@@ -60,13 +60,11 @@ export const PlayerDisplay = () => {
     currentSong: songFromContext,
     currentList: songs,
     setCurrentSong,
+    currentSongIndex,
+    setCurrentSongIndex,
   } = useContext(PlayerContext);
 
   const currentSong = songFromContext ? songFromContext : songs[0];
-  console.log(currentSong);
-  const songIndex = songs.findIndex((song) => song.id === currentSong.id);
-  const [currentSongIndex, setCurrentSongIndex] = useState(songIndex);
-  // const [currentSongIndex, setCurrentSongIndex] = useState(songIndex);
 
   const [progress, setProgress] = useState({
     currentSeconds: 0,
@@ -116,14 +114,14 @@ export const PlayerDisplay = () => {
   };
 
   const handleNext = () => {
-    if (currentSongIndex < songs.length - 1) {
+    if (currentSongIndex && currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
       setCurrentSong(songs[currentSongIndex + 1]);
     }
   };
 
   const handlePrevious = () => {
-    if (currentSongIndex > 0) {
+    if (currentSongIndex && currentSongIndex > 0) {
       setCurrentSongIndex(currentSongIndex - 1);
       setCurrentSong(songs[currentSongIndex - 1]);
     }
@@ -151,7 +149,7 @@ export const PlayerDisplay = () => {
     <>
       <HiddenPlayer>
         <StyledPlayer
-          url={songs[currentSongIndex].url}
+          url={currentSong.url}
           playing={playing}
           ref={playerRef}
           controls={false}

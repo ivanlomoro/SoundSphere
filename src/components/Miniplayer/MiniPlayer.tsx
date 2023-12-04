@@ -1,14 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
 import { HiddenPlayer } from "../playerDisplay/PlayerDisplay";
 import ReactPlayer from "react-player";
 
 const MiniPlayer = () => {
-  const {
-    currentSong,
-    currentList: songs,
-    currentSongIndex,
-  } = useContext(PlayerContext);
+  const { currentSong: songFromContext, currentList: songs } =
+    useContext(PlayerContext);
+
+  const currentSong = songFromContext ? songFromContext : songs[0];
 
   if (!currentSong) return null;
 
@@ -17,7 +16,7 @@ const MiniPlayer = () => {
       <h1>hola</h1>
       {/* <HiddenPlayer>
         <ReactPlayer
-          url={songs[currentSongIndex].url}
+          url={currentSong}
           playing={playing}
           ref={playerRef}
           controls={false}
