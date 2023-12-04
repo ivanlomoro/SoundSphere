@@ -41,7 +41,6 @@ export const Home = () => {
         <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
       </div>
       {/* <SongList /> */}
-      <MiniPlayer />
     </>
   );
 };

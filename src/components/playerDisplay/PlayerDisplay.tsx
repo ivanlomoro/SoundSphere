@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
