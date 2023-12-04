@@ -27,7 +27,8 @@ const StyledNavBar = styled.div`
   bottom: 0;
   width: var(--w-full);
   margin-inline: auto;
-  background-color: var(--clr-bg-elements);
+  background-color: #111111c2;
+  backdrop-filter: blur(6px);
 `;
 
 const StyledNav = styled.nav`
