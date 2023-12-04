@@ -1,5 +1,4 @@
 import { RecentGrid, ScrollableRowComponent } from "../components";
-import MiniPlayer from "../components/Miniplayer/MiniPlayer";
 import { NavbarHome } from "../components/NavBar/NavbarHome";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
