@@ -68,10 +68,12 @@ export const PlayerDisplay = () => {
     handleDuration,
     handleNext,
     handlePrevious,
+    setCurrentList,
   } = useContext(PlayerContext);
 
-  const currentList = songs.length > 0 ? songs : publicSongs;
-  const currentSong = songFromContext ? songFromContext : currentList[0];
+  if (songs.length === 0) setCurrentList(publicSongs);
+
+  const currentSong = songFromContext ? songFromContext : songs[0];
 
   const playerRef = useRef<ReactPlayer>(null);
 
