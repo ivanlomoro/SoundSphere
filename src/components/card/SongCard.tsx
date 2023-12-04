@@ -34,7 +34,7 @@ import { useContext } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
 
 export function SongCard({ song, variant = "card", songs }: SongCardProps) {
- const location = useLocation();
+  const location = useLocation();
   const CardComponent =
     variant === "grid" ? GridCard : variant === "list" ? ListCard : Card;
   const ImageComponent =
@@ -70,9 +70,8 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             <PlayButton
               onClick={() => {
                 addToRecents(song);
-                setCurrentSong(song);
                 setCurrentList(songs);
-           
+                setCurrentSong(song);
               }}
             />
           </GridImageContainer>

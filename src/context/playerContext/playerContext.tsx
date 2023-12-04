@@ -91,7 +91,7 @@ export const PlayerContextProvider = ({
     const songIndex = currentList.findIndex(
       (song) => song.id === currentSong?.id
     );
-
+    console.log("SONG INDEX:", songIndex);
     setCurrentSongIndex(songIndex);
   }, [currentSong]);
 
@@ -126,7 +126,11 @@ export const PlayerContextProvider = ({
   };
 
   const handleNext = () => {
-    if (currentSongIndex && currentSongIndex < currentList.length - 1) {
+    if (
+      (currentSongIndex && currentSongIndex < currentList.length - 1) ||
+      currentSongIndex === 0
+    ) {
+      console.log("HANDLE NEXT");
       setCurrentSongIndex(currentSongIndex + 1);
       setCurrentSong(currentList[currentSongIndex + 1]);
     }
