@@ -50,12 +50,25 @@ input {
   font-family: inherit;
 }
 
-ul{
+ul {
   margin: 0;
   padding: 0;
 }
 
-.custom-icon{
+.custom-icon {
   font-size: 1.5rem;
   margin-right: 0.5rem;
+}
+
+.custom-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: 0.5s;
 }
