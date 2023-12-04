@@ -23,7 +23,7 @@ type genreCageProps = {
 const Styledh3 = styled.h3`
 
   font-size: 1.5em;
-
+  color: black;
 `;
 
 const GenreCage : FC<genreCageProps> = ({genre, color}) => {

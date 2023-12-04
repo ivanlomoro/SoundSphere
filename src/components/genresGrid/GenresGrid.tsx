@@ -11,7 +11,7 @@ const GridContainer = styled.div`
   column-gap: 3em;
   row-gap: 3em;
   max-width: 200px;
-  margin-left: 1em;
+  margin-left: 2em;
 `;
 
 const GenresGrid = () => {
