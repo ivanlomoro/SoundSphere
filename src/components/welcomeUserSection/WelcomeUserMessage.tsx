@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledWelcomeUserMessage = styled.p`
   color: var(--clr-text-secondary);
+  font-size: 1rem;
 `;
 
 type WelcomeUserMessagePropsType = {

@@ -1,7 +1,7 @@
 import { Songs } from './SongsTypes';
 
 export interface Playlist {
-    id: string;
+    id?: string;
     playlistName: string;
     thumbnail: string;
     songs: Songs[];

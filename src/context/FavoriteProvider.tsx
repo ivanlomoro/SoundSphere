@@ -5,8 +5,8 @@
 //   favorites: Songs[];
 //   setFavorites: React.Dispatch<React.SetStateAction<Songs[]>>;
 //   addToFavorites: (song: Songs) => void;
-//   removeFromFavorites: (id: number) => void;
-//   isFavorite: (id: number) => boolean;
+//   removeFromFavorites: (id: string) => void;
+//   isFavorite: (id: string) => boolean;
 //   toggleFavorite: (song: Songs) => void;
 // }
 
@@ -22,7 +22,7 @@
 //   children,
 // }) => {
 //   const [favorites, setFavorites] = useState<Songs[]>([]);
-//   function isFavorite(id: number) {
+//   function isFavorite(id: string) {
 //     return !!favorites.some((song) => song.id === id);
 //   }
 
@@ -33,7 +33,7 @@
 //     }
 //   };
 
-//   const removeFromFavorites = (id: number) => {
+//   const removeFromFavorites = (id: string) => {
 //     setFavorites((currentFavorites) =>
 //       currentFavorites.filter((item) => item.id !== id)
 //     );

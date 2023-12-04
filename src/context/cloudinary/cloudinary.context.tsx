@@ -3,34 +3,34 @@ import React, { createContext, ReactNode, useContext } from "react";
 
 
 
-interface CloudinaryContextType {
+interface NewContextType {
    
 }
 
-const CloudinaryContext = createContext<CloudinaryContextType | null>(null);
-const cloudinaryUrl = process.env.CLOUDINARY_URL;
+const NewContext = createContext<NewContextType | null>(null);
+
 
 type ProviderProps = {
     children: ReactNode;
 }
 
-const CloudinaryContextProvider: React.FC<ProviderProps> = ({ children }) => {
+const NewContextProvider: React.FC<ProviderProps> = ({ children }) => {
    
 
     return (
-        <CloudinaryContext.Provider value={{  }}>
+        <NewContext.Provider value={{  }}>
             {children}
-        </CloudinaryContext.Provider>
+        </NewContext.Provider>
     );
 };
 
-// Custom Hook to use API Calls
-export const useCloudinaryContext = () => {
-    const context = useContext(CloudinaryContext);
+
+export const useNewContext = () => {
+    const context = useContext(NewContext);
     if (!context) {
-        throw new Error("useCloudinaryContext must be used within an CloudinaryContextProvider");
+        throw new Error("useNewContext must be used within an NewContextProvider");
     }
     return context;
 };
 
-export default CloudinaryContextProvider;
+export default NewContextProvider;

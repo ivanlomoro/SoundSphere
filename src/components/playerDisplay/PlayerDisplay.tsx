@@ -8,6 +8,10 @@ import { ProgressBar } from "../progressBar/ProgressBar";
 import { Songs } from "../../Types/SongsTypes";
 import { useNavigate } from "react-router-dom";
 import { FaveButton } from "../card/card.styled.components";
+import { FullHeart } from "../card/card.styled.components";
+import { EmptyHeart } from "../card/card.styled.components";
+import { useInteractions } from "../../context/userContext/InteractionContext";
+
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -15,9 +19,6 @@ export type CustomEventType = {
     offsetX: number;
   };
 };
-
-
-
 
 const HiddenPlayer = styled.div`
   z-index: -5;
@@ -27,9 +28,6 @@ const HiddenPlayer = styled.div`
 `;
 
 const StyledPlayer = styled(ReactPlayer)`
-
-
-
 `;
 
 const ButtonContainer = styled.div`
@@ -56,8 +54,6 @@ margin-top: 0;
   margin: var(--space-sm);
   flex-direction: column;
   align-items: center;
-
-
 `;
 
 type PlayerDisplayProps = {
@@ -65,20 +61,29 @@ type PlayerDisplayProps = {
   currentSong: Songs;
 };
 
+// De donde viene "songs" "currentSong"
+// useSong(): contexto
+// De donde viene "songs" "currentSong"
+// useSong(): contexto
 export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
-  const [playing, setPlaying] = useState(false);
-
-  const initialSongIndex = songs.findIndex(
-    (song) => song.id === currentSong.id
+ const {toggleFavorite, isFavorite } = useInteractions();
+ const [playing, setPlaying] = useState(false);
+// Iniciar cancion index ?? identificar con 'id'
+const initialSongIndex = songs.findIndex(
+  (song) => song.id === currentSong.id
   );
 
+    // Status de la currentSongIndex ??? + update
   const [currentSongIndex, setCurrentSongIndex] = useState(initialSongIndex);
 
+    // Status progress ?? + update
   const [progress, setProgress] = useState({
     currentSeconds: 0,
     currentPercentage: 0,
     currentFormattedTime: "",
   });
+
+  // Status duration ?? + update
   const [duration, setDuration] = useState({
     duration: 0,
     formattedDuration: "",
@@ -92,6 +97,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     playedSeconds: number;
   };
 
+  // funcion para formatear el tiempo
   const getFormattedTime = (currentSeconds: number) => {
     const date = new Date(0);
     date.setSeconds(currentSeconds);
@@ -99,10 +105,12 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     return formattedTime;
   };
 
+  // funcion para conseguir porcentage
   const getPercentage = (currentSeconds: number) => {
     return currentSeconds > 0 ? currentSeconds / duration.duration : 0;
   };
 
+  // función para manjera el proceso
   const handleProgress = ({ playedSeconds }: handleProgressPropsType) => {
     setProgress({
       currentSeconds: playedSeconds,
@@ -111,6 +119,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     });
   };
 
+  // funció para la duración
   const handleDuration = (duration: number) => {
     setDuration({
       duration: duration,
@@ -118,10 +127,12 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     });
   };
 
+  // función para "play" "pause"
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
 
+  // functión para next
   const handleNext = () => {
     if (currentSongIndex < songs.length - 1) {
       setCurrentSongIndex(currentSongIndex + 1);
@@ -129,6 +140,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     }
   };
 
+  // functión para previous
   const handlePrevious = () => {
     if (currentSongIndex > 0) {
       setCurrentSongIndex(currentSongIndex - 1);
@@ -156,7 +168,6 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     
   `;
 
-
   return (
     <>
       <HiddenPlayer>
@@ -174,6 +185,11 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
       </HiddenPlayer> <ResponsiveContainer>
 
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
+
+        <FaveButton onClick={() => { toggleFavorite(currentSong) }}>
+          {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
+        </FaveButton>
+
         <StyledSongName>{currentSong.name}</StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
         <ProgressBar
