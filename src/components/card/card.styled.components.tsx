@@ -72,6 +72,7 @@ export const CardDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-size: var(--fs-lg);
 `;
 
 // List Styles
@@ -151,11 +152,13 @@ export const GridCardDescription = styled.div`
 
 // Common Song Info Styles
 export const SongName = styled.h3`
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
+  text-align: center;
   text-overflow: ellipsis;
   margin: 0;
   color: var(--clr-text-primary);
+  min-height: 50px;
 `;
 
 export const SongArtist = styled.p`

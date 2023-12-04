@@ -64,22 +64,27 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
   return (
     <CardComponent>
       {variant === "grid" && (
-        <Link to={`/displaypage/${song.name}`}>
-          <GridImageContainer>
-            <ImageComponent src={song.thumbnail} alt={song.name} />
-            <PlayButton
-              onClick={() => {
-                addToRecents(song);
-                setCurrentList(songs);
-                setCurrentSong(song);
-              }}
-            />
-          </GridImageContainer>
-        </Link>
+        <GridImageContainer
+          onClick={() => {
+            addToRecents(song);
+            setCurrentList(songs);
+            setCurrentSong(song);
+          }}
+        >
+          <ImageComponent src={song.thumbnail} alt={song.name} />
+        </GridImageContainer>
       )}
 
       {variant != "grid" && (
-        <ImageComponent src={song.thumbnail} alt={song.name} />
+        <ImageComponent
+          src={song.thumbnail}
+          alt={song.name}
+          onClick={() => {
+            addToRecents(song);
+            setCurrentList(songs);
+            setCurrentSong(song);
+          }}
+        />
       )}
 
       <DescriptionComponent>
@@ -89,16 +94,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
         </div>
         {variant != "grid" && (
           <CommonButtonContainer>
-            <Button
-              variant="StyledButtonNav"
-              content={<NavIcon icon={AiOutlinePlayCircle} />}
-              ariaLabel="Music Player"
-              onClick={() => {
-                addToRecents(song);
-                setCurrentSong(song);
-                setCurrentList(songs);
-              }}
-            />{" "}
             <FaveButton
               onClick={() => {
                 toggleFavorite(song);
@@ -106,10 +101,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
-            {/* <Button content="Add To Playlist" onClick={() => addToSelected(song)} /> */}
-            {/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
-						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
-					</FavoriteButton>  */}
             <FaveButton
               onClick={() => {
                 toggleSelected(song);
