@@ -12,6 +12,7 @@ type PlayerContextType = {
   currentList: Songs[];
   setCurrentList: Dispatch<SetStateAction<Songs[] | never[]>>;
   currentSong: Songs | null;
+  setCurrentSong: Dispatch<SetStateAction<Songs | null>>;
   progress: ProgressType;
   playing: boolean;
   setPlaying: Dispatch<SetStateAction<boolean>>;
@@ -46,6 +47,7 @@ const initialState: PlayerContextType = {
   currentSong: null,
   currentList: [],
   setCurrentList: () => {},
+  setCurrentSong: () => {},
   progress: {
     currentSeconds: 0,
     currentPercentage: 0,
@@ -141,6 +143,7 @@ export const PlayerContextProvider = ({
         currentSong,
         currentList,
         setCurrentList,
+        setCurrentSong,
         progress,
         playing,
         setPlaying,
