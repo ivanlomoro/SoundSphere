@@ -95,6 +95,12 @@ export const PlayerContextProvider = ({
     setCurrentSongIndex(songIndex);
   }, [currentSong]);
 
+  useEffect(() => {
+    if (progress.currentPercentage === 1) {
+      handleNext();
+    }
+  }, [progress]);
+
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
