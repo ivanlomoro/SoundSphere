@@ -1,65 +1,58 @@
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { Card, CardImage, CardDescription, SongName, FollowedButton, ArtistActionButtons } from './card.styled.components';
+import { useNavigate } from 'react-router-dom';
 import { Playlist } from '../../Types/PlaylistFormData';
-import { useInteractions } from '../../context/userContext/InteractionContext';
-interface PlaylistCardProps {
-    playlist: Playlist
 
+import {
+    Card,
+    CardImage,
+    CardDescription,
+    SongName,
+GridCardDescription, GridCardImage, GridCard,
+    FullScreenCardTitle,
+    ListCard,
+    ListCardImage,
+    ListCardDescription, 
+} from './card.styled.components';
+import PlaylistActionButtons from './PlaylistActionButtons';
+
+
+interface PlaylistCardProps {
+    playlist: Playlist;
+    variant?: 'grid' | 'list' | 'card' | 'fullscreen';
 }
 
-
-
-export function PlaylistCard({playlist } :PlaylistCardProps) {
-const {isLiked, toggleLiked} = useInteractions();
-    if (!playlist) {
-        return null;
-    }
+export function PlaylistCard({ playlist, variant = "card" }: PlaylistCardProps) {
+    const navigate = useNavigate();
     
 
+
+    if (!playlist) return null;
+
+    const CardComponent = variant === "grid" ? GridCard : variant === "list" ? ListCard : Card;
+    const ImageComponent =variant === "grid"? GridCardImage : variant === "list" ? ListCardImage : CardImage;
+    const DescriptionComponent =variant === "grid"? GridCardDescription: variant === "list"? ListCardDescription: CardDescription;
+
+    const handleCardClick = () => {
+       
+        navigate(`/playlist/${playlist.playlistName}`);
+    }
+
     return (
-        <Card>
-            <CardImage className="card-img" src={playlist.thumbnail} alt={playlist.playlistName} />
-            <CardDescription>
+        <CardComponent onClick={handleCardClick}>
+            {variant === "fullscreen" && 
+           ( <>
+            <FullScreenCardTitle> 
+                {playlist.playlistName}
+                <span>{playlist.songs.length} songs</span>
+                </FullScreenCardTitle><PlaylistActionButtons /></>)}
+                
+            <ImageComponent src={playlist.thumbnail} alt={playlist.playlistName} />
+                
+            {variant === "list" && (<>    <DescriptionComponent>
                 <SongName>{playlist.playlistName}</SongName>
-
-            </CardDescription>
-
-
-            <ArtistActionButtons>
-
-                <FollowedButton onClick={() => toggleLiked(playlist)}>
-                    {isLiked(playlist.playlistName) ? <AiOutlineStar style={{
-                        color: "var(--clr-accent)", height: "30px",
-                        width: "30px"
-                    }} /> : <AiFillStar />}
-                </FollowedButton>
-
-            </ArtistActionButtons>
-        </Card>
+                <PlaylistActionButtons /> 
+            </DescriptionComponent></> ) }
+            
+           
+        </CardComponent>
     );
-
-
 }
-
-
-// const handleDeleteSong = async (songId: string) => {
-//     try {
-//         const result = await Swal.fire({
-//             title: 'Are you sure delete this song?',
-//             text: 'You won\'t be able to revert this.',
-//             icon: 'warning',
-//             showCancelButton: true,
-//             confirmButtonColor: '#FF3B4B',
-//             cancelButtonColor: '#677580',
-//             confirmButtonText: 'Yes, delete it!',
-//             background: '#111111',
-//             color: 'white'
-//         });
-
-//         if (result.isConfirmed) {
-//             deleteSong(songId);
-//         }
-//     } catch (error) {
-//         console.error('Error deleting song', error);
-//     }
-// };

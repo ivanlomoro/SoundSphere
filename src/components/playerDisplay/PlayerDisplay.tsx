@@ -120,7 +120,7 @@ export const PlayerDisplay = () => {
           {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
         </FaveButton>
 
-        <StyledSongName>{currentSong.name}</StyledSongName>
+        <StyledSongName>{currentSong?.name} </StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
         <ProgressBar
           progress={progress}

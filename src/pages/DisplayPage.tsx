@@ -11,7 +11,7 @@ export const DisplayPage = () => {
   const { publicSongs } = useApiCalls();
   const { name } = useParams();
   const selectedSong = name
-    ? publicSongs?.find((song: Songs) => song.name === name)
+    ? selectedSongs?.find((song: Songs) => song.name === name)
     : null;
   const defaultSong = publicSongs[0];
   return (

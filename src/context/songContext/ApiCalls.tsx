@@ -18,7 +18,7 @@ export interface SongUploadData {
 interface ApiCallContextType {
   uploadSong: (songData: SongUploadData) => Promise<void>;
   publicSongs: Songs[];
-  userSongs: Songs[];
+  userSongs?: Songs[];
 }
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
@@ -29,7 +29,7 @@ type ProviderProps = {
 
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
-  const [userSongs, setUSerSongs] = React.useState<Songs[]>([]);
+  // const [userSongs, setUSerSongs] = React.useState<Songs[]>([]);
   const uploadSong = async (songData: SongUploadData) => {
     const baseUrl = `http://localhost:8080`;
     const userID = "65647cd431a39aa197f9ebe7";

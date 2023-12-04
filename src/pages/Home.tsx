@@ -25,6 +25,7 @@ export const Home = () => {
   });
   const { renderPlaylists: renderPlaylists } = useRenderer({
     playlists: playlists,
+    layout: "card",
   });
 
   return (
