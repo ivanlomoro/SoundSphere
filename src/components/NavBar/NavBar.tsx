@@ -1,7 +1,6 @@
 import { Button } from "../button/Button";
 import {
   AiOutlineHome,
-  AiOutlinePlayCircle,
   AiOutlineUser,
   AiOutlineHeart,
   AiOutlineSearch,
@@ -14,7 +13,6 @@ import "./navbar.css";
 import { type IconType } from "react-icons";
 import {
   ADDMUSICPAGE,
-  DISPLAYPAGE,
   FAVORITEPAGE,
   HOME,
   MYSONGSPAGE,
@@ -27,16 +25,12 @@ const StyledNavBar = styled.div`
   bottom: 0;
   width: var(--w-full);
   margin-inline: auto;
-  background-color: #111111c2;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-  backdrop-filter: blur(6px);
 `;
 
 const StyledNav = styled.nav`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: var(--w-full);
-  background-color: var(--clr-elements);
 `;
 
 interface StyledNavIconProps {

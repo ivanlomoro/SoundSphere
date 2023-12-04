@@ -42,7 +42,7 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
           <UserAvatar />
           <WelcomeUserMessage text={`Welcome ${user.given_name} !`} />
         </RowContainer>
-        {editUserLogo &&
+        {editUserLogo && (
           <StyledIconSection>
             <FaUserGear className="custom-icon" />
             <Link to={ADDMUSICPAGE}>
