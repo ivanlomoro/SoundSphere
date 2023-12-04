@@ -31,7 +31,6 @@ const StyledPlayer = styled(ReactPlayer)``;
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  border: 3px solid red;
 `;
 
 const StyledCover = styled.img`
