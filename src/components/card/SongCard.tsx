@@ -21,8 +21,8 @@ import {
   EmptyHeart,
   PlayButton,
   FaveButton,
-  Plus,
   Minus,
+  Plus,
 } from "./card.styled.components";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import CardContainerButtons from "./CardContainerButtons";
@@ -30,8 +30,10 @@ import { SongCardProps } from "../../Types/SongsTypes";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { useLocation } from "react-router-dom";
 import { MYSONGSPAGE } from "../../routes/paths";
+import { useContext } from "react";
+import { PlayerContext } from "../../context/playerContext/playerContext";
 
-export function SongCard({ song, variant = "card" }: SongCardProps) {
+export function SongCard({ song, variant = "card", songs }: SongCardProps) {
   const location = useLocation();
   const CardComponent =
     variant === "grid" ? GridCard : variant === "list" ? ListCard : Card;
@@ -54,6 +56,10 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
     toggleSelected,
     isSelected,
   } = useInteractions();
+  const { setCurrentSong, setCurrentList } = useContext(PlayerContext);
+  if (!songs) {
+    return null;
+  }
 
   return (
     <CardComponent>
@@ -64,6 +70,8 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
             <PlayButton
               onClick={() => {
                 addToRecents(song);
+                setCurrentList(songs);
+                setCurrentSong(song);
               }}
             />
           </GridImageContainer>
@@ -81,17 +89,16 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
         </div>
         {variant != "grid" && (
           <CommonButtonContainer>
-            <Link to={`/displaypage/${song.name}`}>
-              <Button
-                variant="StyledButtonNav"
-                content={<NavIcon icon={AiOutlinePlayCircle} />}
-                ariaLabel="Music Player"
-                onClick={() => {
-                  addToRecents(song);
-                }}
-              />{" "}
-            </Link>
-
+            <Button
+              variant="StyledButtonNav"
+              content={<NavIcon icon={AiOutlinePlayCircle} />}
+              ariaLabel="Music Player"
+              onClick={() => {
+                addToRecents(song);
+                setCurrentSong(song);
+                setCurrentList(songs);
+              }}
+            />{" "}
             <FaveButton
               onClick={() => {
                 toggleFavorite(song);
@@ -99,7 +106,7 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
-
+            {/* <Button content="Add To Playlist" onClick={() => addToSelected(song)} /> */}
             {/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
 						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 					</FavoriteButton>  */}

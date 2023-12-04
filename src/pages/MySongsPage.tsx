@@ -16,12 +16,7 @@ const MySongsPage = () => {
     isModifiedSong,
   } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
-  const { renderSongs } = useRenderer({
-
-    songs: mySongs,
-    layout: "list",
-
-  });
+  const { renderSongs: renderMySongs } = useRenderer({songs: mySongs,layout: "list"});
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -47,7 +42,7 @@ const MySongsPage = () => {
           {isLoading ? (
             <Loader />
           ) : mySongs.length > 0 ? (
-            renderSongs()
+            renderMySongs()
           ) : (
             <p>
               You didn`t upload any songs!{" "}

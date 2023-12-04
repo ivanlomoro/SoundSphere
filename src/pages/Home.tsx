@@ -5,16 +5,26 @@ import { useRenderer } from "../hooks/useRenderer";
 // import { SongList } from "./Songs";
 
 export const Home = () => {
-  const { publicSongs } = useApiCalls()
+  const { publicSongs } = useApiCalls();
 
-  const { recents, favorites, playlists } = useInteractions()
+  const { recents, favorites, playlists } = useInteractions();
 
-  const { renderSongs: renderPublicSongs } = useRenderer({ songs: publicSongs, layout: "card" });
-  const { renderSongs: renderRecentsSongs } = useRenderer({ songs: recents, layout: "grid" });
-  const { renderSongs: renderFavoriteSongs } = useRenderer({ songs: favorites, layout: "card" });
-  const { renderPlaylists: renderPlaylists } = useRenderer({ playlists: playlists })
-
-
+  const { renderSongs: renderPublicSongs } = useRenderer({
+    songs: publicSongs,
+    layout: "card",
+  });
+  const { renderSongs: renderRecentsSongs } = useRenderer({
+    songs: recents,
+    layout: "grid",
+  });
+  const { renderSongs: renderFavoriteSongs } = useRenderer({
+    songs: favorites,
+    layout: "card",
+  });
+  const { renderPlaylists: renderPlaylists } = useRenderer({
+    playlists: playlists,
+    layout: "card",
+  });
 
   return (
     <><div>

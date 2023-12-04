@@ -6,8 +6,9 @@ import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext/UserContext";
 import UserInteractionProvider from "./context/userContext/InteractionContext";
 import ApiCallsProvider from "./context/songContext/ApiCalls";
-import { MusicPlayerProvider } from './context/musicDisplayContext/musicDisplay';
+import { MusicPlayerProvider } from "./context/musicDisplayContext/musicDisplay";
 import GenreProvider from "./context/genreContext/genreContext";
+import { PlayerContextProvider } from "./context/playerContext/playerContext";
 const {
   VITE_AUTH0_DOMAIN: domain,
   VITE_AUTH0_CLIENT_ID: clientId,
@@ -29,24 +30,24 @@ export const App = () => {
       <UserContextProvider>
         <ApiCallsProvider>
           <UserInteractionProvider>
-          <GenreProvider>
-            <SongsProvider>
-            <MusicPlayerProvider>
-              <BrowserRouter>
-                <AppRouter />
-                <Toaster
-                  toastOptions={{
-                    success: {
-                      style: {
-                        background: "#282828",
-                        color: "#fff",
-                      },
-                    },
-                  }}
-                />
-              </BrowserRouter>
-              </MusicPlayerProvider>
-            </SongsProvider>
+            <GenreProvider>
+              <SongsProvider>
+                <PlayerContextProvider>
+                  <BrowserRouter>
+                    <AppRouter />
+                    <Toaster
+                      toastOptions={{
+                        success: {
+                          style: {
+                            background: "#282828",
+                            color: "#fff",
+                          },
+                        },
+                      }}
+                    />
+                  </BrowserRouter>
+                </PlayerContextProvider>
+              </SongsProvider>
             </GenreProvider>
           </UserInteractionProvider>
         </ApiCallsProvider>

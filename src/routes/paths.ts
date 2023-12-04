@@ -6,7 +6,10 @@ export const FAVORITEPAGE = "/favorites"
 export const SEARCHPAGE = "/search"
 export const ADDMUSICPAGE = "/addmusic"
 export const MYSONGSPAGE = "/mysongs"
-export const MICHELE = "/michele"
+// export const MICHELE = "/michele"
+export const PLAYLISTPAGE = "/playlist/:playlistName"
+export const PLAYLISTALL = "/playlist/"
+
 
 
 

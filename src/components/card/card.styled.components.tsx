@@ -7,7 +7,34 @@ export interface ArtistCardProps {
   toggleFollowed: (artist: Artist) => void
   isFollowed: (id: string) => boolean
 }
+export const FullScreenCard = styled.div`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  user-select: none;
+  margin: 0;
+  width: 100vw;
+  z-index: 3;
 
+`;
+export const FullScreenCardTitle = styled.h2`
+font-size: 2.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  z-index: 3;
+`;
+
+
+export const FullscreenCardDetails = styled.p`
+  color: #aaaaaa;
+  font-size: 1.5rem;
+  margin: 5px 0;
+  text-align:center;
+  z-index: 3;
+`;
 // Common Button Container
 export const CommonButtonContainer = styled.div`
   display: flex;
@@ -16,7 +43,7 @@ export const CommonButtonContainer = styled.div`
   width: var(--w-full);
 `
 
-// Card Styles
+// Card Styles``
 export const Card = styled.li`
   display: flex; 
    align-items: center;
@@ -28,17 +55,22 @@ export const Card = styled.li`
   padding: var(--space-md);
   width: 10rem;
   min-width: 10rem;
-  margin: var(--space-md);
+  margin: var(--space-sm);
 `
 
 export const CardImage = styled.img`
   width: var(--w-full);
+  height: 10rem;
   border-radius: var(--radius-sm);
 `
 
 export const CardDescription = styled.div`
   width: var(--w-full);
-  padding: var(--space-xs);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
 `
 
 // List Styles
@@ -61,7 +93,7 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
    }
 `
 
-
+export const FullScreenImage = styled(CardImage)``
 
 export const ListCardImage = styled(CardImage)`
   max-height: 12vh;
@@ -72,8 +104,14 @@ export const ListCardImage = styled(CardImage)`
 
 export const ListCardDescription = styled(CardDescription)`
   padding: var(--space-md);
-  font-size: clamp(0.5rem, 10vw, 1rem);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+   font-size: clamp(0.5rem, 10vw, 1rem);
   overflow: hidden;
+  text-align: center;
+  gap: var(--space-xl);
 
  
 `
@@ -107,14 +145,14 @@ export const GridCardImage = styled.img`
 `
 
 export const GridCardDescription = styled.div`
-  grid-column: 2;
- grid-row: 1/span 2;
-  display: flex;  
-  overflow: hidden;
-   text-overflow: ellipsis;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--space-xs);
+grid-column: 2;
+grid-row: 1/span 2;
+display: flex;  
+overflow: hidden;
+text-overflow: ellipsis;
+flex-direction: column;
+justify-content: space-between;
+padding: var(--space-xs);
 
   
 `
@@ -177,6 +215,11 @@ color: var(--clr-text-secondary);
     color: var(--clr-accent);
    }
 `
+export const StyledColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 export const PlayListButton = styled.button`
 background: transparent;
 border: none;
@@ -203,3 +246,6 @@ export const ArtistActionButtons = styled.div`
   justify-content: space-between;
   color: var(--clr-accent);
 `
+
+
+
