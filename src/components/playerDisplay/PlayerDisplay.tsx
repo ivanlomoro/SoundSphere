@@ -10,6 +10,7 @@ import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { PlayerContext } from "../../context/playerContext/playerContext";
+import { useApiCalls } from "../../context/songContext/ApiCalls";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -54,6 +55,7 @@ const ResponsiveContainer = styled.div`
 
 export const PlayerDisplay = () => {
   const { toggleFavorite, isFavorite } = useInteractions();
+  const { publicSongs } = useApiCalls();
 
   const {
     currentSong: songFromContext,
@@ -68,7 +70,8 @@ export const PlayerDisplay = () => {
     handlePrevious,
   } = useContext(PlayerContext);
 
-  const currentSong = songFromContext ? songFromContext : songs[0];
+  const currentList = songs.length > 0 ? songs : publicSongs;
+  const currentSong = songFromContext ? songFromContext : currentList[0];
 
   const playerRef = useRef<ReactPlayer>(null);
 

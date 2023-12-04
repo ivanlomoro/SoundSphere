@@ -7,6 +7,7 @@ import {
 } from "react";
 import { createContext } from "react";
 import { Songs } from "../../Types/SongsTypes";
+import { useApiCalls } from "../songContext/ApiCalls";
 
 type PlayerContextType = {
   currentList: Songs[];
@@ -68,8 +69,9 @@ export const PlayerContext = createContext<PlayerContextType>(initialState);
 export const PlayerContextProvider = ({
   children,
 }: PlayerContextProviderProps) => {
+  const { publicSongs } = useApiCalls();
   const [currentSong, setCurrentSong] = useState<Songs | null>(null);
-  const [currentList, setCurrentList] = useState<Songs[]>([]);
+  const [currentList, setCurrentList] = useState<Songs[]>(publicSongs);
   const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
 
   const [progress, setProgress] = useState<ProgressType>({
