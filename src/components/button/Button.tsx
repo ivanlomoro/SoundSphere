@@ -55,7 +55,7 @@ const StyledButtonMiniPlay = styled.button`
   font-size: 2em;
   width: 1.5em;
   height: 1.5em;
-  background-color: var(--clr-accent);
+  background-color: var(--clr-bg-primary);
   color: var(--clr-text-secondary);
   border: none;
   border-radius: var(--radius-full);

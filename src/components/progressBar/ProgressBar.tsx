@@ -46,21 +46,23 @@ const StyledProgress = styled.progress`
     height: 5px;
     background-color: #fff;
   }
+  border-radius: 20px;
 `;
 
 const StyledMiniProgress = styled.progress`
   margin-inline: auto;
-  width: var(--w-full);
-  height: 2px;
+  width: 96%;
+  height: 3px;
+  border-radius: 6px;
   -webkit-appearance: none;
   appearance: none;
 
   &::-webkit-progress-bar {
-    background-color: #888888;
+    background-color: #bb00ff1f;
   }
   &::-webkit-progress-value {
     height: 5px;
-    background-color: #fff;
+    background-color: var(--clr-accent);
   }
 `;
 

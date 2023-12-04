@@ -1,16 +1,16 @@
 import { useContext, useRef } from "react";
-import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FaveButton } from "../card/card.styled.components";
-import { FullHeart } from "../card/card.styled.components";
+import { FullMiniHeart, MiniFaveButton } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { PlayerContext } from "../../context/playerContext/playerContext";
 import { useApiCalls } from "../../context/songContext/ApiCalls";
+import { useNavigate } from "react-router-dom";
+import { DISPLAYPAGE } from "../../routes/paths";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -27,15 +27,21 @@ export const HiddenPlayer = styled.div`
 `;
 
 const MiniPlayerContainer = styled.div`
-  position: relative;
+  position: sticky;
+  bottom: 70px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  gap: 1em;
   align-items: center;
   height: 55px;
-  background-color: #111111;
+  color: #000;
+  font-size: var(--fs-md);
+  font-weight: var(--weight-semibold);
+  background-color: #fff;
   margin-bottom: 10px;
-  padding: 0.75em 0.5em;
+  padding: 0.75em 1.5em 0.75em 0.75em;
+  border-radius: 8px;
 `;
 
 const MiniCover = styled.img`
@@ -44,7 +50,14 @@ const MiniCover = styled.img`
   border-radius: 5px;
 `;
 
+const InlineContainer = styled.div`
+  display: flex;
+  gap: 1em;
+`;
+
 export const MiniPlayer = () => {
+  const navigate = useNavigate();
+
   const { toggleFavorite, isFavorite } = useInteractions();
   const { publicSongs } = useApiCalls();
 
@@ -57,8 +70,6 @@ export const MiniPlayer = () => {
     duration,
     handleProgress,
     handleDuration,
-    handleNext,
-    handlePrevious,
     setCurrentList,
   } = useContext(PlayerContext);
 
@@ -91,30 +102,33 @@ export const MiniPlayer = () => {
         />
       </HiddenPlayer>
       <MiniPlayerContainer>
-        <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
-
-        {/* <FaveButton
-          onClick={() => {
-            toggleFavorite(currentSong);
-          }}
-        >
-          {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
-        </FaveButton> */}
-
-        <p>{currentSong?.name} </p>
-        <p>{currentSong.artist}</p>
+        <InlineContainer onClick={() => navigate(DISPLAYPAGE)}>
+          <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
+          <div>
+            <p>{currentSong?.name} </p>
+            <p>{currentSong.artist}</p>
+          </div>
+        </InlineContainer>
         <ProgressBar
           progress={progress}
           duration={duration}
           onClick={handleProgressClick}
           mini={true}
         />
-        <Button
-          variant="StyledButtonMiniPlay"
-          content={playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
-          onClick={handlePlayPause}
-        />
-        <FaveButton />
+        <InlineContainer>
+          <MiniFaveButton
+            onClick={() => {
+              toggleFavorite(currentSong);
+            }}
+          >
+            {isFavorite(currentSong.id) ? <FullMiniHeart /> : <EmptyHeart />}
+          </MiniFaveButton>
+          <Button
+            variant="StyledButtonMiniPlay"
+            content={playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
+            onClick={handlePlayPause}
+          />
+        </InlineContainer>
       </MiniPlayerContainer>
     </>
   );

@@ -10,14 +10,21 @@ const StyledNavLayout = styled.div`
   min-height: 100vh;
 `;
 
+const StickySections = styled.div`
+  position: sticky;
+  bottom: 0;
+`;
+
 export const PlayerLayout = () => {
   return (
-    <StyledNavLayout className="min-h-screen">
+    <StyledNavLayout>
       <div>
         <Outlet />
       </div>
-      <MiniPlayer />
-      <NavBar />
+      <StickySections>
+        <MiniPlayer />
+        <NavBar />
+      </StickySections>
     </StyledNavLayout>
   );
 };
