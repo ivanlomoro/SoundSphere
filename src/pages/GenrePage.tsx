@@ -34,8 +34,11 @@ const GenrePage = () => {
     fetchSongsByGenre();
   }, []);
 
-  return <>
-   <HeaderSection text=" " />
-  {renderGenreSongs()}</>;
+  return (
+    <>
+      <HeaderSection text=" " />
+      {renderGenreSongs()}
+    </>
+  );
 };
 export default GenrePage;
