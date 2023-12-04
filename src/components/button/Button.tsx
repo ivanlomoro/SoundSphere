@@ -48,6 +48,19 @@ const StyledButtonPlay = styled.button`
   }
 `;
 
+const StyledButtonMiniPlay = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: var(--clr-accent);
+  color: var(--clr-text-secondary);
+  border: none;
+  border-radius: var(--radius-full);
+`;
+
 const StyledInvisibleButton = styled(StyledButton)`
   position: absolute;
   top: 0;
@@ -136,7 +149,8 @@ type ButtonProps = {
     | "StyledButtonDisplay"
     | "StyledButtonDisplayPlay"
     | "StyledBackButton"
-    | "StyledButtonOutline";
+    | "StyledButtonOutline"
+    | "StyledButtonMiniPlay";
   ariaLabel?: string;
   onClick?: () => void;
   content?: string | ReactNode;
@@ -157,6 +171,7 @@ export const Button = ({
     StyledButtonDisplayPlay,
     StyledBackButton,
     StyledButtonOutline,
+    StyledButtonMiniPlay,
   };
 
   const SelectedButton = variant ? variants[variant] : StyledButton;

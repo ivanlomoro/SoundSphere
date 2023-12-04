@@ -27,15 +27,21 @@ export const HiddenPlayer = styled.div`
 `;
 
 const MiniPlayerContainer = styled.div`
+  position: relative;
+  box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  max-height: 55px;
+  height: 55px;
   background-color: #111111;
+  margin-bottom: 10px;
+  padding: 0.75em 0.5em;
 `;
 
 const MiniCover = styled.img`
-  height: 52px;
-  width: 52px;
+  height: 42px;
+  width: 42px;
+  border-radius: 5px;
 `;
 
 export const MiniPlayer = () => {
@@ -87,13 +93,13 @@ export const MiniPlayer = () => {
       <MiniPlayerContainer>
         <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
 
-        <FaveButton
+        {/* <FaveButton
           onClick={() => {
             toggleFavorite(currentSong);
           }}
         >
           {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
-        </FaveButton>
+        </FaveButton> */}
 
         <p>{currentSong?.name} </p>
         <p>{currentSong.artist}</p>
@@ -101,15 +107,14 @@ export const MiniPlayer = () => {
           progress={progress}
           duration={duration}
           onClick={handleProgressClick}
+          mini={true}
         />
-        <div>
-          <Button
-            variant="StyledButtonDisplayPlay"
-            content={playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
-            onClick={handlePlayPause}
-          />
-          <FaveButton />
-        </div>
+        <Button
+          variant="StyledButtonMiniPlay"
+          content={playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
+          onClick={handlePlayPause}
+        />
+        <FaveButton />
       </MiniPlayerContainer>
     </>
   );
