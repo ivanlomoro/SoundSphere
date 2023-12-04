@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
@@ -10,7 +10,7 @@ import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { PlayerContext } from "../../context/playerContext/playerContext";
-import { PlayerDisplay } from "../playerDisplay/PlayerDisplay";
+import { useApiCalls } from "../../context/songContext/ApiCalls";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -26,37 +26,91 @@ export const HiddenPlayer = styled.div`
   visibility: hidden;
 `;
 
-const StyledPlayer = styled(ReactPlayer)``;
-
-const ButtonContainer = styled.div`
+const MiniPlayerContainer = styled.div`
   display: flex;
-  justify-content: center;
-  border: 3px solid red;
-`;
-
-const StyledCover = styled.img`
-  max-height: 60%;
-  max-width: 60%;
-`;
-
-const ResponsiveContainer = styled.div`
-  max-height: 75%;
-  max-width: 90%;
-  margin-top: 0;
-  display: flex;
-  border-radius: var(--radius-sm);
-  font-size: clamp(0.8rem, 1.5rem, 2rem);
-  background-color: var(--clr-bg-elements);
-  padding: var(--space-sm);
-  margin: var(--space-sm);
-  flex-direction: column;
   align-items: center;
+  max-height: 55px;
+  background-color: #111111;
+`;
+
+const MiniCover = styled.img`
+  height: 52px;
+  width: 52px;
 `;
 
 export const MiniPlayer = () => {
+  const { toggleFavorite, isFavorite } = useInteractions();
+  const { publicSongs } = useApiCalls();
+
+  const {
+    currentSong: songFromContext,
+    currentList: songs,
+    playing,
+    progress,
+    handlePlayPause,
+    duration,
+    handleProgress,
+    handleDuration,
+    handleNext,
+    handlePrevious,
+    setCurrentList,
+  } = useContext(PlayerContext);
+
+  if (songs.length === 0) setCurrentList(publicSongs);
+
+  const currentSong = songFromContext ? songFromContext : songs[0];
+
+  const playerRef = useRef<ReactPlayer>(null);
+
+  const handleProgressClick = (event: CustomEventType) => {
+    const progressBar = event.target;
+    const clickPosition = event.nativeEvent.offsetX;
+    const progressBarWidth = progressBar.clientWidth;
+    const fraction = clickPosition / progressBarWidth;
+    playerRef.current && playerRef.current.seekTo(fraction, "fraction");
+  };
+
   return (
     <>
-      <PlayerDisplay />
+      <HiddenPlayer>
+        <ReactPlayer
+          url={currentSong.url}
+          playing={playing}
+          ref={playerRef}
+          controls={false}
+          width="100%"
+          height="100%"
+          onProgress={handleProgress}
+          onDuration={handleDuration}
+        />
+      </HiddenPlayer>
+      <MiniPlayerContainer>
+        <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
+
+        <FaveButton
+          onClick={() => {
+            toggleFavorite(currentSong);
+          }}
+        >
+          {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
+        </FaveButton>
+
+        <p>{currentSong?.name} </p>
+        <p>{currentSong.artist}</p>
+        <ProgressBar
+          progress={progress}
+          duration={duration}
+          onClick={handleProgressClick}
+        />
+        <div>
+          <Button
+            variant="StyledButtonDisplayPlay"
+            content={playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
+            onClick={handlePlayPause}
+          />
+          <FaveButton />
+        </div>
+      </MiniPlayerContainer>
     </>
   );
 };
