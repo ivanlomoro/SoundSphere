@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useSongs } from "../../context/songContext/songContext";
 import { Button } from "..";
 import "./CardContainerButtons.styles.css"
-import { GenreType, useGenres } from "../../context/genreContext/genreContext";
+import { useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
 import styled from "styled-components";
 

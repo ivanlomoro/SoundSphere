@@ -1,41 +1,31 @@
 import { styled } from "styled-components";
-import GenreItem from "./GenreItem";
+import { genres } from "../../interfaces/uploadTypes";
+import GenreCage from "./GenreCage";
 
-
-const Cage = styled.div`
-  width: 100%;
-  height: 5em;
-  padding: 16px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size:1.5em;
-  
-
-`;	
+const predefinedColors = ["#d3ebc7", "#74bf9d", "#b8c2a0", "#cde9ca", "#c6d7a0"];
 
 const GridContainer = styled.div`
-margin-top: 1emn;
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-  column-gap: 5em;
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // Set to two equal columns
+  column-gap: 3em;
   row-gap: 3em;
-max-width: 300px;
-margin-left: 1.5em;
+  max-width: 200px;
+  margin-left: 1em;
 `;
 
 const GenresGrid = () => {
   return (
     <>
-    <GridContainer>
-    <Cage>Rock </Cage>
-    <Cage>Pop </Cage>
-    <Cage>Hip Hop </Cage>
-    <Cage>Jazz </Cage>
-    <Cage>Classical </Cage>
-    <Cage>Electronica </Cage>
-    </GridContainer>
+      <GridContainer>
+        {genres.map((genre, index) => {
+          const color = predefinedColors[index % predefinedColors.length];
+
+          return <GenreCage key={genre.id} genre={genre} color={color} />;
+        })}
+      </GridContainer>
     </>
-  )
+  );
 };
+
 export default GenresGrid;

@@ -3,11 +3,9 @@ import { AxiosResponse } from 'axios';
 import getData from '../../api/getApi';
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from '../userContext/UserContext';
+import { GenreType } from '../../Types/GenreTypes';
 
-export type GenreType = {
-    id: string,
-    name: string
-}
+
 
 export type GenreStateProps = {
     apiGenres: GenreType[];
