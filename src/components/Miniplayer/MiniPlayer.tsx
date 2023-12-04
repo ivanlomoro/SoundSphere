@@ -55,6 +55,12 @@ const InlineContainer = styled.div`
   gap: 1em;
 `;
 
+const InlineExpandibleContainer = styled.div`
+  display: flex;
+  gap: 1em;
+  flex-grow: 1;
+`;
+
 export const MiniPlayer = () => {
   const navigate = useNavigate();
 
@@ -102,13 +108,13 @@ export const MiniPlayer = () => {
         />
       </HiddenPlayer>
       <MiniPlayerContainer>
-        <InlineContainer onClick={() => navigate(DISPLAYPAGE)}>
+        <InlineExpandibleContainer onClick={() => navigate(DISPLAYPAGE)}>
           <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
           <div>
             <p>{currentSong?.name} </p>
             <p>{currentSong.artist}</p>
           </div>
-        </InlineContainer>
+        </InlineExpandibleContainer>
         <ProgressBar
           progress={progress}
           duration={duration}
