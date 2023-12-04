@@ -7,13 +7,7 @@ import {
   FavoriteSongs,
   AddMusicPage,
 } from "../pages";
-import {
-  Home,
-  LandingPage,
-  UserPage,
-  FavoriteSongs,
-  AddMusicPage,
-} from "../pages";
+
 import {
   DISPLAYPAGE,
   HOME,
@@ -24,7 +18,7 @@ import {
   ADDMUSICPAGE,
   MYSONGSPAGE,
   PLAYLISTPAGE,
-  PLAYLISTALL,,
+  PLAYLISTALL,
   GENRE,
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
