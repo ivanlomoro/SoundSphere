@@ -1,5 +1,5 @@
 // MusicPlayerContext.js (or MusicPlayerContext.ts for TypeScript)
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 // Create a new context
 const MusicPlayerContext = createContext();

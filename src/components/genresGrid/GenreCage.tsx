@@ -17,15 +17,16 @@ const Cage = styled.div`
 
 type genreCageProps = {
   genre:  GenreType,
+  color: string,
   
 }
 
 
-const GenreCage : FC<genreCageProps> = ({genre}) => {
+const GenreCage : FC<genreCageProps> = ({genre, color}) => {
     return(
       <>
         <Link to={`/genre/${genre.id}`}>
-          <Cage>{genre.name} </Cage>
+          <Cage style={{ backgroundColor: color }}>{genre.name} </Cage>
         </Link>
       </>
     )
