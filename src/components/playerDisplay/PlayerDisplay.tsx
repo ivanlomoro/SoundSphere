@@ -54,7 +54,6 @@ const ResponsiveContainer = styled.div`
 
 export const PlayerDisplay = () => {
   const { toggleFavorite, isFavorite } = useInteractions();
-  const [playing, setPlaying] = useState(false);
 
   const {
     currentSong: songFromContext,
@@ -62,15 +61,13 @@ export const PlayerDisplay = () => {
     setCurrentSong,
     currentSongIndex,
     setCurrentSongIndex,
+    playing,
+    progress,
+    setProgress,
+    handlePlayPause,
   } = useContext(PlayerContext);
 
   const currentSong = songFromContext ? songFromContext : songs[0];
-
-  const [progress, setProgress] = useState({
-    currentSeconds: 0,
-    currentPercentage: 0,
-    currentFormattedTime: "",
-  });
 
   const [duration, setDuration] = useState({
     duration: 0,
@@ -107,10 +104,6 @@ export const PlayerDisplay = () => {
       duration: duration,
       formattedDuration: getFormattedTime(duration),
     });
-  };
-
-  const handlePlayPause = () => {
-    setPlaying(!playing);
   };
 
   const handleNext = () => {

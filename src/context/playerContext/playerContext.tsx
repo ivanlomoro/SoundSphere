@@ -17,6 +17,9 @@ type PlayerContextType = {
   setCurrentSongIndex: Dispatch<SetStateAction<number | null>>;
   progress: ProgressType;
   setProgress: Dispatch<SetStateAction<ProgressType>>;
+  playing: boolean;
+  setPlaying: Dispatch<SetStateAction<boolean>>;
+  handlePlayPause: () => void;
 };
 
 type ProgressType = {
@@ -42,6 +45,9 @@ const initialState: PlayerContextType = {
     currentFormattedTime: "",
   },
   setProgress: () => {},
+  playing: false,
+  setPlaying: () => {},
+  handlePlayPause: () => {},
 };
 
 export const PlayerContext = createContext<PlayerContextType>(initialState);
@@ -58,6 +64,7 @@ export const PlayerContextProvider = ({
     currentPercentage: 0,
     currentFormattedTime: "",
   });
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const songIndex = currentList.findIndex(
@@ -66,6 +73,10 @@ export const PlayerContextProvider = ({
 
     setCurrentSongIndex(songIndex);
   }, [currentSong]);
+
+  const handlePlayPause = () => {
+    setPlaying(!playing);
+  };
 
   return (
     <PlayerContext.Provider
@@ -78,6 +89,9 @@ export const PlayerContextProvider = ({
         setCurrentSongIndex,
         progress,
         setProgress,
+        playing,
+        setPlaying,
+        handlePlayPause,
       }}
     >
       {children}
