@@ -12,18 +12,11 @@ type PlayerContextType = {
   currentList: Songs[];
   setCurrentList: Dispatch<SetStateAction<Songs[] | never[]>>;
   currentSong: Songs | null;
-  setCurrentSong: Dispatch<SetStateAction<Songs | null>>;
-  currentSongIndex: number | null;
-  setCurrentSongIndex: Dispatch<SetStateAction<number | null>>;
   progress: ProgressType;
-  setProgress: Dispatch<SetStateAction<ProgressType>>;
   playing: boolean;
   setPlaying: Dispatch<SetStateAction<boolean>>;
   handlePlayPause: () => void;
   duration: DurationType;
-  setDuration: Dispatch<SetStateAction<DurationType>>;
-  getFormattedTime: (currentSeconds: number) => string;
-  getPercentage: (currentSeconds: number) => number;
   handleProgress: (playedSeconds: HandleProgressPropsType) => void;
   handleDuration: (duration: number) => void;
   handleNext: () => void;
@@ -51,28 +44,17 @@ type PlayerContextProviderProps = {
 
 const initialState: PlayerContextType = {
   currentSong: null,
-  setCurrentSong: () => {},
   currentList: [],
   setCurrentList: () => {},
-  currentSongIndex: null,
-  setCurrentSongIndex: () => {},
   progress: {
     currentSeconds: 0,
     currentPercentage: 0,
     currentFormattedTime: "",
   },
-  setProgress: () => {},
   playing: false,
   setPlaying: () => {},
   handlePlayPause: () => {},
   duration: { duration: 0, formattedDuration: "" },
-  setDuration: () => {},
-  getFormattedTime: (currentSeconds: number) => {
-    return "";
-  },
-  getPercentage: (currentSeconds: number) => {
-    return 0;
-  },
   handleProgress: (playedSeconds: HandleProgressPropsType) => {},
   handleDuration: (duration: number) => {},
   handleNext: () => {},
@@ -157,20 +139,13 @@ export const PlayerContextProvider = ({
     <PlayerContext.Provider
       value={{
         currentSong,
-        setCurrentSong,
         currentList,
         setCurrentList,
-        currentSongIndex,
-        setCurrentSongIndex,
         progress,
-        setProgress,
         playing,
         setPlaying,
         handlePlayPause,
         duration,
-        setDuration,
-        getFormattedTime,
-        getPercentage,
         handleProgress,
         handleDuration,
         handleNext,
