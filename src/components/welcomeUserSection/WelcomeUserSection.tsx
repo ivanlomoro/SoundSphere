@@ -14,6 +14,7 @@ const StyledWelcomeUserSection = styled.div`
   align-items: center;
   gap: var(--space-md);
   cursor: pointer;
+  margin-top: 0.5rem;
 `;
 
 const StyledIconSection = styled.div`

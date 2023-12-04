@@ -1,14 +1,16 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { Link, useSearchParams } from "react-router-dom";
 import { Songs } from "../../Types/SongsTypes";
 import styled from "styled-components";
 import "./styles.css";
 import { useApiCalls } from "../../context/songContext/ApiCalls";
+import { PlayerContext } from "../../context/playerContext/playerContext";
 
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { publicSongs } = useApiCalls();
+  const { setCurrentSong, setCurrentList } = useContext(PlayerContext);
 
   const StyledDivSection = styled.div`
     display: flex;
@@ -54,7 +56,14 @@ export const SearchBar = () => {
                 );
               })
               .map((song: Songs) => (
-                <Link key={song.id} to={`/displaypage/${song.name}`}>
+                <Link
+                  key={song.id}
+                  to={`/displaypage/${song.id}`}
+                  onClick={() => {
+                    setCurrentSong(song);
+                    setCurrentList(publicSongs);
+                  }}
+                >
                   <StyledDivSection2>
                     <img
                       style={{ width: 50 }}

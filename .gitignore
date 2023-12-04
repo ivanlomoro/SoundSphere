@@ -2,3 +2,6 @@ node_modules/
 src/pages/styles.css
 .env
 .vercel
+src/hooks/useStateManager.tsx
+src/components/uploadForm/PlaylistUploadForm.tsx
+src/components/uploadForm/PlaylistUploadForm.tsx

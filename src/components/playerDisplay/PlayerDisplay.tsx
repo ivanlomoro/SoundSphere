@@ -1,16 +1,16 @@
-import { useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { Songs } from "../../Types/SongsTypes";
-import { useNavigate } from "react-router-dom";
 import { FaveButton } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { useInteractions } from "../../context/userContext/InteractionContext";
+import { PlayerContext } from "../../context/playerContext/playerContext";
+import { useApiCalls } from "../../context/songContext/ApiCalls";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -19,13 +19,14 @@ export type CustomEventType = {
   };
 };
 
-const HiddenPlayer = styled.div`
+export const HiddenPlayer = styled.div`
   z-index: -5;
   width: 0;
   height: 0;
   visibility: hidden;
 `;
 
+const StyledPlayer = styled(ReactPlayer)``;
 const StyledPlayer = styled(ReactPlayer)``;
 
 const ButtonContainer = styled.div`
@@ -53,97 +54,29 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
-type PlayerDisplayProps = {
-  songs: Songs[];
-  currentSong: Songs;
-};
-
-// De donde viene "songs" "currentSong"
-// useSong(): contexto
-// De donde viene "songs" "currentSong"
-// useSong(): contexto
-export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
+export const PlayerDisplay = () => {
   const { toggleFavorite, isFavorite } = useInteractions();
-  const [playing, setPlaying] = useState(false);
-  // Iniciar cancion index ?? identificar con 'id'
-  const initialSongIndex = songs.findIndex(
-    (song) => song.id === currentSong.id
-  );
+  const { publicSongs } = useApiCalls();
 
-  // Status de la currentSongIndex ??? + update
-  const [currentSongIndex, setCurrentSongIndex] = useState(initialSongIndex);
+  const {
+    currentSong: songFromContext,
+    currentList: songs,
+    playing,
+    progress,
+    handlePlayPause,
+    duration,
+    handleProgress,
+    handleDuration,
+    handleNext,
+    handlePrevious,
+    setCurrentList,
+  } = useContext(PlayerContext);
 
-  // Status progress ?? + update
-  const [progress, setProgress] = useState({
-    currentSeconds: 0,
-    currentPercentage: 0,
-    currentFormattedTime: "",
-  });
+  if (songs.length === 0) setCurrentList(publicSongs);
 
-  // Status duration ?? + update
-  const [duration, setDuration] = useState({
-    duration: 0,
-    formattedDuration: "",
-  });
+  const currentSong = songFromContext ? songFromContext : songs[0];
 
   const playerRef = useRef<ReactPlayer>(null);
-
-  const navigate = useNavigate();
-
-  type handleProgressPropsType = {
-    playedSeconds: number;
-  };
-
-  // funcion para formatear el tiempo
-  const getFormattedTime = (currentSeconds: number) => {
-    const date = new Date(0);
-    date.setSeconds(currentSeconds);
-    const formattedTime = date.toISOString().substring(14, 19);
-    return formattedTime;
-  };
-
-  // funcion para conseguir porcentage
-  const getPercentage = (currentSeconds: number) => {
-    return currentSeconds > 0 ? currentSeconds / duration.duration : 0;
-  };
-
-  // función para manjera el proceso
-  const handleProgress = ({ playedSeconds }: handleProgressPropsType) => {
-    setProgress({
-      currentSeconds: playedSeconds,
-      currentPercentage: getPercentage(playedSeconds),
-      currentFormattedTime: getFormattedTime(playedSeconds),
-    });
-  };
-
-  // funció para la duración
-  const handleDuration = (duration: number) => {
-    setDuration({
-      duration: duration,
-      formattedDuration: getFormattedTime(duration),
-    });
-  };
-
-  // función para "play" "pause"
-  const handlePlayPause = () => {
-    setPlaying(!playing);
-  };
-
-  // functión para next
-  const handleNext = () => {
-    if (currentSongIndex < songs.length - 1) {
-      setCurrentSongIndex(currentSongIndex + 1);
-      navigate(`/displaypage/${songs[currentSongIndex + 1].name}`);
-    }
-  };
-
-  // functión para previous
-  const handlePrevious = () => {
-    if (currentSongIndex > 0) {
-      setCurrentSongIndex(currentSongIndex - 1);
-      navigate(`/displaypage/${songs[currentSongIndex - 1].name}`);
-    }
-  };
 
   const handleProgressClick = (event: CustomEventType) => {
     const progressBar = event.target;
@@ -167,7 +100,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
     <>
       <HiddenPlayer>
         <StyledPlayer
-          url={songs[currentSongIndex].url}
+          url={currentSong.url}
           playing={playing}
           ref={playerRef}
           controls={false}
@@ -188,7 +121,7 @@ export const PlayerDisplay = ({ songs, currentSong }: PlayerDisplayProps) => {
           {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
         </FaveButton>
 
-        <StyledSongName>{currentSong.name}</StyledSongName>
+        <StyledSongName>{currentSong?.name} </StyledSongName>
         <StyledArtistName>{currentSong.artist}</StyledArtistName>
         <ProgressBar
           progress={progress}

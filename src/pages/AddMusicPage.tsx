@@ -23,6 +23,7 @@ import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
+import Loader from "../components/Loader/Loader";
 
 interface Album {
   id: string;
@@ -315,7 +316,7 @@ export const AddMusicPage = () => {
               <p className="switch-text">Private</p>
             )}
           </div>
-          <Submit>{axiosLoading ? "Uploading song..." : "Upload Song"}</Submit>
+          <Submit>{axiosLoading ? "Uploading Song..." : "Upload Song"}</Submit>
         </FormContainer>
       </form>
     </section>

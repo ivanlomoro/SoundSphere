@@ -117,4 +117,4 @@
 //     handleFavoritesAction('toggle', someSong);
 
 //     // ... rest of your component
-// };
+// }

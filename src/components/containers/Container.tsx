@@ -5,7 +5,6 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--space-md);
   min-height: 90vh;
   padding-top: var(--space-sm);
   padding-inline: var(--space-md);

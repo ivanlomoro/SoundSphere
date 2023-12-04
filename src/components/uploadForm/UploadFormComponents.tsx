@@ -114,7 +114,6 @@ export const ErrorMessage = styled.p`
 `;
 
 export const Submit = styled.button`
-  position: sticky;
   bottom: 80px;
   width: 80vw;
   margin: auto;
