@@ -125,6 +125,7 @@ export const Submit = styled.button`
   text-transform: uppercase;
   font-size: var(--fs-lg);
   font-weight: bold;
+  margin-bottom: 2em;
 `;
 
 const StyledFormContainer = styled.div`

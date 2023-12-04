@@ -8,7 +8,6 @@ import { FaUserGear } from "react-icons/fa6";
 import { FC } from "react";
 import { MdFileUpload } from "react-icons/md";
 
-
 const StyledWelcomeUserSection = styled.div`
   display: flex;
   align-items: center;
@@ -22,8 +21,8 @@ const StyledIconSection = styled.div`
 `;
 
 type Props = {
-  editUserLogo?: boolean
-}
+  editUserLogo?: boolean;
+};
 
 export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
   const { user } = useAuth0();
@@ -34,15 +33,15 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
       <StyledWelcomeUserSection>
         <UserAvatar />
         <WelcomeUserMessage text={`Welcome ${user.given_name} !`} />
-        {editUserLogo &&
+        {editUserLogo && (
           <StyledIconSection>
             <FaUserGear className="custom-icon" />
             <Link to={ADDMUSICPAGE}>
               <MdFileUpload className="custom-icon" />
             </Link>
           </StyledIconSection>
-        }
-      </StyledWelcomeUserSection >
+        )}
+      </StyledWelcomeUserSection>
     </Link>
   ) : null;
 };

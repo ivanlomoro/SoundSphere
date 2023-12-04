@@ -6,12 +6,14 @@ import {
   AiOutlineHeart,
   AiOutlineSearch,
 } from "react-icons/ai";
+import { MdFileUpload } from "react-icons/md";
 
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./navbar.css";
 import { type IconType } from "react-icons";
 import {
+  ADDMUSICPAGE,
   DISPLAYPAGE,
   FAVORITEPAGE,
   HOME,
@@ -75,10 +77,10 @@ export const NavBar = () => {
             ariaLabel="Search"
           />
         </NavLink>
-        <NavLink to={DISPLAYPAGE}>
+        <NavLink to={ADDMUSICPAGE}>
           <Button
             variant="StyledButtonNav"
-            content={<NavIcon icon={AiOutlinePlayCircle} />}
+            content={<NavIcon icon={MdFileUpload} />}
             ariaLabel="Music Player"
           />
         </NavLink>
