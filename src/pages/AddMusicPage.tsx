@@ -316,7 +316,7 @@ export const AddMusicPage = () => {
               <p className="switch-text">Private</p>
             )}
           </div>
-          <Submit>{axiosLoading ? <Loader/> : "Upload Song"}</Submit>
+          <Submit>{axiosLoading ? "Uploading Song..." : "Upload Song"}</Submit>
         </FormContainer>
       </form>
     </section>
