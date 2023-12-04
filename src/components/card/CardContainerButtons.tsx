@@ -7,6 +7,7 @@ import "./CardContainerButtons.styles.css"
 import { useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from '../../Types/SongsTypes';
 import styled from "styled-components";
+import { FaveButton, Plus } from "./card.styled.components";
 
 
 export type editSongType = {
@@ -23,9 +24,7 @@ type Props = {
 }
 
 const StyledColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display:grid
 `;
 
 
@@ -163,16 +162,15 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
 
     return (
         <StyledColumnContainer>
-            <Button
-                content={<FaEdit />}
-                variant="StyledBackButton"
-                onClick={() => { handleUpdateSong(stringId, song) }}
-            />
-            <Button
-                content={<FaTrash />}
-                variant="StyledBackButton"
-                onClick={() => { handleDeleteSong(stringId) }}
-            />
+
+            <FaveButton onClick={() => { handleDeleteSong(stringId) }}>     <FaTrash /> </FaveButton>
+            <FaveButton onClick={() => { handleUpdateSong(stringId, song) }} >     <FaEdit /> </FaveButton>
+            <FaveButton onClick={() => { handleUpdateSong(stringId, song) }} >     <Plus /> </FaveButton>
+
+
+
+
+
         </StyledColumnContainer>
     )
 }

@@ -11,4 +11,17 @@ export const RecentGrid = styled.ul`
    
 `
 
+export const ListContainer = styled.ul`
+
+
+ width: 95vw;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ margin: 0;
+ padding: 0;
+ list-style: numbers;
+   
+`
+
 

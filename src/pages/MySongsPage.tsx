@@ -7,6 +7,7 @@ import { ADDMUSICPAGE } from "../routes/paths";
 import { Container, HeaderSection, WelcomeUserSection } from "../components";
 import { UserContainer } from "../components/containers/UserContainer";
 import Loader from "../components/Loader/Loader";
+import { ListContainer } from "../components/homeContainers/FavoritesGrid";
 
 
 const MySongsPage = () => {
@@ -42,7 +43,7 @@ const MySongsPage = () => {
           {isLoading ? (
             <Loader />
           ) : mySongs.length > 0 ? (
-            renderMySongs()
+        <ListContainer>{renderMySongs()}</ListContainer>  
           ) : (
             <p>
               You didn`t upload any songs!{" "}

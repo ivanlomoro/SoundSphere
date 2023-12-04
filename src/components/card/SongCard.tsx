@@ -89,7 +89,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
         </div>
         {variant != "grid" && (
           <CommonButtonContainer>
-            <Button
+            {/* <Button
               variant="StyledButtonNav"
               content={<NavIcon icon={AiOutlinePlayCircle} />}
               ariaLabel="Music Player"
@@ -98,25 +98,13 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
                 setCurrentSong(song);
                 setCurrentList(songs);
               }}
-            />{" "}
-            <FaveButton
-              onClick={() => {
-                toggleFavorite(song);
-              }}
-            >
-              {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
-            </FaveButton>
+            />{" "} */}
+    
             {/* <Button content="Add To Playlist" onClick={() => addToSelected(song)} /> */}
             {/* <FavoriteButton onClick={() => { toggleFavorite(song) }}>
 						{isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
 					</FavoriteButton>  */}
-            <FaveButton
-              onClick={() => {
-                toggleSelected(song);
-              }}
-            >
-              {isSelected(song.id) ? <Minus /> : <Plus />}
-            </FaveButton>
+          
           </CommonButtonContainer>
         )}
       </DescriptionComponent>

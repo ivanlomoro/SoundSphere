@@ -7,6 +7,8 @@ const ScrollableRow = styled.ul`
   width: 95vw;
   overflow-x: auto;
   white-space: nowrap;
+  padding: 50px;
+  gap : 23px;
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {

@@ -1,7 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
 import styled from 'styled-components'
 import { type Artist } from '../../Types/SongsTypes'
 import { AiFillHeart, AiOutlineHeart, AiOutlinePlayCircle } from 'react-icons/ai'
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { FaEdit, FaTrash } from 'react-icons/fa';
 export interface ArtistCardProps {
   artist: Artist
   toggleFollowed: (artist: Artist) => void
@@ -40,39 +52,49 @@ export const FullscreenCardDetails = styled.p`
 // Card Styles``
 export const Card = styled.li`
   display: flex; 
+  user-select: none;
    align-items: center;
   flex-direction: column;
   font-size:clamp(0.8rem, 1.5rem, 2rem);
   background-color: var(--clr-bg-elements);
   color: var(--clr-text-secondary);
   border-radius: var(--radius-sm);
-  padding: var(--space-md);
+padding: var(--space-sm);
+// border: 2px var(--clr-bg-elements)  solid;
   width: 10rem;
   min-width: 10rem;
-  margin: var(--space-sm);
+   box-shadow: 2px 3px 5px 3px rgba(184, 184, 184, 0.35);
+  -webkit-box-shadow: 2px 3px 5px 3px rgba(184, 184, 184, 0.35);
+  -moz-box-shadow: 2px 3px 5px 3px rgba(184, 184, 184, 0.35);
+
+
 `
 
 export const CardImage = styled.img`
-  width: var(--w-full);
-  height: 10rem;
+  height: 160px;
+  width: 160px;
+  object-fit: cover;
   border-radius: var(--radius-sm);
+  
 `
 
 export const CardDescription = styled.div`
   width: var(--w-full);
-  padding: var(--space-md);
   display: flex;
+  padding: var(--space-md);
   flex-direction: column;
   justify-content: space-between;
+  
 `
 
 // List Styles
 export const ListCard = styled(Card)`
   width: 85%;
-  max-height: 10vh;
+  max-height: 9vh;
   flex-direction: row;
   align-items: center;
-  margin: var(--space-md);
+  margin: var(--space-sm)
+  ;
 `
 export const PlayButton = styled(AiOutlinePlayCircle)`
   height: 50px;
@@ -88,21 +110,22 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
 export const FullScreenImage = styled(CardImage)``
 
 export const ListCardImage = styled(CardImage)`
-  max-height: 8vh;
-  max-width: 8vh;
+  max-height: 9vh;
+  max-width: 9vh;
   position: relative;
   
 `
 
 export const ListCardDescription = styled(CardDescription)`
-  padding: 0;
+  padding: var(--space-md);
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  font-size: clamp(0.5rem, 10vw, 1rem);
+   font-size: clamp(0.5rem, 10vw, 1rem);
   overflow: hidden;
   text-align: center;
+  gap: var(--space-xl);
 
  
 `
@@ -111,7 +134,7 @@ export const ListCardDescription = styled(CardDescription)`
 export const GridCard = styled.li`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 1fr;
   background-color: var(--clr-bg-elements);
   color: var(--clr-text-secondary);
   border-radius: var(--radius-sm);
@@ -137,7 +160,7 @@ export const GridCardImage = styled.img`
 
 export const GridCardDescription = styled.div`
 grid-column: 2;
-grid-row: 1;
+grid-row: 1/span 2;
 display: flex;  
 overflow: hidden;
 text-overflow: ellipsis;
@@ -154,14 +177,22 @@ export const SongName = styled.h3`
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
+  text-align: center;
+    font-size: clamp(0.6rem, 10vw, 1.2rem);
+  font-weight: var(--fw-bold);
+
    color: var(--clr-text-primary);
+
+   &: hover{
+    color: var(--clr-accent);
+   }
 `
 
 export const SongArtist = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: clamp(0.5rem, 10vw, 1rem);
+  font-size: clamp(0.5rem, 7vw, 0.7rem);
   color: var(--clr-text-secondary);
   margin: 0;
 `
@@ -183,7 +214,12 @@ color: var(--clr-accent);
 width: 30px;
 height: 30px;
 `
+export const Delete = styled(FaTrash)`
+width: 30px;
+height: 30px;
+`
 
+export const Edit = styled(FaEdit)
 export const EmptyHeart = styled(AiOutlineHeart)`
 width: 30px;
 height: 30px;
@@ -199,6 +235,14 @@ color: var(--clr-accent);
 height: 30px;
 `
 export const FaveButton = styled.button`
+background: transparent;
+border: none;
+color: var(--clr-text-secondary);
+&:hover{
+    color: var(--clr-accent);
+   }
+`
+export const ActionButton = styled.button`
 background: transparent;
 border: none;
 color: var(--clr-text-secondary);
@@ -236,7 +280,7 @@ export const ArtistActionButtons = styled.div`
   display: flex;
   justify-content: space-between;
   color: var(--clr-accent);
-`
+// `
 // Common Button Container
 export const CommonButtonContainer = styled.div`
   display: flex;
@@ -246,5 +290,6 @@ export const CommonButtonContainer = styled.div`
   grid-column: 2;
   grid-row: 2;
 `
+
 
 
