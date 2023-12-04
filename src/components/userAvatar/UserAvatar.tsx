@@ -4,8 +4,8 @@ import { FaUserCircle } from "react-icons/fa";
 
 
 const StyledUserAvatar = styled.img`
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: var(--radius-full);
 `;
 

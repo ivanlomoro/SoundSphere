@@ -12,7 +12,6 @@ export const FavoriteSongs = () => {
     <>
       <HeaderSection text="Favorites" />
       <ul>
-        <h2>Favorites</h2>
         {renderFavoriteSongs()}
       </ul>
     </>

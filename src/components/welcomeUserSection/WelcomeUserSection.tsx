@@ -12,10 +12,17 @@ import { MdFileUpload } from "react-icons/md";
 const StyledWelcomeUserSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-md);
   cursor: pointer;
   margin-top: 0.5rem;
 `;
+
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+`
 
 const StyledIconSection = styled.div`
   margin-left: 3rem;
@@ -32,8 +39,10 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
   return user ? (
     <Link to={USERPAGE}>
       <StyledWelcomeUserSection>
-        <UserAvatar />
-        <WelcomeUserMessage text={`Welcome ${user.given_name} !`} />
+        <RowContainer>
+          <UserAvatar />
+          <WelcomeUserMessage text={`Welcome ${user.given_name} !`} />
+        </RowContainer>
         {editUserLogo &&
           <StyledIconSection>
             <FaUserGear className="custom-icon" />
