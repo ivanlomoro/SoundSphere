@@ -33,8 +33,8 @@ import { MYSONGSPAGE } from "../../routes/paths";
 import { useContext } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
 
-export function SongCard({ song, variant = "card" }: SongCardProps) {
-  const location = useLocation();
+export function SongCard({ song, variant = "card", songs }: SongCardProps) {
+ const location = useLocation();
   const CardComponent =
     variant === "grid" ? GridCard : variant === "list" ? ListCard : Card;
   const ImageComponent =
@@ -57,6 +57,9 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
     isSelected,
   } = useInteractions();
   const { setCurrentSong, setCurrentList } = useContext(PlayerContext);
+  if (!songs) {
+    return null;
+  }
 
   return (
     <CardComponent>
@@ -67,6 +70,9 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
             <PlayButton
               onClick={() => {
                 addToRecents(song);
+                setCurrentSong(song);
+                setCurrentList(songs);
+           
               }}
             />
           </GridImageContainer>
@@ -91,7 +97,7 @@ export function SongCard({ song, variant = "card" }: SongCardProps) {
               onClick={() => {
                 addToRecents(song);
                 setCurrentSong(song);
-                setCurrentList(publicSongs);
+                setCurrentList(songs);
               }}
             />{" "}
             <FaveButton

@@ -38,6 +38,7 @@ export type Artist = {
 
 export interface SongCardProps {
 	song: Songs
+  songs: Songs[]
 	toggleFavorite?: (song: Songs) => void
 	isFavorite?: (id: string) => boolean
 	addToRecents?: (song: Songs) => void

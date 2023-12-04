@@ -11,6 +11,7 @@ type MagicInput<T> = {
   playlists?: Playlist[];
   isMySong?: true;
   layout: T;
+ 
 };
 
 type LayoutVariant = "grid" | "list" | "card" | "fullscreen" | undefined;
@@ -26,6 +27,8 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
             variant={layout}
             key={song.id}
             song={song}
+            songs={songs}
+   
           />
         ))}
       </>
