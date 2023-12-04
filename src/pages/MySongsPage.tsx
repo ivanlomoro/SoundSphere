@@ -6,20 +6,21 @@ import { Link } from "react-router-dom";
 import { ADDMUSICPAGE } from "../routes/paths";
 import { Container, HeaderSection, WelcomeUserSection } from "../components";
 import { UserContainer } from "../components/containers/UserContainer";
+import Loader from "../components/Loader/Loader";
 
 
 const MySongsPage = () => {
   const {
-       mySongs,
+    mySongs,
     getMySongs,
     isModifiedSong,
   } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
   const { renderSongs } = useRenderer({
 
-   songs: mySongs,
-     layout: "list",
-   
+    songs: mySongs,
+    layout: "list",
+
   });
   const { user } = useContext(UserContext);
 
@@ -37,14 +38,14 @@ const MySongsPage = () => {
 
   return (
     <>
+      <HeaderSection text="My Sphere" />
+      <UserContainer>
+        <WelcomeUserSection editUserLogo={true} />
+      </UserContainer>
       <Container>
-        <HeaderSection text="My Sphere" />
-        <UserContainer>
-          <WelcomeUserSection editUserLogo={true}/>
-        </UserContainer>
         <div>
           {isLoading ? (
-            <p>Loading...</p>
+            <Loader />
           ) : mySongs.length > 0 ? (
             renderSongs()
           ) : (
