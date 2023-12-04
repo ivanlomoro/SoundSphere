@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Songs } from "../Types/SongsTypes";
 import { useRenderer } from "../hooks/useRenderer";
 import { useInteractions } from "../context/userContext/InteractionContext";
+import { HeaderSection } from "../components";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();
@@ -33,6 +34,8 @@ const GenrePage = () => {
     fetchSongsByGenre();
   }, []);
 
-  return <>{renderGenreSongs()}</>;
+  return <>
+   <HeaderSection text=" " />
+  {renderGenreSongs()}</>;
 };
 export default GenrePage;
