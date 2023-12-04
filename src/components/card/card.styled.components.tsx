@@ -35,13 +35,7 @@ export const FullscreenCardDetails = styled.p`
   text-align:center;
   z-index: 3;
 `;
-// Common Button Container
-export const CommonButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--w-full);
-`
+
 
 // Card Styles``
 export const Card = styled.li`
@@ -70,7 +64,6 @@ export const CardDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
 `
 
 // List Styles
@@ -79,8 +72,7 @@ export const ListCard = styled(Card)`
   max-height: 10vh;
   flex-direction: row;
   align-items: center;
-  margin: var(--space-md)
-  ;
+  margin: var(--space-md);
 `
 export const PlayButton = styled(AiOutlinePlayCircle)`
   height: 50px;
@@ -96,22 +88,21 @@ export const PlayButton = styled(AiOutlinePlayCircle)`
 export const FullScreenImage = styled(CardImage)``
 
 export const ListCardImage = styled(CardImage)`
-  max-height: 12vh;
-  max-width: 12vh;
+  max-height: 8vh;
+  max-width: 8vh;
   position: relative;
   
 `
 
 export const ListCardDescription = styled(CardDescription)`
-  padding: var(--space-md);
+  padding: 0;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-   font-size: clamp(0.5rem, 10vw, 1rem);
+  font-size: clamp(0.5rem, 10vw, 1rem);
   overflow: hidden;
   text-align: center;
-  gap: var(--space-xl);
 
  
 `
@@ -120,7 +111,7 @@ export const ListCardDescription = styled(CardDescription)`
 export const GridCard = styled.li`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 2fr;
   background-color: var(--clr-bg-elements);
   color: var(--clr-text-secondary);
   border-radius: var(--radius-sm);
@@ -146,7 +137,7 @@ export const GridCardImage = styled.img`
 
 export const GridCardDescription = styled.div`
 grid-column: 2;
-grid-row: 1/span 2;
+grid-row: 1;
 display: flex;  
 overflow: hidden;
 text-overflow: ellipsis;
@@ -246,6 +237,14 @@ export const ArtistActionButtons = styled.div`
   justify-content: space-between;
   color: var(--clr-accent);
 `
-
+// Common Button Container
+export const CommonButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--w-full);
+  grid-column: 2;
+  grid-row: 2;
+`
 
 
