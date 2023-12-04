@@ -40,11 +40,11 @@ const StyledProgress = styled.progress`
   appearance: none;
 
   &::-webkit-progress-bar {
-    background-color: #888888;
+    background-color: #826f88;
   }
   &::-webkit-progress-value {
     height: 5px;
-    background-color: #fff;
+    background-color: var(--clr-accent);
   }
   border-radius: 20px;
 `;

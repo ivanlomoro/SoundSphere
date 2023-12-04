@@ -106,8 +106,8 @@ const StyledButtonDisplayPlay = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  width: 150px;
-  height: 60px;
+  width: 100px;
+  height: 42px;
   background-color: var(--clr-accent);
   color: var(--clr-text-secondary);
   border: none;

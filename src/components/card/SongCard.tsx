@@ -56,7 +56,8 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
     toggleSelected,
     isSelected,
   } = useInteractions();
-  const { setCurrentSong, setCurrentList } = useContext(PlayerContext);
+  const { setCurrentSong, setCurrentList, setPlaying } =
+    useContext(PlayerContext);
   if (!songs) {
     return null;
   }
@@ -69,6 +70,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             addToRecents(song);
             setCurrentList(songs);
             setCurrentSong(song);
+            setPlaying(true);
           }}
         >
           <ImageComponent src={song.thumbnail} alt={song.name} />
@@ -83,6 +85,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             addToRecents(song);
             setCurrentList(songs);
             setCurrentSong(song);
+            setPlaying(true);
           }}
         />
       )}
@@ -101,6 +104,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
+
             <FaveButton
               onClick={() => {
                 toggleSelected(song);

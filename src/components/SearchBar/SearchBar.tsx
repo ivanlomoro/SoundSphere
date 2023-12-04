@@ -10,20 +10,25 @@ import { PlayerContext } from "../../context/playerContext/playerContext";
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { publicSongs } = useApiCalls();
-  const { setCurrentSong, setCurrentList } = useContext(PlayerContext);
+  const { setCurrentSong, setCurrentList, setPlaying } =
+    useContext(PlayerContext);
 
   const StyledDivSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
+    background: var(--clr-bg-primary);
     max-width: 100%;
     margin: 10px;
+    font-size: 1rem;
   `;
 
   const StyledDivSection2 = styled.div`
     display: flex;
+    height: 100%;
+    align-items: center;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 2em;
     align-items: center;
     width: 100%;
     margin: 10px;
@@ -56,26 +61,23 @@ export const SearchBar = () => {
                 );
               })
               .map((song: Songs) => (
-                <Link
-                  key={song.id}
-                  to={`/displaypage/${song.id}`}
+                <StyledDivSection2
                   onClick={() => {
                     setCurrentSong(song);
                     setCurrentList(publicSongs);
+                    setPlaying(true);
                   }}
                 >
-                  <StyledDivSection2>
-                    <img
-                      style={{ width: 50 }}
-                      src={song.thumbnail}
-                      alt="miscojones"
-                    />
-                    <StyledDivSection>
-                      <p>{song.name}</p>
-                      <p>{song.artist}</p>
-                    </StyledDivSection>
-                  </StyledDivSection2>
-                </Link>
+                  <img
+                    style={{ width: 50 }}
+                    src={song.thumbnail}
+                    alt="miscojones"
+                  />
+                  <StyledDivSection>
+                    <p>{song.name}</p>
+                    {song.artist && <p>{song.artist}</p>}
+                  </StyledDivSection>
+                </StyledDivSection2>
               ))}
           </StyledDivSection>
         )}
