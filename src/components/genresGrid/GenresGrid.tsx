@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { genres } from "../../interfaces/uploadTypes";
 import GenreCage from "./GenreCage";
 
-const predefinedColors = ["#FF5733", "#33FF57", "#5733FF", "#FF33A1", "#33A1FF"];
+const predefinedColors = ["#d3ebc7", "#74bf9d", "#b8c2a0", "#cde9ca", "#c6d7a0"];
 
 const GridContainer = styled.div`
   margin-top: 1em;
