@@ -65,60 +65,19 @@ export const PlayerDisplay = () => {
     progress,
     setProgress,
     handlePlayPause,
+    duration,
+    setDuration,
+    getFormattedTime,
+    getPercentage,
+    handleProgress,
+    handleDuration,
+    handleNext,
+    handlePrevious,
   } = useContext(PlayerContext);
 
   const currentSong = songFromContext ? songFromContext : songs[0];
 
-  const [duration, setDuration] = useState({
-    duration: 0,
-    formattedDuration: "",
-  });
-
   const playerRef = useRef<ReactPlayer>(null);
-
-  type handleProgressPropsType = {
-    playedSeconds: number;
-  };
-
-  const getFormattedTime = (currentSeconds: number) => {
-    const date = new Date(0);
-    date.setSeconds(currentSeconds);
-    const formattedTime = date.toISOString().substring(14, 19);
-    return formattedTime;
-  };
-
-  const getPercentage = (currentSeconds: number) => {
-    return currentSeconds > 0 ? currentSeconds / duration.duration : 0;
-  };
-
-  const handleProgress = ({ playedSeconds }: handleProgressPropsType) => {
-    setProgress({
-      currentSeconds: playedSeconds,
-      currentPercentage: getPercentage(playedSeconds),
-      currentFormattedTime: getFormattedTime(playedSeconds),
-    });
-  };
-
-  const handleDuration = (duration: number) => {
-    setDuration({
-      duration: duration,
-      formattedDuration: getFormattedTime(duration),
-    });
-  };
-
-  const handleNext = () => {
-    if (currentSongIndex && currentSongIndex < songs.length - 1) {
-      setCurrentSongIndex(currentSongIndex + 1);
-      setCurrentSong(songs[currentSongIndex + 1]);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentSongIndex && currentSongIndex > 0) {
-      setCurrentSongIndex(currentSongIndex - 1);
-      setCurrentSong(songs[currentSongIndex - 1]);
-    }
-  };
 
   const handleProgressClick = (event: CustomEventType) => {
     const progressBar = event.target;
