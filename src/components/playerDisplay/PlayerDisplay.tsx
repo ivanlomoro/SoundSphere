@@ -86,7 +86,9 @@ export const PlayerDisplay = () => {
   };
 
   const StyledSongName = styled.p`
-    font-size: var(--fs-xl);
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
     max-width: 85%;
     min-height: 58px;
     margin-bottom: 0;
@@ -113,7 +115,9 @@ export const PlayerDisplay = () => {
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong?.name} </StyledSongName>
-        <StyledArtistName>{currentSong.artist}</StyledArtistName>
+        {currentSong.artist && (
+          <StyledArtistName>{currentSong.artist}</StyledArtistName>
+        )}
         <ProgressBar
           progress={progress}
           duration={duration}
