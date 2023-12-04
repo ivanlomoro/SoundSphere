@@ -1,21 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Songs } from "../Types/SongsTypes";
 import { useRenderer } from "../hooks/useRenderer";
-import { useInteractions } from "../context/userContext/InteractionContext";
 import { HeaderSection } from "../components";
+import { GenreContext, useGenres } from "../context/genreContext/genreContext";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();
+  const { apiGenres } = useGenres();
 
-  const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
+  const genreName = apiGenres.find((genre) => genre.id === genreId);
+  console.log("CURRENT GENRE:", genreName);
 
   const { renderSongs: renderGenreSongs } = useRenderer({
     songs: songByGenre,
-    toggleFavorite,
-    isFavorite,
-    addToRecents,
     layout: "list",
   });
 
@@ -36,7 +35,7 @@ const GenrePage = () => {
 
   return (
     <>
-      <HeaderSection text=" " />
+      <HeaderSection />
       {renderGenreSongs()}
     </>
   );

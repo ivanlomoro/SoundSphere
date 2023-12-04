@@ -12,12 +12,12 @@ const predefinedColors = [
 ];
 
 const GridContainer = styled.div`
-  margin-top: 1em;
+  margin-top: 2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 3em;
   row-gap: 3em;
-  margin-left: 1em;
+  margin-inline: 2em;
 `;
 
 const GenresGrid = () => {
