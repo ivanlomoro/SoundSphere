@@ -74,6 +74,7 @@ export const CardDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-size: var(--fs-lg);
 `;
 
 export const ListCard = styled(Card)`
@@ -122,7 +123,7 @@ export const GridCard = styled.li`
   color: var(--clr-text-secondary);
   border-radius: var(--radius-sm);
   min-width: 95%;
-  font-size: clamp(1rem, 1.3rem, 1.5rem);
+  font-size: 1.2em;
   margin: var(--space-xs);
   align-items: center;
 `;
@@ -151,11 +152,24 @@ export const GridCardDescription = styled.div`
 `;
 
 export const SongName = styled.h3`
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
   color: var(--clr-text-primary);
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+`;
+
+export const GridSongName = styled.h3`
+  white-space: wrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  color: var(--clr-text-primary);
+  min-height: unset;
 `;
 
 export const SongArtist = styled.p`

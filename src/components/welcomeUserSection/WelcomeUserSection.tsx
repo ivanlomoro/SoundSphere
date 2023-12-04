@@ -3,10 +3,9 @@ import { UserAvatar } from "../userAvatar/UserAvatar";
 import { WelcomeUserMessage } from "./WelcomeUserMessage";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import { ADDMUSICPAGE, USERPAGE } from "../../routes/paths";
+import { USERPAGE } from "../../routes/paths";
 import { FaUserGear } from "react-icons/fa6";
 import { FC } from "react";
-import { MdFileUpload } from "react-icons/md";
 
 const StyledWelcomeUserSection = styled.div`
   display: flex;
@@ -21,7 +20,7 @@ const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: var(--space-md);
-`
+`;
 
 const StyledIconSection = styled.div`
   margin-left: 3rem;
@@ -44,9 +43,6 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
         {editUserLogo && (
           <StyledIconSection>
             <FaUserGear className="custom-icon" />
-            <Link to={ADDMUSICPAGE}>
-              <MdFileUpload className="custom-icon" />
-            </Link>
           </StyledIconSection>
         )}
       </StyledWelcomeUserSection>

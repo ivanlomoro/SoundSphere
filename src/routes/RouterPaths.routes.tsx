@@ -42,13 +42,13 @@ export const RouterPaths: FC = () => {
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={MYSONGSPAGE} element={<MySongsPage />} />
           <Route path={PLAYLISTALL} element={<PlaylistPage />} />
+          <Route path={GENRE} element={<GenrePage />} />
         </Route>
         <Route element={<NavLayout />}>
           <Route path={DISPLAYPAGE} element={<DisplayPage />}>
             <Route path=":name" element={<DisplayPage />}></Route>
           </Route>
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
-          <Route path={GENRE} element={<GenrePage />} />
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />
         <Route path="/" element={<Navigate to={HOME} />} />

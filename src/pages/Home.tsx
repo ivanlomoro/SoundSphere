@@ -1,4 +1,9 @@
-import { HeaderSection, RecentGrid, ScrollableRowComponent, WelcomeUserSection } from "../components";
+import {
+  HeaderSection,
+  RecentGrid,
+  ScrollableRowComponent,
+  WelcomeUserSection,
+} from "../components";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
@@ -29,30 +34,27 @@ export const Home = () => {
       <div>
         <WelcomeUserSection />
         <h3>Song List</h3>
-        <ScrollableRowComponent>
-          {renderPublicSongs()}
-        </ScrollableRowComponent>
-        {(recents.length > 0) &&
+        <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent>
+        {recents.length > 0 && (
           <>
             <h2>Recently Listended </h2>
-            <RecentGrid>
-              {renderRecentsSongs()}
-            </RecentGrid>
-          </>}
-        {(favorites.length > 0) &&
+            <RecentGrid>{renderRecentsSongs()}</RecentGrid>
+          </>
+        )}
+        {favorites.length > 0 && (
           <>
             <h2>Favorites</h2>
             <ScrollableRowComponent>
               {renderFavoriteSongs()}
             </ScrollableRowComponent>
-          </>}
-        {(playlists.length > 0) &&
+          </>
+        )}
+        {playlists.length > 0 && (
           <>
             <h2>Playlist</h2>
-            <ScrollableRowComponent>
-              {renderPlaylists()}
-            </ScrollableRowComponent>
-          </>}
+            <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
+          </>
+        )}
       </div>
     </>
   );

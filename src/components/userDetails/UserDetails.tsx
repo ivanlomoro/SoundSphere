@@ -9,6 +9,7 @@ const StyledUserDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  font-size: var(--fs-lg);
 `;
 
 const StyledRowContainer = styled.div`
@@ -51,7 +52,10 @@ export const UserDetails = () => {
         <>
           <StyledRowContainer>
             <UserDetail label="Password" info="*******" />
-            <FaEdit className="custom-icon" onClick={() => resetPassword(user.email!)} />
+            <FaEdit
+              className="custom-icon"
+              onClick={() => resetPassword(user.email!)}
+            />
           </StyledRowContainer>
         </>
       )}

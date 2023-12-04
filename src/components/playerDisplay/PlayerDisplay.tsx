@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FaveButton } from "../card/card.styled.components";
+import { FaveButton, Minus, Plus } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { useInteractions } from "../../context/userContext/InteractionContext";
@@ -30,22 +30,22 @@ const StyledPlayer = styled(ReactPlayer)``;
 
 const ButtonContainer = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
 `;
 
 const StyledCover = styled.img`
-  max-height: 60%;
-  max-width: 60%;
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
 `;
 
 const ResponsiveContainer = styled.div`
   max-height: 75%;
-  max-width: 90%;
   margin-top: 0;
   display: flex;
   border-radius: var(--radius-sm);
-  font-size: clamp(0.8rem, 1.5rem, 2rem);
-  background-color: var(--clr-bg-elements);
+  font-size: var(--fs-lg);
   padding: var(--space-sm);
   margin: var(--space-sm);
   flex-direction: column;
@@ -53,7 +53,8 @@ const ResponsiveContainer = styled.div`
 `;
 
 export const PlayerDisplay = () => {
-  const { toggleFavorite, isFavorite } = useInteractions();
+  const { toggleFavorite, isFavorite, toggleSelected, isSelected } =
+    useInteractions();
   const { publicSongs } = useApiCalls();
 
   const {
@@ -84,8 +85,11 @@ export const PlayerDisplay = () => {
   };
 
   const StyledSongName = styled.p`
-    font-size: var(--fs-xl);
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
     max-width: 85%;
+    min-height: 58px;
     margin-bottom: 0;
   `;
 
@@ -111,23 +115,23 @@ export const PlayerDisplay = () => {
       </HiddenPlayer>{" "}
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
-
-        <FaveButton
-          onClick={() => {
-            toggleFavorite(currentSong);
-          }}
-        >
-          {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
-        </FaveButton>
-
         <StyledSongName>{currentSong?.name} </StyledSongName>
-        <StyledArtistName>{currentSong.artist}</StyledArtistName>
+        {currentSong.artist && (
+          <StyledArtistName>{currentSong.artist}</StyledArtistName>
+        )}
         <ProgressBar
           progress={progress}
           duration={duration}
           onClick={handleProgressClick}
         />
         <ButtonContainer>
+          <FaveButton
+            onClick={() => {
+              toggleSelected(currentSong);
+            }}
+          >
+            {isSelected(currentSong.id) ? <Minus /> : <Plus />}
+          </FaveButton>
           <Button
             variant="StyledButtonDisplay"
             content={<AiOutlineStepBackward />}
@@ -143,7 +147,13 @@ export const PlayerDisplay = () => {
             content={<AiOutlineStepForward />}
             onClick={handleNext}
           />
-          <FaveButton />
+          <FaveButton
+            onClick={() => {
+              toggleFavorite(currentSong);
+            }}
+          >
+            {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
+          </FaveButton>
         </ButtonContainer>
       </ResponsiveContainer>
     </>

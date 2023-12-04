@@ -56,7 +56,8 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
     toggleSelected,
     isSelected,
   } = useInteractions();
-  const { setCurrentSong, setCurrentList } = useContext(PlayerContext);
+  const { setCurrentSong, setCurrentList, setPlaying } =
+    useContext(PlayerContext);
   if (!songs) {
     return null;
   }
@@ -64,22 +65,29 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
   return (
     <CardComponent>
       {variant === "grid" && (
-        <Link to={`/displaypage/${song.name}`}>
-          <GridImageContainer>
-            <ImageComponent src={song.thumbnail} alt={song.name} />
-            <PlayButton
-              onClick={() => {
-                addToRecents(song);
-                setCurrentList(songs);
-                setCurrentSong(song);
-              }}
-            />
-          </GridImageContainer>
-        </Link>
+        <GridImageContainer
+          onClick={() => {
+            addToRecents(song);
+            setCurrentList(songs);
+            setCurrentSong(song);
+            setPlaying(true);
+          }}
+        >
+          <ImageComponent src={song.thumbnail} alt={song.name} />
+        </GridImageContainer>
       )}
 
       {variant != "grid" && (
-        <ImageComponent src={song.thumbnail} alt={song.name} />
+        <ImageComponent
+          src={song.thumbnail}
+          alt={song.name}
+          onClick={() => {
+            addToRecents(song);
+            setCurrentList(songs);
+            setCurrentSong(song);
+            setPlaying(true);
+          }}
+        />
       )}
 
       <DescriptionComponent>
@@ -89,16 +97,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
         </div>
         {variant != "grid" && (
           <CommonButtonContainer>
-            <Button
-              variant="StyledButtonNav"
-              content={<NavIcon icon={AiOutlinePlayCircle} />}
-              ariaLabel="Music Player"
-              onClick={() => {
-                addToRecents(song);
-                setCurrentSong(song);
-                setCurrentList(songs);
-              }}
-            />{" "}
             <FaveButton
               onClick={() => {
                 toggleFavorite(song);
@@ -106,6 +104,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
+
             <FaveButton
               onClick={() => {
                 toggleSelected(song);
