@@ -20,6 +20,7 @@ import {
   PLAYLISTPAGE,
   PLAYLISTALL,
   GENRE,
+  ADDTOPLAYLIST,
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
@@ -29,6 +30,7 @@ import PlaylistDetails from "../pages/playlistDetail";
 import PlaylistPage from "../pages/PlaylistPage";
 import { PlayerLayout } from "../components/layouts/PlayerLayout";
 import GenrePage from "../pages/GenrePage";
+import AddToPlayListPage from "../pages/AddPlayListPage";
 
 export const RouterPaths: FC = () => {
   return (
@@ -42,6 +44,7 @@ export const RouterPaths: FC = () => {
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={MYSONGSPAGE} element={<MySongsPage />} />
           <Route path={PLAYLISTALL} element={<PlaylistPage />} />
+          <Route path={ADDTOPLAYLIST} element={<AddToPlayListPage />} />
           <Route path={GENRE} element={<GenrePage />} />
         </Route>
         <Route element={<NavLayout />}>

@@ -9,3 +9,4 @@ export const MYSONGSPAGE = "/mysongs";
 export const GENRE = "/genre/:genreId";
 export const PLAYLISTPAGE = "/playlist/:playlistName";
 export const PLAYLISTALL = "/playlist/";
+export const ADDTOPLAYLIST = "/addtoplaylist/:songId";

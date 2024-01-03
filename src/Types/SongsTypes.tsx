@@ -1,6 +1,6 @@
 import { editSongType } from "../components/card/CardContainerButtons";
 import { UserInterface } from "../context/songContext/songContext";
-import {Dispatch, SetStateAction} from 'react';
+import { Dispatch, SetStateAction } from "react";
 
 export type Songs = {
   id: string;
@@ -27,25 +27,25 @@ export type Artist = {
 };
 
 export interface SongCardProps {
-	song: Songs
-  songs: Songs[]
-	toggleFavorite?: (song: Songs) => void
-	isFavorite?: (id: string) => boolean
-	addToRecents?: (song: Songs) => void
-	variant?: 'grid' | 'list' | 'card' | 'fullscreen'
-  isSelected? : (id: string) => boolean
-  toggleSelected?: (song: Songs) => void
-  edit?: boolean
-};
+  song: Songs;
+  songs: Songs[];
+  toggleFavorite?: (song: Songs) => void;
+  isFavorite?: (id: string) => boolean;
+  addToRecents?: (song: Songs) => void;
+  variant?: "grid" | "list" | "card" | "fullscreen";
+  isSelected?: (id: string) => boolean;
+  toggleSelected?: (song: Songs) => void;
+  edit?: boolean;
+}
 
 export interface SongUploadData {
   thumbnail: string;
   url?: string;
   name: string;
   genreId: string;
-  isPublic: boolean,
+  isPublic: boolean;
   userCreator: string;
-};
+}
 
 export type SongsContextType = {
   isMySong: (id: string) => boolean;
@@ -56,7 +56,7 @@ export type SongsContextType = {
   favorites: Songs[];
   categories?: Category[];
   mySongs: Songs[];
-  setSongs: Dispatch<SetStateAction<Songs[]>>
+  setSongs: Dispatch<SetStateAction<Songs[]>>;
   addToRecents: (song: Songs) => void;
   addToFavorites: (song: Songs) => void;
   removeFromFavorites: (id: string) => void;
@@ -71,6 +71,7 @@ export type SongsContextType = {
   isModifiedSong: boolean;
   updateSong: (songID: string, editSong: editSongType) => void;
   getSongById: (songID: string) => void;
-  editedSong: Songs | null
-  errorEditedSong: boolean
+  editedSong: Songs | null;
+  errorEditedSong: boolean;
+  createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
 };

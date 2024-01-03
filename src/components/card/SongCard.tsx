@@ -29,7 +29,7 @@ import CardContainerButtons from "./CardContainerButtons";
 import { SongCardProps } from "../../Types/SongsTypes";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { useLocation } from "react-router-dom";
-import { MYSONGSPAGE } from "../../routes/paths";
+import { ADDTOPLAYLIST, MYSONGSPAGE, PLAYLISTALL } from "../../routes/paths";
 import { useContext } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
 
@@ -49,13 +49,8 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       : variant === "list"
       ? ListCardDescription
       : CardDescription;
-  const {
-    toggleFavorite,
-    isFavorite,
-    addToRecents,
-    toggleSelected,
-    isSelected,
-  } = useInteractions();
+  const { toggleFavorite, isFavorite, addToRecents, isSelected } =
+    useInteractions();
   const { setCurrentSong, setCurrentList, setPlaying } =
     useContext(PlayerContext);
   if (!songs) {
@@ -104,14 +99,11 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
-
-            <FaveButton
-              onClick={() => {
-                toggleSelected(song);
-              }}
-            >
-              {isSelected(song.id) ? <Minus /> : <Plus />}
-            </FaveButton>
+            <Link to={`/addtoplaylist/${song.id}`}>
+              <FaveButton>
+                <Plus />
+              </FaveButton>
+            </Link>
           </CommonButtonContainer>
         )}
       </DescriptionComponent>
