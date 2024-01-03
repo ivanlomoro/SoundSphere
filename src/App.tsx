@@ -8,6 +8,7 @@ import UserInteractionProvider from "./context/userContext/InteractionContext";
 import ApiCallsProvider from "./context/songContext/ApiCalls";
 import GenreProvider from "./context/genreContext/genreContext";
 import { PlayerContextProvider } from "./context/playerContext/playerContext";
+import { PlaylistContextProvider } from "./context/playlistContext/PlayListContext";
 
 const {
   VITE_AUTH0_DOMAIN: domain,
@@ -27,29 +28,31 @@ export const App = () => {
       }}
     >
       <UserContextProvider>
-        <ApiCallsProvider>
-          <UserInteractionProvider>
-            <GenreProvider>
-              <SongsProvider>
-                <PlayerContextProvider>
-                  <BrowserRouter>
-                    <AppRouter />
-                    <Toaster
-                      toastOptions={{
-                        success: {
-                          style: {
-                            background: "#282828",
-                            color: "#fff",
+        <PlaylistContextProvider>
+          <ApiCallsProvider>
+            <UserInteractionProvider>
+              <GenreProvider>
+                <SongsProvider>
+                  <PlayerContextProvider>
+                    <BrowserRouter>
+                      <AppRouter />
+                      <Toaster
+                        toastOptions={{
+                          success: {
+                            style: {
+                              background: "#282828",
+                              color: "#fff",
+                            },
                           },
-                        },
-                      }}
-                    />
-                  </BrowserRouter>
-                </PlayerContextProvider>
-              </SongsProvider>
-            </GenreProvider>
-          </UserInteractionProvider>
-        </ApiCallsProvider>
+                        }}
+                      />
+                    </BrowserRouter>
+                  </PlayerContextProvider>
+                </SongsProvider>
+              </GenreProvider>
+            </UserInteractionProvider>
+          </ApiCallsProvider>
+        </PlaylistContextProvider>
       </UserContextProvider>
     </Auth0Provider>
   );
