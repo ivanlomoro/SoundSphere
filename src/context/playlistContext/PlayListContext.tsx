@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import postData from "../../api/postApi";
-import { AxiosResponse } from "axios";
+import { AxiosResponse, isAxiosError } from "axios";
 import { UserContext } from "../userContext/UserContext";
 import { Songs } from "../../Types/SongsTypes";
 import patchData from "../../api/patchApi";
@@ -103,7 +103,8 @@ export const PlaylistContextProvider = ({
         setPlaylistsToUpdate(true);
         toast.success(`Added to ${playlistName}.`);
       } catch (error) {
-        console.error(error);
+        if (isAxiosError(error) && error.response)
+          toast.error(error.response.data.error);
       }
     }
   };
