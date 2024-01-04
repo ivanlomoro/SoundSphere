@@ -2,6 +2,9 @@ import { Outlet } from "react-router-dom";
 import { NavBar } from "../NavBar/NavBar";
 import styled from "styled-components";
 import { MiniPlayer } from "../Miniplayer/MiniPlayer";
+import { useContext } from "react";
+import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
+import AddToPlayList from "../../pages/AddToPlaylist";
 
 const StyledNavLayout = styled.div`
   display: flex;
@@ -23,6 +26,8 @@ const StickySections = styled.div`
 `;
 
 export const PlayerLayout = () => {
+  const { songForPlaylist } = useContext(PlaylistContext);
+
   return (
     <StyledNavLayout>
       <div>
@@ -30,6 +35,7 @@ export const PlayerLayout = () => {
       </div>
       <StickySections>
         <MiniPlayer />
+        {songForPlaylist && <AddToPlayList />}
         <NavBar />
       </StickySections>
     </StyledNavLayout>

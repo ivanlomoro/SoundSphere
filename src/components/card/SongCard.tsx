@@ -1,8 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import { Button } from "..";
-import { NavIcon } from "../NavBar/NavBar";
-import { Link } from "react-router-dom";
 import {
   GridCard,
   ListCard,
@@ -19,19 +16,17 @@ import {
   CommonButtonContainer,
   FullHeart,
   EmptyHeart,
-  PlayButton,
   FaveButton,
-  Minus,
   Plus,
 } from "./card.styled.components";
-import { AiOutlinePlayCircle } from "react-icons/ai";
 import CardContainerButtons from "./CardContainerButtons";
 import { SongCardProps } from "../../Types/SongsTypes";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { useLocation } from "react-router-dom";
-import { ADDTOPLAYLIST, MYSONGSPAGE, PLAYLISTALL } from "../../routes/paths";
+import { MYSONGSPAGE } from "../../routes/paths";
 import { useContext } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
+import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
 export function SongCard({ song, variant = "card", songs }: SongCardProps) {
   const location = useLocation();
@@ -49,8 +44,8 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       : variant === "list"
       ? ListCardDescription
       : CardDescription;
-  const { toggleFavorite, isFavorite, addToRecents, isSelected } =
-    useInteractions();
+  const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
+  const { setSongForPlaylist } = useContext(PlaylistContext);
   const { setCurrentSong, setCurrentList, setPlaying } =
     useContext(PlayerContext);
   if (!songs) {
@@ -99,11 +94,9 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             >
               {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
             </FaveButton>
-            <Link to={`/addtoplaylist/${song.id}`}>
-              <FaveButton>
-                <Plus />
-              </FaveButton>
-            </Link>
+            <FaveButton onClick={() => setSongForPlaylist(song)}>
+              <Plus />
+            </FaveButton>
           </CommonButtonContainer>
         )}
       </DescriptionComponent>

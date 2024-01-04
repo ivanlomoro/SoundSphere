@@ -1,10 +1,12 @@
 import Swal from "sweetalert2";
 import { Button } from "../components";
-import { useParams } from "react-router-dom";
 import { useSongs } from "../context/songContext/songContext";
+import { useContext } from "react";
+import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 
-const AddToPlayListPage = () => {
-  const { songId } = useParams();
+const AddToPlayList = () => {
+  const { songForPlaylist: song, setSongForPlaylist } =
+    useContext(PlaylistContext);
   const { createPlaylist } = useSongs();
 
   const createPlayList = async (songId: string) => {
@@ -24,20 +26,22 @@ const AddToPlayListPage = () => {
     })) as { value: string };
     if (name) {
       try {
-        const response = await createPlaylist(
+        await createPlaylist(
           songId,
           name,
           "https://res.cloudinary.com/dnmoqsjh7/image/upload/v1701301482/thumbnail/qnujgmf2vrjcascxidtt.jpg"
         );
-        console.log("PLAYLIST CREATED!");
+        setSongForPlaylist(null);
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  return (
-    <Button content="New Playlist" onClick={() => createPlayList(songId)} />
-  );
+  if (song && song.id) {
+    return (
+      <Button content="New Playlist" onClick={() => createPlayList(song.id)} />
+    );
+  }
 };
-export default AddToPlayListPage;
+export default AddToPlayList;

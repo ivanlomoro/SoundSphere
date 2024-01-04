@@ -11,15 +11,20 @@ import { useAuth0 } from "@auth0/auth0-react";
 import postData from "../../api/postApi";
 import { AxiosResponse } from "axios";
 import { UserContext } from "../userContext/UserContext";
+import { Songs } from "../../Types/SongsTypes";
 
 export type PlayListContextType = {
   userPlaylists: PlaylistType[] | null;
   setUserPlaylists: Dispatch<SetStateAction<PlaylistType[] | null>>;
+  songForPlaylist: Songs | null;
+  setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
 };
 
 const initialState = {
   userPlaylists: [],
   setUserPlaylists: () => {},
+  songForPlaylist: null,
+  setSongForPlaylist: () => {},
 };
 
 export const PlaylistContext = createContext<PlayListContextType>(initialState);
@@ -34,6 +39,7 @@ export const PlaylistContextProvider = ({
   const [userPlaylists, setUserPlaylists] = useState<PlaylistType[] | null>(
     null
   );
+  const [songForPlaylist, setSongForPlaylist] = useState<Songs | null>(null);
   const { getAccessTokenSilently: getToken } = useAuth0();
   const { user } = useContext(UserContext);
 
@@ -53,7 +59,14 @@ export const PlaylistContextProvider = ({
   }, [user]);
 
   return (
-    <PlaylistContext.Provider value={{ userPlaylists, setUserPlaylists }}>
+    <PlaylistContext.Provider
+      value={{
+        userPlaylists,
+        setUserPlaylists,
+        songForPlaylist,
+        setSongForPlaylist,
+      }}
+    >
       {children}
     </PlaylistContext.Provider>
   );
