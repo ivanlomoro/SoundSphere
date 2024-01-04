@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
 const PlaylistCardContainer = styled.div`
   display: flex;
@@ -22,12 +24,21 @@ type PlaylistCardProps = {
 };
 
 const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
-  console.log("this playlist", playlist);
-  return (
-    <PlaylistCardContainer key={playlist.id}>
-      <PlayListThumbnail src={playlist.thumbnail} alt={playlist.playlistName} />
-      <PlaylistName>{playlist.playlistName}</PlaylistName>
-    </PlaylistCardContainer>
-  );
+  const { addSongToPlaylist, songForPlaylist } = useContext(PlaylistContext);
+  console.log(songForPlaylist);
+
+  if (songForPlaylist && songForPlaylist.id)
+    return (
+      <PlaylistCardContainer
+        key={playlist.id}
+        onClick={() => addSongToPlaylist(songForPlaylist.id, playlist.id)}
+      >
+        <PlayListThumbnail
+          src={playlist.thumbnail}
+          alt={playlist.playlistName}
+        />
+        <PlaylistName>{playlist.playlistName}</PlaylistName>
+      </PlaylistCardContainer>
+    );
 };
 export default PlaylistCard;

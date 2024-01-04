@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 import { Button, HeaderSection } from "../components";
-import { useSongs } from "../context/songContext/songContext";
 import { useContext } from "react";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import styled from "styled-components";
@@ -54,12 +53,6 @@ const AddToPlayList = () => {
       }
     }
   };
-
-  // const updatePlaylist = (songId: string) => {
-  //   try {
-  //     await
-  //   }
-  // }
 
   console.log("PLAYLIST FOR PLAYLIST", userPlaylists);
   if (song && song.id) {

@@ -12,6 +12,7 @@ import postData from "../../api/postApi";
 import { AxiosResponse } from "axios";
 import { UserContext } from "../userContext/UserContext";
 import { Songs } from "../../Types/SongsTypes";
+import patchData from "../../api/patchApi";
 
 export type PlayListContextType = {
   userPlaylists: PlaylistType[] | null;
@@ -19,6 +20,7 @@ export type PlayListContextType = {
   songForPlaylist: Songs | null;
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
   createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
+  addSongToPlaylist: (songId: string, playlistId: string) => void;
 };
 
 const initialState = {
@@ -26,9 +28,8 @@ const initialState = {
   setUserPlaylists: () => {},
   songForPlaylist: null,
   setSongForPlaylist: () => {},
-  createPlaylist: (songId: string) => {
-    return songId;
-  },
+  createPlaylist: () => {},
+  addSongToPlaylist: () => {},
 };
 
 export const PlaylistContext = createContext<PlayListContextType>(initialState);
@@ -69,6 +70,27 @@ export const PlaylistContextProvider = ({
     }
   };
 
+  const addSongToPlaylist = async (songId: string, playlistId: string) => {
+    console.log("INIT");
+    console.log(playlistId);
+
+    if (songId != null) {
+      console.log(songId);
+      const URL = `playlist/addsong/${playlistId}`;
+      const data = {
+        songId: songId,
+      };
+
+      try {
+        const response = await patchData(URL, data, getToken);
+        console.log(response);
+        setSongForPlaylist(null);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   useEffect(() => {
     if (user && user.userId.length > 0) {
       const getUserPlaylists = async () => {
@@ -92,6 +114,7 @@ export const PlaylistContextProvider = ({
         songForPlaylist,
         setSongForPlaylist,
         createPlaylist,
+        addSongToPlaylist,
       }}
     >
       {children}

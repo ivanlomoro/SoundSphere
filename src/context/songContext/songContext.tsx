@@ -14,7 +14,6 @@ import { editSongType } from "../../components/card/CardContainerButtons";
 import Swal from "sweetalert2";
 import { useApiCalls } from "./ApiCalls";
 import { SongsContextType } from "../../Types/SongsTypes";
-import postData from "../../api/postApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
@@ -39,7 +38,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const [editedSong, setEditedSong] = useState<Songs | null>(null);
   const [errorEditedSong, setErrorEditedSong] = useState<boolean>(true);
   const { publicSongs } = useApiCalls();
-  const { getAccessTokenSilently: getToken } = useAuth0();
 
   useEffect(() => {
     setSongs(publicSongs);
@@ -198,28 +196,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
 
   const isFollowed = (id: string): boolean => artistExists(followed, id);
 
-  const createPlaylist = async (
-    songId: string,
-    name: string,
-    thumbnail?: string
-  ) => {
-    if (songId != null && name != null) {
-      const URL = `playlist/create/${user?.userId}`;
-      const data = {
-        playlistSongs: [songId],
-        playlistName: name,
-        thumbnail: thumbnail,
-      };
-
-      try {
-        const response = await postData(URL, data, getToken);
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
   return (
     <SongsContext.Provider
       value={{
@@ -245,7 +221,6 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         getSongById,
         editedSong,
         errorEditedSong,
-        createPlaylist,
       }}
     >
       {children}
