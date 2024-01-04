@@ -17,20 +17,16 @@ import {
   SEARCHPAGE,
   ADDMUSICPAGE,
   MYSONGSPAGE,
-  PLAYLISTPAGE,
   PLAYLISTALL,
   GENRE,
-  ADDTOPLAYLIST,
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
 import { DisplayPage } from "../pages/DisplayPage";
 import { SearchPage } from "../pages/SearchPage";
 import MySongsPage from "../pages/MySongsPage";
-import PlaylistDetails from "../pages/playlistDetail";
 import PlaylistPage from "../pages/PlaylistPage";
 import { PlayerLayout } from "../components/layouts/PlayerLayout";
 import GenrePage from "../pages/GenrePage";
-import AddToPlayListPage from "../pages/AddToPlaylist";
 
 export const RouterPaths: FC = () => {
   return (
@@ -39,7 +35,6 @@ export const RouterPaths: FC = () => {
         <Route element={<PlayerLayout />}>
           <Route path={HOME} element={<Home />} />
           <Route path={USERPAGE} element={<UserPage />} />
-          <Route path={PLAYLISTPAGE} element={<PlaylistDetails />} />
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoriteSongs />} />
           <Route path={MYSONGSPAGE} element={<MySongsPage />} />

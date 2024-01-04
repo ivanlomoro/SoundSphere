@@ -31,7 +31,13 @@ const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
     return (
       <PlaylistCardContainer
         key={playlist.id}
-        onClick={() => addSongToPlaylist(songForPlaylist.id, playlist.id)}
+        onClick={() =>
+          addSongToPlaylist(
+            songForPlaylist.id,
+            playlist.id,
+            playlist.playlistName
+          )
+        }
       >
         <PlayListThumbnail
           src={playlist.thumbnail}

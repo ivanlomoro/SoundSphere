@@ -13,6 +13,7 @@ import { AxiosResponse } from "axios";
 import { UserContext } from "../userContext/UserContext";
 import { Songs } from "../../Types/SongsTypes";
 import patchData from "../../api/patchApi";
+import toast from "react-hot-toast";
 
 export type PlayListContextType = {
   userPlaylists: PlaylistType[] | null;
@@ -20,7 +21,11 @@ export type PlayListContextType = {
   songForPlaylist: Songs | null;
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
   createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
-  addSongToPlaylist: (songId: string, playlistId: string) => void;
+  addSongToPlaylist: (
+    songId: string,
+    playlistId: string,
+    playlistName: string
+  ) => void;
 };
 
 const initialState = {
@@ -63,17 +68,21 @@ export const PlaylistContextProvider = ({
       };
 
       try {
-        const response = await postData(URL, data, getToken);
+        await postData(URL, data, getToken);
         setSongForPlaylist(null);
         setPlaylistsToUpdate(true);
-        console.log(response);
+        toast.success(`Added to ${name}`);
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  const addSongToPlaylist = async (songId: string, playlistId: string) => {
+  const addSongToPlaylist = async (
+    songId: string,
+    playlistId: string,
+    playlistName: string
+  ) => {
     console.log("INIT");
     console.log(playlistId);
 
@@ -89,6 +98,7 @@ export const PlaylistContextProvider = ({
         console.log(response);
         setSongForPlaylist(null);
         setPlaylistsToUpdate(true);
+        toast.success(`Added to ${playlistName}.`);
       } catch (error) {
         console.error(error);
       }
