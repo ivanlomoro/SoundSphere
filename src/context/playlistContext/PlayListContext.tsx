@@ -23,6 +23,7 @@ export type PlayListContextType = {
   createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
   addSongToPlaylist: (
     songId: string,
+    thumbnail: string,
     playlistId: string,
     playlistName: string
   ) => void;
@@ -80,6 +81,7 @@ export const PlaylistContextProvider = ({
 
   const addSongToPlaylist = async (
     songId: string,
+    thumbnail: string,
     playlistId: string,
     playlistName: string
   ) => {
@@ -91,6 +93,7 @@ export const PlaylistContextProvider = ({
       const URL = `playlist/addsong/${playlistId}`;
       const data = {
         songId: songId,
+        thumbnail: thumbnail,
       };
 
       try {

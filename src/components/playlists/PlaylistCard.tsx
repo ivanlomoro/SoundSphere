@@ -34,6 +34,7 @@ const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
         onClick={() =>
           addSongToPlaylist(
             songForPlaylist.id,
+            songForPlaylist.thumbnail,
             playlist.id,
             playlist.playlistName
           )
