@@ -1,15 +1,37 @@
 import Swal from "sweetalert2";
-import { Button } from "../components";
+import { Button, HeaderSection } from "../components";
 import { useSongs } from "../context/songContext/songContext";
 import { useContext } from "react";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
+import styled from "styled-components";
+import PlaylistCard from "../components/playlists/PlaylistCard";
+
+const AddToListContainer = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  background-color: var(--clr-bg-primary);
+  overflow-y: scroll;
+  padding: var(--space-md);
+`;
+
+const PlaylistsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-top: var(--space-md);
+`;
 
 const AddToPlayList = () => {
-  const { songForPlaylist: song, setSongForPlaylist } =
-    useContext(PlaylistContext);
+  const {
+    songForPlaylist: song,
+    setSongForPlaylist,
+    userPlaylists,
+  } = useContext(PlaylistContext);
   const { createPlaylist } = useSongs();
 
-  const createPlayList = async (songId: string) => {
+  console.log("USER PLAYLISTS", userPlaylists);
+  const createPlayList = async (songId: string, thumbnail: string) => {
     const { value: name } = (await Swal.fire({
       title: "Enter the new playlist name",
       input: "text",
@@ -26,11 +48,7 @@ const AddToPlayList = () => {
     })) as { value: string };
     if (name) {
       try {
-        await createPlaylist(
-          songId,
-          name,
-          "https://res.cloudinary.com/dnmoqsjh7/image/upload/v1701301482/thumbnail/qnujgmf2vrjcascxidtt.jpg"
-        );
+        await createPlaylist(songId, name, thumbnail);
         setSongForPlaylist(null);
       } catch (error) {
         console.error(error);
@@ -38,9 +56,27 @@ const AddToPlayList = () => {
     }
   };
 
+  console.log("PLAYLIST FOR PLAYLIST", userPlaylists);
   if (song && song.id) {
     return (
-      <Button content="New Playlist" onClick={() => createPlayList(song.id)} />
+      <AddToListContainer>
+        <HeaderSection
+          text="Add to list"
+          withBackButton={true}
+          arrowBackAction={() => setSongForPlaylist(null)}
+        />
+        <Button
+          content="New Playlist"
+          onClick={() => createPlayList(song.id, song.thumbnail)}
+        />
+        {userPlaylists && (
+          <PlaylistsContainer>
+            {userPlaylists?.map((playlist) => (
+              <PlaylistCard playlist={playlist} />
+            ))}
+          </PlaylistsContainer>
+        )}
+      </AddToListContainer>
     );
   }
 };

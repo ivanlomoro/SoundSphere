@@ -11,7 +11,11 @@ const StyledArrowBackSection = styled.div`
   left: 0;
 `;
 
-export const ArrowBackSection = () => {
+type Props = {
+  onClick?: () => void;
+};
+
+export const ArrowBackSection = ({ onClick }: Props) => {
   const navigate = useNavigate();
   const navigateBack = () => {
     navigate(-1);
@@ -20,9 +24,9 @@ export const ArrowBackSection = () => {
     <StyledArrowBackSection>
       <Button
         content={<IoIosArrowBack />}
-        onClick={navigateBack}
+        onClick={onClick ? onClick : navigateBack}
         variant="StyledBackButton"
       />
     </StyledArrowBackSection>
-  )
+  );
 };

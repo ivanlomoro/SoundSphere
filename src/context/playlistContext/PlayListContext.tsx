@@ -52,7 +52,7 @@ export const PlaylistContextProvider = ({
           {},
           getToken
         );
-        setUserPlaylists(response);
+        setUserPlaylists(response.incomingData);
       };
       getUserPlaylists();
     }

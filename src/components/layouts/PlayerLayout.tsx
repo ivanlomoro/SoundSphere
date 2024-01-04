@@ -33,9 +33,9 @@ export const PlayerLayout = () => {
       <div>
         <Outlet />
       </div>
+      {songForPlaylist && <AddToPlayList />}
       <StickySections>
         <MiniPlayer />
-        {songForPlaylist && <AddToPlayList />}
         <NavBar />
       </StickySections>
     </StyledNavLayout>

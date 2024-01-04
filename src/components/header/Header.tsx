@@ -13,13 +13,18 @@ const StyledHeaderSection = styled.div`
 
 type HeaderPropsType = {
   text?: string;
-  withBackButton?:boolean; 
+  withBackButton?: boolean;
+  arrowBackAction?: () => void;
 };
 
-export const HeaderSection = ({ text = "SoundSphere", withBackButton=true }: HeaderPropsType) => {
+export const HeaderSection = ({
+  text = "SoundSphere",
+  withBackButton = true,
+  arrowBackAction,
+}: HeaderPropsType) => {
   return (
     <StyledHeaderSection>
-      {withBackButton && <ArrowBackSection />}
+      {withBackButton && <ArrowBackSection onClick={arrowBackAction} />}
       <WelcomeUserMessage text={text} />
     </StyledHeaderSection>
   );
