@@ -18,6 +18,7 @@ export type PlayListContextType = {
   setUserPlaylists: Dispatch<SetStateAction<PlaylistType[] | null>>;
   songForPlaylist: Songs | null;
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
+  createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
 };
 
 const initialState = {
@@ -25,6 +26,9 @@ const initialState = {
   setUserPlaylists: () => {},
   songForPlaylist: null,
   setSongForPlaylist: () => {},
+  createPlaylist: (songId: string) => {
+    return songId;
+  },
 };
 
 export const PlaylistContext = createContext<PlayListContextType>(initialState);
@@ -42,6 +46,28 @@ export const PlaylistContextProvider = ({
   const [songForPlaylist, setSongForPlaylist] = useState<Songs | null>(null);
   const { getAccessTokenSilently: getToken } = useAuth0();
   const { user } = useContext(UserContext);
+
+  const createPlaylist = async (
+    songId: string,
+    name: string,
+    thumbnail?: string
+  ) => {
+    if (songId != null && name != null) {
+      const URL = `playlist/create/${user?.userId}`;
+      const data = {
+        playlistSongs: [songId],
+        playlistName: name,
+        thumbnail: thumbnail,
+      };
+
+      try {
+        const response = await postData(URL, data, getToken);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   useEffect(() => {
     if (user && user.userId.length > 0) {
@@ -65,6 +91,7 @@ export const PlaylistContextProvider = ({
         setUserPlaylists,
         songForPlaylist,
         setSongForPlaylist,
+        createPlaylist,
       }}
     >
       {children}

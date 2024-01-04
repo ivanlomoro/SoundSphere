@@ -27,10 +27,9 @@ const AddToPlayList = () => {
     songForPlaylist: song,
     setSongForPlaylist,
     userPlaylists,
+    createPlaylist,
   } = useContext(PlaylistContext);
-  const { createPlaylist } = useSongs();
 
-  console.log("USER PLAYLISTS", userPlaylists);
   const createPlayList = async (songId: string, thumbnail: string) => {
     const { value: name } = (await Swal.fire({
       title: "Enter the new playlist name",
@@ -55,6 +54,12 @@ const AddToPlayList = () => {
       }
     }
   };
+
+  // const updatePlaylist = (songId: string) => {
+  //   try {
+  //     await
+  //   }
+  // }
 
   console.log("PLAYLIST FOR PLAYLIST", userPlaylists);
   if (song && song.id) {

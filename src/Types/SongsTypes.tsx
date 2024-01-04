@@ -73,5 +73,4 @@ export type SongsContextType = {
   getSongById: (songID: string) => void;
   editedSong: Songs | null;
   errorEditedSong: boolean;
-  createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
 };
