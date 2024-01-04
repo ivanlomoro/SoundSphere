@@ -45,6 +45,7 @@ export const PlaylistContextProvider = ({
     null
   );
   const [songForPlaylist, setSongForPlaylist] = useState<Songs | null>(null);
+  const [playlistsToUpdate, setPlaylistsToUpdate] = useState(false);
   const { getAccessTokenSilently: getToken } = useAuth0();
   const { user } = useContext(UserContext);
 
@@ -63,6 +64,8 @@ export const PlaylistContextProvider = ({
 
       try {
         const response = await postData(URL, data, getToken);
+        setSongForPlaylist(null);
+        setPlaylistsToUpdate(true);
         console.log(response);
       } catch (error) {
         console.error(error);
@@ -85,26 +88,35 @@ export const PlaylistContextProvider = ({
         const response = await patchData(URL, data, getToken);
         console.log(response);
         setSongForPlaylist(null);
+        setPlaylistsToUpdate(true);
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  useEffect(() => {
+  const getUserPlaylists = async () => {
     if (user && user.userId.length > 0) {
-      const getUserPlaylists = async () => {
-        const path = `playlist/user/${user.userId}`;
-        const response: AxiosResponse["data"] = await postData(
-          path,
-          {},
-          getToken
-        );
-        setUserPlaylists(response.incomingData);
-      };
-      getUserPlaylists();
+      const path = `playlist/user/${user.userId}`;
+      const response: AxiosResponse["data"] = await postData(
+        path,
+        {},
+        getToken
+      );
+      setUserPlaylists(response.incomingData);
     }
+  };
+
+  useEffect(() => {
+    getUserPlaylists();
   }, [user]);
+
+  useEffect(() => {
+    if (playlistsToUpdate) {
+      getUserPlaylists();
+      setPlaylistsToUpdate(false);
+    }
+  }, [playlistsToUpdate]);
 
   return (
     <PlaylistContext.Provider

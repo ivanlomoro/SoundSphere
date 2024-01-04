@@ -47,7 +47,6 @@ const AddToPlayList = () => {
     if (name) {
       try {
         await createPlaylist(songId, name, thumbnail);
-        setSongForPlaylist(null);
       } catch (error) {
         console.error(error);
       }
