@@ -135,8 +135,8 @@ export const GridImageContainer = styled.div`
 export const GridCardImage = styled.img`
   grid-column: 1;
   grid-row: 1 / span 2;
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   border-radius: var(--radius-sm);
 `;
 
@@ -151,20 +151,20 @@ export const GridCardDescription = styled.div`
   padding: var(--space-xs);
 `;
 
-export const SongName = styled.h3`
+export const SongName = styled.h5`
   white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
+  font-weight: 400;
   color: var(--clr-text-primary);
   min-height: 50px;
   display: flex;
   align-items: center;
 `;
 
-export const GridSongName = styled.h3`
+export const GridSongName = styled.h5`
   white-space: wrap;
-
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;

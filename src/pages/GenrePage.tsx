@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { Songs } from "../Types/SongsTypes";
 import { useRenderer } from "../hooks/useRenderer";
 import { HeaderSection } from "../components";
-import { GenreContext, useGenres } from "../context/genreContext/genreContext";
+// import { GenreContext, useGenres } from "../context/genreContext/genreContext";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();
-  const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
+  // const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
   const { renderSongs: renderGenreSongs } = useRenderer({
     songs: songByGenre,
     layout: "list",
