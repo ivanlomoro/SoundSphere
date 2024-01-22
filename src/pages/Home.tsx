@@ -4,6 +4,7 @@ import {
   ScrollableRowComponent,
   WelcomeUserSection,
 } from "../components";
+import axios from "axios";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";

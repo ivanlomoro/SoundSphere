@@ -1,7 +1,12 @@
 import { genres } from "../../interfaces/uploadTypes";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ScrollableRowComponent } from "..";
+import axios from "axios";
+import { useState } from "react";
+import { Songs } from "../../Types/SongsTypes";
+import GenrePage from "../../pages/GenrePage";
+import { useRenderer } from "../../hooks/useRenderer";
+useRenderer;
 
 const LinkButton = styled.div`
   background-color: #232323;
@@ -16,20 +21,41 @@ const LinkButton = styled.div`
 `;
 
 function GenreButtons() {
-  return (
-    <ScrollableRowComponent>
-      {genres.map((genre) => {
-        //   const color = predefinedColors[index % predefinedColors.length];
+  const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
+  const { renderSongs: renderGenreSongs } = useRenderer({
+    songs: songByGenre,
+    layout: "card",
+  });
+  const fetchSongsByGenre = async (genreId: string) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/song/public/genre/${genreId}`
+      );
+      setSongByGenre(response.data);
+      return songByGenre;
+    } catch (error) {
+      console.error("Failed to fetch Songs:", error);
+    }
+  };
 
-        return (
-          <LinkButton key={genre.id}>
-            <Link to={`/genre/${genre.id}`}>
+  return (
+    <>
+      <ScrollableRowComponent>
+        {genres.map((genre) => {
+          //   const color = predefinedColors[index % predefinedColors.length];
+
+          return (
+            <LinkButton
+              onClick={() => fetchSongsByGenre(genre.id)}
+              key={genre.id}
+            >
               <p>{genre.name}</p>{" "}
-            </Link>
-          </LinkButton>
-        );
-      })}
-    </ScrollableRowComponent>
+            </LinkButton>
+          );
+        })}
+      </ScrollableRowComponent>
+      <ScrollableRowComponent>{renderGenreSongs()}</ScrollableRowComponent>
+    </>
   );
 }
 

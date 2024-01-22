@@ -5,28 +5,25 @@ import { Songs } from "../Types/SongsTypes";
 import { useRenderer } from "../hooks/useRenderer";
 import { HeaderSection } from "../components";
 // import { GenreContext, useGenres } from "../context/genreContext/genreContext";
-const GenrePage = () => {
+const GenrePage = (genreId: string) => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
-  const { genreId } = useParams();
+  // const { genreId } = useParams();
   // const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
   const { renderSongs: renderGenreSongs } = useRenderer({
     songs: songByGenre,
-    layout: "list",
+    layout: "card",
   });
 
-  useEffect(() => {
-    const fetchSongsByGenre = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/song/public/genre/${genreId}`
-        );
-        setSongByGenre(response.data);
-      } catch (error) {
-        console.error("Failed to fetch Songs:", error);
-      }
-    };
-    fetchSongsByGenre();
-  }, []);
+  // const fetchSongsByGenre = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:8080/song/public/genre/${genreId}`
+  //     );
+  //     setSongByGenre(response.data);
+  //   } catch (error) {
+  //     console.error("Failed to fetch Songs:", error);
+  //   }
+  // };
 
   return (
     <>
