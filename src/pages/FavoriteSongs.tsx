@@ -9,6 +9,7 @@ export const FavoriteSongs = () => {
   return (
     <>
       <HeaderSection text="Favorites" />
+      
       <ul>
         {renderFavoriteSongs()}
       </ul>
