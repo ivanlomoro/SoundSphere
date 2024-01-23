@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useApiCalls } from "../../context/songContext/ApiCalls";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
 import ReactPlayer from "react-player";
-import { useNavigate } from "react-router-dom";
 import { useInteractions } from "../../context/userContext/InteractionContext";
 import { MiniPlayer } from "../Miniplayer/MiniPlayer";
 import { PlayerDisplay } from "../playerDisplay/PlayerDisplay";
+import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -40,12 +40,18 @@ const Player = () => {
     isExpanded,
   } = useContext(PlayerContext);
 
+  const { setSongForPlaylist } = useContext(PlaylistContext)!;
+
   const { toggleFavorite, isFavorite } = useInteractions();
 
-  if (songs.length === 0) setCurrentList(publicSongs);
+  const updatedCurrentList = songs.length === 0 ? publicSongs : songs;
 
-  const currentSong = songFromContext ? songFromContext : songs[0];
+  const currentSong = songFromContext ? songFromContext : updatedCurrentList[0];
   const playerRef = useRef<ReactPlayer>(null);
+
+  useEffect(() => {
+    setCurrentList(updatedCurrentList);
+  }, [updatedCurrentList]);
 
   const handleProgressClick = (event: CustomEventType) => {
     const progressBar = event.target;
@@ -80,6 +86,7 @@ const Player = () => {
           isFavorite={isFavorite}
           handlePlayPause={handlePlayPause}
           setIsExpanded={setIsExpanded}
+          setSongForPlaylist={setSongForPlaylist}
         />
       ) : (
         <PlayerDisplay
@@ -94,6 +101,7 @@ const Player = () => {
           isFavorite={isFavorite}
           handleProgressClick={handleProgressClick}
           setIsExpanded={setIsExpanded}
+          setSongForPlaylist={setSongForPlaylist}
         />
       )}
     </>

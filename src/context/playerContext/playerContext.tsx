@@ -25,8 +25,8 @@ type PlayerContextType = {
   handlePrevious: () => void;
   isExpanded: boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
-  lastProgress: ProgressType;
-  setLastProgress: Dispatch<SetStateAction<ProgressType>>;
+  isRandom: boolean;
+  setIsRandom: Dispatch<SetStateAction<boolean>>;
 };
 
 export type HandleProgressPropsType = {
@@ -62,18 +62,18 @@ const initialState: PlayerContextType = {
   setPlaying: () => {},
   handlePlayPause: () => {},
   duration: { duration: 0, formattedDuration: "" },
-  handleProgress: (playedSeconds: HandleProgressPropsType) => {},
-  handleDuration: (duration: number) => {},
+  handleProgress: (playedSeconds: HandleProgressPropsType) => {
+    if (playedSeconds) return null;
+  },
+  handleDuration: (duration: number) => {
+    if (duration) return null;
+  },
   handleNext: () => {},
   handlePrevious: () => {},
   isExpanded: false,
   setIsExpanded: () => {},
-  lastProgress: {
-    currentSeconds: 0,
-    currentPercentage: 0,
-    currentFormattedTime: "",
-  },
-  setLastProgress: () => {},
+  isRandom: false,
+  setIsRandom: () => {},
 };
 
 export const PlayerContext = createContext<PlayerContextType>(initialState);
@@ -86,11 +86,7 @@ export const PlayerContextProvider = ({
   const [currentList, setCurrentList] = useState<Songs[]>(publicSongs);
   const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [lastProgress, setLastProgress] = useState({
-    currentSeconds: 0,
-    currentPercentage: 0,
-    currentFormattedTime: "",
-  });
+  const [isRandom, setIsRandom] = useState(false);
 
   const [progress, setProgress] = useState<ProgressType>({
     currentSeconds: 0,
@@ -109,8 +105,8 @@ export const PlayerContextProvider = ({
     const songIndex = currentList.findIndex(
       (song) => song.id === currentSong?.id
     );
-    console.log("SONG INDEX:", songIndex);
-    setCurrentSongIndex(songIndex);
+    if (songIndex === -1) setCurrentSongIndex(0);
+    if (songIndex !== -1) setCurrentSongIndex(songIndex);
   }, [currentSong]);
 
   useEffect(() => {
@@ -193,8 +189,8 @@ export const PlayerContextProvider = ({
         handlePrevious,
         isExpanded,
         setIsExpanded,
-        lastProgress,
-        setLastProgress,
+        isRandom,
+        setIsRandom,
       }}
     >
       {children}

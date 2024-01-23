@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 import AddToPlayList from "../../pages/AddToPlaylist";
 import Player from "../player/Player";
+import { PlayerContext } from "../../context/playerContext/playerContext";
 
 const StyledNavLayout = styled.div`
   display: flex;
@@ -13,20 +14,9 @@ const StyledNavLayout = styled.div`
   min-height: 100vh;
 `;
 
-const StickySections = styled.div`
-  position: sticky;
-  bottom: 0;
-  background-color: #111111c2;
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.1),
-    rgba(0, 0, 0, 1)
-  );
-  backdrop-filter: blur(6px);
-`;
-
 export const PlayerLayout = () => {
   const { songForPlaylist } = useContext(PlaylistContext);
+  const { isExpanded } = useContext(PlayerContext);
 
   return (
     <StyledNavLayout>
@@ -34,10 +24,11 @@ export const PlayerLayout = () => {
         <Outlet />
       </div>
       {songForPlaylist && <AddToPlayList />}
-      <StickySections>
-        <Player />
-        <NavBar />
-      </StickySections>
+
+      {/* <StickySections> */}
+      <Player />
+      {!isExpanded && <NavBar />}
+      {/* </StickySections> */}
     </StyledNavLayout>
   );
 };

@@ -9,7 +9,6 @@ import {
 } from "../pages";
 
 import {
-  DISPLAYPAGE,
   HOME,
   LANDINGPAGE,
   USERPAGE,
@@ -21,7 +20,6 @@ import {
   GENRE,
 } from "./paths";
 import { NavLayout } from "../components/layouts/NavLayout";
-import { DisplayPage } from "../pages/DisplayPage";
 import { SearchPage } from "../pages/SearchPage";
 import MySongsPage from "../pages/MySongsPage";
 import PlaylistPage from "../pages/PlaylistPage";
@@ -42,9 +40,6 @@ export const RouterPaths: FC = () => {
           <Route path={GENRE} element={<GenrePage />} />
         </Route>
         <Route element={<NavLayout />}>
-          <Route path={DISPLAYPAGE} element={<DisplayPage />}>
-            <Route path=":name" element={<DisplayPage />}></Route>
-          </Route>
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />

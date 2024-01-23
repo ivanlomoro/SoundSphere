@@ -3,7 +3,11 @@ import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FullMiniHeart, MiniFaveButton } from "../card/card.styled.components";
+import {
+  FullMiniHeart,
+  MiniFaveButton,
+  Plus,
+} from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import {
   DurationType,
@@ -26,8 +30,11 @@ export const HiddenPlayer = styled.div`
 `;
 
 const MiniPlayerContainer = styled.div`
-  position: sticky;
+  position: fixed;
+  z-index: 1;
+  width: calc(100% - 16px);
   bottom: 70px;
+  margin-left: 0;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -70,6 +77,7 @@ type MiniPlayerProps = {
   handleProgressClick: (event: CustomEventType) => void;
   toggleFavorite: (song: Songs) => void;
   isFavorite: (id: string) => boolean;
+  setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
 };
 
 export const MiniPlayer: FC<MiniPlayerProps> = ({
@@ -82,6 +90,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
   isFavorite,
   handlePlayPause,
   setIsExpanded,
+  setSongForPlaylist,
 }) => {
   return (
     <>
@@ -100,6 +109,9 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
           mini={true}
         />
         <InlineContainer>
+          <MiniFaveButton onClick={() => setSongForPlaylist(currentSong)}>
+            <Plus />
+          </MiniFaveButton>
           <MiniFaveButton
             onClick={() => {
               toggleFavorite(currentSong);

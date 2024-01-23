@@ -230,6 +230,9 @@ export const FaveButton = styled.button`
 
 export const MiniFaveButton = styled.button`
   background: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0;
   border: none;
   color: var(--clr-bg-primary);
   &:hover {

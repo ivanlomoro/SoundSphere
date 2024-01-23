@@ -1,11 +1,10 @@
-import { Dispatch, FC, SetStateAction, useRef } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FaveButton } from "../card/card.styled.components";
+import { FaveButton, Plus } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { Songs } from "../../Types/SongsTypes";
@@ -13,7 +12,7 @@ import {
   DurationType,
   ProgressType,
 } from "../../context/playerContext/playerContext";
-import { ArrowBackSection } from "..";
+import { HeaderSection } from "..";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -53,6 +52,26 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
+const PlayerDisplayContainer = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+`;
+
+const StyledSongName = styled.p`
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  max-width: 85%;
+  min-height: 58px;
+  margin-bottom: 0;
+`;
+
+const StyledArtistName = styled.p`
+  font-size: var(--fs-lg);
+  max-width: 85%;
+`;
+
 type PlayerDisplayProps = {
   currentSong: Songs;
   progress: ProgressType;
@@ -65,6 +84,7 @@ type PlayerDisplayProps = {
   toggleFavorite: (song: Songs) => void;
   isFavorite: (id: string) => boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
+  setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
 };
 
 export const PlayerDisplay: FC<PlayerDisplayProps> = ({
@@ -79,24 +99,11 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   toggleFavorite,
   isFavorite,
   setIsExpanded,
+  setSongForPlaylist,
 }) => {
-  const StyledSongName = styled.p`
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    max-width: 85%;
-    min-height: 58px;
-    margin-bottom: 0;
-  `;
-
-  const StyledArtistName = styled.p`
-    font-size: var(--fs-lg);
-    max-width: 85%;
-  `;
-
   return (
-    <>
-      <ArrowBackSection onClick={() => setIsExpanded(false)} />
+    <PlayerDisplayContainer>
+      <HeaderSection arrowBackAction={() => setIsExpanded(false)} />
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong?.name} </StyledSongName>
@@ -109,11 +116,9 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
           onClick={handleProgressClick}
         />
         <ButtonContainer>
-          <FaveButton
-            onClick={() => {
-              console.log("Holi");
-            }}
-          ></FaveButton>
+          <FaveButton onClick={() => setSongForPlaylist(currentSong)}>
+            <Plus />
+          </FaveButton>
           <Button
             variant="StyledButtonDisplay"
             content={<AiOutlineStepBackward />}
@@ -138,6 +143,6 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
           </FaveButton>
         </ButtonContainer>
       </ResponsiveContainer>
-    </>
+    </PlayerDisplayContainer>
   );
 };
