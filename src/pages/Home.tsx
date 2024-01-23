@@ -9,10 +9,15 @@ import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
+import { useContext } from "react";
+import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 
 export const Home = () => {
   const { publicSongs } = useApiCalls();
   const { recents, favorites, playlists } = useInteractions();
+  const { userPlaylists } = useContext(PlaylistContext);
+
+  console.log(playlists);
   const { renderSongs: renderPublicSongs } = useRenderer({
     songs: publicSongs,
     layout: "card",
@@ -25,6 +30,7 @@ export const Home = () => {
     songs: favorites,
     layout: "card",
   });
+
   const { renderPlaylists: renderPlaylists } = useRenderer({
     playlists: playlists,
     layout: "card",
@@ -60,14 +66,13 @@ export const Home = () => {
             </ScrollableRowComponent>
           </>
         )}
-        {favorites.length > 0 && (
+        {playlists.length > 0 && (
           <>
             <h3>Carrussel playlist2</h3>
-            <ScrollableRowComponent>
-              {renderFavoriteSongs()}
-            </ScrollableRowComponent>
+            <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
           </>
         )}
+
         {/* // Quiero hardcodear las playlists */}
         {/* {playlists.length > 0 && (
           <>

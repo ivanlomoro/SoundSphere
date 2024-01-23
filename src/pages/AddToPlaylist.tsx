@@ -53,7 +53,6 @@ const AddToPlayList = () => {
     }
   };
 
-  console.log("PLAYLIST FOR PLAYLIST", userPlaylists);
   if (song && song.id) {
     return (
       <AddToListContainer>

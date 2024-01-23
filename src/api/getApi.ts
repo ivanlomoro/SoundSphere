@@ -4,7 +4,6 @@ const getData = async (url: string, getToken: () => void) => {
   const token = await getToken();
 
   const fullUrl = `http://localhost:8080/${url}`;
-  console.log(fullUrl);
   const config = {
     headers: {
       authorization: `Bearer ${token}`,

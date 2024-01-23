@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect } from "react";
 import axios from "axios";
-import { Songs } from '../../Types/SongsTypes';
+import { Songs } from "../../Types/SongsTypes";
 
 export interface SongUploadData {
   thumbnail: string;
@@ -11,19 +11,18 @@ export interface SongUploadData {
   userCreator: string;
   albumId?: string;
   newAlbum?: string;
-};
+}
 
 interface ApiCallContextType {
   uploadSong: (songData: SongUploadData) => Promise<void>;
   publicSongs: Songs[];
   userSongs?: Songs[];
-};
+}
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
 type ProviderProps = {
   children: ReactNode;
 };
-
 
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
@@ -32,15 +31,14 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
     const requestUrl = `${baseUrl}/song/${encodedID}`;
-    
+
     useEffect(() => {
       fetchSongs();
     }, []);
-   
+
     try {
       const response = await axios.post(requestUrl, songData);
       if (response) {
-        console.log("Song uploaded successfully!", response.data); // REVISAR 
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -56,10 +54,10 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/song/');
+      const response = await axios.get("http://localhost:8080/song/");
       setPublicSongs(response.data);
     } catch (error) {
-      console.error('Failed to fetch Songs:', error);
+      console.error("Failed to fetch Songs:", error);
     }
   };
 

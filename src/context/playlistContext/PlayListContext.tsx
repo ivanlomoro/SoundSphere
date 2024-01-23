@@ -85,11 +85,7 @@ export const PlaylistContextProvider = ({
     playlistId: string,
     playlistName: string
   ) => {
-    console.log("INIT");
-    console.log(playlistId);
-
     if (songId != null) {
-      console.log(songId);
       const URL = `playlist/addsong/${playlistId}`;
       const data = {
         songId: songId,
@@ -98,7 +94,6 @@ export const PlaylistContextProvider = ({
 
       try {
         const response = await patchData(URL, data, getToken);
-        console.log(response);
         setSongForPlaylist(null);
         setPlaylistsToUpdate(true);
         toast.success(`Added to ${playlistName}.`);

@@ -10,7 +10,6 @@ const StyledUserAvatar = styled.img`
 
 export const UserAvatar = () => {
   const { user } = useAuth0();
-  console.log(user?.picture);
 
   return (
     <>

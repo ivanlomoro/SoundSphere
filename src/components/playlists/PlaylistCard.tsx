@@ -25,7 +25,6 @@ type PlaylistCardProps = {
 
 const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
   const { addSongToPlaylist, songForPlaylist } = useContext(PlaylistContext);
-  console.log(songForPlaylist);
 
   if (songForPlaylist && songForPlaylist.id)
     return (
