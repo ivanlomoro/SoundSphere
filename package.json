@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
-    "server": "json-server --watch ./src/data/db.json"
+    "server": "json-server --watch ./src/data/db.json",
+    "start": "vite"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.3",
