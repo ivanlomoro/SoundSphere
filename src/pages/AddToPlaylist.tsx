@@ -68,8 +68,8 @@ const AddToPlayList = () => {
         />
         {userPlaylists && (
           <PlaylistsContainer>
-            {userPlaylists?.map((playlist) => (
-              <PlaylistCard playlist={playlist} />
+            {userPlaylists?.map((playlist, index) => (
+              <PlaylistCard key={index} playlist={playlist} />
             ))}
           </PlaylistsContainer>
         )}

@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Songs } from "../Types/SongsTypes";
 import { useRenderer } from "../hooks/useRenderer";
 import { HeaderSection } from "../components";
-import { GenreContext, useGenres } from "../context/genreContext/genreContext";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();
