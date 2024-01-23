@@ -16,14 +16,14 @@ import patchData from "../../api/patchApi";
 import toast from "react-hot-toast";
 
 export type PlayListContextType = {
-  userPlaylists: PlaylistType[] | null;
+  userPlaylists: PlaylistType[];
   setUserPlaylists: Dispatch<SetStateAction<PlaylistType[] | null>>;
   songForPlaylist: Songs | null;
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
-  createPlaylist: (songId: string, name: string, thumbnail?: string) => void;
+  createPlaylist: (songId: string, name: string, image?: string) => void;
   addSongToPlaylist: (
     songId: string,
-    thumbnail: string,
+    image: string,
     playlistId: string,
     playlistName: string
   ) => void;
@@ -58,14 +58,14 @@ export const PlaylistContextProvider = ({
   const createPlaylist = async (
     songId: string,
     name: string,
-    thumbnail?: string
+    image?: string
   ) => {
     if (songId != null && name != null) {
       const URL = `playlist/create/${user?.userId}`;
       const data = {
         playlistSongs: [songId],
         playlistName: name,
-        thumbnail: thumbnail,
+        image: image,
       };
 
       try {
@@ -81,7 +81,7 @@ export const PlaylistContextProvider = ({
 
   const addSongToPlaylist = async (
     songId: string,
-    thumbnail: string,
+    image: string,
     playlistId: string,
     playlistName: string
   ) => {
@@ -93,7 +93,7 @@ export const PlaylistContextProvider = ({
       const URL = `playlist/addsong/${playlistId}`;
       const data = {
         songId: songId,
-        thumbnail: thumbnail,
+        image: image,
       };
 
       try {

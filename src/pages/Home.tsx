@@ -9,9 +9,12 @@ import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
+import { useContext } from "react";
+import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 
 export const Home = () => {
   const { publicSongs } = useApiCalls();
+  const { userPlaylists } = useContext(PlaylistContext);
   const { recents, favorites, playlists } = useInteractions();
   const { renderSongs: renderPublicSongs } = useRenderer({
     songs: publicSongs,
@@ -26,7 +29,7 @@ export const Home = () => {
     layout: "card",
   });
   const { renderPlaylists: renderPlaylists } = useRenderer({
-    playlists: playlists,
+    playlists: userPlaylists,
     layout: "card",
   });
 
@@ -42,6 +45,12 @@ export const Home = () => {
           <>
             <h3>Recently listended </h3>
             <RecentGrid>{renderRecentsSongs()}</RecentGrid>
+          </>
+        )}
+        {userPlaylists.length > 0 && (
+          <>
+            <h3>Recently listended </h3>
+            <RecentGrid>{renderuserPlaylists()}</RecentGrid>
           </>
         )}
         {favorites.length > 0 && (

@@ -95,7 +95,7 @@ export const MiniPlayer = () => {
     <>
       <HiddenPlayer>
         <ReactPlayer
-          url={currentSong.url}
+          url={currentsong.track}
           playing={playing}
           ref={playerRef}
           controls={false}
@@ -107,7 +107,7 @@ export const MiniPlayer = () => {
       </HiddenPlayer>
       <MiniPlayerContainer>
         <InlineExpandibleContainer onClick={() => navigate(DISPLAYPAGE)}>
-          <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
+          <MiniCover src={currentSong.image} alt="Song Cover" />
           <div>
             <p>{currentSong?.name} </p>
             <p>{currentSong.artist}</p>

@@ -28,7 +28,7 @@ interface Album {
   id: string;
   name: string;
   userId: string;
-  thumbnail: string;
+  image: string;
   isPublic: boolean;
 }
 
@@ -109,7 +109,7 @@ export const AddMusicPage = () => {
       if (selectedAlbum === "newAlbum") {
         const newAlbumData = {
           name: data.newAlbum,
-          thumbnail: cloudinaryImage.secure_url,
+          image: cloudinaryImage.secure_url,
           genreId: selectedGenre,
           isPublic: true,
         };
@@ -136,7 +136,7 @@ export const AddMusicPage = () => {
           : selectedAlbum;
 
       const requestData = {
-        thumbnail: cloudinaryImage.secure_url,
+        image: cloudinaryImage.secure_url,
         url: cloudinarySong.secure_url,
         name: data.name,
         genreId: selectedGenre,
@@ -194,10 +194,10 @@ export const AddMusicPage = () => {
               accept="image/*"
               style={{ display: "none" }}
               id="image-upload"
-              {...register("thumbnail", {
+              {...register("image", {
                 required: {
                   value: true,
-                  message: "Please upload a thumbnail",
+                  message: "Please upload a image",
                 },
                 onChange: imageUpload,
               })}
@@ -206,8 +206,8 @@ export const AddMusicPage = () => {
               <label htmlFor="image-upload">
                 <StyledButtonOutline as="span">Add Image</StyledButtonOutline>
               </label>
-              {errors.thumbnail && (
-                <ErrorMessage>{errors.thumbnail.message}</ErrorMessage>
+              {errors.image && (
+                <ErrorMessage>{errors.image.message}</ErrorMessage>
               )}
             </InputContainer>
             <Input

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Playlist } from "../../Types/PlaylistFormData";
 
 import {
   Card,
@@ -17,7 +16,7 @@ import {
 import PlaylistActionButtons from "./PlaylistActionButtons";
 
 interface PlaylistCardProps {
-  playlist: Playlist;
+  playlist: PlaylistType;
   variant?: "grid" | "list" | "card" | "fullscreen";
 }
 
@@ -54,13 +53,13 @@ export function PlaylistCard({
         <>
           <FullScreenCardTitle>
             {playlist.playlistName}
-            <span>{playlist.songs.length} songs</span>
+            <span>{playlist.playlistSongs.length} songs</span>
           </FullScreenCardTitle>
           <PlaylistActionButtons />
         </>
       )}
 
-      <ImageComponent src={playlist.thumbnail} alt={playlist.playlistName} />
+      <ImageComponent src={playlist.image} alt={playlist.playlistName} />
 
       {variant === "list" && (
         <>

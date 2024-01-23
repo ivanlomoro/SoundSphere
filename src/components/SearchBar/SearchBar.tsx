@@ -57,7 +57,7 @@ export const SearchBar = () => {
             {publicSongs
               .filter((song: Songs) => {
                 return (
-                  song && song.name.toLowerCase().includes(query.toLowerCase())
+                  song && song.title.toLowerCase().includes(query.toLowerCase())
                 );
               })
               .map((song: Songs) => (
@@ -70,11 +70,11 @@ export const SearchBar = () => {
                 >
                   <img
                     style={{ width: 50 }}
-                    src={song.thumbnail}
+                    src={song.image}
                     alt="miscojones"
                   />
                   <StyledDivSection>
-                    <p>{song.name}</p>
+                    <p>{song.title}</p>
                     {song.artist && <p>{song.artist}</p>}
                   </StyledDivSection>
                 </StyledDivSection2>

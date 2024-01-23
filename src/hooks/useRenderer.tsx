@@ -8,7 +8,7 @@ import { PlaylistCard } from '../components/card/PlaylistCard';
 type MagicInput<T> = {
   songs?: Songs[];
   artists?: Artist[];
-  playlists?: Playlist[];
+  playlists?: PlaylistType[];
   isMySong?: true;
   layout: T;
 };

@@ -1,5 +1,5 @@
 type PlaylistType = {
-  thumbnail?: string;
+  image?: string;
   playlistName: string;
   UserCreator: string;
   playlistSongs: string[];

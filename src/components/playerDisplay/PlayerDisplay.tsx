@@ -102,7 +102,7 @@ export const PlayerDisplay = () => {
     <>
       <HiddenPlayer>
         <StyledPlayer
-          url={currentSong.url}
+          url={currentsong.track}
           playing={playing}
           ref={playerRef}
           controls={false}
@@ -114,7 +114,7 @@ export const PlayerDisplay = () => {
         
       </HiddenPlayer>{" "}
       <ResponsiveContainer>
-        <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
+        <StyledCover src={currentSong.image} alt="Song Cover" />
         <StyledSongName>{currentSong?.name} </StyledSongName>
         {currentSong.artist && (
           <StyledArtistName>{currentSong.artist}</StyledArtistName>

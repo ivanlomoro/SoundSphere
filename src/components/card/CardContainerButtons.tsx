@@ -12,7 +12,7 @@ import { GenreType } from "../../Types/GenreTypes";
 export type editSongType = {
   name: string;
   url?: string;
-  thumbnail?: string;
+  image?: string;
   isPublic?: boolean;
   genreId: string;
   artistId?: string;
@@ -47,7 +47,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
       title: "Enter the new song name",
       input: "text",
       inputLabel: "Name",
-      inputValue: editSong.name,
+      inputValue: editsong.title,
       showCancelButton: true,
       background: "#111111",
       color: "white",

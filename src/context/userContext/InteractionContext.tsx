@@ -32,7 +32,7 @@ export interface UserInteractionProps {
 const placeHolderPlaylist: Playlist = {
   playlistName: "dont show in future",
   userCreator: "michee",
-  thumbnail: "",
+  image: "",
   songs: [],
   frontId: "calla",
   id: "cvndfb",
@@ -112,13 +112,13 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
 
       if (!selectedSongs.length && user) {
         const defaultPlaylistName = "New Playlist";
-        const defaultThumbnail = song.thumbnail;
+        const defaultimage = song.image;
         const userCreatorId = user.userId;
         const newPlaylist: Playlist = {
           frontId: song.id + userCreatorId,
           playlistName: defaultPlaylistName,
           songs: selectedSongs,
-          thumbnail: defaultThumbnail,
+          image: defaultimage,
           userCreator: userCreatorId,
         };
         setSelectedPlaylist(newPlaylist);
@@ -141,13 +141,13 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     newName: Playlist["playlistName"]
   ) => {
     if (playlist.songs.length > 0 && user) {
-      const defaultThumbnail = playlist.thumbnail;
+      const defaultimage = playlist.image;
       const userCreatorId = user.userId;
       const newPlaylist: Playlist = {
         frontId: playlist.frontId + userCreatorId,
         playlistName: newName,
         songs: playlist.songs,
-        thumbnail: defaultThumbnail,
+        image: defaultimage,
         userCreator: userCreatorId,
       };
       setSelectedPlaylist(newPlaylist);

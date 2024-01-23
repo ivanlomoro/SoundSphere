@@ -12,7 +12,7 @@ const PlaylistDetails = () => {
     const placeHolderPlaylist: Playlist = {
         playlistName: 'dont show in future',
         userCreator: 'michee',
-        thumbnail: 'qualsiasi',
+        image: 'qualsiasi',
         songs: [],
         id: 'cvndfb',
         frontId: 'cvndfb',}

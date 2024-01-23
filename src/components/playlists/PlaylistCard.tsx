@@ -14,7 +14,7 @@ const PlaylistName = styled.div`
   font-size: var(--fs-lg);
 `;
 
-const PlayListThumbnail = styled.img`
+const PlayListimage = styled.img`
   max-height: 6em;
   width: auto;
 `;
@@ -34,14 +34,14 @@ const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
         onClick={() =>
           addSongToPlaylist(
             songForPlaylist.id,
-            songForPlaylist.thumbnail,
+            songForPlaylist.image,
             playlist.id,
             playlist.playlistName
           )
         }
       >
-        <PlayListThumbnail
-          src={playlist.thumbnail}
+        <PlayListimage
+          src={playlist.image}
           alt={playlist.playlistName}
         />
         <PlaylistName>{playlist.playlistName}</PlaylistName>

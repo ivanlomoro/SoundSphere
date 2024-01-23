@@ -29,7 +29,7 @@ const AddToPlayList = () => {
     createPlaylist,
   } = useContext(PlaylistContext);
 
-  const createPlayList = async (songId: string, thumbnail: string) => {
+  const createPlayList = async (songId: string, image: string) => {
     const { value: name } = (await Swal.fire({
       title: "Enter the new playlist name",
       input: "text",
@@ -46,7 +46,7 @@ const AddToPlayList = () => {
     })) as { value: string };
     if (name) {
       try {
-        await createPlaylist(songId, name, thumbnail);
+        await createPlaylist(songId, name, image);
       } catch (error) {
         console.error(error);
       }
@@ -64,7 +64,7 @@ const AddToPlayList = () => {
         />
         <Button
           content="New Playlist"
-          onClick={() => createPlayList(song.id, song.thumbnail)}
+          onClick={() => createPlayList(song.id, song.image)}
         />
         {userPlaylists && (
           <PlaylistsContainer>

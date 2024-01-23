@@ -4,10 +4,10 @@ import { Dispatch, SetStateAction } from "react";
 
 export type Songs = {
   id: string;
-  name: string;
+  title: string;
   artist: string;
-  url: string;
-  thumbnail: string;
+  track: string;
+  image: string;
   genre: string;
   isPublic: boolean;
   liked: boolean;
@@ -20,10 +20,12 @@ export type Category = {
 
 export type Artist = {
   id: string;
+  artistID?: number;
   name: string;
   genres: string[];
   popularity: number;
-  photoUrl: string;
+  image: string;
+  songs: Songs[]
 };
 
 export interface SongCardProps {
@@ -39,10 +41,10 @@ export interface SongCardProps {
 }
 
 export interface SongUploadData {
-  thumbnail: string;
-  url?: string;
+  image: string;
+  track?: string;
   name: string;
-  genreId: string;
+  genreID: string;
   isPublic: boolean;
   userCreator: string;
 }

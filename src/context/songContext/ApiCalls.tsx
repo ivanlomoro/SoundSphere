@@ -3,21 +3,21 @@ import axios from "axios";
 import { Songs } from '../../Types/SongsTypes';
 
 export interface SongUploadData {
-  thumbnail: string;
-  url?: string;
-  name: string;
-  genreId: string;
+  image: string;
+  track?: string;
+  title: string;
+  genreID: string;
   isPublic: boolean;
   userCreator: string;
-  albumId?: string;
+  albumID?: string;
   newAlbum?: string;
-};
+}
 
 interface ApiCallContextType {
   uploadSong: (songData: SongUploadData) => Promise<void>;
   publicSongs: Songs[];
   userSongs?: Songs[];
-};
+}
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
 type ProviderProps = {
@@ -31,11 +31,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     const baseUrl = `http://localhost:8080`;
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
-    const requestUrl = `${baseUrl}/song/${encodedID}`;
-    
-    useEffect(() => {
-      fetchSongs();
-    }, []);
+    const requestUrl = `${baseUrl}/song/${encodedID}`;  
    
     try {
       const response = await axios.post(requestUrl, songData);
@@ -53,6 +49,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
       }
     }
   };
+
 
   const fetchSongs = async () => {
     try {

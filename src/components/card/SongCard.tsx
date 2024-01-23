@@ -63,14 +63,14 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
             setPlaying(true);
           }}
         >
-          <ImageComponent src={song.thumbnail} alt={song.name} />
+          <ImageComponent src={song.image} alt={song.title} />
         </GridImageContainer>
       )}
 
       {variant != "grid" && (
         <ImageComponent
-          src={song.thumbnail}
-          alt={song.name}
+          src={song.image}
+          alt={song.title}
           onClick={() => {
             addToRecents(song);
             setCurrentList(songs);
@@ -82,7 +82,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
 
       <DescriptionComponent>
         <div>
-          <SongName>{song.name}</SongName>
+          <SongName>{song.title}</SongName>
           {/* <SongArtist>{song.artist}</SongArtist> */}
         </div>
         {/* {variant != "grid" && (
