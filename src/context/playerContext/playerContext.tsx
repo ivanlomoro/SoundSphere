@@ -23,18 +23,22 @@ type PlayerContextType = {
   handleDuration: (duration: number) => void;
   handleNext: () => void;
   handlePrevious: () => void;
+  isExpanded: boolean;
+  setIsExpanded: Dispatch<SetStateAction<boolean>>;
+  lastProgress: ProgressType;
+  setLastProgress: Dispatch<SetStateAction<ProgressType>>;
 };
 
-type HandleProgressPropsType = {
+export type HandleProgressPropsType = {
   playedSeconds: number;
 };
 
-type DurationType = {
+export type DurationType = {
   duration: number;
   formattedDuration: string;
 };
 
-type ProgressType = {
+export type ProgressType = {
   currentSeconds: number;
   currentPercentage: number;
   currentFormattedTime: string;
@@ -62,6 +66,14 @@ const initialState: PlayerContextType = {
   handleDuration: (duration: number) => {},
   handleNext: () => {},
   handlePrevious: () => {},
+  isExpanded: false,
+  setIsExpanded: () => {},
+  lastProgress: {
+    currentSeconds: 0,
+    currentPercentage: 0,
+    currentFormattedTime: "",
+  },
+  setLastProgress: () => {},
 };
 
 export const PlayerContext = createContext<PlayerContextType>(initialState);
@@ -73,6 +85,12 @@ export const PlayerContextProvider = ({
   const [currentSong, setCurrentSong] = useState<Songs | null>(null);
   const [currentList, setCurrentList] = useState<Songs[]>(publicSongs);
   const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [lastProgress, setLastProgress] = useState({
+    currentSeconds: 0,
+    currentPercentage: 0,
+    currentFormattedTime: "",
+  });
 
   const [progress, setProgress] = useState<ProgressType>({
     currentSeconds: 0,
@@ -173,6 +191,10 @@ export const PlayerContextProvider = ({
         handleDuration,
         handleNext,
         handlePrevious,
+        isExpanded,
+        setIsExpanded,
+        lastProgress,
+        setLastProgress,
       }}
     >
       {children}

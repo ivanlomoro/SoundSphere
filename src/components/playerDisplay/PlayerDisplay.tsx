@@ -1,16 +1,19 @@
-import { useContext, useRef } from "react";
+import { Dispatch, FC, SetStateAction, useRef } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FaveButton, Minus, Plus } from "../card/card.styled.components";
+import { FaveButton } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
-import { useInteractions } from "../../context/userContext/InteractionContext";
-import { PlayerContext } from "../../context/playerContext/playerContext";
-import { useApiCalls } from "../../context/songContext/ApiCalls";
+import { Songs } from "../../Types/SongsTypes";
+import {
+  DurationType,
+  ProgressType,
+} from "../../context/playerContext/playerContext";
+import { ArrowBackSection } from "..";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -25,8 +28,6 @@ export const HiddenPlayer = styled.div`
   height: 0;
   visibility: hidden;
 `;
-
-const StyledPlayer = styled(ReactPlayer)``;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -52,38 +53,33 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
-export const PlayerDisplay = () => {
-  const { toggleFavorite, isFavorite, toggleSelected, isSelected } =
-    useInteractions();
-  const { publicSongs } = useApiCalls();
+type PlayerDisplayProps = {
+  currentSong: Songs;
+  progress: ProgressType;
+  playing: boolean;
+  handlePlayPause: () => void;
+  duration: DurationType;
+  handleNext: () => void;
+  handlePrevious: () => void;
+  handleProgressClick: (event: CustomEventType) => void;
+  toggleFavorite: (song: Songs) => void;
+  isFavorite: (id: string) => boolean;
+  setIsExpanded: Dispatch<SetStateAction<boolean>>;
+};
 
-  const {
-    currentSong: songFromContext,
-    currentList: songs,
-    playing,
-    progress,
-    handlePlayPause,
-    duration,
-    handleProgress,
-    handleDuration,
-    handleNext,
-    handlePrevious,
-    setCurrentList,
-  } = useContext(PlayerContext);
-
-  if (songs.length === 0) setCurrentList(publicSongs);
-
-  const currentSong = songFromContext ? songFromContext : songs[0];
-  const playerRef = useRef<ReactPlayer>(null);
-
-  const handleProgressClick = (event: CustomEventType) => {
-    const progressBar = event.target;
-    const clickPosition = event.nativeEvent.offsetX;
-    const progressBarWidth = progressBar.clientWidth;
-    const fraction = clickPosition / progressBarWidth;
-    playerRef.current && playerRef.current.seekTo(fraction, "fraction");
-  };
-
+export const PlayerDisplay: FC<PlayerDisplayProps> = ({
+  currentSong,
+  progress,
+  playing,
+  handlePlayPause,
+  duration,
+  handleNext,
+  handlePrevious,
+  handleProgressClick,
+  toggleFavorite,
+  isFavorite,
+  setIsExpanded,
+}) => {
   const StyledSongName = styled.p`
     display: flex;
     align-items: center;
@@ -100,19 +96,7 @@ export const PlayerDisplay = () => {
 
   return (
     <>
-      <HiddenPlayer>
-        <StyledPlayer
-          url={currentSong.url}
-          playing={playing}
-          ref={playerRef}
-          controls={false}
-          width="100%"
-          height="100%"
-          onProgress={handleProgress}
-          onDuration={handleDuration}
-        />
-        
-      </HiddenPlayer>{" "}
+      <ArrowBackSection onClick={() => setIsExpanded(false)} />
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong?.name} </StyledSongName>
@@ -127,11 +111,9 @@ export const PlayerDisplay = () => {
         <ButtonContainer>
           <FaveButton
             onClick={() => {
-              toggleSelected(currentSong);
+              console.log("Holi");
             }}
-          >
-            {isSelected(currentSong.id) ? <Minus /> : <Plus />}
-          </FaveButton>
+          ></FaveButton>
           <Button
             variant="StyledButtonDisplay"
             content={<AiOutlineStepBackward />}
