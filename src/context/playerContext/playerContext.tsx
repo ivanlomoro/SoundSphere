@@ -47,21 +47,25 @@ type PlayerContextProviderProps = {
 const initialState: PlayerContextType = {
   currentSong: null,
   currentList: [],
-  setCurrentList: () => {},
-  setCurrentSong: () => {},
+  setCurrentList: () => { },
+  setCurrentSong: () => { },
   progress: {
     currentSeconds: 0,
     currentPercentage: 0,
     currentFormattedTime: "",
   },
   playing: false,
-  setPlaying: () => {},
-  handlePlayPause: () => {},
+  setPlaying: () => { },
+  handlePlayPause: () => { },
   duration: { duration: 0, formattedDuration: "" },
-  handleProgress: (playedSeconds: HandleProgressPropsType) => {},
-  handleDuration: (duration: number) => {},
-  handleNext: () => {},
-  handlePrevious: () => {},
+  handleProgress: (playedSeconds: HandleProgressPropsType) => {
+    if (playedSeconds) return null
+  },
+  handleDuration: (duration: number) => {
+    if (duration) return null
+  },
+  handleNext: () => { },
+  handlePrevious: () => { },
 };
 
 export const PlayerContext = createContext<PlayerContextType>(initialState);

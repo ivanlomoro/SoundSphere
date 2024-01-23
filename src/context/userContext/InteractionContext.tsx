@@ -21,7 +21,7 @@ export interface UserInteractionProps {
     addToSelected: (song: Songs) => void
     addToRecents: (song: Songs) => void
     selectedPlaylist: Playlist
-};
+}
 
 const placeHolderPlaylist: Playlist = {
     playlistName: 'dont show in future',

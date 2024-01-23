@@ -52,6 +52,20 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
+const StyledSongName = styled.p`
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  max-width: 85%;
+  min-height: 58px;
+  margin-bottom: 0;
+`;
+
+const StyledArtistName = styled.p`
+  font-size: var(--fs-lg);
+  max-width: 85%;
+`;
+
 export const PlayerDisplay = () => {
   const { toggleFavorite, isFavorite, toggleSelected, isSelected } =
     useInteractions();
@@ -84,20 +98,6 @@ export const PlayerDisplay = () => {
     playerRef.current && playerRef.current.seekTo(fraction, "fraction");
   };
 
-  const StyledSongName = styled.p`
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    max-width: 85%;
-    min-height: 58px;
-    margin-bottom: 0;
-  `;
-
-  const StyledArtistName = styled.p`
-    font-size: var(--fs-lg);
-    max-width: 85%;
-  `;
-
   return (
     <>
       <HiddenPlayer>
@@ -111,7 +111,7 @@ export const PlayerDisplay = () => {
           onProgress={handleProgress}
           onDuration={handleDuration}
         />
-        
+
       </HiddenPlayer>{" "}
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
