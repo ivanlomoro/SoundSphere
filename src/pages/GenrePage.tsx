@@ -17,7 +17,7 @@ const GenrePage = () => {
     const fetchSongsByGenre = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/song/public/genre/${genreId}`
+          `https://soundspherebackend-production.up.railway.app/song/public/genre/${genreId}`
         );
         setSongByGenre(response.data);
       } catch (error) {

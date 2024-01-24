@@ -36,7 +36,7 @@ export const LogoComponent = ({
 }: LogoComponentProps) => {
   return (
     <StyledLogoComponent>
-      <StyledImage src="src/assets/imgs/iconoSound.jpg" alt="Icono Page" />
+      <StyledImage src="https://res.cloudinary.com/dnmoqsjh7/image/upload/v1706093829/assets/iconoSound_rsuiny.jpg" alt="Icono Page" />
       <StyledTitle>{textTitle}</StyledTitle>
       <StyledSlogan>{textSlogan}</StyledSlogan>
     </StyledLogoComponent>
