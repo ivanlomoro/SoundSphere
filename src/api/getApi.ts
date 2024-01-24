@@ -3,7 +3,7 @@ import axios from "axios";
 const getData = async (url: string, getToken: () => void) => {
   const token = await getToken();
 
-  const fullUrl = `https://soundspherebackend-production.up.railway.app/${url}`;
+  const fullUrl = `${import.meta.env.VITE_API_BASE_URL}${url}`;
   console.log(fullUrl);
   const config = {
     headers: {

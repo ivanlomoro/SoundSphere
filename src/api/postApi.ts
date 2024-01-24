@@ -1,8 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 
-const postData = async (url: string, data: AxiosResponse['data'], getToken: () => Promise<string>) => {
+const postData = async (
+  url: string,
+  data: AxiosResponse["data"],
+  getToken: () => Promise<string>
+) => {
   const token = await getToken();
-  const fullUrl = `https://soundspherebackend-production.up.railway.app/${url}`;
+  const fullUrl = `${import.meta.env.VITE_API_BASE_URL}${url}`;
   const config = {
     headers: {
       authorization: `Bearer ${token}`,
@@ -20,4 +24,3 @@ const postData = async (url: string, data: AxiosResponse['data'], getToken: () =
 };
 
 export default postData;
-
