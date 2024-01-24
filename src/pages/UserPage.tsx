@@ -27,7 +27,7 @@ export const UserPage = () => {
           <WelcomeUserSection />
           <UserDetails />
         </UserContainer>
-        <Button content="Log out" onClick={logout} />
+        <Button content="Log out" onClick={ () =>logout({ logoutParams: { returnTo: window.location.origin } })} />
       </StyledProfileContainer>
     </>
   );
