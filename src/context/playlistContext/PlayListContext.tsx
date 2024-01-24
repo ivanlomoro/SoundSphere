@@ -28,8 +28,8 @@ export type PlayListContextType = {
     playlistId: string,
     playlistName: string
   ) => void;
-  getMusicByPlaylist: ( playlistId: string, playlistName: string) => void; 
-  songs: Songs[]
+  getMusicByPlaylist: (playlistId: string, playlistName: string) => void;
+  songs: Songs[];
 };
 
 const initialState = {
@@ -40,7 +40,7 @@ const initialState = {
   createPlaylist: () => {},
   addSongToPlaylist: () => {},
   getMusicByPlaylist: () => {},
-  songs: []
+  songs: [],
 };
 
 export const PlaylistContext = createContext<PlayListContextType>(initialState);
@@ -61,7 +61,6 @@ export const PlaylistContextProvider = ({
   const { user } = useContext(UserContext);
 
   const [songs, setSongs] = useState<Songs[]>([]);
-
 
   const createPlaylist = async (
     songId: string,
@@ -87,7 +86,6 @@ export const PlaylistContextProvider = ({
     }
   };
 
-
   const addSongToPlaylist = async (
     songId: string,
     thumbnail: string,
@@ -102,7 +100,7 @@ export const PlaylistContextProvider = ({
       };
 
       try {
-        const response = await patchData(URL, data, getToken);
+        await patchData(URL, data, getToken);
         setSongForPlaylist(null);
         setPlaylistsToUpdate(true);
         toast.success(`Added to ${playlistName}.`);
@@ -136,23 +134,28 @@ export const PlaylistContextProvider = ({
     }
   }, [playlistsToUpdate]);
 
-
-  const getMusicByPlaylist = async (playlistId: string, playlistName: string) => {
+  const getMusicByPlaylist = async (
+    playlistId: string,
+    playlistName: string
+  ) => {
     if (playlistId != null) {
       const URL = `playlist/getSongsByPlaylistId`;
-  
+
       try {
         const data = { playlistId };
         const response = await postData(URL, data, getToken);
 
-
-        if (response && response.incomingData && Array.isArray(response.incomingData.songs)) {
+        if (
+          response &&
+          response.incomingData &&
+          Array.isArray(response.incomingData.songs)
+        ) {
           const fetchedSongs = response.incomingData.songs;
 
           if (Array.isArray(fetchedSongs) && fetchedSongs.length > 0) {
-            console.log('Songs found:', fetchedSongs);
+            console.log("Songs found:", fetchedSongs);
             setSongs(fetchedSongs);
-            console.log(setSongs)
+            console.log(setSongs);
           } else {
             console.error(`No songs found for playlist: ${playlistName}`);
           }
@@ -175,7 +178,7 @@ export const PlaylistContextProvider = ({
         createPlaylist,
         addSongToPlaylist,
         getMusicByPlaylist,
-        songs
+        songs,
       }}
     >
       {children}

@@ -2,26 +2,24 @@ import {
   HeaderSection,
   RecentGrid,
   ScrollableRowComponent,
-  WelcomeUserSection,
 } from "../components";
-import axios from "axios";
 import GenreButtons from "../components/genresGrid/GenreButtons";
-import { useApiCalls } from "../context/songContext/ApiCalls";
+// import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
-import { useContext } from "react";
-import { PlaylistContext } from "../context/playlistContext/PlayListContext";
+// import { useContext } from "react";
+// import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 
 export const Home = () => {
-  const { publicSongs } = useApiCalls();
+  // const { publicSongs } = useApiCalls();
   const { recents, favorites, playlists } = useInteractions();
-  const { userPlaylists } = useContext(PlaylistContext);
+  // const { userPlaylists } = useContext(PlaylistContext);
 
   console.log(playlists);
-  const { renderSongs: renderPublicSongs } = useRenderer({
-    songs: publicSongs,
-    layout: "card",
-  });
+  // const { renderSongs: renderPublicSongs } = useRenderer({
+  //   songs: publicSongs,
+  //   layout: "card",
+  // });
   const { renderSongs: renderRecentsSongs } = useRenderer({
     songs: recents,
     layout: "grid",
