@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
-    "server": "json-server --watch ./src/data/db.json"
+    "server": "json-server --watch ./src/data/db.json",
+    "start": "npx http-server ./dist"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.3",
@@ -17,6 +18,7 @@
     "@cloudinary/url-gen": "^1.13.0",
     "@types/styled-components": "^5.1.29",
     "axios": "^1.6.2",
+    "http-server": "^14.1.1",
     "json-server": "^0.17.4",
     "mui": "^0.0.1",
     "react": "^18.2.0",

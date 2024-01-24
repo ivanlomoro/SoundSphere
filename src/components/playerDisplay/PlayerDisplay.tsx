@@ -52,6 +52,20 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
+const StyledSongName = styled.p`
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  max-width: 85%;
+  min-height: 58px;
+  margin-bottom: 0;
+`;
+
+const StyledArtistName = styled.p`
+  font-size: var(--fs-lg);
+  max-width: 85%;
+`;
+
 const PlayerDisplayContainer = styled.div`
   position: fixed;
   inset: 0;

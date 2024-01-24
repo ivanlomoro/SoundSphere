@@ -27,7 +27,7 @@ type ProviderProps = {
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
   const uploadSong = async (songData: SongUploadData) => {
-    const baseUrl = `http://localhost:8080`;
+    const baseUrl = `https://soundspherebackend-production.up.railway.app/`;
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
     const requestUrl = `${baseUrl}/song/${encodedID}`;
@@ -54,7 +54,9 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/song/");
+      const response = await axios.get(
+        "https://soundspherebackend-production.up.railway.app/song/"
+      );
       setPublicSongs(response.data);
     } catch (error) {
       console.error("Failed to fetch Songs:", error);

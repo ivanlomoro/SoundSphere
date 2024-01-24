@@ -14,7 +14,6 @@ import { editSongType } from "../../components/card/CardContainerButtons";
 import Swal from "sweetalert2";
 import { useApiCalls } from "./ApiCalls";
 import { SongsContextType } from "../../Types/SongsTypes";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
 const SongsContext = createContext<SongsContextType | null>(null);
