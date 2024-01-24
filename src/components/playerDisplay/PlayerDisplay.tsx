@@ -73,20 +73,6 @@ const PlayerDisplayContainer = styled.div`
   backdrop-filter: blur(5px);
 `;
 
-const StyledSongName = styled.p`
-  display: flex;
-  align-items: center;
-  font-size: 1.25rem;
-  max-width: 85%;
-  min-height: 58px;
-  margin-bottom: 0;
-`;
-
-const StyledArtistName = styled.p`
-  font-size: var(--fs-lg);
-  max-width: 85%;
-`;
-
 type PlayerDisplayProps = {
   currentSong: Songs;
   progress: ProgressType;
