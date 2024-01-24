@@ -4,7 +4,6 @@ import { ScrollableRowComponent } from "..";
 import axios from "axios";
 import { useState } from "react";
 import { Songs } from "../../Types/SongsTypes";
-import GenrePage from "../../pages/GenrePage";
 import { useRenderer } from "../../hooks/useRenderer";
 useRenderer;
 
@@ -17,7 +16,7 @@ const LinkButton = styled.div`
   display: flex;
   justify-content: center;
   margin: 1em;
-  mouse: pointer;
+  cursor: pointer;
 `;
 
 function GenreButtons() {
