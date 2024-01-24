@@ -6,7 +6,7 @@ import { Button } from "../button/Button";
 const StyledArrowBackSection = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 2em;
+  margin-right: 3em;
   position: absolute;
   left: 0;
 `;

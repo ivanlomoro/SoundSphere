@@ -8,7 +8,7 @@ import { GenreContext, useGenres } from "../context/genreContext/genreContext";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();
-  const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
+  
   const { renderSongs: renderGenreSongs } = useRenderer({
     songs: songByGenre,
     layout: "list",

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
+import { PlaylistType } from "../../interfaces/PlaylistType";
 
 const PlaylistCardContainer = styled.div`
   display: flex;
@@ -25,7 +26,6 @@ type PlaylistCardProps = {
 
 const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
   const { addSongToPlaylist, songForPlaylist } = useContext(PlaylistContext);
-  console.log(songForPlaylist);
 
   if (songForPlaylist && songForPlaylist.id)
     return (

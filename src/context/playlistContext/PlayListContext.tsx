@@ -14,6 +14,7 @@ import { UserContext } from "../userContext/UserContext";
 import { Songs } from "../../Types/SongsTypes";
 import patchData from "../../api/patchApi";
 import toast from "react-hot-toast";
+import { PlaylistType } from "../../interfaces/PlaylistType";
 
 export type PlayListContextType = {
   userPlaylists: PlaylistType[] | null;
@@ -27,6 +28,8 @@ export type PlayListContextType = {
     playlistId: string,
     playlistName: string
   ) => void;
+  getMusicByPlaylist: ( playlistId: string, playlistName: string) => void; 
+  songs: Songs[]
 };
 
 const initialState = {
@@ -36,6 +39,8 @@ const initialState = {
   setSongForPlaylist: () => {},
   createPlaylist: () => {},
   addSongToPlaylist: () => {},
+  getMusicByPlaylist: () => {},
+  songs: []
 };
 
 export const PlaylistContext = createContext<PlayListContextType>(initialState);
@@ -54,6 +59,9 @@ export const PlaylistContextProvider = ({
   const [playlistsToUpdate, setPlaylistsToUpdate] = useState(false);
   const { getAccessTokenSilently: getToken } = useAuth0();
   const { user } = useContext(UserContext);
+
+  const [songs, setSongs] = useState<Songs[]>([]);
+
 
   const createPlaylist = async (
     songId: string,
@@ -79,17 +87,14 @@ export const PlaylistContextProvider = ({
     }
   };
 
+
   const addSongToPlaylist = async (
     songId: string,
     thumbnail: string,
     playlistId: string,
     playlistName: string
   ) => {
-    console.log("INIT");
-    console.log(playlistId);
-
     if (songId != null) {
-      console.log(songId);
       const URL = `playlist/addsong/${playlistId}`;
       const data = {
         songId: songId,
@@ -98,7 +103,6 @@ export const PlaylistContextProvider = ({
 
       try {
         const response = await patchData(URL, data, getToken);
-        console.log(response);
         setSongForPlaylist(null);
         setPlaylistsToUpdate(true);
         toast.success(`Added to ${playlistName}.`);
@@ -132,6 +136,35 @@ export const PlaylistContextProvider = ({
     }
   }, [playlistsToUpdate]);
 
+
+  const getMusicByPlaylist = async (playlistId: string, playlistName: string) => {
+    if (playlistId != null) {
+      const URL = `playlist/getSongsByPlaylistId`;
+  
+      try {
+        const data = { playlistId };
+        const response = await postData(URL, data, getToken);
+
+
+        if (response && response.incomingData && Array.isArray(response.incomingData.songs)) {
+          const fetchedSongs = response.incomingData.songs;
+
+          if (Array.isArray(fetchedSongs) && fetchedSongs.length > 0) {
+            console.log('Songs found:', fetchedSongs);
+            setSongs(fetchedSongs);
+            console.log(setSongs)
+          } else {
+            console.error(`No songs found for playlist: ${playlistName}`);
+          }
+        } else {
+          console.error(`Invalid response data format.`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <PlaylistContext.Provider
       value={{
@@ -141,6 +174,8 @@ export const PlaylistContextProvider = ({
         setSongForPlaylist,
         createPlaylist,
         addSongToPlaylist,
+        getMusicByPlaylist,
+        songs
       }}
     >
       {children}

@@ -83,9 +83,9 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       <DescriptionComponent>
         <div>
           <SongName>{song.name}</SongName>
-          <SongArtist>{song.artist}</SongArtist>
+          {/* <SongArtist>{song.artist}</SongArtist> */}
         </div>
-        {variant != "grid" && (
+        {/* {variant != "grid" && (
           <CommonButtonContainer>
             <FaveButton
               onClick={() => {
@@ -98,7 +98,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
               <Plus />
             </FaveButton>
           </CommonButtonContainer>
-        )}
+        )} */}
       </DescriptionComponent>
       {location.pathname === MYSONGSPAGE && (
         <CardContainerButtons song={song} />

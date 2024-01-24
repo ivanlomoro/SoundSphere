@@ -1,9 +1,9 @@
-import React from 'react';
-import { SongCard } from '../components/card/SongCard';
-import { Songs, Artist } from '../Types/SongsTypes';
-import { ArtistCard } from '../components/card/ArtistCard';
-import { Playlist } from '../Types/PlaylistFormData';
-import { PlaylistCard } from '../components/card/PlaylistCard';
+import React from "react";
+import { SongCard } from "../components/card/SongCard";
+import { Songs, Artist } from "../Types/SongsTypes";
+import { ArtistCard } from "../components/card/ArtistCard";
+import { Playlist } from "../Types/PlaylistFormData";
+import { PlaylistCard } from "../components/card/PlaylistCard";
 
 type MagicInput<T> = {
   songs?: Songs[];
@@ -17,18 +17,11 @@ type LayoutVariant = "grid" | "list" | "card" | "fullscreen" | undefined;
 
 export const useRenderer = (input: MagicInput<LayoutVariant>) => {
   const { songs, artists, playlists, layout } = input;
-
   const renderSongs = React.useCallback(() => {
     return (
       <>
         {songs?.map((song) => (
-          <SongCard
-            variant={layout}
-            key={song.id}
-            song={song}
-            songs={songs}
-   
-          />
+          <SongCard variant={layout} key={song.id} song={song} songs={songs} />
         ))}
       </>
     );
@@ -38,10 +31,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
     return (
       <>
         {artists?.map((artist) => (
-          <ArtistCard
-            key={artist.id}
-            artist={artist}
-          />
+          <ArtistCard key={artist.id} artist={artist} />
         ))}
       </>
     );
@@ -52,9 +42,9 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
       <>
         {playlists?.map((playlist) => (
           <PlaylistCard
+            variant={layout}
             key={playlist.frontId}
             playlist={playlist}
-            variant={layout}
           />
         ))}
       </>

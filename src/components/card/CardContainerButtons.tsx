@@ -38,7 +38,6 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
     apiGenres.map((genre: GenreType) => {
       genres[genre.id] = genre.name;
     });
-    console.log("Genres", genres);
     return genres;
   };
 
