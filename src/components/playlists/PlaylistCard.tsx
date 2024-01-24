@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
+import { PlaylistType } from "../../interfaces/PlaylistType";
 
 const PlaylistCardContainer = styled.div`
   display: flex;
