@@ -55,7 +55,8 @@ const ResponsiveContainer = styled.div`
 const PlayerDisplayContainer = styled.div`
   position: fixed;
   inset: 0;
-  background-color: #000;
+  background-color: #000000e3;
+  backdrop-filter: blur(5px);
 `;
 
 const StyledSongName = styled.p`
