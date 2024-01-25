@@ -10,14 +10,17 @@ import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
 import { useContext } from "react";
+
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
+import { NavLink } from "react-router-dom";
+import { FAVORITESONGSPAGE } from "../routes/paths";
+import { PlaylistCardContainer } from "../components/card/PlaylistCard";
 
 export const Home = () => {
   const { publicSongs } = useApiCalls();
   const { recents, favorites, playlists } = useInteractions();
   const { userPlaylists } = useContext(PlaylistContext);
 
-  console.log(playlists);
   const { renderSongs: renderPublicSongs } = useRenderer({
     songs: publicSongs,
     layout: "card",
@@ -31,10 +34,10 @@ export const Home = () => {
     layout: "card",
   });
 
-  const { renderPlaylists: renderPlaylists } = useRenderer({
-    playlists: playlists,
-    layout: "card",
-  });
+  // const { renderPlaylists: renderPlaylists } = useRenderer({
+  //   playlists: userPlaylists,
+  //   layout: "card",
+  // });
 
   return (
     <>
@@ -58,20 +61,20 @@ export const Home = () => {
             </ScrollableRowComponent>
           </>
         )}
-        {favorites.length > 0 && (
+        {/* {favorites.length > 0 && (
           <>
             <h3>Carrussel playlist1</h3>
             <ScrollableRowComponent>
               {renderFavoriteSongs()}
             </ScrollableRowComponent>
           </>
-        )}
-        {playlists.length > 0 && (
+        )} */}
+        {/* {playlists.length > 0 && (
           <>
             <h3>Carrussel playlist2</h3>
             <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
           </>
-        )}
+        )} */}
 
         {/* // Quiero hardcodear las playlists */}
         {/* {playlists.length > 0 && (

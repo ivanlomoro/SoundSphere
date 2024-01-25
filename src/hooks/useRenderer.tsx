@@ -4,11 +4,12 @@ import { Songs, Artist } from "../Types/SongsTypes";
 import { ArtistCard } from "../components/card/ArtistCard";
 import { Playlist } from "../Types/PlaylistFormData";
 import { PlaylistCard } from "../components/card/PlaylistCard";
+import { PlaylistType } from "../interfaces/PlaylistType";
 
 type MagicInput<T> = {
   songs?: Songs[];
   artists?: Artist[];
-  playlists?: Playlist[];
+  playlists?: Playlist[] | PlaylistType[] | null | undefined;
   isMySong?: true;
   layout: T;
 };
@@ -43,7 +44,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
         {playlists?.map((playlist) => (
           <PlaylistCard
             variant={layout}
-            key={playlist.frontId}
+            key={playlist.id}
             playlist={playlist}
           />
         ))}
