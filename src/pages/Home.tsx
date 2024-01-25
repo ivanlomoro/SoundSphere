@@ -4,20 +4,14 @@ import {
 } from "../components";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
-// import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
-// import { useContext } from "react";
-// import { PlaylistContext } from "../context/playlistContext/PlayListContext";
-import { ArtistCard } from "../components/card/ArtistCard";
 import { AlbumCard } from "../components/card/AlbumCard";
 import { RecentGrid } from '../components/homeContainers/FavoritesGrid';
 
 export const Home = () => {
   // const { publicSongs } = useApiCalls();
-  const { playlists } = useInteractions();
-  const { artists } = useApiCalls();
-  const { publicSongs } = useApiCalls();
+
   const { albums } = useApiCalls();
   const{favorites, recents} = useInteractions()
   // const { userPlaylists } = useContext(PlaylistContext);
@@ -31,10 +25,7 @@ export const Home = () => {
     songs: favorites,
     layout: "card",
   });
-const{ renderSongs: renderPublicSongs } = useRenderer({
-    songs: publicSongs,
-    layout: "card",
-})
+
 
 
   return (
@@ -43,22 +34,16 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
       {/* <WelcomeUserSection /> */}
       <GenreButtons />
 
-      <h3>artists</h3>
-      <div>
+      
+      <div> <h2>Favorites Songs</h2>
         <ScrollableRowComponent>
-          <h2>Song List</h2>
-           <ScrollableRowComponent>{renderFavoriteSongs()}</ScrollableRowComponent>
-          {artists.length > 0 && (
-            <>
-              {artists.map((artist) => (
-                <ArtistCard key={artist.id} artist={artist} />
-              ))}
-            </>
-          )}
+         
+           {renderFavoriteSongs()}
+       
         </ScrollableRowComponent>
-        {publicSongs.length > 0 && (
+        {recents.length > 0 && (
           <>
-            <h3>songs</h3>
+            <h3>Recently Listened</h3>
             <RecentGrid>{renderRecentsSongs()}</RecentGrid>
           </>
         )}
@@ -66,7 +51,7 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
           <>
             <h3>Albums</h3>
             <ScrollableRowComponent>
-              {" "}
+         
               {albums.map((album) => (
                 <li key={album.id}>
                   <AlbumCard album={album} />
@@ -76,21 +61,9 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
           </>
         )}
 
-        {playlists.length > 0 && (
-          <>
-            <h3></h3>
+       
 
-            <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent>
-          </>
-        )}
 
-        {/* // Quiero hardcodear las playlists */}
-        {/* {playlists.length > 0 && (
-          <>
-            <h2>Playlist</h2>
-            <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
-          </>
-        )} */}
       </div>
     </>
   );
