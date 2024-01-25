@@ -1,8 +1,4 @@
-import {
-  HeaderSection,
-  RecentGrid,
-  ScrollableRowComponent,
-} from "../components";
+import { HeaderSection, ScrollableRowComponent } from "../components";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 // import { useApiCalls } from "../context/songContext/ApiCalls";
@@ -17,7 +13,7 @@ export const Home = () => {
   // const { publicSongs } = useApiCalls();
   const { playlists } = useInteractions();
   const { artists } = useApiCalls();
-  const { publicSongs } = useApiCalls();
+  // const { publicSongs } = useApiCalls();
   const { albums } = useApiCalls();
   // const { userPlaylists } = useContext(PlaylistContext);
   // const { renderSongs: renderRecentsSongs } = useRenderer({
