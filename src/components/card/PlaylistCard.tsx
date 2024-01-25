@@ -15,9 +15,10 @@ import {
   ListCardDescription,
 } from "./card.styled.components";
 import PlaylistActionButtons from "./PlaylistActionButtons";
+import { PlaylistType } from "../../interfaces/PlaylistType";
 
 interface PlaylistCardProps {
-  playlist: Playlist;
+  playlist: Playlist | PlaylistType | null | undefined;
   variant?: "grid" | "list" | "card" | "fullscreen";
 }
 

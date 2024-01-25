@@ -10,13 +10,13 @@ import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
 // import { useContext } from "react";
 // import { PlaylistContext } from "../context/playlistContext/PlayListContext";
-import { ArtistCard } from '../components/card/ArtistCard';
-import { AlbumCard } from '../components/card/AlbumCard';
+import { ArtistCard } from "../components/card/ArtistCard";
+import { AlbumCard } from "../components/card/AlbumCard";
 
 export const Home = () => {
   // const { publicSongs } = useApiCalls();
-  const {   playlists } = useInteractions();
-  const { artists } = useApiCalls()
+  const { playlists } = useInteractions();
+  const { artists } = useApiCalls();
   const { publicSongs } = useApiCalls();
   const { albums } = useApiCalls();
   // const { userPlaylists } = useContext(PlaylistContext);
@@ -24,10 +24,15 @@ export const Home = () => {
   //   songs: recents,
   //   layout: "grid",
   // });
-  const { renderSongs: renderFavoriteSongs } = useRenderer({
-    songs: publicSongs,
-    layout: "grid",
-  });
+  // const { renderSongs: renderFavoriteSongs } = useRenderer({
+  //   songs: publicSongs,
+  //   layout: "grid",
+  // });
+
+  // const { renderSongs: renderFavoriteSongs } = useRenderer({
+  //   songs: favorites,
+  //   layout: "card",
+  // });
 
   const { renderPlaylists: renderPlaylists } = useRenderer({
     playlists: playlists,
@@ -39,40 +44,44 @@ export const Home = () => {
       <HeaderSection text="SoundSphere" withBackButton={false} />
       {/* <WelcomeUserSection /> */}
       <GenreButtons />
-      
+
       <h3>artists</h3>
-      <div><ScrollableRowComponent>   
-        {/* <h2>Song List</h2> */}
-        {/* <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> */}
-        {artists.length > 0 && (
-          <>
-            {artists.map((artist) => (
-              <ArtistCard key={artist.id} artist={artist} />
-            ))}
-          </>
-        )}</ScrollableRowComponent>
-        {publicSongs.length > 0 && (
+      <div>
+        <ScrollableRowComponent>
+          {/* <h2>Song List</h2> */}
+          {/* <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> */}
+          {artists.length > 0 && (
+            <>
+              {artists.map((artist) => (
+                <ArtistCard key={artist.id} artist={artist} />
+              ))}
+            </>
+          )}
+        </ScrollableRowComponent>
+        {/* {publicSongs.length > 0 && (
           <>
             <h3>songs</h3>
-            <RecentGrid>
-              {renderFavoriteSongs()}
-            </RecentGrid>
+            <RecentGrid>{renderFavoriteSongs()}</RecentGrid>
           </>
-        )}
+        )} */}
         {albums.length > 0 && (
           <>
-         <h3>Albums</h3> 
-          <ScrollableRowComponent>    {albums.map((album) => ( <li key={album.id} >
-              <AlbumCard album={album} /></li>
-            ))}
-          </ScrollableRowComponent>
-        </>
+            <h3>Albums</h3>
+            <ScrollableRowComponent>
+              {" "}
+              {albums.map((album) => (
+                <li key={album.id}>
+                  <AlbumCard album={album} />
+                </li>
+              ))}
+            </ScrollableRowComponent>
+          </>
         )}
-        
+
         {playlists.length > 0 && (
           <>
             <h3>Carrussel playlist2</h3>
-           
+
             <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
           </>
         )}
