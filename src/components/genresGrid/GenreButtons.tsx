@@ -4,7 +4,7 @@ import { ScrollableRowComponent } from "..";
 import axios from "axios";
 import { useState } from "react";
 import { Songs } from "../../Types/SongsTypes";
-import GenrePage from "../../pages/GenrePage";
+
 import { useRenderer } from "../../hooks/useRenderer";
 useRenderer;
 
@@ -17,7 +17,7 @@ const LinkButton = styled.div`
   display: flex;
   justify-content: center;
   margin: 1em;
-  mouse: pointer;
+  
 `;
 // const genres = [
 //   { id: "65b1b95fe5f3c6d344bf0a3c", name: "Rock" },
@@ -26,8 +26,8 @@ const LinkButton = styled.div`
 
 //http://localhost:8080/song/public/genre/65b1b95fe5f3c6d344bf0a3c
 //http://localhost:8080/song/public/genre/65b1b99ae5f3c6d344bf0a3e
-//http://localhost:8080/song/public/genre/65b1b9ebe5f3c6d344bf0a40
 // ];
+// http://localhost:8080/song/public/genre/65b1b9ebe5f3c6d344bf0a40
 
 function GenreButtons() {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
