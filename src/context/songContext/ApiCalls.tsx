@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect } from "react";
 import axios from "axios";
-import { Songs } from "../../Types/SongsTypes";
+import { Artist, Songs } from "../../Types/SongsTypes";
+import { Album } from '../../pages/AddMusicPage';
 
 export interface SongUploadData {
   thumbnail: string;
@@ -17,6 +18,9 @@ interface ApiCallContextType {
   uploadSong: (songData: SongUploadData) => Promise<void>;
   publicSongs: Songs[];
   userSongs?: Songs[];
+  artists: Artist[];
+  albums: Album[];
+
 }
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
@@ -25,16 +29,17 @@ type ProviderProps = {
 };
 
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
+
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
+  const [artists, setArtists] = React.useState<Songs[]>([]);
+  const [albums, setAlbums] = React.useState<Album[]>([]);
   const uploadSong = async (songData: SongUploadData) => {
     const baseUrl = `http://localhost:8080`;
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
     const requestUrl = `${baseUrl}/song/${encodedID}`;
 
-    useEffect(() => {
-      fetchSongs();
-    }, []);
+ 
 
     try {
       const response = await axios.post(requestUrl, songData);
@@ -54,7 +59,9 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/song/");
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}song/`
+      );
       setPublicSongs(response.data);
     } catch (error) {
       console.error("Failed to fetch Songs:", error);
@@ -63,10 +70,11 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     fetchSongs();
+    fetchArtists();
   }, []);
 
   return (
-    <ApiCallsContext.Provider value={{ uploadSong, publicSongs }}>
+    <ApiCallsContext.Provider value={{albums,  artists, uploadSong, publicSongs }}>
       {children}
     </ApiCallsContext.Provider>
   );

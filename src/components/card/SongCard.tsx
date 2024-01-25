@@ -52,6 +52,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
     return null;
   }
 
+
   return (
     <CardComponent>
       {variant === "grid" && (
@@ -64,6 +65,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
           }}
         >
           <ImageComponent src={song.thumbnail} alt={song.name} />
+     
         </GridImageContainer>
       )}
 
@@ -83,6 +85,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       <DescriptionComponent>
         <div>
           <SongName>{song.name}</SongName>
+   
           {/* <SongArtist>{song.artist}</SongArtist> */}
         </div>
         {/* {variant != "grid" && (

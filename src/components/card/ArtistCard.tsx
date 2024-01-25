@@ -1,30 +1,23 @@
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { ArtistCardProps, Card, CardImage, CardDescription, SongName, FollowedButton, ArtistActionButtons } from './card.styled.components';
+
+import { ArtistCardProps, Card, CardImage, CardDescription, SongName } from './card.styled.components';
 
 
-export function ArtistCard({ artist, toggleFollowed, isFollowed }: Partial<ArtistCardProps>) {
+
+export function ArtistCard({ artist }: Partial<ArtistCardProps>) {
+ 
     if (!artist) {
         return null;
     }
-    if (!toggleFollowed || !isFollowed) {
-        return null;
-    }
+   
 
     return (
         <Card>
-            <CardImage className="card-img" src={artist.photoUrl} alt={artist.name} />
+            <CardImage className="card-img" src={artist.thumbnail} alt={artist.name} />
             <CardDescription>
                 <SongName>{artist.name}</SongName>
+                <SongName>Total Songs: {artist.song?.length}</SongName>
             </CardDescription>
 
-            <ArtistActionButtons>
-                <FollowedButton onClick={() => toggleFollowed(artist)}>
-                    {isFollowed(artist.id) ? <AiOutlineStar style={{
-                        color: "var(--clr-accent)", height: "30px",
-                        width: "30px"
-                    }} /> : <AiFillStar />}
-                </FollowedButton>
-            </ArtistActionButtons>
         </Card>
     );
 }

@@ -19,6 +19,15 @@ const LinkButton = styled.div`
   margin: 1em;
   mouse: pointer;
 `;
+// const genres = [
+//   { id: "65b1b95fe5f3c6d344bf0a3c", name: "Rock" },
+//   { id: "65b1b99ae5f3c6d344bf0a3e", name: "Pop" },
+//   { id: "65b1b9ebe5f3c6d344bf0a40", name: "Hip-Hop" }
+
+//http://localhost:8080/song/public/genre/65b1b95fe5f3c6d344bf0a3c
+//http://localhost:8080/song/public/genre/65b1b99ae5f3c6d344bf0a3e
+//http://localhost:8080/song/public/genre/65b1b9ebe5f3c6d344bf0a40
+// ];
 
 function GenreButtons() {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
@@ -26,10 +35,11 @@ function GenreButtons() {
     songs: songByGenre,
     layout: "card",
   });
-  const fetchSongsByGenre = async (genreId: string) => {
+  const fetchSongsByGenre = async ( id : string) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/song/public/genre/${genreId}`
+        `http://localhost:8080/song/public/genre/${id}`
+
       );
       setSongByGenre(response.data);
       return songByGenre;

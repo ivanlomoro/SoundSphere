@@ -21,9 +21,8 @@ export type Category = {
 export type Artist = {
   id: string;
   name: string;
-  genres: string[];
-  popularity: number;
-  photoUrl: string;
+  song?: Songs[]
+  thumbnail?: string;
 };
 
 export interface SongCardProps {
