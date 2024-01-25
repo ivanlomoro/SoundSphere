@@ -2,79 +2,89 @@ import {
   HeaderSection,
   RecentGrid,
   ScrollableRowComponent,
-  WelcomeUserSection,
 } from "../components";
-import axios from "axios";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
+// import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
-import { useContext } from "react";
-
-import { PlaylistContext } from "../context/playlistContext/PlayListContext";
-import { NavLink } from "react-router-dom";
-import { FAVORITESONGSPAGE } from "../routes/paths";
-import { PlaylistCardContainer } from "../components/card/PlaylistCard";
+// import { useContext } from "react";
+// import { PlaylistContext } from "../context/playlistContext/PlayListContext";
+import { ArtistCard } from "../components/card/ArtistCard";
+import { AlbumCard } from "../components/card/AlbumCard";
 
 export const Home = () => {
+  // const { publicSongs } = useApiCalls();
+  const { playlists } = useInteractions();
+  const { artists } = useApiCalls();
   const { publicSongs } = useApiCalls();
-  const { recents, favorites, playlists } = useInteractions();
-  const { userPlaylists } = useContext(PlaylistContext);
+  const { albums } = useApiCalls();
+  // const { userPlaylists } = useContext(PlaylistContext);
+  // const { renderSongs: renderRecentsSongs } = useRenderer({
+  //   songs: recents,
+  //   layout: "grid",
+  // });
+  // const { renderSongs: renderFavoriteSongs } = useRenderer({
+  //   songs: publicSongs,
+  //   layout: "grid",
+  // });
 
-  const { renderSongs: renderPublicSongs } = useRenderer({
-    songs: publicSongs,
-    layout: "card",
-  });
-  const { renderSongs: renderRecentsSongs } = useRenderer({
-    songs: recents,
-    layout: "grid",
-  });
-  const { renderSongs: renderFavoriteSongs } = useRenderer({
-    songs: favorites,
-    layout: "card",
-  });
-
-  // const { renderPlaylists: renderPlaylists } = useRenderer({
-  //   playlists: userPlaylists,
+  // const { renderSongs: renderFavoriteSongs } = useRenderer({
+  //   songs: favorites,
   //   layout: "card",
   // });
+
+  const { renderPlaylists: renderPlaylists } = useRenderer({
+    playlists: playlists,
+    layout: "card",
+  });
 
   return (
     <>
       <HeaderSection text="SoundSphere" withBackButton={false} />
       {/* <WelcomeUserSection /> */}
       <GenreButtons />
+
+      <h3>artists</h3>
       <div>
-        {/* <h2>Song List</h2> */}
-        {/* <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> */}
-        {recents.length > 0 && (
+        <ScrollableRowComponent>
+          {/* <h2>Song List</h2> */}
+          {/* <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> */}
+          {artists.length > 0 && (
+            <>
+              {artists.map((artist) => (
+                <ArtistCard key={artist.id} artist={artist} />
+              ))}
+            </>
+          )}
+        </ScrollableRowComponent>
+        {/* {publicSongs.length > 0 && (
           <>
-            <h3>Recently listended </h3>
-            <RecentGrid>{renderRecentsSongs()}</RecentGrid>
-          </>
-        )}
-        {favorites.length > 0 && (
-          <>
-            <h3>Favorites</h3>
-            <ScrollableRowComponent>
-              {renderFavoriteSongs()}
-            </ScrollableRowComponent>
-          </>
-        )}
-        {/* {favorites.length > 0 && (
-          <>
-            <h3>Carrussel playlist1</h3>
-            <ScrollableRowComponent>
-              {renderFavoriteSongs()}
-            </ScrollableRowComponent>
+            <h3>songs</h3>
+            <RecentGrid>{renderFavoriteSongs()}</RecentGrid>
           </>
         )} */}
-        {/* {playlists.length > 0 && (
+        {albums.length > 0 && (
+          <>
+            <h3>Albums</h3>
+            <ScrollableRowComponent>
+              {" "}
+              {albums.map((album) => (
+                <li key={album.id}>
+                  <AlbumCard album={album} />
+                </li>
+              ))}
+            </ScrollableRowComponent>
+          </>
+        )}
+
+        {playlists.length > 0 && (
           <>
             <h3>Carrussel playlist2</h3>
+
             <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
           </>
-        )} */}
+        )}
 
         {/* // Quiero hardcodear las playlists */}
         {/* {playlists.length > 0 && (

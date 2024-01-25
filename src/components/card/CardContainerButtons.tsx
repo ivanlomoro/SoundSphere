@@ -108,7 +108,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
           };
 
           try {
-            const response = await updateSong(songId, editedSong);
+            updateSong(songId, editedSong);
           } catch (error) {
             console.error(error);
             Swal.fire(

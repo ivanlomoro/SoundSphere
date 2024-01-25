@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext } from "react";
 import { BiSearch } from "react-icons/bi";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Songs } from "../../Types/SongsTypes";
 import styled from "styled-components";
 import "./styles.css";
@@ -60,8 +60,8 @@ export const SearchBar = () => {
                   song && song.name.toLowerCase().includes(query.toLowerCase())
                 );
               })
-              .map((song: Songs) => (
-                <StyledDivSection2
+              .map((song: Songs, index) => (
+                <StyledDivSection2 key={index}
                   onClick={() => {
                     setCurrentSong(song);
                     setCurrentList(publicSongs);

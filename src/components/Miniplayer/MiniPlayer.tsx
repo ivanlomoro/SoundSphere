@@ -1,16 +1,19 @@
-import { useContext, useRef } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FullMiniHeart, MiniFaveButton } from "../card/card.styled.components";
+import {
+  FullMiniHeart,
+  MiniFaveButton,
+  Plus,
+} from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
-import { useInteractions } from "../../context/userContext/InteractionContext";
-import { PlayerContext } from "../../context/playerContext/playerContext";
-import { useApiCalls } from "../../context/songContext/ApiCalls";
-import { useNavigate } from "react-router-dom";
-import { DISPLAYPAGE } from "../../routes/paths";
+import {
+  DurationType,
+  ProgressType,
+} from "../../context/playerContext/playerContext";
+import { Songs } from "../../Types/SongsTypes";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -27,8 +30,11 @@ export const HiddenPlayer = styled.div`
 `;
 
 const MiniPlayerContainer = styled.div`
-  position: sticky;
+  position: fixed;
+  z-index: 1;
+  width: calc(100% - 16px);
   bottom: 70px;
+  margin-left: 0;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -61,52 +67,35 @@ const InlineExpandibleContainer = styled.div`
   flex-grow: 1;
 `;
 
-export const MiniPlayer = () => {
-  const navigate = useNavigate();
-  const { toggleFavorite, isFavorite } = useInteractions();
-  const { publicSongs } = useApiCalls();
+type MiniPlayerProps = {
+  currentSong: Songs;
+  progress: ProgressType;
+  playing: boolean;
+  handlePlayPause: () => void;
+  duration: DurationType;
+  setIsExpanded: Dispatch<SetStateAction<boolean>>;
+  handleProgressClick: (event: CustomEventType) => void;
+  toggleFavorite: (song: Songs) => void;
+  isFavorite: (id: string) => boolean;
+  setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
+};
 
-  const {
-    currentSong: songFromContext,
-    currentList: songs,
-    playing,
-    progress,
-    handlePlayPause,
-    duration,
-    handleProgress,
-    handleDuration,
-    setCurrentList,
-  } = useContext(PlayerContext);
-
-  if (songs.length === 0) setCurrentList(publicSongs);
-
-  const currentSong = songFromContext ? songFromContext : songs[0];
-  const playerRef = useRef<ReactPlayer>(null);
-
-  const handleProgressClick = (event: CustomEventType) => {
-    const progressBar = event.target;
-    const clickPosition = event.nativeEvent.offsetX;
-    const progressBarWidth = progressBar.clientWidth;
-    const fraction = clickPosition / progressBarWidth;
-    playerRef.current && playerRef.current.seekTo(fraction, "fraction");
-  };
-
+export const MiniPlayer: FC<MiniPlayerProps> = ({
+  currentSong,
+  playing,
+  progress,
+  duration,
+  handleProgressClick,
+  toggleFavorite,
+  isFavorite,
+  handlePlayPause,
+  setIsExpanded,
+  setSongForPlaylist,
+}) => {
   return (
     <>
-      <HiddenPlayer>
-        <ReactPlayer
-          url={currentSong.url}
-          playing={playing}
-          ref={playerRef}
-          controls={false}
-          width="100%"
-          height="100%"
-          onProgress={handleProgress}
-          onDuration={handleDuration}
-        />
-      </HiddenPlayer>
       <MiniPlayerContainer>
-        <InlineExpandibleContainer onClick={() => navigate(DISPLAYPAGE)}>
+        <InlineExpandibleContainer onClick={() => setIsExpanded(true)}>
           <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
           <div>
             <p>{currentSong?.name} </p>
@@ -120,6 +109,9 @@ export const MiniPlayer = () => {
           mini={true}
         />
         <InlineContainer>
+          <MiniFaveButton onClick={() => setSongForPlaylist(currentSong)}>
+            <Plus />
+          </MiniFaveButton>
           <MiniFaveButton
             onClick={() => {
               toggleFavorite(currentSong);

@@ -12,12 +12,6 @@ import {
   ListCardDescription,
   CardDescription,
   SongName,
-  SongArtist,
-  CommonButtonContainer,
-  FullHeart,
-  EmptyHeart,
-  FaveButton,
-  Plus,
 } from "./card.styled.components";
 import CardContainerButtons from "./CardContainerButtons";
 import { SongCardProps } from "../../Types/SongsTypes";
@@ -26,7 +20,6 @@ import { useLocation } from "react-router-dom";
 import { MYSONGSPAGE } from "../../routes/paths";
 import { useContext } from "react";
 import { PlayerContext } from "../../context/playerContext/playerContext";
-import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
 export function SongCard({ song, variant = "card", songs }: SongCardProps) {
   const location = useLocation();
@@ -44,13 +37,13 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       : variant === "list"
       ? ListCardDescription
       : CardDescription;
-  const { toggleFavorite, isFavorite, addToRecents } = useInteractions();
-  const { setSongForPlaylist } = useContext(PlaylistContext);
+  const { addToRecents } = useInteractions();
   const { setCurrentSong, setCurrentList, setPlaying } =
     useContext(PlayerContext);
   if (!songs) {
     return null;
   }
+
 
   return (
     <CardComponent>
@@ -64,6 +57,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
           }}
         >
           <ImageComponent src={song.thumbnail} alt={song.name} />
+     
         </GridImageContainer>
       )}
 
@@ -83,6 +77,7 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       <DescriptionComponent>
         <div>
           <SongName>{song.name}</SongName>
+   
           {/* <SongArtist>{song.artist}</SongArtist> */}
         </div>
         {/* {variant != "grid" && (
