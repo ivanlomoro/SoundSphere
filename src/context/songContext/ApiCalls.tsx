@@ -15,7 +15,7 @@ export interface SongUploadData {
 }
 
 interface ApiCallContextType {
-  uploadSong: (songData: SongUploadData) => Promise<void>;
+
   publicSongs: Songs[];
   userSongs?: Songs[];
   artists: Artist[];
@@ -33,30 +33,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
   const [artists, setArtists] = React.useState<Songs[]>([]);
   const [albums, setAlbums] = React.useState<Album[]>([]);
-  const uploadSong = async (songData: SongUploadData) => {
-    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
-    const userID = "65647cd431a39aa197f9ebe7";
-    const encodedID = encodeURIComponent(userID);
-    const requestUrl = `${baseUrl}/song/${encodedID}`;
-    
-
  
-
-    try {
-      const response = await axios.post(requestUrl, songData);
-      if (response) {
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        console.error(
-          "Failed to upload song:",
-          error.response.data.message || "Unknown Error"
-        );
-      } else {
-        console.error("Failed to upload song:", error);
-      }
-    }
-  };
 
   const fetchSongs = async () => {
     try {
@@ -102,10 +79,11 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   useEffect(() => {
     fetchSongs();
     fetchArtists();
+    fetchAlbums();
   }, []);
 
   return (
-    <ApiCallsContext.Provider value={{albums,  artists, uploadSong, publicSongs }}>
+    <ApiCallsContext.Provider value={{albums,  artists, publicSongs }}>
       {children}
     </ApiCallsContext.Provider>
   );
