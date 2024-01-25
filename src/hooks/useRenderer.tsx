@@ -32,6 +32,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
     return (
       <>
         {artists?.map((artist) => (
+          
           <ArtistCard key={artist.id} artist={artist} />
         ))}
       </>

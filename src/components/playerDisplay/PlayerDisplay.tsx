@@ -14,6 +14,7 @@ import {
 } from "../../context/playerContext/playerContext";
 import { HeaderSection } from "..";
 
+
 export type CustomEventType = {
   target: HTMLProgressElement;
   nativeEvent: {
@@ -94,6 +95,7 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   playing,
   handlePlayPause,
   duration,
+  
   handleNext,
   handlePrevious,
   handleProgressClick,
@@ -102,6 +104,8 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   setIsExpanded,
   setSongForPlaylist,
 }) => {
+  
+  
   return (
     <PlayerDisplayContainer>
       <HeaderSection arrowBackAction={() => setIsExpanded(false)} />
@@ -142,7 +146,9 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
           >
             {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
           </FaveButton>
+
         </ButtonContainer>
+ 
       </ResponsiveContainer>
     </PlayerDisplayContainer>
   );

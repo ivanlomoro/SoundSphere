@@ -8,6 +8,7 @@ import { MiniPlayer } from "../Miniplayer/MiniPlayer";
 import { PlayerDisplay } from "../playerDisplay/PlayerDisplay";
 import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
+
 export type CustomEventType = {
   target: HTMLProgressElement;
   nativeEvent: {
@@ -38,6 +39,8 @@ const Player = () => {
     setCurrentList,
     setIsExpanded,
     isExpanded,
+   
+   
   } = useContext(PlayerContext);
 
   const { setSongForPlaylist } = useContext(PlaylistContext)!;
@@ -88,7 +91,7 @@ const Player = () => {
           setIsExpanded={setIsExpanded}
           setSongForPlaylist={setSongForPlaylist}
         />
-      ) : (
+      ) : (<>
         <PlayerDisplay
           currentSong={currentSong}
           playing={playing}
@@ -102,8 +105,10 @@ const Player = () => {
           handleProgressClick={handleProgressClick}
           setIsExpanded={setIsExpanded}
           setSongForPlaylist={setSongForPlaylist}
-        />
+        /> 
+       </>
       )}
+    
     </>
   );
 };

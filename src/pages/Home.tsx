@@ -1,6 +1,5 @@
 import {
   HeaderSection,
-  RecentGrid,
   ScrollableRowComponent,
 } from "../components";
 import GenreButtons from "../components/genresGrid/GenreButtons";
@@ -33,7 +32,10 @@ export const Home = () => {
   //   songs: favorites,
   //   layout: "card",
   // });
-
+const{ renderSongs: renderPublicSongs } = useRenderer({
+    songs: publicSongs,
+    layout: "card",
+})
   const { renderPlaylists: renderPlaylists } = useRenderer({
     playlists: playlists,
     layout: "card",
@@ -80,9 +82,9 @@ export const Home = () => {
 
         {playlists.length > 0 && (
           <>
-            <h3>Carrussel playlist2</h3>
+            <h3></h3>
 
-            <ScrollableRowComponent>{renderPlaylists()}</ScrollableRowComponent>
+            <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent>
           </>
         )}
 
