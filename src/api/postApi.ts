@@ -6,7 +6,7 @@ const postData = async (
   getToken: () => Promise<string>
 ) => {
   const token = await getToken();
-  const fullUrl = `${import.meta.env.VITE_API_BASE_URL}${url}`;
+  const fullUrl = `http://localhost:8080/${url}`;
   const config = {
     headers: {
       authorization: `Bearer ${token}`,

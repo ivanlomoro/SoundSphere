@@ -23,14 +23,11 @@ import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
-import { Artist, Songs } from "../Types/SongsTypes";
 
 export interface Album {
   id: string;
   name: string;
   userId: string;
-  songs: Songs[];
-  artist?: Artist
   thumbnail: string;
   isPublic: boolean;
 }
@@ -115,7 +112,7 @@ export const AddMusicPage = () => {
           thumbnail: cloudinaryImage.secure_url,
           genreId: selectedGenre,
           isPublic: true,
-          songs : []
+          artistId: '65b238d4335a2dd9222300be'
         };
         const response = await postData(
           `album/${user?.userId}`,
@@ -147,7 +144,7 @@ export const AddMusicPage = () => {
         isPublic: data.isPublic,
         userCreator: user?.userId,
         albumId: albumId,
-        songs: []
+        artistId: '65b238d4335a2dd9222300be'
       };
 
       try {
