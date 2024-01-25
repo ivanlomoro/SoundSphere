@@ -11,6 +11,7 @@ import { useRenderer } from "../hooks/useRenderer";
 // import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import { ArtistCard } from "../components/card/ArtistCard";
 import { AlbumCard } from "../components/card/AlbumCard";
+import { RecentGrid } from '../components/homeContainers/FavoritesGrid';
 
 export const Home = () => {
   // const { publicSongs } = useApiCalls();
@@ -18,28 +19,23 @@ export const Home = () => {
   const { artists } = useApiCalls();
   const { publicSongs } = useApiCalls();
   const { albums } = useApiCalls();
+  const{favorites, recents} = useInteractions()
   // const { userPlaylists } = useContext(PlaylistContext);
-  // const { renderSongs: renderRecentsSongs } = useRenderer({
-  //   songs: recents,
-  //   layout: "grid",
-  // });
-  // const { renderSongs: renderFavoriteSongs } = useRenderer({
-  //   songs: publicSongs,
-  //   layout: "grid",
-  // });
+  const { renderSongs: renderRecentsSongs } = useRenderer({
+    songs: recents,
+    layout: "grid",
+  });
 
-  // const { renderSongs: renderFavoriteSongs } = useRenderer({
-  //   songs: favorites,
-  //   layout: "card",
-  // });
+
+  const { renderSongs: renderFavoriteSongs } = useRenderer({
+    songs: favorites,
+    layout: "card",
+  });
 const{ renderSongs: renderPublicSongs } = useRenderer({
     songs: publicSongs,
     layout: "card",
 })
-  const { renderPlaylists: renderPlaylists } = useRenderer({
-    playlists: playlists,
-    layout: "card",
-  });
+
 
   return (
     <>
@@ -50,8 +46,8 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
       <h3>artists</h3>
       <div>
         <ScrollableRowComponent>
-          {/* <h2>Song List</h2> */}
-          {/* <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> */}
+          <h2>Song List</h2>
+           <ScrollableRowComponent>{renderFavoriteSongs()}</ScrollableRowComponent>
           {artists.length > 0 && (
             <>
               {artists.map((artist) => (
@@ -60,12 +56,12 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
             </>
           )}
         </ScrollableRowComponent>
-        {/* {publicSongs.length > 0 && (
+        {publicSongs.length > 0 && (
           <>
             <h3>songs</h3>
-            <RecentGrid>{renderFavoriteSongs()}</RecentGrid>
+            <RecentGrid>{renderRecentsSongs()}</RecentGrid>
           </>
-        )} */}
+        )}
         {albums.length > 0 && (
           <>
             <h3>Albums</h3>

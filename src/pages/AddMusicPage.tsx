@@ -23,6 +23,7 @@ import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
+import { Artist } from '../Types/SongsTypes';
 
 export interface Album {
   id: string;
@@ -30,6 +31,7 @@ export interface Album {
   userId: string;
   thumbnail: string;
   isPublic: boolean;
+  Artist:Artist
 }
 
 export const AddMusicPage = () => {
