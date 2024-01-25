@@ -2,9 +2,7 @@ import {
   HeaderSection,
   RecentGrid,
   ScrollableRowComponent,
-  WelcomeUserSection,
 } from "../components";
-import axios from "axios";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 // import { useApiCalls } from "../context/songContext/ApiCalls";

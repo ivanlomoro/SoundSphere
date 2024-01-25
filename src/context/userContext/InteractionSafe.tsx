@@ -35,7 +35,8 @@ const placeHolderPlaylist: Playlist = {
     userCreator: 'michee',
     thumbnail: 'qualsiasi',
     songs: [],
-    id: 'cvndfb',
+    id: "string",
+    frontId: "id"
 }
 
 const InteractionContext = createContext<UserInteractionProps | null>(null);
@@ -87,6 +88,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
                     songs: selectedSongs,
                     thumbnail: defaultThumbnail,
                     userCreator: userCreatorId,
+                    frontId: ""
                 };
                 setSelectedPlaylist(newPlaylist);
                 setPlaylists(prevPlaylists => [...prevPlaylists, selectedPlaylist]);
@@ -118,7 +120,7 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
 
                     if (updatedPlaylist.songs.length === 0) {
                         setPlaylists(currentPlaylists => currentPlaylists.filter(playlist => playlist.id !== selectedPlaylist.id));
-                        setSelectedPlaylist(undefined);
+                        setSelectedPlaylist(placeHolderPlaylist);
                     }
                 }
                 return updatedSelectedSongs;

@@ -1,16 +1,18 @@
-import { useContext, useRef } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { Button } from "../button/Button";
 import { ProgressBar } from "../progressBar/ProgressBar";
-import { FaveButton, Minus, Plus } from "../card/card.styled.components";
+import { FaveButton, Plus } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
-import { useInteractions } from "../../context/userContext/InteractionContext";
-import { PlayerContext } from "../../context/playerContext/playerContext";
-import { useApiCalls } from "../../context/songContext/ApiCalls";
+import { Songs } from "../../Types/SongsTypes";
+import {
+  DurationType,
+  ProgressType,
+} from "../../context/playerContext/playerContext";
+import { HeaderSection } from "..";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -25,8 +27,6 @@ export const HiddenPlayer = styled.div`
   height: 0;
   visibility: hidden;
 `;
-
-const StyledPlayer = styled(ReactPlayer)``;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -52,67 +52,59 @@ const ResponsiveContainer = styled.div`
   align-items: center;
 `;
 
-export const PlayerDisplay = () => {
-  const { toggleFavorite, isFavorite, toggleSelected, isSelected } =
-    useInteractions();
-  const { publicSongs } = useApiCalls();
+const StyledSongName = styled.p`
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  max-width: 85%;
+  min-height: 58px;
+  margin-bottom: 0;
+`;
 
-  const {
-    currentSong: songFromContext,
-    currentList: songs,
-    playing,
-    progress,
-    handlePlayPause,
-    duration,
-    handleProgress,
-    handleDuration,
-    handleNext,
-    handlePrevious,
-    setCurrentList,
-  } = useContext(PlayerContext);
+const StyledArtistName = styled.p`
+  font-size: var(--fs-lg);
+  max-width: 85%;
+`;
 
-  if (songs.length === 0) setCurrentList(publicSongs);
+const PlayerDisplayContainer = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: #000000e3;
+  backdrop-filter: blur(5px);
+`;
 
-  const currentSong = songFromContext ? songFromContext : songs[0];
-  const playerRef = useRef<ReactPlayer>(null);
+type PlayerDisplayProps = {
+  currentSong: Songs;
+  progress: ProgressType;
+  playing: boolean;
+  handlePlayPause: () => void;
+  duration: DurationType;
+  handleNext: () => void;
+  handlePrevious: () => void;
+  handleProgressClick: (event: CustomEventType) => void;
+  toggleFavorite: (song: Songs) => void;
+  isFavorite: (id: string) => boolean;
+  setIsExpanded: Dispatch<SetStateAction<boolean>>;
+  setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
+};
 
-  const handleProgressClick = (event: CustomEventType) => {
-    const progressBar = event.target;
-    const clickPosition = event.nativeEvent.offsetX;
-    const progressBarWidth = progressBar.clientWidth;
-    const fraction = clickPosition / progressBarWidth;
-    playerRef.current && playerRef.current.seekTo(fraction, "fraction");
-  };
-
-  const StyledSongName = styled.p`
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    max-width: 85%;
-    min-height: 58px;
-    margin-bottom: 0;
-  `;
-
-  const StyledArtistName = styled.p`
-    font-size: var(--fs-lg);
-    max-width: 85%;
-  `;
-
+export const PlayerDisplay: FC<PlayerDisplayProps> = ({
+  currentSong,
+  progress,
+  playing,
+  handlePlayPause,
+  duration,
+  handleNext,
+  handlePrevious,
+  handleProgressClick,
+  toggleFavorite,
+  isFavorite,
+  setIsExpanded,
+  setSongForPlaylist,
+}) => {
   return (
-    <>
-      <HiddenPlayer>
-        <StyledPlayer
-          url={currentSong.url}
-          playing={playing}
-          ref={playerRef}
-          controls={false}
-          width="100%"
-          height="100%"
-          onProgress={handleProgress}
-          onDuration={handleDuration}
-        />
-        
-      </HiddenPlayer>{" "}
+    <PlayerDisplayContainer>
+      <HeaderSection arrowBackAction={() => setIsExpanded(false)} />
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong?.name} </StyledSongName>
@@ -125,12 +117,8 @@ export const PlayerDisplay = () => {
           onClick={handleProgressClick}
         />
         <ButtonContainer>
-          <FaveButton
-            onClick={() => {
-              toggleSelected(currentSong);
-            }}
-          >
-            {isSelected(currentSong.id) ? <Minus /> : <Plus />}
+          <FaveButton onClick={() => setSongForPlaylist(currentSong)}>
+            <Plus />
           </FaveButton>
           <Button
             variant="StyledButtonDisplay"
@@ -156,6 +144,6 @@ export const PlayerDisplay = () => {
           </FaveButton>
         </ButtonContainer>
       </ResponsiveContainer>
-    </>
+    </PlayerDisplayContainer>
   );
 };

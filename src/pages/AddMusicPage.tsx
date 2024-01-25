@@ -168,18 +168,18 @@ export const AddMusicPage = () => {
   const genreValidation = (value: string) =>
     value !== "" || "Please select a genre.";
 
-  const albumValidation = (value: string) =>
-    value !== "" || "Please select an album or create a new one.";
+  // const albumValidation = (value: string) =>
+  //   value !== "" || "Please select an album or create a new one.";
 
-  const newAlbumValidation = (value: string) => {
-    if (watch("albumId") == "newAlbum") {
-      return (
-        (value && value.length > 3) ||
-        "New album name should be more than 3 characters long."
-      );
-    }
-    return true;
-  };
+  // const newAlbumValidation = (value: string) => {
+  //   if (watch("albumId") == "newAlbum") {
+  //     return (
+  //       (value && value.length > 3) ||
+  //       "New album name should be more than 3 characters long."
+  //     );
+  //   }
+  //   return true;
+  // };
 
   return (
     <section>
@@ -272,9 +272,19 @@ export const AddMusicPage = () => {
           <InputContainer>
             <Select
               {...register("albumId", {
-                validate: albumValidation,
+                required: {
+                  value: true,
+                  message: "Album name required.",
+                },
+                minLength: {
+                  value: 3,
+                  message: "The album name must be at least 3 characters long.",
+                },
               })}
             >
+              {errors.genreId && (
+                <ErrorMessage>{errors.genreId.message}</ErrorMessage>
+              )}
               <option value="">Select an album</option>
               <option value="newAlbum">Create new album</option>
 
@@ -295,7 +305,14 @@ export const AddMusicPage = () => {
                 type="text"
                 placeholder="Enter album name"
                 {...register("newAlbum", {
-                  validate: newAlbumValidation,
+                  required: {
+                    value: true,
+                    message: "Album name required.",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "The album name must be at least 3 characters long.",
+                  },
                 })}
               />
             )}

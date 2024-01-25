@@ -25,6 +25,14 @@ const StyledNavBar = styled.div`
   bottom: 0;
   width: var(--w-full);
   margin-inline: auto;
+  background-color: #111111c2;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 1)
+  );
+  backdrop-filter: blur(6px);
+  padding-top: 75px;
 `;
 
 const StyledNav = styled.nav`
@@ -66,7 +74,7 @@ export const NavBar = () => {
             ariaLabel="Home"
           />
         </NavLink>
-        
+
         <NavLink to={SEARCHPAGE}>
           <Button
             variant="StyledButtonNav"
@@ -98,7 +106,6 @@ export const NavBar = () => {
             ariaLabel="User"
           />
         </NavLink>
-
       </StyledNav>
     </StyledNavBar>
   );

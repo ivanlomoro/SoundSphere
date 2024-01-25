@@ -34,7 +34,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [artists, setArtists] = React.useState<Songs[]>([]);
   const [albums, setAlbums] = React.useState<Album[]>([]);
   const uploadSong = async (songData: SongUploadData) => {
-    const baseUrl = `http://localhost:8080`;
+    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
     const userID = "65647cd431a39aa197f9ebe7";
     const encodedID = encodeURIComponent(userID);
     const requestUrl = `${baseUrl}/song/${encodedID}`;

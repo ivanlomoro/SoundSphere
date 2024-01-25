@@ -6,7 +6,7 @@ const patchData = async (
   getToken: () => Promise<string>
 ) => {
   const token = await getToken();
-  const fullUrl = `http://localhost:8080/${url}`;
+  const fullUrl = `${import.meta.env.VITE_API_BASE_URL}${url}`;
   const config = {
     headers: {
       authorization: `Bearer ${token}`,
