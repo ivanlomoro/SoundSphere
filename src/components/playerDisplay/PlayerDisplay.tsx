@@ -15,12 +15,17 @@ import {
   ProgressType,
 } from "../../context/playerContext/playerContext";
 import { HeaderSection } from "..";
+import RangeSlider from "../rangeSlider/RangeSlider";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
   nativeEvent: {
     offsetX: number;
   };
+};
+
+type StyledShuffleButtonType = {
+  isShuffled: boolean;
 };
 
 export const HiddenPlayer = styled.div`
@@ -75,6 +80,13 @@ const PlayerDisplayContainer = styled.div`
   backdrop-filter: blur(5px);
 `;
 
+const StyledShuffleButton = styled.button<StyledShuffleButtonType>`
+  background: none;
+  border: none;
+  color: ${(props) =>
+    props.isShuffled ? "var(--clr-accent)" : "var(--clr-text-secondary)"};
+`;
+
 type PlayerDisplayProps = {
   currentSong: Songs;
   progress: ProgressType;
@@ -90,6 +102,8 @@ type PlayerDisplayProps = {
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
   isShuffled: boolean;
   setIsShuffled: Dispatch<SetStateAction<boolean>>;
+  volume: number;
+  setVolume: Dispatch<SetStateAction<number>>;
 };
 
 export const PlayerDisplay: FC<PlayerDisplayProps> = ({
@@ -98,7 +112,6 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   playing,
   handlePlayPause,
   duration,
-
   handleNext,
   handlePrevious,
   handleProgressClick,
@@ -106,7 +119,10 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   isFavorite,
   setIsExpanded,
   setSongForPlaylist,
+  isShuffled,
   setIsShuffled,
+  volume,
+  setVolume,
 }) => {
   return (
     <PlayerDisplayContainer>
@@ -117,9 +133,18 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
         {currentSong.artist && (
           <StyledArtistName>{currentSong.artist}</StyledArtistName>
         )}
-        <FaveButton onClick={() => setIsShuffled((prevState) => !prevState)}>
-          <FaRandom />
-        </FaveButton>
+        <StyledShuffleButton
+          isShuffled={isShuffled}
+          onClick={() => setIsShuffled((prevState) => !prevState)}
+        >
+          <FaRandom size={16} />
+        </StyledShuffleButton>
+        <RangeSlider
+          minValue={0}
+          maxValue={1}
+          value={volume}
+          handleChange={setVolume}
+        />
         <ProgressBar
           progress={progress}
           duration={duration}

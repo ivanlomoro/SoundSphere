@@ -40,6 +40,8 @@ const Player = () => {
     isExpanded,
     isShuffled,
     setIsShuffled,
+    volume,
+    setVolume,
   } = useContext(PlayerContext);
 
   const { setSongForPlaylist } = useContext(PlaylistContext)!;
@@ -63,55 +65,60 @@ const Player = () => {
     playerRef.current && playerRef.current.seekTo(fraction, "fraction");
   };
 
-  return (
-    <>
-      <HiddenPlayer>
-        <ReactPlayer
-          url={currentSong.url}
-          playing={playing}
-          ref={playerRef}
-          controls={false}
-          width="100%"
-          height="100%"
-          onProgress={handleProgress}
-          onDuration={handleDuration}
-        />
-      </HiddenPlayer>
-      {!isExpanded ? (
-        <MiniPlayer
-          currentSong={currentSong}
-          playing={playing}
-          progress={progress}
-          duration={duration}
-          handleProgressClick={handleProgressClick}
-          toggleFavorite={toggleFavorite}
-          isFavorite={isFavorite}
-          handlePlayPause={handlePlayPause}
-          setIsExpanded={setIsExpanded}
-          setSongForPlaylist={setSongForPlaylist}
-        />
-      ) : (
-        <>
-          <PlayerDisplay
+  if (currentSong && currentSong.url) {
+    return (
+      <>
+        <HiddenPlayer>
+          <ReactPlayer
+            url={currentSong.url}
+            playing={playing}
+            ref={playerRef}
+            controls={false}
+            width="100%"
+            height="100%"
+            onProgress={handleProgress}
+            onDuration={handleDuration}
+            volume={volume}
+          />
+        </HiddenPlayer>
+        {!isExpanded ? (
+          <MiniPlayer
             currentSong={currentSong}
             playing={playing}
             progress={progress}
-            handlePlayPause={handlePlayPause}
             duration={duration}
-            handleNext={handleNext}
-            handlePrevious={handlePrevious}
+            handleProgressClick={handleProgressClick}
             toggleFavorite={toggleFavorite}
             isFavorite={isFavorite}
-            handleProgressClick={handleProgressClick}
+            handlePlayPause={handlePlayPause}
             setIsExpanded={setIsExpanded}
             setSongForPlaylist={setSongForPlaylist}
-            isShuffled={isShuffled}
-            setIsShuffled={setIsShuffled}
           />
-        </>
-      )}
-    </>
-  );
+        ) : (
+          <>
+            <PlayerDisplay
+              currentSong={currentSong}
+              playing={playing}
+              progress={progress}
+              handlePlayPause={handlePlayPause}
+              duration={duration}
+              handleNext={handleNext}
+              handlePrevious={handlePrevious}
+              toggleFavorite={toggleFavorite}
+              isFavorite={isFavorite}
+              handleProgressClick={handleProgressClick}
+              setIsExpanded={setIsExpanded}
+              setSongForPlaylist={setSongForPlaylist}
+              isShuffled={isShuffled}
+              setIsShuffled={setIsShuffled}
+              volume={volume}
+              setVolume={setVolume}
+            />
+          </>
+        )}
+      </>
+    );
+  }
 };
 
 export default Player;

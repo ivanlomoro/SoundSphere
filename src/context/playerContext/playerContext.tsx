@@ -32,6 +32,8 @@ type PlayerContextType = {
   setIsShuffled: Dispatch<SetStateAction<boolean>>;
   shuffledIndexes: shuffledIndexesType;
   setShuffledIndexes: Dispatch<SetStateAction<shuffledIndexesType>>;
+  volume: number;
+  setVolume: Dispatch<SetStateAction<number>>;
 };
 
 export type HandleProgressPropsType = {
@@ -81,6 +83,8 @@ const initialState: PlayerContextType = {
   setIsShuffled: () => {},
   shuffledIndexes: {},
   setShuffledIndexes: () => {},
+  volume: 1,
+  setVolume: () => {},
 };
 
 export const PlayerContext = createContext<PlayerContextType>(initialState);
@@ -94,6 +98,7 @@ export const PlayerContextProvider = ({
   const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isShuffled, setIsShuffled] = useState(false);
+  const [volume, setVolume] = useState(1);
   const [shuffledIndexes, setShuffledIndexes] = useState<shuffledIndexesType>(
     {}
   );
@@ -218,6 +223,8 @@ export const PlayerContextProvider = ({
         setIsShuffled,
         shuffledIndexes,
         setShuffledIndexes,
+        volume,
+        setVolume,
       }}
     >
       {children}
