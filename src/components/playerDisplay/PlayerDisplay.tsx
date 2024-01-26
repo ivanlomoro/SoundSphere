@@ -8,12 +8,13 @@ import { FaveButton, Plus } from "../card/card.styled.components";
 import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { Songs } from "../../Types/SongsTypes";
+import { FaRandom } from "react-icons/fa";
+
 import {
   DurationType,
   ProgressType,
 } from "../../context/playerContext/playerContext";
 import { HeaderSection } from "..";
-
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -87,6 +88,8 @@ type PlayerDisplayProps = {
   isFavorite: (id: string) => boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
+  isShuffled: boolean;
+  setIsShuffled: Dispatch<SetStateAction<boolean>>;
 };
 
 export const PlayerDisplay: FC<PlayerDisplayProps> = ({
@@ -95,7 +98,7 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   playing,
   handlePlayPause,
   duration,
-  
+
   handleNext,
   handlePrevious,
   handleProgressClick,
@@ -103,9 +106,8 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   isFavorite,
   setIsExpanded,
   setSongForPlaylist,
+  setIsShuffled,
 }) => {
-  
-  
   return (
     <PlayerDisplayContainer>
       <HeaderSection arrowBackAction={() => setIsExpanded(false)} />
@@ -115,12 +117,16 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
         {currentSong.artist && (
           <StyledArtistName>{currentSong.artist}</StyledArtistName>
         )}
+        <FaveButton onClick={() => setIsShuffled((prevState) => !prevState)}>
+          <FaRandom />
+        </FaveButton>
         <ProgressBar
           progress={progress}
           duration={duration}
           onClick={handleProgressClick}
         />
         <ButtonContainer>
+          <FaveButton></FaveButton>
           <FaveButton onClick={() => setSongForPlaylist(currentSong)}>
             <Plus />
           </FaveButton>
@@ -146,9 +152,7 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
           >
             {isFavorite(currentSong.id) ? <FullHeart /> : <EmptyHeart />}
           </FaveButton>
-
         </ButtonContainer>
- 
       </ResponsiveContainer>
     </PlayerDisplayContainer>
   );

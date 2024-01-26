@@ -8,6 +8,9 @@ import {
 import { createContext } from "react";
 import { Songs } from "../../Types/SongsTypes";
 import { useApiCalls } from "../songContext/ApiCalls";
+import { createShuffledIndexesObject } from "../../utils/shuffleIndexes";
+
+type shuffledIndexesType = { [key: number]: number };
 
 type PlayerContextType = {
   currentList: Songs[];
@@ -25,8 +28,10 @@ type PlayerContextType = {
   handlePrevious: () => void;
   isExpanded: boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
-  isRandom: boolean;
-  setIsRandom: Dispatch<SetStateAction<boolean>>;
+  isShuffled: boolean;
+  setIsShuffled: Dispatch<SetStateAction<boolean>>;
+  shuffledIndexes: shuffledIndexesType;
+  setShuffledIndexes: Dispatch<SetStateAction<shuffledIndexesType>>;
 };
 
 export type HandleProgressPropsType = {
@@ -72,8 +77,10 @@ const initialState: PlayerContextType = {
   handlePrevious: () => {},
   isExpanded: false,
   setIsExpanded: () => {},
-  isRandom: false,
-  setIsRandom: () => {},
+  isShuffled: false,
+  setIsShuffled: () => {},
+  shuffledIndexes: {},
+  setShuffledIndexes: () => {},
 };
 
 export const PlayerContext = createContext<PlayerContextType>(initialState);
@@ -86,8 +93,10 @@ export const PlayerContextProvider = ({
   const [currentList, setCurrentList] = useState<Songs[]>(publicSongs);
   const [currentSongIndex, setCurrentSongIndex] = useState<number | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isRandom, setIsRandom] = useState(false);
-
+  const [isShuffled, setIsShuffled] = useState(false);
+  const [shuffledIndexes, setShuffledIndexes] = useState<shuffledIndexesType>(
+    {}
+  );
   const [progress, setProgress] = useState<ProgressType>({
     currentSeconds: 0,
     currentPercentage: 0,
@@ -114,6 +123,11 @@ export const PlayerContextProvider = ({
       handleNext();
     }
   }, [progress]);
+
+  useEffect(() => {
+    const shuffledIndexes = createShuffledIndexesObject(currentList);
+    setShuffledIndexes(shuffledIndexes);
+  }, [currentList, isShuffled]);
 
   const handlePlayPause = () => {
     setPlaying(!playing);
@@ -150,8 +164,14 @@ export const PlayerContextProvider = ({
       (currentSongIndex && currentSongIndex < currentList.length - 1) ||
       currentSongIndex === 0
     ) {
-      setCurrentSongIndex(currentSongIndex + 1);
-      setCurrentSong(currentList[currentSongIndex + 1]);
+      if (!isShuffled) {
+        setCurrentSongIndex(currentSongIndex + 1);
+        setCurrentSong(currentList[currentSongIndex + 1]);
+      }
+      if (isShuffled) {
+        setCurrentSongIndex(shuffledIndexes[currentSongIndex + 1]);
+        setCurrentSong(currentList[shuffledIndexes[currentSongIndex + 1]]);
+      }
     }
     if (currentSongIndex === currentList.length - 1) {
       setCurrentSongIndex(0);
@@ -161,8 +181,14 @@ export const PlayerContextProvider = ({
 
   const handlePrevious = () => {
     if (currentSongIndex && currentSongIndex > 0) {
-      setCurrentSongIndex(currentSongIndex - 1);
-      setCurrentSong(currentList[currentSongIndex - 1]);
+      if (!isShuffled) {
+        setCurrentSongIndex(currentSongIndex - 1);
+        setCurrentSong(currentList[currentSongIndex - 1]);
+      }
+      if (isShuffled) {
+        setCurrentSongIndex(shuffledIndexes[currentSongIndex - 1]);
+        setCurrentSong(currentList[shuffledIndexes[currentSongIndex - 1]]);
+      }
     }
     if (currentSongIndex === 0) {
       setCurrentSongIndex(currentList.length - 1);
@@ -188,8 +214,10 @@ export const PlayerContextProvider = ({
         handlePrevious,
         isExpanded,
         setIsExpanded,
-        isRandom,
-        setIsRandom,
+        isShuffled,
+        setIsShuffled,
+        shuffledIndexes,
+        setShuffledIndexes,
       }}
     >
       {children}
