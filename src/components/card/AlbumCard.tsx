@@ -25,8 +25,8 @@ export function AlbumCard({ album }: AlbumCardProps) {
             <CardDescription>
                 <SongName>{album.name}</SongName>
                 {
-                    album.artist && (
-                        <p>{album.artist.name}</p>)
+                    album.Artist && (
+                        <p>{album.Artist.name}</p>)
                   
                 }
            

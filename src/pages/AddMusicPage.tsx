@@ -23,7 +23,7 @@ import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
-import { Artist } from "../Types/SongsTypes";
+import { Artist } from '../Types/SongsTypes';
 
 export interface Album {
   id: string;
