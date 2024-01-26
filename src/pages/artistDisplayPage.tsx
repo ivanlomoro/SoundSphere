@@ -10,28 +10,26 @@ const ArtistDisplayPage = () => {
   const { fetchAlbumsByArtistId } = useApiCalls();
   const navigate = useNavigate();
   const { artistId } = useParams();
-  const [albums, setAlbums] = useState<Album[] | null>(null); // Initialize as null
+  const [albums, setAlbums] = useState<Album[] | null>(null);
 
   useEffect(() => {
-    // Use an effect to fetch albums when the component mounts
     const fetchAlbums = async () => {
       try {
         const response = await fetchAlbumsByArtistId(artistId!);
         if (response!) {
-          setAlbums(response); // Set the fetched albums in state if there is data
+          setAlbums(response);
         } else {
-          // Handle the case when there is no data returned
           console.warn("No albums found for the artist.");
-          setAlbums([]); // Set albums as an empty array
+          setAlbums([]);
         }
       } catch (error) {
         console.error("Failed to fetch Albums:", error);
-        setAlbums([]); // Set albums as an empty array in case of error
+        setAlbums([]);
       }
     };
 
     if (artistId) {
-      fetchAlbums(); // Fetch albums when artistId is available
+      fetchAlbums();
     }
   }, [fetchAlbumsByArtistId, artistId]);
 
@@ -43,7 +41,7 @@ const ArtistDisplayPage = () => {
         arrowBackAction={() => navigate(-1)}
       />
 
-      {albums !== null && ( // Check if albums is not null
+      {albums !== null && (
         <>
           <h3>Albums</h3>
           <ScrollableRowComponent>

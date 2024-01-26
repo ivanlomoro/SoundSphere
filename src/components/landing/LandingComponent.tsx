@@ -7,8 +7,29 @@ import { Button } from "../button/Button";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import Swal from "sweetalert2";
+import axios from "axios";
+
 export const LandingComponent = () => {
   const { loginWithRedirect } = useAuth0();
+
+  const handleClick = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/");
+      console.log("landing isApiRunning func", response);
+      if (response.statusText === "OK") return loginWithRedirect();
+    } catch (error) {
+      Swal.fire({
+        title: "Server Error!",
+        text: "refresh and try again",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
+
+      console.log("landing, click login => apierror", error);
+      console.log("landing, click login => axios error", axios.isAxiosError);
+    }
+  };
 
   const StyledMain = styled.main`
     width: var(--w-full);
@@ -30,7 +51,7 @@ export const LandingComponent = () => {
           <StyledMain>
             <Button
               content="Login"
-              onClick={(): Promise<void> => loginWithRedirect()}
+              onClick={(): Promise<void> => handleClick()}
             />
           </StyledMain>
         </StyledDiv>

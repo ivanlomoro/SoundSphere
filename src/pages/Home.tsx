@@ -1,32 +1,24 @@
 import { HeaderSection, ScrollableRowComponent } from "../components";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
-// import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
-// import { useContext } from "react";
-// import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import { ArtistCard } from "../components/card/ArtistCard";
 import { AlbumCard } from "../components/card/AlbumCard";
 import { RecentGrid } from "../components";
 
 export const Home = () => {
   const { recents, favorites } = useInteractions();
-  const { albums, artists, publicSongs } = useApiCalls();
-  console.log("albums", albums, "artists", artists, "publicSongs", publicSongs);
+  const { albums, artists } = useApiCalls();
 
   const { renderSongs: renderRecentsSongs } = useRenderer({
     songs: recents,
     layout: "grid",
   });
-  // const { renderSongs: renderFavoriteSongs } = useRenderer({
-  //   songs: publicSongs,
-  //   layout: "grid",
-  // });
 
   const { renderSongs: renderFavoriteSongs } = useRenderer({
     songs: favorites,
-    layout: "card",
+    layout: "grid",
   });
 
   return (
