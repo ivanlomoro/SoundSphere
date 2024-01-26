@@ -28,6 +28,7 @@ export const Home = () => {
     songs: favorites,
     layout: "card",
   });
+
   return (
     <>
       <HeaderSection text="SoundSphere" withBackButton={false} />
@@ -35,15 +36,19 @@ export const Home = () => {
       <GenreButtons />
       {recents.length > 0 && (
         <>
-          <h3>Recently Listened</h3>
-
+          <h3>Recent listened</h3>
+          <RecentGrid>{renderRecentsSongs()}</RecentGrid>
+        </>
+      )}
+      {favorites.length > 0 && (
+        <>
+          <h3>Favorites</h3>
           <RecentGrid>{renderFavoriteSongs()}</RecentGrid>
         </>
       )}
-
       {artists.length > 0 && (
         <>
-          <h3>artists</h3>
+          <h3>Artists</h3>
           <ScrollableRowComponent>
             {artists.map((artist) => (
               <ArtistCard key={artist.id} artist={artist} />
