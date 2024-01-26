@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://res.cloudinary.com/dnmoqsjh7/image/upload/v1706093829/assets/iconoSound_rsuiny.jpg" alt="SoundSphere" width="300">
+  <img src="https://res.cloudinary.com/dnmoqsjh7/image/upload/v1706262172/assets/IconoPagina_onwriy.jpg" alt="SoundSphere" width="300">
 </div>
 
 # SoundSphere 🎶
