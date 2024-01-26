@@ -11,8 +11,9 @@ import { RecentGrid } from '../components/homeContainers/FavoritesGrid';
 
 export const Home = () => {
   // const { publicSongs } = useApiCalls();
-
-  const { albums } = useApiCalls();
+  const { albums,artists,publicSongs } = useApiCalls();
+  console.log( 'albums',albums, 'artists',
+   artists,'publicSongs', publicSongs)
   const{favorites, recents} = useInteractions()
   // const { userPlaylists } = useContext(PlaylistContext);
   const { renderSongs: renderRecentsSongs } = useRenderer({
@@ -53,9 +54,9 @@ export const Home = () => {
             <ScrollableRowComponent>
          
               {albums.map((album) => (
-                <li key={album.id}>
+                <div key={album.id}>
                   <AlbumCard album={album} />
-                </li>
+                </div>
               ))}
             </ScrollableRowComponent>
           </>

@@ -55,10 +55,6 @@ const UserInteractionProvider: React.FC<ProviderProps> = ({ children }) => {
     []
   );
 
-  console.log("recents", recents);
-  console.log("favorites", favorites);
-  console.log("playlists", playlists);
-
   const songExists = (arr: Songs[], id: string) =>
     arr.some((song) => song.id === id);
   const [selectedSongs, setSelectedSongs] = useLocalStorage<Playlist["songs"]>(

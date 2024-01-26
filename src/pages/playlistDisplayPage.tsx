@@ -22,7 +22,6 @@ const PlaylistDisplayPage = () => {
   }, [playlistId, userPlaylists]);
 
   const navigate = useNavigate();
-  console.log(selectedPlaylist)
   return (
     <>
       <HeaderSection

@@ -15,6 +15,7 @@ import {
 import { HeaderSection } from "..";
 
 
+
 export type CustomEventType = {
   target: HTMLProgressElement;
   nativeEvent: {
@@ -112,8 +113,8 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
         <StyledSongName>{currentSong?.name} </StyledSongName>
-        {currentSong.artist && (
-          <StyledArtistName>{currentSong.artist}</StyledArtistName>
+        {currentSong.Artist.name && (
+          <StyledArtistName>{currentSong.Artist.name}</StyledArtistName>
         )}
         <ProgressBar
           progress={progress}

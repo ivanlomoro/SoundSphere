@@ -107,6 +107,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     fetchSongs(0);
     fetchArtists(0);
     fetchAlbums(0);
+    
   }, []);
 
   return (

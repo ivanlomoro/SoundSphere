@@ -78,9 +78,9 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
        
           <SongName>{song.name}</SongName>
    
-          <SongName>{song.artist}</SongName>
+          <SongName>{song.Artist.name}</SongName>
    
-          <SongName>{song.genre}</SongName>
+          <SongName>{song.Genre.name}</SongName>
    
      
         {/* {variant != "grid" && (
