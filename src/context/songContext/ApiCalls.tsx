@@ -29,6 +29,7 @@ interface ApiCallContextType {
   handleNextPageAlbums: () => void;
   handleNextPageArtists: () => void;
   fetchAlbumsByArtistId: (artistId: string) => void;
+  fetchSongsByAlbumId: (albumId: string) => void;
 }
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
@@ -41,12 +42,12 @@ const customAxios = axios.create({
 });
 
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
-  const [artists, setArtists] = React.useState<Songs[]>([]);
-  const [albums, setAlbums] = React.useState<Album[]>([]);
-  const [currentPageSongs, setCurrentPageSongs] = useState(0);
-  const [currentPageAlbums, setCurrentPageAlbums] = useState(0);
-  const [currentPageArtists, setCurrentPageArtists] = useState(0);
+  const [publicSongs, setPublicSongs] = useState<Songs[]>([]);
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [currentPageSongs, setCurrentPageSongs] = useState<number>(0);
+  const [currentPageAlbums, setCurrentPageAlbums] = useState<number>(0);
+  const [currentPageArtists, setCurrentPageArtists] = useState<number>(0);
 
   const fetchSongs = async (currentPageSongs: number) => {
     try {
@@ -56,6 +57,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
       console.error("Failed to fetch Songs:", error);
     }
   };
+
   const fetchArtists = async (currentPageArtists: number) => {
     try {
       const response = await customAxios.get(
@@ -63,9 +65,10 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
       );
       setArtists(response.data);
     } catch (error) {
-      console.error("Failed to fetch Songs:", error);
+      console.error("Failed to fetch Artists:", error);
     }
   };
+
   const fetchAlbums = async (currentPageAlbums: number) => {
     try {
       const response = await customAxios.get(
@@ -73,7 +76,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
       );
       setAlbums(response.data);
     } catch (error) {
-      console.error("Failed to fetch Songs:", error);
+      console.error("Failed to fetch Albums:", error);
     }
   };
 
@@ -82,18 +85,25 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
       const response = await customAxios.get(
         `album/getAlbumsByArtistId/${artistId}`
       );
-      
       const albums: Album[] = response.data;
       return albums;
     } catch (error) {
-      console.error("Failed to fetch Albums:", error);
+      console.error("Failed to fetch Albums by Artist ID:", error);
       throw error;
     }
-  }
-  
+  };
 
-
-
+  const fetchSongsByAlbumId = async (albumId: string) => {
+    try {
+      const response = await customAxios.get(
+        `song/getSongsByAlbumId/${albumId}`
+      );
+      const songs: Songs[] = response.data;
+      return songs;
+    } catch (error) {
+      console.error("Failed to fetch Songs by Album ID:", error);
+    }
+  };
 
   const handleNextPageSongs = () => {
     const nextPage = currentPageSongs + 1;
@@ -112,16 +122,6 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     setCurrentPageArtists(nextPage);
     fetchArtists(nextPage);
   };
-  // const fetchPlaylists = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${import.meta.env.VITE_API_BASE_URL}playlist/`
-  //     );
-  //     setPublicSongs(response.data);
-  //   } catch (error) {
-  //     console.error("Failed to fetch Songs:", error);
-  //   }
-  // };
 
   useEffect(() => {
     fetchSongs(0);
@@ -139,6 +139,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
         handleNextPageSongs,
         handleNextPageArtists,
         fetchAlbumsByArtistId,
+        fetchSongsByAlbumId,
       }}
     >
       {children}

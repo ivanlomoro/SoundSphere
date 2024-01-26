@@ -19,7 +19,6 @@ type LayoutVariant = "grid" | "list" | "card" | "fullscreen" | undefined;
 
 export const useRenderer = (input: MagicInput<LayoutVariant>) => {
   const { songs, artists, playlists, layout } = input;
-
   const renderSongs = React.useCallback(() => {
     return (
       <>
@@ -34,11 +33,7 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
       return (
       <>
         {artists?.map((artist) => (
-          
-          <ArtistCard 
-          key={artist.id} 
-          artist={artist}  
-         />
+          <ArtistCard key={artist.id} artist={artist} />
         ))}
       </>
     );
@@ -47,13 +42,14 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
   const renderPlaylists = React.useCallback(() => {
     return (
       <>
-        {playlists && playlists.map((playlist) => (
-          <PlaylistCard
-            variant={layout}
-            key={playlist.id}
-            playlist={playlist}
-          />
-        ))}
+        {playlists &&
+          playlists.map((playlist) => (
+            <PlaylistCard
+              variant={layout}
+              key={playlist.id}
+              playlist={playlist}
+            />
+          ))}
       </>
     );
   }, [playlists, layout]);

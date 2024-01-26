@@ -1,45 +1,30 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { PlaylistContext } from "../context/playlistContext/PlayListContext";
+import { useNavigate } from "react-router-dom";
 import { HeaderSection } from "../components";
-import { PlaylistType } from "../interfaces/PlaylistType";
+import { useParams } from "react-router-dom";
 import { useRenderer } from "../hooks/useRenderer";
-
+import { Album } from "./AddMusicPage";
+import { useApiCalls } from "../context/songContext/ApiCalls";
+import { AlbumHeader } from "../components/albumHeader/albumHeader";
 
 const AlbumDisplayPage = () => {
-  const { playlistId } = useParams();
-  const { getMusicByPlaylist, userPlaylists, songs } = useContext(PlaylistContext);
-  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistType | null>(null);
-  const { renderSongs: renderPlaylistSongs  } = useRenderer({ songs: songs, layout: "list"});
-  useEffect(() => {
-    if (userPlaylists) {
-      const playlist = userPlaylists.find((playlist) => playlist.id === playlistId);
-      if (playlist) {
-        setSelectedPlaylist(playlist);
-        getMusicByPlaylist(playlist.id, playlist.playlistName);
-      }
-    }
-  }, [playlistId, userPlaylists]);
-
   const navigate = useNavigate();
-  console.log(selectedPlaylist)
+  const { albumId } = useParams();
+  const { albums } = useApiCalls();
+  const album: Album | undefined = albums.find((album) => album.id === albumId);
+  const { renderSongs: renderAlbumSongs } = useRenderer({
+    songs: album?.Song,
+    layout: "list",
+  });
+
   return (
     <>
       <HeaderSection
-        text={selectedPlaylist?.playlistName}
+        text=""
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
-
-      <div>
-        {selectedPlaylist && (
-          <>
-            <ul>
-              {renderPlaylistSongs()}
-            </ul>
-          </>
-        )}
-      </div>
+      {album ? <AlbumHeader album={album} /> : <h3> No hay canciones</h3>}
+      {album ? renderAlbumSongs() : <h3> No hay canciones</h3>}
     </>
   );
 };

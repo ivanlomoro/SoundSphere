@@ -44,7 +44,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
     return null;
   }
 
-
   return (
     <CardComponent>
       {variant === "grid" && (
@@ -57,7 +56,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
           }}
         >
           <ImageComponent src={song.thumbnail} alt={song.name} />
-     
         </GridImageContainer>
       )}
 
@@ -75,15 +73,9 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       )}
 
       <DescriptionComponent>
-       
-          <SongName>{song.name}</SongName>
-   
-          <SongName>{song.Artist.name}</SongName>
-   
-          <SongName>{song.Genre.name}</SongName>
-   
-     
-        {/* {variant != "grid" && (
+        <SongName>{song.name}</SongName>
+      </DescriptionComponent>
+      {/* {variant != "grid" && (
           <CommonButtonContainer>
             <FaveButton
               onClick={() => {
@@ -96,8 +88,8 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
               <Plus />
             </FaveButton>
           </CommonButtonContainer>
-        )} */}
-      </DescriptionComponent>
+        )}
+      */}
       {location.pathname === MYSONGSPAGE && (
         <CardContainerButtons song={song} />
       )}

@@ -1,42 +1,35 @@
 import { useNavigate, useParams } from "react-router-dom";
-import {
-    HeaderSection,
-    ScrollableRowComponent,
-  } from "../components";
+import { HeaderSection, ScrollableRowComponent } from "../components";
 import { useApiCalls } from "../context/songContext/ApiCalls";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AlbumCard } from "../components/card/AlbumCard";
 import { Album } from "./AddMusicPage";
-
-
 
 const ArtistDisplayPage = () => {
   const { fetchAlbumsByArtistId } = useApiCalls();
   const navigate = useNavigate();
   const { artistId } = useParams();
-  const [albums, setAlbums] = useState<Album[] | null>(null); // Initialize as null
+  const [albums, setAlbums] = useState<Album[] | null>(null);
 
   useEffect(() => {
-    // Use an effect to fetch albums when the component mounts
     const fetchAlbums = async () => {
       try {
         const response = await fetchAlbumsByArtistId(artistId!);
-        if (response) {
-          setAlbums(response); // Set the fetched albums in state if there is data
+        if (response!) {
+          setAlbums(response);
         } else {
-          // Handle the case when there is no data returned
           console.warn("No albums found for the artist.");
-          setAlbums([]); // Set albums as an empty array
+          setAlbums([]);
         }
       } catch (error) {
         console.error("Failed to fetch Albums:", error);
-        setAlbums([]); // Set albums as an empty array in case of error
+        setAlbums([]);
       }
     };
 
     if (artistId) {
-      fetchAlbums(); // Fetch albums when artistId is available
+      fetchAlbums();
     }
   }, [fetchAlbumsByArtistId, artistId]);
 
@@ -48,7 +41,7 @@ const ArtistDisplayPage = () => {
         arrowBackAction={() => navigate(-1)}
       />
 
-      {albums !== null && ( // Check if albums is not null
+      {albums !== null && (
         <>
           <h3>Albums</h3>
           <ScrollableRowComponent>
