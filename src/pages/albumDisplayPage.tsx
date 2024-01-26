@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { HeaderSection } from "../components";
 import { useParams } from "react-router-dom";
-import { useRenderer } from "../hooks/useRenderer";
 import { Album } from "./AddMusicPage";
 import { AlbumHeader } from "../components/albumHeader/albumHeader";
 import { useContext, useEffect, useState } from "react";
@@ -60,12 +59,6 @@ const AlbumDisplayPage = () => {
   }, [])
 
   console.log("DISPLAY ALBUM:", album)
-
-
-  const { renderSongs: renderAlbumSongs } = useRenderer({
-    songs: album?.Song,
-    layout: "list",
-  });
 
   return (
     <>

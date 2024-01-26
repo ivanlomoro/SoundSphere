@@ -1,11 +1,21 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { HeaderSection, ScrollableRowComponent } from "../components";
+import { HeaderSection } from "../components";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 import { AlbumCard } from "../components/card/AlbumCard";
 import { Album } from "./AddMusicPage";
 import Loader from "../components/Loader/Loader";
+import styled from "styled-components";
+import { Artist } from "../Types/SongsTypes";
+import { ArtistHeader } from "../components/albumHeader/albumHeader";
+
+
+const AlbumsContainer = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: center
+`
 
 const ArtistDisplayPage = () => {
   const { fetchAlbumsByArtistId } = useApiCalls();
@@ -13,10 +23,36 @@ const ArtistDisplayPage = () => {
   const { artistId } = useParams();
   const [albums, setAlbums] = useState<Album[] | null>(null);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [artist, setArtist] = useState<Artist>();
+
+  const getArtistById = async (id: string) => {
+   const url =  `${import.meta.env.VITE_API_BASE_URL}/artist/`
+    try {
+      const {data} = await axios.get(
+       url ,
+        { data: { "artistId": id } }
+      );
+
+
+      const allArtist: Artist[] = data;
+
+      const artist: Artist | undefined = allArtist.find((artist) => artist.id === id)
+      setArtist(artist)
+    } catch (error) {
+      console.error("Failed to fetch Artist :", error);
+      throw error;
+    }
+  };
 
 
   useEffect(() => {
-    const fetchAlbums = async () => {
+    const loadData = async () => {
+      try {
+        { artistId && await getArtistById(artistId) }
+      } catch (error) {
+        console.error("can't load artist", error)
+      }
+
       try {
         const response = await fetchAlbumsByArtistId(artistId!);
         if (response!) {
@@ -30,13 +66,14 @@ const ArtistDisplayPage = () => {
         setAlbums([]);
       }
       setLoading(false);
-
     };
 
     if (artistId) {
-      fetchAlbums();
+      loadData();
     }
   }, [fetchAlbumsByArtistId, artistId]);
+
+ 
 
   return (
     <>
@@ -49,16 +86,16 @@ const ArtistDisplayPage = () => {
         ? <Loader />
         :
         <>
+        {artist && <ArtistHeader artist={artist}/>}
       {albums !== null && (
         <>
           <h3>Albums</h3>
-          <ScrollableRowComponent>
-            {albums.map((album) => (
-              <li key={album.id}>
-                <AlbumCard album={album} />
-              </li>
+         <AlbumsContainer>
+         {albums.map((album) => (
+                <AlbumCard key={album.id} album={album} />
             ))}
-          </ScrollableRowComponent>
+         </AlbumsContainer>
+            
         </>
       )}
       </>
