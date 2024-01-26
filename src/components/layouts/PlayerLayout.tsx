@@ -29,7 +29,7 @@ export const PlayerLayout = () => {
         <Outlet />
       </div>
       <StickySections>
-        <MiniPlayer />
+        {/* <MiniPlayer /> */}
         <NavBar />
       </StickySections>
     </StyledNavLayout>

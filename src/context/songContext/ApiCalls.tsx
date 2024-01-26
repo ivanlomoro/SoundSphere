@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useEffect } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Songs } from '../../Types/SongsTypes';
 
@@ -16,9 +16,10 @@ export interface SongUploadData {
 }
 
 interface ApiCallContextType {
-  uploadSong: (songData: SongUploadData) => Promise<void>;
+  uploadSong: (songData: SongUploadData) => void;
   publicSongs: Songs[];
   userSongs?: Songs[];
+  apiError: boolean;
 }
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
@@ -29,7 +30,8 @@ type ProviderProps = {
 
 const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   const [publicSongs, setPublicSongs] = React.useState<Songs[]>([]);
-  // const [userSongs, setUSerSongs] = React.useState<Songs[]>([]);
+  const [apiError, setApiError] = useState<boolean>(false)
+
   const uploadSong = async (songData: SongUploadData) => {
     const baseUrl = `http://localhost:8080`;
     const userID = "65647cd431a39aa197f9ebe7";
@@ -37,11 +39,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     const requestUrl = `${baseUrl}/song/${encodedID}`;
     
     
-    useEffect(() => {
-      fetchSongs();
-   
-
-    }, []);
+  
    
     try {
       const response = await axios.post(requestUrl, songData);
@@ -63,22 +61,30 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
 
 
+
   const fetchSongs = async () => {
+    console.log("apicalls context fetchSOngs func", apiError)
+
     try {
       const response = await axios.get('http://localhost:8080/song/');
       setPublicSongs(response.data);
+      setApiError(false)
     } catch (error) {
       console.error('Failed to fetch Songs:', error);
+      setApiError(true)
+
     }
   };
 
   useEffect(() => {
-    fetchSongs();
-    console.log(publicSongs);
+      fetchSongs();
+      console.log(publicSongs);
+
+      console.log("apicalls context useeffect func", apiError)
   }, []);
 
   return (
-    <ApiCallsContext.Provider value={{ uploadSong, publicSongs }}>
+    <ApiCallsContext.Provider value={{ uploadSong, publicSongs, apiError }}>
       {children}
     </ApiCallsContext.Provider>
   );

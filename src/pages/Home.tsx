@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   HeaderSection,
   RecentGrid,
@@ -7,13 +8,20 @@ import {
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
+import { Songs } from "../Types/SongsTypes";
 
 export const Home = () => {
-  const { publicSongs } = useApiCalls();
+  const { publicSongs, apiError } = useApiCalls();
+  const [allSongs, setAllSongs ] = useState<Songs[]>(publicSongs)
+
+  console.log("publicSongs", apiError, publicSongs)
+  useEffect(() => {
+    setAllSongs(publicSongs)
+  }, [publicSongs, apiError])
 
   const { recents, favorites, playlists } = useInteractions();
   const { renderSongs: renderPublicSongs } = useRenderer({
-    songs: publicSongs,
+    songs: allSongs,
     layout: "card",
   });
   const { renderSongs: renderRecentsSongs } = useRenderer({
@@ -35,7 +43,7 @@ export const Home = () => {
       <div>
         <WelcomeUserSection />
         <h3>Song List</h3>
-        <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent>
+     {  !apiError ? <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> : <h1>test = api error </h1>}
         {recents.length > 0 && (
           <>
             <h2>Recently Listended </h2>

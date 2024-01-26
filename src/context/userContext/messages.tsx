@@ -3,16 +3,16 @@
 import Swal from 'sweetalert2';
 import { Playlist } from '../../Types/PlaylistFormData';
 import { useInteractions } from './InteractionContext';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export const useSwal = () => {
     const { removeFromPlaylists, updatePlaylist, createNewPlaylist } = useInteractions();
-const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleDeletePlaylist = async (frontId: Playlist['frontId']) => {
         try {
-            
+
             const result = await Swal.fire({
                 title: 'Are you sure you want to delete this playlist?',
                 text: 'You won\'t be able to revert this!',
@@ -27,7 +27,7 @@ const navigate = useNavigate();
 
             if (result.isConfirmed) {
                 removeFromPlaylists(frontId);
-               
+
                 navigate('/home')
             }
         } catch (error) {
@@ -62,7 +62,7 @@ const navigate = useNavigate();
 
     const handleCreatePlaylist = async (playlist: Playlist) => {
         try {
-            
+
             const { value: newName } = await Swal.fire({
                 title: "Start fresh",
                 input: "text",
