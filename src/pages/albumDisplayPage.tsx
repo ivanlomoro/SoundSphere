@@ -6,7 +6,7 @@ import { PlaylistType } from "../interfaces/PlaylistType";
 import { useRenderer } from "../hooks/useRenderer";
 
 
-const PlaylistDisplayPage = () => {
+const AlbumDisplayPage = () => {
   const { playlistId } = useParams();
   const { getMusicByPlaylist, userPlaylists, songs } = useContext(PlaylistContext);
   const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistType | null>(null);
@@ -44,4 +44,4 @@ const PlaylistDisplayPage = () => {
   );
 };
 
-export default PlaylistDisplayPage;
+export default AlbumDisplayPage;

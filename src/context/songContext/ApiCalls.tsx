@@ -28,6 +28,7 @@ interface ApiCallContextType {
   handleNextPageSongs: () => void;
   handleNextPageAlbums: () => void;
   handleNextPageArtists: () => void;
+  fetchAlbumsByArtistId: (artistId: string) => void;
 }
 
 const ApiCallsContext = createContext<ApiCallContextType | null>(null);
@@ -75,6 +76,25 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
       console.error("Failed to fetch Songs:", error);
     }
   };
+
+  const fetchAlbumsByArtistId = async (artistId: string): Promise<Album[]> => {
+    try {
+      const response = await customAxios.get(
+        `album/getAlbumsByArtistId/${artistId}`
+      );
+      
+      const albums: Album[] = response.data;
+      return albums;
+    } catch (error) {
+      console.error("Failed to fetch Albums:", error);
+      throw error;
+    }
+  }
+  
+
+
+
+
   const handleNextPageSongs = () => {
     const nextPage = currentPageSongs + 1;
     setCurrentPageSongs(nextPage);
@@ -107,6 +127,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     fetchSongs(0);
     fetchArtists(0);
     fetchAlbums(0);
+  
   }, []);
 
   return (
@@ -118,6 +139,7 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
         handleNextPageAlbums,
         handleNextPageSongs,
         handleNextPageArtists,
+        fetchAlbumsByArtistId,
       }}
     >
       {children}

@@ -11,6 +11,7 @@ import { useRenderer } from "../hooks/useRenderer";
 // import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import { ArtistCard } from "../components/card/ArtistCard";
 import { AlbumCard } from "../components/card/AlbumCard";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   // const { publicSongs } = useApiCalls();
@@ -41,6 +42,7 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
     layout: "card",
   });
 
+
   return (
     <>
       <HeaderSection text="SoundSphere" withBackButton={false} />
@@ -50,12 +52,13 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
       <h3>artists</h3>
       <div>
         <ScrollableRowComponent>
+          
           {/* <h2>Song List</h2> */}
           {/* <ScrollableRowComponent>{renderPublicSongs()}</ScrollableRowComponent> */}
           {artists.length > 0 && (
             <>
               {artists.map((artist) => (
-                <ArtistCard key={artist.id} artist={artist} />
+                <ArtistCard key={artist.id} artist={artist}/>
               ))}
             </>
           )}
@@ -73,7 +76,7 @@ const{ renderSongs: renderPublicSongs } = useRenderer({
               {" "}
               {albums.map((album) => (
                 <li key={album.id}>
-                  <AlbumCard album={album} />
+                  <AlbumCard album={album}/>
                 </li>
               ))}
             </ScrollableRowComponent>
