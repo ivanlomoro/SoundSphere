@@ -1,15 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
-import {
-    HeaderSection,
-    ScrollableRowComponent,
-  } from "../components";
+import { HeaderSection, ScrollableRowComponent } from "../components";
 import { useApiCalls } from "../context/songContext/ApiCalls";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AlbumCard } from "../components/card/AlbumCard";
 import { Album } from "./AddMusicPage";
-
-
 
 const ArtistDisplayPage = () => {
   const { fetchAlbumsByArtistId } = useApiCalls();
@@ -22,7 +17,7 @@ const ArtistDisplayPage = () => {
     const fetchAlbums = async () => {
       try {
         const response = await fetchAlbumsByArtistId(artistId!);
-        if (response) {
+        if (response!) {
           setAlbums(response); // Set the fetched albums in state if there is data
         } else {
           // Handle the case when there is no data returned

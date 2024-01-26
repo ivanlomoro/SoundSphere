@@ -25,13 +25,12 @@ export const SearchBar = () => {
 
   const StyledDivSection2 = styled.div`
     display: flex;
-    height: 100%;
     align-items: center;
     flex-direction: row;
     gap: 2em;
     align-items: center;
     width: 100%;
-    margin: 10px;
+    margin: 1px;
   `;
 
   const handleQuery = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +60,8 @@ export const SearchBar = () => {
                 );
               })
               .map((song: Songs, index) => (
-                <StyledDivSection2 key={index}
+                <StyledDivSection2
+                  key={index}
                   onClick={() => {
                     setCurrentSong(song);
                     setCurrentList(publicSongs);
@@ -75,7 +75,7 @@ export const SearchBar = () => {
                   />
                   <StyledDivSection>
                     <p>{song.name}</p>
-                    {song.artist && <p>{song.artist}</p>}
+                    {song.Artist && <p>{song.Artist.name}</p>}
                   </StyledDivSection>
                 </StyledDivSection2>
               ))}

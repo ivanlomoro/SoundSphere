@@ -60,7 +60,9 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchArtists = async (currentPageArtists: number) => {
     try {
-      const response = await customAxios.get(`artist/?page=${currentPageArtists}`);
+      const response = await customAxios.get(
+        `artist/?page=${currentPageArtists}`
+      );
       setArtists(response.data);
     } catch (error) {
       console.error("Failed to fetch Artists:", error);
@@ -69,7 +71,9 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchAlbums = async (currentPageAlbums: number) => {
     try {
-      const response = await customAxios.get(`album/?page=${currentPageAlbums}`);
+      const response = await customAxios.get(
+        `album/?page=${currentPageAlbums}`
+      );
       setAlbums(response.data);
     } catch (error) {
       console.error("Failed to fetch Albums:", error);
@@ -78,7 +82,9 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchAlbumsByArtistId = async (artistId: string): Promise<Album[]> => {
     try {
-      const response = await customAxios.get(`album/getAlbumsByArtistId/${artistId}`);
+      const response = await customAxios.get(
+        `album/getAlbumsByArtistId/${artistId}`
+      );
       const albums: Album[] = response.data;
       return albums;
     } catch (error) {
@@ -89,12 +95,13 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const fetchSongsByAlbumId = async (albumId: string) => {
     try {
-      const response = await customAxios.get(`album/getSongsByAlbumId/${albumId}`);
+      const response = await customAxios.get(
+        `song/getSongsByAlbumId/${albumId}`
+      );
       const songs: Songs[] = response.data;
       return songs;
     } catch (error) {
       console.error("Failed to fetch Songs by Album ID:", error);
-      throw error;
     }
   };
 
@@ -115,9 +122,6 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
     setCurrentPageArtists(nextPage);
     fetchArtists(nextPage);
   };
-
-  
-
 
   useEffect(() => {
     fetchSongs(0);

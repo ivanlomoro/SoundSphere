@@ -1,17 +1,41 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { PlaylistContext } from "../context/playlistContext/PlayListContext";
+import { useNavigate } from "react-router-dom";
 import { HeaderSection } from "../components";
-import { PlaylistType } from "../interfaces/PlaylistType";
+import { useEffect, useState } from "react";
+import { Songs } from "../Types/SongsTypes";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useRenderer } from "../hooks/useRenderer";
-import { useApiCalls } from "../context/songContext/ApiCalls";
-
+const customAxios = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+});
 
 const AlbumDisplayPage = () => {
- 
-  const { fetchSongsByAlbumId } = useApiCalls();
   const navigate = useNavigate();
-  
+  const { albumId } = useParams();
+  const [albumSong, setAlbumSong] = useState<Songs[]>([]);
+  const { renderSongs: renderAlbumSongs } = useRenderer({
+    songs: albumSong,
+    layout: "list",
+  });
+
+  const fetchSongsByAlbumId = async (albumId: string) => {
+    try {
+      const response = await customAxios.get(
+        `song/getSongsByAlbumId/${albumId}`
+      );
+      const songs: Songs[] = response.data;
+      setAlbumSong(songs);
+    } catch (error) {
+      console.error("Failed to fetch Songs by Album ID:", error);
+    }
+  };
+
+  useEffect(() => {
+    {
+      albumId && fetchSongsByAlbumId(albumId);
+    }
+  }, []);
+
   return (
     <>
       <HeaderSection
@@ -19,8 +43,7 @@ const AlbumDisplayPage = () => {
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
-
-     
+      {albumSong ? renderAlbumSongs() : <h3> No hay canciones</h3>}
     </>
   );
 };
