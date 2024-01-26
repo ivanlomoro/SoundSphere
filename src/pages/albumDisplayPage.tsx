@@ -3,7 +3,6 @@ import { HeaderSection } from "../components";
 import { useParams } from "react-router-dom";
 import { useRenderer } from "../hooks/useRenderer";
 import { Album } from "./AddMusicPage";
-import { useApiCalls } from "../context/songContext/ApiCalls";
 import { AlbumHeader } from "../components/albumHeader/albumHeader";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -17,8 +16,7 @@ const customAxios = axios.create({
 const AlbumDisplayPage = () => {
   const navigate = useNavigate();
   const { albumId } = useParams();
-  // const { albums } = useApiCalls();
-  // const album: Album | undefined = albums.find((album) => album.id === albumId);
+
   const [album, setAlbum] = useState<Album>()
   const [isLoading, setLoading] = useState<boolean>(true);
 

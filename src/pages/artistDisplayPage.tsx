@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 
 import { AlbumCard } from "../components/card/AlbumCard";
 import { Album } from "./AddMusicPage";
+import Loader from "../components/Loader/Loader";
 
 const ArtistDisplayPage = () => {
   const { fetchAlbumsByArtistId } = useApiCalls();
   const navigate = useNavigate();
   const { artistId } = useParams();
   const [albums, setAlbums] = useState<Album[] | null>(null);
+  const [isLoading, setLoading] = useState<boolean>(true);
+
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -26,6 +29,8 @@ const ArtistDisplayPage = () => {
         console.error("Failed to fetch Albums:", error);
         setAlbums([]);
       }
+      setLoading(false);
+
     };
 
     if (artistId) {
@@ -40,7 +45,10 @@ const ArtistDisplayPage = () => {
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
-
+{isLoading
+        ? <Loader />
+        :
+        <>
       {albums !== null && (
         <>
           <h3>Albums</h3>
@@ -53,6 +61,8 @@ const ArtistDisplayPage = () => {
           </ScrollableRowComponent>
         </>
       )}
+      </>
+            }
     </>
   );
 };
