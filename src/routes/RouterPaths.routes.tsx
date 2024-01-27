@@ -35,8 +35,8 @@ export const RouterPaths: FC = () => {
   return (
     <>
       <Routes>
-        <Route element={<PlayerLayout />}>
-          <Route path={HOME} element={<Home />} />
+        <Route element={<PlayerLayout /> } >
+          <Route path={HOME} element={<Home />}  />
           <Route path={USERPAGE} element={<UserPage />} />
           <Route path={SEARCHPAGE} element={<SearchPage />} />
           <Route path={FAVORITEPAGE} element={<FavoritePlaylist />} />
@@ -52,7 +52,7 @@ export const RouterPaths: FC = () => {
           <Route path={ADDMUSICPAGE} element={<AddMusicPage />} />
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />
-        <Route path="/" element={<Navigate to={HOME} />} />
+        <Route path="/" element={<Navigate to={HOME} />}/>
       </Routes>
     </>
   );

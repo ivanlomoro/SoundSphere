@@ -9,6 +9,7 @@ import Loader from "../components/Loader/Loader";
 import styled from "styled-components";
 import { Artist } from "../Types/SongsTypes";
 import { ArtistHeader } from "../components/albumHeader/albumHeader";
+import Swal from "sweetalert2";
 
 
 const AlbumsContainer = styled.div`
@@ -26,13 +27,9 @@ const ArtistDisplayPage = () => {
   const [artist, setArtist] = useState<Artist>();
 
   const getArtistById = async (id: string) => {
-   const url =  `${import.meta.env.VITE_API_BASE_URL}/artist/`
+    const url = `${import.meta.env.VITE_API_BASE_URL}/artist/`
     try {
-      const {data} = await axios.get(
-       url ,
-        { data: { "artistId": id } }
-      );
-
+      const { data } = await axios.get(url);
 
       const allArtist: Artist[] = data;
 
@@ -40,6 +37,7 @@ const ArtistDisplayPage = () => {
       setArtist(artist)
     } catch (error) {
       console.error("Failed to fetch Artist :", error);
+     
       throw error;
     }
   };
@@ -51,6 +49,7 @@ const ArtistDisplayPage = () => {
         { artistId && await getArtistById(artistId) }
       } catch (error) {
         console.error("can't load artist", error)
+
       }
 
       try {
@@ -64,6 +63,15 @@ const ArtistDisplayPage = () => {
       } catch (error) {
         console.error("Failed to fetch Albums:", error);
         setAlbums([]);
+
+        Swal.fire({
+          title: "Server Error!",
+          text: "This artist could not exist",
+          icon: "error",
+          confirmButtonText: "ok",
+          background: "#111111",
+          color: "white",
+        });
       }
       setLoading(false);
     };
@@ -73,7 +81,7 @@ const ArtistDisplayPage = () => {
     }
   }, [fetchAlbumsByArtistId, artistId]);
 
- 
+
 
   return (
     <>
@@ -82,24 +90,24 @@ const ArtistDisplayPage = () => {
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
-{isLoading
+      {isLoading
         ? <Loader />
         :
         <>
-        {artist && <ArtistHeader artist={artist}/>}
-      {albums !== null && (
-        <>
-          <h3>Albums</h3>
-         <AlbumsContainer>
-         {albums.map((album) => (
-                <AlbumCard key={album.id} album={album} />
-            ))}
-         </AlbumsContainer>
-            
+          {artist && <ArtistHeader artist={artist} />}
+          {albums !== null && (
+            <>
+              <h3>Albums</h3>
+              <AlbumsContainer>
+                {albums.map((album) => (
+                  <AlbumCard key={album.id} album={album} />
+                ))}
+              </AlbumsContainer>
+
+            </>
+          )}
         </>
-      )}
-      </>
-            }
+      }
     </>
   );
 };

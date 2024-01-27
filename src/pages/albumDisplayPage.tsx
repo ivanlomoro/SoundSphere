@@ -10,6 +10,7 @@ import { AlbumSongCard } from "../components/card/AlbumSongCard";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { PlayerContext } from "../context/playerContext/playerContext";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const customAxios = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -40,6 +41,14 @@ const AlbumDisplayPage = () => {
       setAlbum(album)
     } catch (error) {
       console.error("Failed to fetch Albums by Artist ID:", error);
+      Swal.fire({
+        title: "Server Error!",
+        text: "This Album could not exist",
+        icon: "error",
+        confirmButtonText: "ok",
+        background: "#111111",
+        color: "white",
+      });
       throw error;
     }
   };
@@ -58,8 +67,6 @@ const AlbumDisplayPage = () => {
     loadData();
   }, [])
 
-  console.log("DISPLAY ALBUM:", album)
-
   return (
     <>
       <HeaderSection
@@ -73,7 +80,7 @@ const AlbumDisplayPage = () => {
         ? <Loader />
         :
         <>
-          {album ? <AlbumHeader album={album} /> : (<h3> No hay canciones</h3>)}
+          {album && <AlbumHeader album={album} /> }
 
           {album &&
             <ListSongsContainer className="list-none">

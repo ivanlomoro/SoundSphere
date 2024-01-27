@@ -41,7 +41,6 @@ text-overflow: ellipsis;
 export const AlbumSongCard: FC<Props> = ({ song }) => {
 const {isFavorite, toggleFavorite} = useInteractions()
   const { name } = song
-  console.log("Album song card", song)
   const { setSongForPlaylist } = useContext(PlaylistContext);
   
   return (
