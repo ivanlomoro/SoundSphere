@@ -30,6 +30,7 @@ import FavoritePlaylist from "../pages/FavoritePlaylistPage";
 import PlaylistDisplayPage from "../pages/playlistDisplayPage";
 import AlbumDisplayPage from "../pages/albumDisplayPage";
 import ArtistDisplayPage from "../pages/artistDisplayPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 export const RouterPaths: FC = () => {
   return (
@@ -53,6 +54,7 @@ export const RouterPaths: FC = () => {
         </Route>
         <Route path={LANDINGPAGE} element={<LandingPage />} />
         <Route path="/" element={<Navigate to={HOME} />}/>
+        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
     </>
   );
