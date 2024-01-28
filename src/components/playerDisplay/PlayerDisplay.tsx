@@ -68,11 +68,6 @@ const StyledSongName = styled.p`
   margin-bottom: 0;
 `;
 
-const StyledArtistName = styled.p`
-  font-size: var(--fs-lg);
-  max-width: 85%;
-`;
-
 const PlayerDisplayContainer = styled.div<{ bg: string }>`
   position: fixed;
   inset: 0;

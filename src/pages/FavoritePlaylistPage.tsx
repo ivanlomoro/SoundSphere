@@ -10,22 +10,9 @@ import {
 } from "../components/card/card.styled.components";
 
 import {
-  Card,
-  // CardImage,
   CardDescription,
-  // SongName,
 } from "../components/card/card.styled.components";
 
-// const PlaylistCardContainer = styled.div`
-//   display: flex;
-//   max-height: 10em;
-//   align-items: center;
-//   gap: 1em;
-//   color: #fff;
-//   cursor: pointer;
-//   margin-top: 4em;
-//   margin-left: 2em;
-// `;
 
 const PlaylistName = styled.div`
   font-size: var(--fs-md);
@@ -33,11 +20,6 @@ const PlaylistName = styled.div`
   justify-content: center;
 `;
 
-const PlayListThumbnail = styled.img`
-  width: var(--w-full);
-  height: 10rem;
-  border-radius: var(--radius-sm);
-`;
 
 const AlbumsContainer = styled.ul`
   display: grid;

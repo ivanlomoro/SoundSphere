@@ -131,7 +131,7 @@ export const ListCardDescription = styled(CardDescription)`
   gap: var(--space-xl);
 `;
 
-export const GridCard = styled.ul`
+export const GridCard = styled.li`
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;

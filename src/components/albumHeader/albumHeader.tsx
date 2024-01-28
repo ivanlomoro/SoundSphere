@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Album } from "../../pages/AddMusicPage";
 import { FC } from "react";
 import { Artist } from "../../Types/SongsTypes";
-import { Playlist } from "../../Types/PlaylistFormData";
 import { PlaylistType } from "../../interfaces/PlaylistType";
 
 const AlbumHeaderContainer = styled.div`
