@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Album } from "../../pages/AddMusicPage";
 import { FC } from "react";
 import { Artist } from "../../Types/SongsTypes";
+import { Playlist } from "../../Types/PlaylistFormData";
+import { PlaylistType } from "../../interfaces/PlaylistType";
 
 const AlbumHeaderContainer = styled.div`
   display: flex;
@@ -45,6 +47,21 @@ export const ArtistHeader: FC<ArtistProps> = ({ artist }) => {
     <AlbumHeaderContainer>
       <AlbumImage src={thumbnail} alt={name} />
       <h2>{name}</h2>
+    </AlbumHeaderContainer>
+  );
+};
+
+type PlaylistProps = {
+  playlist: PlaylistType;
+};
+
+export const PlaylistHeader: FC<PlaylistProps> = ({ playlist }) => {
+  const { playlistName, thumbnail } = playlist;
+
+  return (
+    <AlbumHeaderContainer>
+      <AlbumImage src={thumbnail} alt={playlistName} />
+      <h2>{playlistName}</h2>
     </AlbumHeaderContainer>
   );
 };

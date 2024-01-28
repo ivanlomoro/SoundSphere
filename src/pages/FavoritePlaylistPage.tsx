@@ -2,27 +2,54 @@ import { HeaderSection } from "../components";
 import { useContext } from "react";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import styled from "styled-components";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FAVORITESONGSPAGE } from "../routes/paths";
+import {
+  CardImagePlaylist,
+  CardPlaylist,
+} from "../components/card/card.styled.components";
 
-const PlaylistCardContainer = styled.div`
-  display: flex;
-  max-height: 10em;
-  align-items: center;
-  gap: 1em;
-  color: #fff;
-  cursor: pointer; // Add cursor pointer to make it clickable
-  margin-top: 4em;
-  margin-left: 2em;
-`;
+import {
+  Card,
+  // CardImage,
+  CardDescription,
+  // SongName,
+} from "../components/card/card.styled.components";
+
+// const PlaylistCardContainer = styled.div`
+//   display: flex;
+//   max-height: 10em;
+//   align-items: center;
+//   gap: 1em;
+//   color: #fff;
+//   cursor: pointer;
+//   margin-top: 4em;
+//   margin-left: 2em;
+// `;
 
 const PlaylistName = styled.div`
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
+  display: flex;
+  justify-content: center;
 `;
 
 const PlayListThumbnail = styled.img`
-  max-height: 6em;
-  width: auto;
+  width: var(--w-full);
+  height: 10rem;
+  border-radius: var(--radius-sm);
+`;
+
+const AlbumsContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  justify-items: center;
+`;
+
+const StyledLink = styled(Link)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const FavoritePlaylist = () => {
@@ -31,7 +58,8 @@ const FavoritePlaylist = () => {
 
   const hardcodedPlaylist = {
     id: "1",
-    thumbnail: "https://picsum.photos/300/300",
+    thumbnail:
+      "https://res.cloudinary.com/dnmoqsjh7/image/upload/v1706473262/assets/icono_sound_dgxm8g.png",
     playlistName: "Favorites",
   };
 
@@ -47,30 +75,37 @@ const FavoritePlaylist = () => {
         arrowBackAction={() => navigate(-1)}
       />
 
-      <NavLink to={FAVORITESONGSPAGE}>
-        {" "}
-        <PlaylistCardContainer key={hardcodedPlaylist.id}>
-          <PlayListThumbnail
-            src={hardcodedPlaylist.thumbnail}
-            alt={hardcodedPlaylist.playlistName}
-          />
-          <PlaylistName>{hardcodedPlaylist.playlistName}</PlaylistName>
-        </PlaylistCardContainer>{" "}
-      </NavLink>
+      <AlbumsContainer>
+        <StyledLink to={FAVORITESONGSPAGE}>
+          <CardPlaylist>
+            <CardImagePlaylist
+              key={hardcodedPlaylist.playlistName}
+              className="card-img"
+              src={hardcodedPlaylist.thumbnail}
+              alt={hardcodedPlaylist.playlistName}
+            />
+            <CardDescription>
+              <PlaylistName>{hardcodedPlaylist.playlistName}</PlaylistName>
+            </CardDescription>
+          </CardPlaylist>
+        </StyledLink>
 
-      {/* User playlists */}
-      {userPlaylists?.map((playlist) => (
-        <PlaylistCardContainer
-          key={playlist.id}
-          onClick={() => handlePlaylistClick(playlist.id)}
-        >
-          <PlayListThumbnail
-            src={playlist.thumbnail}
-            alt={playlist.playlistName}
-          />
-          <PlaylistName>{playlist.playlistName}</PlaylistName>
-        </PlaylistCardContainer>
-      ))}
+        {userPlaylists?.map((playlist, index) => (
+          <CardPlaylist
+            key={index}
+            onClick={() => handlePlaylistClick(playlist.id)}
+          >
+            <CardImagePlaylist
+              className="card-img"
+              src={playlist.thumbnail}
+              alt={playlist.playlistName}
+            />
+            <CardDescription>
+              <PlaylistName>{playlist.playlistName}</PlaylistName>
+            </CardDescription>
+          </CardPlaylist>
+        ))}
+      </AlbumsContainer>
     </>
   );
 };

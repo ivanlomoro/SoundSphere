@@ -16,6 +16,7 @@ import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
 type Props = {
   song: Songs;
+  isPlaylist?: boolean;
 };
 
 const InlineContiner = styled.div`
@@ -37,7 +38,7 @@ const SongTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const AlbumSongCard: FC<Props> = ({ song }) => {
+export const AlbumSongCard: FC<Props> = ({ song, isPlaylist }) => {
   const { isFavorite, toggleFavorite } = useInteractions();
   const { name } = song;
   const { setSongForPlaylist } = useContext(PlaylistContext);
@@ -56,14 +57,16 @@ export const AlbumSongCard: FC<Props> = ({ song }) => {
         >
           {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
         </FaveButton>
-        <FaveButton
-          onClick={(event) => {
-            setSongForPlaylist(song);
-            event.stopPropagation();
-          }}
-        >
-          <Plus />
-        </FaveButton>
+        {!isPlaylist && (
+          <FaveButton
+            onClick={(event) => {
+              setSongForPlaylist(song);
+              event.stopPropagation();
+            }}
+          >
+            <Plus />
+          </FaveButton>
+        )}
       </ButtonsContainer>
     </InlineContiner>
   );

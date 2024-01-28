@@ -16,29 +16,26 @@ const customAxios = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
-const ListSongsContainer = styled.ul`
-list-style: none;
-`
+export const ListSongsContainer = styled.ul`
+  list-style: none;
+`;
 
 const AlbumDisplayPage = () => {
   const navigate = useNavigate();
   const { albumId } = useParams();
 
-  const [album, setAlbum] = useState<Album>()
+  const [album, setAlbum] = useState<Album>();
   const [isLoading, setLoading] = useState<boolean>(true);
 
   const { addToRecents } = useInteractions();
   const { setCurrentSong, setCurrentList, setPlaying } =
     useContext(PlayerContext);
 
-
   const getAlbumsById = async (albumId: string) => {
     try {
-      const response = await customAxios.get(
-        `album/${albumId}`
-      );
+      const response = await customAxios.get(`album/${albumId}`);
       const album: Album = response.data;
-      setAlbum(album)
+      setAlbum(album);
     } catch (error) {
       console.error("Failed to fetch Albums by Artist ID:", error);
       Swal.fire({
@@ -55,17 +52,17 @@ const AlbumDisplayPage = () => {
 
   useEffect(() => {
     const loadData = async () => {
-
       try {
-        { albumId && await getAlbumsById(albumId) }
-
+        {
+          albumId && (await getAlbumsById(albumId));
+        }
       } catch (error) {
-        console.error("can't load album", error)
+        console.error("can't load album", error);
       }
       setLoading(false);
     };
     loadData();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -75,38 +72,31 @@ const AlbumDisplayPage = () => {
         arrowBackAction={() => navigate(-1)}
       />
 
-
-      {isLoading
-        ? <Loader />
-        :
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
-          {album && <AlbumHeader album={album} /> }
+          {album && <AlbumHeader album={album} />}
 
-          {album &&
+          {album && (
             <ListSongsContainer className="list-none">
               {album.Song.map((song, index) => (
-                <li key={index} onClick={() => {
-                  addToRecents(song);
-                  setCurrentList(album.Song);
-                  setCurrentSong(song);
-                  setPlaying(true);
-                }}>
+                <li
+                  key={index}
+                  onClick={() => {
+                    addToRecents(song);
+                    setCurrentList(album.Song);
+                    setCurrentSong(song);
+                    setPlaying(true);
+                  }}
+                >
                   <AlbumSongCard song={song} />
                 </li>
               ))}
             </ListSongsContainer>
-
-
-          }
-
+          )}
         </>
-      }
-
-
-
-
-
-
+      )}
     </>
   );
 };

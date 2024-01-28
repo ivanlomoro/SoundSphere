@@ -62,10 +62,20 @@ export const Card = styled.li`
   margin: var(--space-sm);
 `;
 
+export const CardPlaylist = styled(Card)`
+  width: 65%;
+  aspect-ratio: 1/1;
+`;
+
 export const CardImage = styled.img`
   width: var(--w-full);
   height: 10rem;
   border-radius: var(--radius-sm);
+`;
+
+export const CardImagePlaylist = styled(CardImage)`
+  aspect-ratio: 1/1;
+  height: unset;
 `;
 
 export const CardImageArtist = styled.img`
@@ -121,7 +131,7 @@ export const ListCardDescription = styled(CardDescription)`
   gap: var(--space-xl);
 `;
 
-export const GridCard = styled.li`
+export const GridCard = styled.ul`
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
