@@ -11,12 +11,11 @@ import { Artist } from "../Types/SongsTypes";
 import { ArtistHeader } from "../components/albumHeader/albumHeader";
 import Swal from "sweetalert2";
 
-
 const AlbumsContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center
-`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 const ArtistDisplayPage = () => {
   const { fetchAlbumsByArtistId } = useApiCalls();
@@ -27,29 +26,31 @@ const ArtistDisplayPage = () => {
   const [artist, setArtist] = useState<Artist>();
 
   const getArtistById = async (id: string) => {
-    const url = `${import.meta.env.VITE_API_BASE_URL}/artist/`
+    const url = `${import.meta.env.VITE_API_BASE_URL}artist/`;
     try {
       const { data } = await axios.get(url);
 
       const allArtist: Artist[] = data;
 
-      const artist: Artist | undefined = allArtist.find((artist) => artist.id === id)
-      setArtist(artist)
+      const artist: Artist | undefined = allArtist.find(
+        (artist) => artist.id === id
+      );
+      setArtist(artist);
     } catch (error) {
       console.error("Failed to fetch Artist :", error);
-     
+
       throw error;
     }
   };
 
-
   useEffect(() => {
     const loadData = async () => {
       try {
-        { artistId && await getArtistById(artistId) }
+        {
+          artistId && (await getArtistById(artistId));
+        }
       } catch (error) {
-        console.error("can't load artist", error)
-
+        console.error("can't load artist", error);
       }
 
       try {
@@ -81,8 +82,6 @@ const ArtistDisplayPage = () => {
     }
   }, [fetchAlbumsByArtistId, artistId]);
 
-
-
   return (
     <>
       <HeaderSection
@@ -90,9 +89,9 @@ const ArtistDisplayPage = () => {
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
-      {isLoading
-        ? <Loader />
-        :
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
           {artist && <ArtistHeader artist={artist} />}
           {albums !== null && (
@@ -103,11 +102,10 @@ const ArtistDisplayPage = () => {
                   <AlbumCard key={album.id} album={album} />
                 ))}
               </AlbumsContainer>
-
             </>
           )}
         </>
-      }
+      )}
     </>
   );
 };
