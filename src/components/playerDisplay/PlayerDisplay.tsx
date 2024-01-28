@@ -56,7 +56,7 @@ const ResponsiveContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-block: auto;
-  transform: translateY(-20px);
+  transform: translateY(-25px);
 `;
 
 const StyledSongName = styled.p`

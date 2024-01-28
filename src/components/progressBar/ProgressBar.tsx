@@ -20,6 +20,7 @@ const StyledProgressBar = styled.div`
   flex-direction: column;
   margin-top: var(--space-xl);
   width: var(--w-full);
+  cursor: pointer;
 `;
 
 const StyledMiniProgressBar = styled.div`
@@ -62,7 +63,7 @@ const StyledMiniProgress = styled.progress`
   &::-webkit-progress-bar {
     background-color: #bb00ff1f;
   }
-  
+
   &::-webkit-progress-value {
     height: 5px;
     background-color: var(--clr-accent);

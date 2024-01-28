@@ -37,6 +37,7 @@ const StyledButtonPill = styled(StyledButton)`
 `;
 
 const StyledButtonPlay = styled.button`
+  cursor: pointer;
   border-radius: var(--w-full);
   border: none;
   background: var(--clr-bg-primary);
@@ -49,6 +50,7 @@ const StyledButtonPlay = styled.button`
 `;
 
 const StyledButtonMiniPlay = styled.button`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,6 +79,7 @@ const StyledInvisibleButton = styled(StyledButton)`
 `;
 
 const StyledButtonNav = styled.button`
+  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
@@ -102,6 +105,7 @@ const StyledButtonNav = styled.button`
 `;
 
 const StyledButtonDisplayPlay = styled.button`
+  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
@@ -126,6 +130,7 @@ const StyledButtonDisplay = styled.button`
   background: transparent;
   color: var(--clr-text-secondary);
   border: none;
+  cursor: pointer;
 `;
 
 const StyledBackButton = styled(StyledButton)`
@@ -139,6 +144,7 @@ const StyledBackButton = styled(StyledButton)`
   width: fit-content;
   color: var(--clr-text-primary);
   margin-bottom: 0;
+  cursor: pointer;
 `;
 
 type ButtonProps = {

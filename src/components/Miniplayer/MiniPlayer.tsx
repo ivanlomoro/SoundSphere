@@ -66,6 +66,7 @@ const InlineExpandibleContainer = styled.div`
   align-items: center;
   gap: 1em;
   flex-grow: 1;
+  cursor: pointer;
 `;
 
 type MiniPlayerProps = {

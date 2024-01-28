@@ -221,6 +221,7 @@ export const Minus = styled(CiCircleMinus)`
 `;
 
 export const FaveButton = styled.button`
+  cursor: pointer;
   background: transparent;
   border: none;
   color: var(--clr-text-secondary);
@@ -239,6 +240,7 @@ export const MiniFaveButton = styled.button`
   &:hover {
     color: var(--clr-bg-primary);
   }
+  cursor: pointer;
 `;
 
 export const StyledColumnContainer = styled.div`
