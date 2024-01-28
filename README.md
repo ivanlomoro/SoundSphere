@@ -1,26 +1,52 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="https://res.cloudinary.com/dnmoqsjh7/image/upload/v1706262172/assets/IconoPagina_onwriy.jpg" alt="SoundSphere" width="300">
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-Currently, two official plugins are available:
+# SoundSphere 🎶
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+SoundSphere emerges as an innovative music player application, skillfully developed using React alongside TypeScript. Boasting a delightful assortment of functionalities, SoundSphere stands as your premier musical ally, offering an immersive experience in the realm of music.
 
-## Expanding the ESLint configuration
+## Introduction
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Welcome to the [SoundSphere Frontend repository](https://github.com/ivanlomoro/SoundSphere), a component of the comprehensive SoundSphere music application. The project has been restructured into two separate repositories – one for the frontend and another for the backend. This repository is dedicated to the frontend, developed using React, TypeScript and Vite, and is deployed on [Vercel](https://vercel.com/) for effortless hosting. Additionally, [Cloudinary](https://cloudinary.com/) is utilized for efficient media management.
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- Interactive user interface.
+- Seamless integration with the [backend](https://github.com/SoundSphere23/SoundSphereBackend) for CRUD operations on songs.
+- User authentication and authorization through [Auth0](https://auth0.com/).
+- Enhanced user experience with React features.
+- Automatic deployment using [Vercel](https://vercel.com/) for quick updates.
+- Media storage and management through [Cloudinary](https://cloudinary.com/).
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Requirements
+
+- Node.js and pnpm installed.
+- Basic knowledge of JavaScript and TypeScript.
+- Familiarity with frontend development concepts.
+- Access to the [SoundSphere Backend repository](https://github.com/SoundSphere23/SoundSphereBackend).
+
+## Installation and Setup
+
+1. Clone this repository: `git clone https://github.com/ivanlomoro/SoundSphere`
+2. Navigate to the client folder: `cd SoundSphere`
+3. Install dependencies: `pnpm install`
+4. Configure frontend environment variables.
+5. Run the development server: `pnpm run dev`
+
+## Usage
+
+Access the SoundSphere frontend application at http://localhost:your_port.
+
+## Deployment
+The SoundSphere Frontend is automatically deployed on [Vercel](https://vercel.com/). Any changes pushed to the main branch trigger an automatic update of the deployed application.
+
+## Technologies and Concepts
+
+- React and Vite for frontend development.
+- TypeScript for type-safe JavaScript.
+- [Auth0](https://auth0.com/) for secure user authentication.
+- Integration with the [SoundSphere Backend repository](https://github.com/SoundSphere23/SoundSphereBackend).
+- MVC (Model-View-Controller) design pattern.
+- [Vercel](https://vercel.com/) for efficient and automatic deployment.
+- [Cloudinary](https://cloudinary.com/) for media storage and management.

@@ -68,6 +68,12 @@ export const CardImage = styled.img`
   border-radius: var(--radius-sm);
 `;
 
+export const CardImageArtist = styled.img`
+  width: var(--w-full);
+  height: 10rem;
+  border-radius: var(--radius-xl);
+`;
+
 export const CardDescription = styled.div`
   width: var(--w-full);
   padding: var(--space-md);

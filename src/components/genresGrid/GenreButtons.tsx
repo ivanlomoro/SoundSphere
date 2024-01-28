@@ -52,8 +52,6 @@ function GenreButtons() {
     <>
       <ScrollableRowComponent>
         {genres.map((genre) => {
-          //   const color = predefinedColors[index % predefinedColors.length];
-
           return (
             <LinkButton
               onClick={() => fetchSongsByGenre(genre.id)}

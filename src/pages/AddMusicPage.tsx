@@ -23,7 +23,8 @@ import getData from "../api/getApi";
 import toast from "react-hot-toast";
 import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
-import { Artist } from '../Types/SongsTypes';
+import { Artist, Songs } from "../Types/SongsTypes";
+import { GenreType } from "../Types/GenreTypes";
 
 export interface Album {
   id: string;
@@ -31,7 +32,10 @@ export interface Album {
   userId: string;
   thumbnail: string;
   isPublic: boolean;
-  Artist:Artist
+  Artist: Artist;
+  Song: Songs[];
+  GenreType: GenreType;
+  Genre?: GenreType;
 }
 
 export const AddMusicPage = () => {
@@ -114,7 +118,7 @@ export const AddMusicPage = () => {
           thumbnail: cloudinaryImage.secure_url,
           genreId: selectedGenre,
           isPublic: true,
-          artistId: '65b238d4335a2dd9222300be'
+          artistId: "65b238d4335a2dd9222300be",
         };
         const response = await postData(
           `album/${user?.userId}`,
@@ -146,7 +150,7 @@ export const AddMusicPage = () => {
         isPublic: data.isPublic,
         userCreator: user?.userId,
         albumId: albumId,
-        artistId: '65b238d4335a2dd9222300be'
+        artistId: "65b238d4335a2dd9222300be",
       };
 
       try {
@@ -310,7 +314,8 @@ export const AddMusicPage = () => {
                   },
                   minLength: {
                     value: 3,
-                    message: "The album name must be at least 3 characters long.",
+                    message:
+                      "The album name must be at least 3 characters long.",
                   },
                 })}
               />

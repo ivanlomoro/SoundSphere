@@ -10,7 +10,7 @@ const PlaylistDisplayPage = () => {
   const { playlistId } = useParams();
   const { getMusicByPlaylist, userPlaylists, songs } = useContext(PlaylistContext);
   const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistType | null>(null);
-  const { renderSongs: renderFavoriteSongs  } = useRenderer({ songs: songs, layout: "list"});
+  const { renderSongs: renderPlaylistSongs  } = useRenderer({ songs: songs, layout: "list"});
   useEffect(() => {
     if (userPlaylists) {
       const playlist = userPlaylists.find((playlist) => playlist.id === playlistId);
@@ -22,11 +22,10 @@ const PlaylistDisplayPage = () => {
   }, [playlistId, userPlaylists]);
 
   const navigate = useNavigate();
-  console.log(selectedPlaylist)
   return (
     <>
       <HeaderSection
-        text="Add to list"
+        text={selectedPlaylist?.playlistName}
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
@@ -34,9 +33,8 @@ const PlaylistDisplayPage = () => {
       <div>
         {selectedPlaylist && (
           <>
-            <h1>Playlist: {selectedPlaylist.playlistName}</h1>
             <ul>
-              {renderFavoriteSongs()}
+              {renderPlaylistSongs()}
             </ul>
           </>
         )}

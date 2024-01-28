@@ -5,6 +5,7 @@ import { ArtistCard } from "../components/card/ArtistCard";
 import { Playlist } from "../Types/PlaylistFormData";
 import { PlaylistCard } from "../components/card/PlaylistCard";
 import { PlaylistType } from "../interfaces/PlaylistType";
+import { useNavigate } from "react-router-dom";
 
 type MagicInput<T> = {
   songs?: Songs[];
@@ -32,7 +33,6 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
     return (
       <>
         {artists?.map((artist) => (
-          
           <ArtistCard key={artist.id} artist={artist} />
         ))}
       </>
@@ -42,13 +42,14 @@ export const useRenderer = (input: MagicInput<LayoutVariant>) => {
   const renderPlaylists = React.useCallback(() => {
     return (
       <>
-        {playlists?.map((playlist) => (
-          <PlaylistCard
-            variant={layout}
-            key={playlist.id}
-            playlist={playlist}
-          />
-        ))}
+        {playlists &&
+          playlists.map((playlist) => (
+            <PlaylistCard
+              variant={layout}
+              key={playlist.id}
+              playlist={playlist}
+            />
+          ))}
       </>
     );
   }, [playlists, layout]);

@@ -1,16 +1,18 @@
 import { editSongType } from "../components/card/CardContainerButtons";
 import { UserInterface } from "../context/songContext/songContext";
 import { Dispatch, SetStateAction } from "react";
+import { GenreType } from "./GenreTypes";
 
 export type Songs = {
   id: string;
   name: string;
-  artist: string;
+  Artist: Artist;
   url: string;
   thumbnail: string;
-  genre: string;
+  Genre : GenreType
   isPublic: boolean;
   liked: boolean;
+
 };
 
 export type Category = {
@@ -21,7 +23,7 @@ export type Category = {
 export type Artist = {
   id: string;
   name: string;
-  song?: Songs[]
+  song?: Songs[];
   thumbnail?: string;
 };
 

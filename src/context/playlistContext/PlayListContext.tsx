@@ -153,9 +153,7 @@ export const PlaylistContextProvider = ({
           const fetchedSongs = response.incomingData.songs;
 
           if (Array.isArray(fetchedSongs) && fetchedSongs.length > 0) {
-            console.log("Songs found:", fetchedSongs);
             setSongs(fetchedSongs);
-            console.log(setSongs);
           } else {
             console.error(`No songs found for playlist: ${playlistName}`);
           }
