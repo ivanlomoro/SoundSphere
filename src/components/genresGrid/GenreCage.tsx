@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { GenreType } from "../../Types/GenreTypes";
 
 const Cage = styled.div`
   height: 5em;
@@ -15,8 +14,13 @@ const Cage = styled.div`
 `;
 
 type genreCageProps = {
-  genre: GenreType;
+  genre: GenreForCage;
   color: string;
+};
+
+type GenreForCage = {
+  name: string;
+  id: string;
 };
 
 const Styledh3 = styled.h3`

@@ -61,7 +61,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
       const { value: genre } = (await Swal.fire({
         title: "Select field validation",
         input: "select",
-        inputValue: editSong.genre,
+        inputValue: editSong.Genre.name,
         background: "#111111",
         color: "white",
         inputOptions: genreItems(),
@@ -70,7 +70,7 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         showCancelButton: true,
         inputValidator: (value) => {
           if (!value) {
-            value = editSong.genre;
+            value = editSong.Genre.name;
             return "You need to choose something!";
           }
         },

@@ -5,7 +5,6 @@ import { ArtistCard } from "../components/card/ArtistCard";
 import { Playlist } from "../Types/PlaylistFormData";
 import { PlaylistCard } from "../components/card/PlaylistCard";
 import { PlaylistType } from "../interfaces/PlaylistType";
-import { useNavigate } from "react-router-dom";
 
 type MagicInput<T> = {
   songs?: Songs[];

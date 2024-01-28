@@ -101,7 +101,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
           <MiniCover src={currentSong.thumbnail} alt="Song Cover" />
           <div>
             <p>{currentSong?.name} </p>
-            <p>{currentSong.artist}</p>
+            <p>{currentSong.Artist.name}</p>
           </div>
         </InlineExpandibleContainer>
         <ProgressBar
