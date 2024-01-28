@@ -23,6 +23,7 @@ const StyledVolumeController = styled.div`
 const StyledVolumeButton = styled.button<StyledMuteButtonType>`
   background: none;
   border: none;
+  cursor: pointer;
   color: ${(props) =>
     props.volume === 0 ? "var(--clr-text-primary)" : "var(--clr-accent)"};
 `;
@@ -43,7 +44,11 @@ const VolumeController: FC<VolumeControllerProps> = ({ volume, setVolume }) => {
   return (
     <StyledVolumeController>
       <StyledVolumeButton volume={volume} onClick={handleMute}>
-        {volume == 0 ? <IoMdVolumeMute /> : <IoMdVolumeHigh />}
+        {volume == 0 ? (
+          <IoMdVolumeMute size={20} />
+        ) : (
+          <IoMdVolumeHigh size={20} />
+        )}
       </StyledVolumeButton>
       <RangeSlider
         minValue={0}

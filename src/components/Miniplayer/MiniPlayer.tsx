@@ -76,7 +76,7 @@ type MiniPlayerProps = {
   handlePlayPause: () => void;
   duration: DurationType;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
-  handleProgressClick: (event: CustomEventType) => void;
+  handleProgressChange: (position: number) => void;
   toggleFavorite: (song: Songs) => void;
   isFavorite: (id: string) => boolean;
   setSongForPlaylist: Dispatch<SetStateAction<Songs | null>>;
@@ -87,7 +87,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
   playing,
   progress,
   duration,
-  handleProgressClick,
+  handleProgressChange,
   toggleFavorite,
   isFavorite,
   handlePlayPause,
@@ -107,7 +107,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
         <ProgressBar
           progress={progress}
           duration={duration}
-          onClick={handleProgressClick}
+          onChange={handleProgressChange}
           mini={true}
         />
         <InlineContainer>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CustomEventType } from "../playerDisplay/PlayerDisplay";
+import RangeSlider from "../rangeSlider/RangeSlider";
 
 type ProgressBarPropsType = {
   progress: {
@@ -11,7 +11,7 @@ type ProgressBarPropsType = {
     duration: number;
     formattedDuration: string;
   };
-  onClick: (event: CustomEventType) => void;
+  onChange: (position: number) => void;
   mini?: boolean;
 };
 
@@ -33,42 +33,42 @@ const StyledMiniProgressBar = styled.div`
   width: var(--w-full);
 `;
 
-const StyledProgress = styled.progress`
-  margin-inline: auto;
-  width: 80%;
-  height: 2px;
-  -webkit-appearance: none;
-  appearance: none;
+// const StyledProgress = styled.progress`
+//   margin-inline: auto;
+//   width: 80%;
+//   height: 2px;
+//   -webkit-appearance: none;
+//   appearance: none;
 
-  &::-webkit-progress-bar {
-    background-color: #826f88;
-  }
+//   &::-webkit-progress-bar {
+//     background-color: #826f88;
+//   }
 
-  &::-webkit-progress-value {
-    height: 5px;
-    background-color: var(--clr-accent);
-  }
+//   &::-webkit-progress-value {
+//     height: 5px;
+//     background-color: var(--clr-accent);
+//   }
 
-  border-radius: 20px;
-`;
+//   border-radius: 20px;
+// `;
 
-const StyledMiniProgress = styled.progress`
-  margin-inline: auto;
-  width: 96%;
-  height: 3px;
-  border-radius: 6px;
-  -webkit-appearance: none;
-  appearance: none;
+// const StyledMiniProgress = styled.progress`
+//   margin-inline: auto;
+//   width: 96%;
+//   height: 3px;
+//   border-radius: 6px;
+//   -webkit-appearance: none;
+//   appearance: none;
 
-  &::-webkit-progress-bar {
-    background-color: #bb00ff1f;
-  }
+//   &::-webkit-progress-bar {
+//     background-color: #bb00ff1f;
+//   }
 
-  &::-webkit-progress-value {
-    height: 5px;
-    background-color: var(--clr-accent);
-  }
-`;
+//   &::-webkit-progress-value {
+//     height: 5px;
+//     background-color: var(--clr-accent);
+//   }
+// `;
 
 const StyledAlignedItems = styled.div`
   display: flex;
@@ -77,32 +77,39 @@ const StyledAlignedItems = styled.div`
   margin-inline: auto;
 `;
 
-type ProgressPropsType = {
-  onClick: any;
-  value: number;
-  mini?: boolean;
-};
+// type ProgressPropsType = {
+//   onClick: any;
+//   value: number;
+//   mini?: boolean;
+// };
 
-const Progress = ({ onClick, value, mini }: ProgressPropsType) => {
-  const SelectedProgress = mini ? StyledMiniProgress : StyledProgress;
+// const Progress = ({ onClick, value, mini }: ProgressPropsType) => {
+//   const SelectedProgress = mini ? StyledMiniProgress : StyledProgress;
 
-  return <SelectedProgress value={value} onClick={onClick} />;
-};
+//   return <SelectedProgress value={value} onClick={onClick} />;
+// };
 
 export const ProgressBar = ({
   progress,
   duration,
-  onClick,
+  onChange,
   mini,
 }: ProgressBarPropsType) => {
   const SelectedProgressbar = mini ? StyledMiniProgressBar : StyledProgressBar;
 
   return (
     <SelectedProgressbar>
-      <Progress
+      {/* <Progress
         value={progress.currentPercentage}
         onClick={onClick}
         mini={mini}
+      /> */}
+      <RangeSlider
+        maxValue={1}
+        minValue={0}
+        value={progress.currentPercentage}
+        handleChange={onChange}
+        isMini={mini}
       />
       {!mini && (
         <StyledAlignedItems>

@@ -98,8 +98,14 @@ const PlayerDisplayContainer = styled.div<{ bg: string }>`
 const StyledShuffleButton = styled.button<StyledShuffleButtonType>`
   background: none;
   border: none;
+  cursor: pointer;
   color: ${(props) =>
     props.isShuffled ? "var(--clr-accent)" : "var(--clr-text-secondary)"};
+`;
+
+const InlineContainer = styled.div`
+  display: flex;
+  gap: 1em;
 `;
 
 type PlayerDisplayProps = {
@@ -110,7 +116,7 @@ type PlayerDisplayProps = {
   duration: DurationType;
   handleNext: () => void;
   handlePrevious: () => void;
-  handleProgressClick: (event: CustomEventType) => void;
+  handleProgressChange: (position: number) => void;
   toggleFavorite: (song: Songs) => void;
   isFavorite: (id: string) => boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
@@ -129,7 +135,7 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   duration,
   handleNext,
   handlePrevious,
-  handleProgressClick,
+  handleProgressChange,
   toggleFavorite,
   isFavorite,
   setIsExpanded,
@@ -155,17 +161,19 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
         {currentSong.artist && (
           <StyledArtistName>{currentSong.artist}</StyledArtistName>
         )}
-        <StyledShuffleButton
-          isShuffled={isShuffled}
-          onClick={() => setIsShuffled((prevState) => !prevState)}
-        >
-          <FaRandom size={16} />
-        </StyledShuffleButton>
-        <VolumeController volume={volume} setVolume={setVolume} />
+        <InlineContainer>
+          <StyledShuffleButton
+            isShuffled={isShuffled}
+            onClick={() => setIsShuffled((prevState) => !prevState)}
+          >
+            <FaRandom size={16} />
+          </StyledShuffleButton>
+          <VolumeController volume={volume} setVolume={setVolume} />
+        </InlineContainer>
         <ProgressBar
           progress={progress}
           duration={duration}
-          onClick={handleProgressClick}
+          onChange={handleProgressChange}
         />
         <ButtonContainer>
           <FaveButton></FaveButton>

@@ -5,15 +5,19 @@ const StyledRangeSliderContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  width: 80%;
+  margin-inline: auto;
 `;
 
-const StyledRangeSlider = styled.input.attrs({ type: "range" })`
+const StyledRangeSlider = styled.input.attrs<{ isMini?: boolean }>({
+  type: "range",
+})`
   -webkit-appearance: none;
   appearance: none;
   background-color: #535353;
-  height: 4px;
+  height: ${({ isMini }) => (isMini ? "2px" : "4px")};
   overflow: hidden;
-  width: auto;
+  width: 100%;
   border-radius: 2px;
   cursor: pointer;
 
@@ -28,7 +32,7 @@ const StyledRangeSlider = styled.input.attrs({ type: "range" })`
     z-index: 9;
     background: var(--clr-accent);
     border-radius: 50%;
-    box-shadow: -410px 0 0 408px var(--clr-accent);
+    box-shadow: -800px 0 0 798px var(--clr-accent);
     cursor: pointer;
     height: 4px;
     width: 4px;
@@ -63,10 +67,15 @@ const StyledRangeSlider = styled.input.attrs({ type: "range" })`
   }
 `;
 
-const StyledSpanThumb = styled.span`
-  width: 10px;
-  height: 10px;
+const StyledSpanThumb = styled.span<{
+  thumbOffset: string;
+  isMini?: boolean;
+}>`
   position: absolute;
+  left: ${({ thumbOffset }) => thumbOffset};
+  width: ${({ isMini }) => (isMini ? "5px" : "10px")};
+  height: ${({ isMini }) => (isMini ? "5px" : "10px")};
+  transform: ${({ isMini }) => (isMini ? "translateY(-10%)" : "translateY(0)")};
   border-radius: 50px;
   z-index: 1;
   pointer-events: none;
@@ -79,6 +88,7 @@ type RangeSliderProps = {
   minValue: number;
   handleChange: (number: number) => void;
   value: number;
+  isMini?: boolean;
 };
 
 const RangeSlider: FC<RangeSliderProps> = ({
@@ -86,6 +96,7 @@ const RangeSlider: FC<RangeSliderProps> = ({
   minValue,
   maxValue,
   handleChange,
+  isMini,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [decimalValue, setDecimalValue] = useState<number>(0);
@@ -109,6 +120,10 @@ const RangeSlider: FC<RangeSliderProps> = ({
     if (e.target && e.target.value) handleChange(parseFloat(e.target.value));
   };
 
+  const thumbOffset = isMini
+    ? `${decimalValue * inputRefWidth!}px`
+    : `${decimalValue * inputRefWidth! - 3}px`;
+
   return (
     <StyledRangeSliderContainer>
       <StyledRangeSlider
@@ -119,10 +134,12 @@ const RangeSlider: FC<RangeSliderProps> = ({
         max={maxValue}
         step="0.01"
         value={value}
+        isMini={isMini}
       />
       {inputRefWidth && (
         <StyledSpanThumb
-          style={{ left: `${decimalValue * inputRefWidth - 3}px` }}
+          thumbOffset={thumbOffset}
+          isMini={isMini}
         ></StyledSpanThumb>
       )}
     </StyledRangeSliderContainer>
