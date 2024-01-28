@@ -15,11 +15,11 @@ import { useInteractions } from "../../context/userContext/InteractionContext";
 import { PlaylistContext } from "../../context/playlistContext/PlayListContext";
 
 type Props = {
-  song: Songs
-}
+  song: Songs;
+};
 
 const InlineContiner = styled.div`
-position: relative;
+  position: relative;
   display: flex;
   justify-content: space-between;
   height: 3rem;
@@ -27,38 +27,44 @@ position: relative;
   padding-inline: 1.4em;
   background-color: var(--clr-bg-elements);
   white-space: nowrap;
-  `
+`;
 const ButtonsContainer = styled(CommonButtonContainer)`
   justify-content: right;
-  right: 0,
-`
+  right: 0;
+`;
 
 const SongTitle = styled.div`
-
-text-overflow: ellipsis;
-`
+  text-overflow: ellipsis;
+`;
 
 export const AlbumSongCard: FC<Props> = ({ song }) => {
-const {isFavorite, toggleFavorite} = useInteractions()
-  const { name } = song
+  const { isFavorite, toggleFavorite } = useInteractions();
+  const { name } = song;
   const { setSongForPlaylist } = useContext(PlaylistContext);
-  
-  return (
-    <InlineContiner >
-      <SongTitle><h3>{name}</h3></SongTitle>
-      <ButtonsContainer>
-            <FaveButton
-              onClick={() => {
-                toggleFavorite(song);
-              }}
-            >
-              {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
-            </FaveButton>
-            <FaveButton onClick={() => setSongForPlaylist(song)}>
-              <Plus />
-            </FaveButton>
-          </ButtonsContainer>
-    </InlineContiner>
 
-  )
-}
+  return (
+    <InlineContiner>
+      <SongTitle>
+        <h3>{name}</h3>
+      </SongTitle>
+      <ButtonsContainer>
+        <FaveButton
+          onClick={(event) => {
+            toggleFavorite(song);
+            event.stopPropagation();
+          }}
+        >
+          {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
+        </FaveButton>
+        <FaveButton
+          onClick={(event) => {
+            setSongForPlaylist(song);
+            event.stopPropagation();
+          }}
+        >
+          <Plus />
+        </FaveButton>
+      </ButtonsContainer>
+    </InlineContiner>
+  );
+};

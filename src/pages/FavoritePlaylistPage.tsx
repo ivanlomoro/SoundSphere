@@ -42,7 +42,7 @@ const FavoritePlaylist = () => {
   return (
     <>
       <HeaderSection
-        text="Your Favorite Playlists"
+        text="Library"
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
