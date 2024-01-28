@@ -38,7 +38,7 @@ function GenreButtons() {
   const fetchSongsByGenre = async ( id : string) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/song/public/genre/${id}`
+        `${import.meta.env.VITE_API_BASE_URL}song/public/genre/${id}`
 
       );
       setSongByGenre(response.data);

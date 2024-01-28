@@ -15,7 +15,7 @@ export const LandingComponent = () => {
 
   const handleClick = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/");
+      const response = await axios.get(import.meta.env.VITE_API_BASE_URL);
       console.log("landing isApiRunning func", response);
       if (response.statusText === "OK") return loginWithRedirect();
     } catch (error) {
