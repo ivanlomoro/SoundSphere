@@ -120,7 +120,6 @@ export const PlayerContextProvider = ({
       (song) => song.id === currentSong?.id
     );
     if (songIndex === -1) setCurrentSongIndex(0);
-    if (songIndex !== -1) setCurrentSongIndex(songIndex);
   }, [currentSong]);
 
   useEffect(() => {
@@ -169,35 +168,38 @@ export const PlayerContextProvider = ({
       (currentSongIndex && currentSongIndex < currentList.length - 1) ||
       currentSongIndex === 0
     ) {
-      if (!isShuffled) {
-        setCurrentSongIndex(currentSongIndex + 1);
-        setCurrentSong(currentList[currentSongIndex + 1]);
-      }
-      if (isShuffled) {
-        setCurrentSongIndex(shuffledIndexes[currentSongIndex + 1]);
-        setCurrentSong(currentList[shuffledIndexes[currentSongIndex + 1]]);
-      }
+      const newIndex = isShuffled
+        ? shuffledIndexes[currentSongIndex + 1]
+        : currentSongIndex + 1;
+
+      console.log("CURRENT INDEX", currentSongIndex);
+
+      setCurrentSongIndex((prevIndex) => prevIndex! + 1);
+      setCurrentSong(currentList[newIndex]);
     }
     if (currentSongIndex === currentList.length - 1) {
+      const newIndex = isShuffled ? shuffledIndexes[0] : 0;
+      console.log("CURRENT INDEX", currentSongIndex);
+
       setCurrentSongIndex(0);
-      setCurrentSong(currentList[0]);
+      setCurrentSong(currentList[newIndex]);
     }
   };
 
   const handlePrevious = () => {
     if (currentSongIndex && currentSongIndex > 0) {
-      if (!isShuffled) {
-        setCurrentSongIndex(currentSongIndex - 1);
-        setCurrentSong(currentList[currentSongIndex - 1]);
-      }
-      if (isShuffled) {
-        setCurrentSongIndex(shuffledIndexes[currentSongIndex - 1]);
-        setCurrentSong(currentList[shuffledIndexes[currentSongIndex - 1]]);
-      }
+      const newIndex = isShuffled
+        ? shuffledIndexes[currentSongIndex - 1]
+        : currentSongIndex - 1;
+      setCurrentSongIndex((prevIndex) => prevIndex! - 1);
+      setCurrentSong(currentList[newIndex]);
     }
     if (currentSongIndex === 0) {
+      const newIndex = isShuffled
+        ? shuffledIndexes[currentList.length - 1]
+        : currentList.length - 1;
       setCurrentSongIndex(currentList.length - 1);
-      setCurrentSong(currentList[currentList.length - 1]);
+      setCurrentSong(currentList[newIndex]);
     }
   };
 
