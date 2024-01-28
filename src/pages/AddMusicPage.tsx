@@ -171,19 +171,6 @@ export const AddMusicPage = () => {
   const genreValidation = (value: string) =>
     value !== "" || "Please select a genre.";
 
-  // const albumValidation = (value: string) =>
-  //   value !== "" || "Please select an album or create a new one.";
-
-  // const newAlbumValidation = (value: string) => {
-  //   if (watch("albumId") == "newAlbum") {
-  //     return (
-  //       (value && value.length > 3) ||
-  //       "New album name should be more than 3 characters long."
-  //     );
-  //   }
-  //   return true;
-  // };
-
   return (
     <section>
       <HeaderSection text="Upload" />

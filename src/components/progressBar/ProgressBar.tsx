@@ -33,61 +33,12 @@ const StyledMiniProgressBar = styled.div`
   width: var(--w-full);
 `;
 
-// const StyledProgress = styled.progress`
-//   margin-inline: auto;
-//   width: 80%;
-//   height: 2px;
-//   -webkit-appearance: none;
-//   appearance: none;
-
-//   &::-webkit-progress-bar {
-//     background-color: #826f88;
-//   }
-
-//   &::-webkit-progress-value {
-//     height: 5px;
-//     background-color: var(--clr-accent);
-//   }
-
-//   border-radius: 20px;
-// `;
-
-// const StyledMiniProgress = styled.progress`
-//   margin-inline: auto;
-//   width: 96%;
-//   height: 3px;
-//   border-radius: 6px;
-//   -webkit-appearance: none;
-//   appearance: none;
-
-//   &::-webkit-progress-bar {
-//     background-color: #bb00ff1f;
-//   }
-
-//   &::-webkit-progress-value {
-//     height: 5px;
-//     background-color: var(--clr-accent);
-//   }
-// `;
-
 const StyledAlignedItems = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80%;
   margin-inline: auto;
 `;
-
-// type ProgressPropsType = {
-//   onClick: any;
-//   value: number;
-//   mini?: boolean;
-// };
-
-// const Progress = ({ onClick, value, mini }: ProgressPropsType) => {
-//   const SelectedProgress = mini ? StyledMiniProgress : StyledProgress;
-
-//   return <SelectedProgress value={value} onClick={onClick} />;
-// };
 
 export const ProgressBar = ({
   progress,
@@ -99,11 +50,6 @@ export const ProgressBar = ({
 
   return (
     <SelectedProgressbar>
-      {/* <Progress
-        value={progress.currentPercentage}
-        onClick={onClick}
-        mini={mini}
-      /> */}
       <RangeSlider
         maxValue={1}
         minValue={0}

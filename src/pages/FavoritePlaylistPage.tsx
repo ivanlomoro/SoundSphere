@@ -2,7 +2,7 @@ import { HeaderSection } from "../components";
 import { useContext } from "react";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import styled from "styled-components";
-import {NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FAVORITESONGSPAGE } from "../routes/paths";
 
 const PlaylistCardContainer = styled.div`
@@ -25,9 +25,8 @@ const PlayListThumbnail = styled.img`
   width: auto;
 `;
 
-
 const FavoritePlaylist = () => {
-  const { userPlaylists} = useContext(PlaylistContext);
+  const { userPlaylists } = useContext(PlaylistContext);
   const navigate = useNavigate();
 
   const hardcodedPlaylist = {
@@ -36,7 +35,6 @@ const FavoritePlaylist = () => {
     playlistName: "Favorites",
   };
 
-  // Function to handle clicking on a playlist card
   const handlePlaylistClick = (playlistId: string) => {
     navigate(`/playlist/${playlistId}`);
   };
@@ -49,23 +47,22 @@ const FavoritePlaylist = () => {
         arrowBackAction={() => navigate(-1)}
       />
 
-      {/* Hardcoded playlist for favorites */}
-      <NavLink to={FAVORITESONGSPAGE}> <PlaylistCardContainer
-        key={hardcodedPlaylist.id}
-        
-      >
-        <PlayListThumbnail
-          src={hardcodedPlaylist.thumbnail}
-          alt={hardcodedPlaylist.playlistName}
-        />
-        <PlaylistName>{hardcodedPlaylist.playlistName}</PlaylistName>
-      </PlaylistCardContainer> </NavLink>
+      <NavLink to={FAVORITESONGSPAGE}>
+        {" "}
+        <PlaylistCardContainer key={hardcodedPlaylist.id}>
+          <PlayListThumbnail
+            src={hardcodedPlaylist.thumbnail}
+            alt={hardcodedPlaylist.playlistName}
+          />
+          <PlaylistName>{hardcodedPlaylist.playlistName}</PlaylistName>
+        </PlaylistCardContainer>{" "}
+      </NavLink>
 
       {/* User playlists */}
       {userPlaylists?.map((playlist) => (
         <PlaylistCardContainer
-        key={playlist.id}
-        onClick={() => handlePlaylistClick(playlist.id)}
+          key={playlist.id}
+          onClick={() => handlePlaylistClick(playlist.id)}
         >
           <PlayListThumbnail
             src={playlist.thumbnail}

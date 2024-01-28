@@ -14,7 +14,6 @@ import { GenreType } from "../../Types/GenreTypes";
 
 export type GenreStateProps = {
   apiGenres: GenreType[];
-  // apiError: boolean
   getAllGenres: () => void;
 };
 

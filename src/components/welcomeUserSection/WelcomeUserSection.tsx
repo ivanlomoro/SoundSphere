@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { UserAvatar } from "../userAvatar/UserAvatar";
-// import { WelcomeUserMessage } from "./WelcomeUserMessage";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { USERPAGE } from "../../routes/paths";
@@ -37,7 +36,6 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
       <StyledWelcomeUserSection>
         <RowContainer>
           <UserAvatar />
-          {/* <WelcomeUserMessage text={`Welcome ${user.given_name} !`} /> */}
         </RowContainer>
         {editUserLogo && (
           <StyledIconSection>

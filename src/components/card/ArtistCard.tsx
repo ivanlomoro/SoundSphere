@@ -26,7 +26,7 @@ export function ArtistCard({ artist }: Partial<ArtistCardProps>) {
       />
       <CardDescription>
         <SongName>{artist.name}</SongName>
-        <SongName>Total Songs: {artist.song?.length}</SongName>
+        {/* <SongName>Total Songs: {artist.song?.length}</SongName> */}
       </CardDescription>
     </Card>
   );

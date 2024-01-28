@@ -6,10 +6,17 @@ import { useRenderer } from "../hooks/useRenderer";
 import { ArtistCard } from "../components/card/ArtistCard";
 import { AlbumCard } from "../components/card/AlbumCard";
 import { RecentGrid } from "../components";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Home = () => {
   const { recents, favorites } = useInteractions();
   const { albums, artists } = useApiCalls();
+
+  const favoritesToRender = favorites.slice(
+    favorites.length - 6,
+    favorites.length
+  );
 
   const { renderSongs: renderRecentsSongs } = useRenderer({
     songs: recents,
@@ -17,14 +24,22 @@ export const Home = () => {
   });
 
   const { renderSongs: renderFavoriteSongs } = useRenderer({
-    songs: favorites,
+    songs: favoritesToRender,
     layout: "grid",
   });
+
+  const StyledLinkContainer = styled.div`
+    margin-inline: auto;
+    margin-top: var(--space-sm);
+    width: fit-content;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 1em 1.5em;
+  `;
 
   return (
     <>
       <HeaderSection text="SoundSphere" withBackButton={false} />
-      {/* <WelcomeUserSection /> */}
       <GenreButtons />
       {recents.length > 0 && (
         <>
@@ -36,6 +51,11 @@ export const Home = () => {
         <>
           <h3>Favorites</h3>
           <RecentGrid>{renderFavoriteSongs()}</RecentGrid>
+          <StyledLinkContainer>
+            <Link to="/favoriteSongs">
+              <span>View More</span>
+            </Link>
+          </StyledLinkContainer>
         </>
       )}
       {artists.length > 0 && (
