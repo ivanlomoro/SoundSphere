@@ -7,7 +7,7 @@ const StyledHeaderSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--clr-bg-primary);
+  background-color: transparent;
   padding: var(--fs-md);
 `;
 

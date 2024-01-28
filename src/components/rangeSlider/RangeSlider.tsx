@@ -1,4 +1,78 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+
+const StyledRangeSliderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const StyledRangeSlider = styled.input.attrs({ type: "range" })`
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #535353;
+  height: 4px;
+  overflow: hidden;
+  width: auto;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 4px;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;
+    z-index: 9;
+    background: var(--clr-accent);
+    border-radius: 50%;
+    box-shadow: -410px 0 0 408px var(--clr-accent);
+    cursor: pointer;
+    height: 4px;
+    width: 4px;
+    border: 0;
+  }
+
+  &::-moz-range-thumb {
+    background: #b3b3b3;
+    border-radius: 50%;
+    box-shadow: -410px 0 0 408px var(--clr-accent);
+    cursor: pointer;
+    height: 4px;
+    width: 4px;
+    border: 0;
+  }
+
+  &::-moz-range-track {
+    background-color: #535353;
+  }
+
+  &::-moz-range-progress {
+    background-color: #b3b3b3;
+    height: 4px;
+  }
+
+  &::-ms-fill-upper {
+    background-color: #535353;
+  }
+
+  &::-ms-fill-lower {
+    background-color: #b3b3b3;
+  }
+`;
+
+const StyledSpanThumb = styled.span`
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-radius: 50px;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--clr-accent);
+  opacity: 1;
+`;
 
 type RangeSliderProps = {
   maxValue: number;
@@ -36,8 +110,8 @@ const RangeSlider: FC<RangeSliderProps> = ({
   };
 
   return (
-    <div>
-      <input
+    <StyledRangeSliderContainer>
+      <StyledRangeSlider
         ref={inputRef}
         type="range"
         onChange={handleInputChange}
@@ -46,12 +120,12 @@ const RangeSlider: FC<RangeSliderProps> = ({
         step="0.01"
         value={value}
       />
-      <span
-        style={{
-          left: `${inputRefWidth && decimalValue * inputRefWidth - 3}px`,
-        }}
-      ></span>
-    </div>
+      {inputRefWidth && (
+        <StyledSpanThumb
+          style={{ left: `${decimalValue * inputRefWidth - 3}px` }}
+        ></StyledSpanThumb>
+      )}
+    </StyledRangeSliderContainer>
   );
 };
 

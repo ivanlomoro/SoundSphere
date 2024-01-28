@@ -63,6 +63,7 @@ const InlineContainer = styled.div`
 
 const InlineExpandibleContainer = styled.div`
   display: flex;
+  align-items: center;
   gap: 1em;
   flex-grow: 1;
 `;

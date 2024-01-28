@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { AiOutlineStepBackward, AiOutlineStepForward } from "react-icons/ai";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import styled from "styled-components";
@@ -15,7 +15,7 @@ import {
   ProgressType,
 } from "../../context/playerContext/playerContext";
 import { HeaderSection } from "..";
-import RangeSlider from "../rangeSlider/RangeSlider";
+import VolumeController from "../volumeController/VolumeController";
 
 export type CustomEventType = {
   target: HTMLProgressElement;
@@ -48,8 +48,6 @@ const StyledCover = styled.img`
 `;
 
 const ResponsiveContainer = styled.div`
-  max-height: 75%;
-  margin-top: 0;
   display: flex;
   border-radius: var(--radius-sm);
   font-size: var(--fs-lg);
@@ -57,6 +55,8 @@ const ResponsiveContainer = styled.div`
   margin: var(--space-sm);
   flex-direction: column;
   align-items: center;
+  margin-block: auto;
+  transform: translateY(-20px);
 `;
 
 const StyledSongName = styled.p`
@@ -73,11 +73,26 @@ const StyledArtistName = styled.p`
   max-width: 85%;
 `;
 
-const PlayerDisplayContainer = styled.div`
+const PlayerDisplayContainer = styled.div<{ bg: string }>`
   position: fixed;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   background-color: #000000e3;
   backdrop-filter: blur(5px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #000000e3;
+    background-image: ${(props) => (props.bg ? `url(${props.bg})` : "none")};
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-position: center;
+    filter: blur(5px);
+  }
 `;
 
 const StyledShuffleButton = styled.button<StyledShuffleButtonType>`
@@ -124,8 +139,15 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
   volume,
   setVolume,
 }) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, []);
+
   return (
-    <PlayerDisplayContainer>
+    <PlayerDisplayContainer bg={currentSong.thumbnail}>
       <HeaderSection arrowBackAction={() => setIsExpanded(false)} />
       <ResponsiveContainer>
         <StyledCover src={currentSong.thumbnail} alt="Song Cover" />
@@ -139,12 +161,7 @@ export const PlayerDisplay: FC<PlayerDisplayProps> = ({
         >
           <FaRandom size={16} />
         </StyledShuffleButton>
-        <RangeSlider
-          minValue={0}
-          maxValue={1}
-          value={volume}
-          handleChange={setVolume}
-        />
+        <VolumeController volume={volume} setVolume={setVolume} />
         <ProgressBar
           progress={progress}
           duration={duration}

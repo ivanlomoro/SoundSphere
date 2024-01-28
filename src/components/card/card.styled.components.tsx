@@ -211,6 +211,7 @@ export const EmptyHeart = styled(AiOutlineHeart)`
 export const Plus = styled(CiCirclePlus)`
   width: 30px;
   height: 30px;
+  stroke-width: 0.75px;
 `;
 
 export const Minus = styled(CiCircleMinus)`

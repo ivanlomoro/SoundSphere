@@ -25,10 +25,8 @@ export const PlayerLayout = () => {
       </div>
       {songForPlaylist && <AddToPlayList />}
 
-      {/* <StickySections> */}
       <Player />
       {!isExpanded && <NavBar />}
-      {/* </StickySections> */}
     </StyledNavLayout>
   );
 };
