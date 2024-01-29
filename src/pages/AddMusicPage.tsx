@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import postData from "../api/postApi";
@@ -18,6 +18,7 @@ import {
   ErrorMessage,
   Submit,
   InputContainer,
+  AddSoundContainer,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
@@ -25,6 +26,8 @@ import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
 import { Artist, Songs } from "../Types/SongsTypes";
 import { GenreType } from "../Types/GenreTypes";
+import { HiddenInputContainer } from "../components/uploadForm/UploadFormComponents";
+import { AddSoundButton } from "../components/uploadForm/UploadFormComponents";
 
 export interface Album {
   id: string;
@@ -54,6 +57,7 @@ export const AddMusicPage = () => {
   const [axiosLoading, setAxiosLoading] = useState(false);
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
+  const uploadImageRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (user) {
@@ -176,11 +180,11 @@ export const AddMusicPage = () => {
       <HeaderSection text="Upload" />
       <form onSubmit={handleSubmit(submitData)}>
         <FormContainer>
-          <ImageContainer>
+          <ImageContainer onClick={() => uploadImageRef.current!.click()}>
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
             ) : (
-              <AiOutlineCamera size={70} />
+              <AiOutlineCamera size={40} />
             )}
           </ImageContainer>
           <ButtonContainer>
@@ -196,15 +200,16 @@ export const AddMusicPage = () => {
                 },
                 onChange: imageUpload,
               })}
+              ref={uploadImageRef}
             />
-            <InputContainer>
+            <HiddenInputContainer>
               <label htmlFor="image-upload">
                 <StyledButtonOutline as="span">Add Image</StyledButtonOutline>
               </label>
               {errors.thumbnail && (
                 <ErrorMessage>{errors.thumbnail.message}</ErrorMessage>
               )}
-            </InputContainer>
+            </HiddenInputContainer>
             <Input
               type="file"
               accept="audio/mpeg, audio/mp3"
@@ -218,12 +223,12 @@ export const AddMusicPage = () => {
                 onChange: soundUpload,
               })}
             />
-            <InputContainer>
+            <AddSoundContainer>
               <label htmlFor="sound-upload">
-                <StyledButtonOutline as="span">Add Sound</StyledButtonOutline>
+                <AddSoundButton>Add Sound</AddSoundButton>
               </label>
               {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
-            </InputContainer>
+            </AddSoundContainer>
           </ButtonContainer>
           <InputContainer>
             <Input

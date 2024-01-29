@@ -1,4 +1,5 @@
 import { Button } from "../button/Button";
+import { FC } from "react";
 import {
   AiOutlineHome,
   AiOutlineUser,
@@ -6,7 +7,6 @@ import {
   AiOutlineSearch,
 } from "react-icons/ai";
 import { MdFileUpload } from "react-icons/md";
-
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./navbar.css";
@@ -19,7 +19,7 @@ import {
   SEARCHPAGE,
 } from "../../routes/paths";
 
-const StyledNavBar = styled.div`
+const StyledNavBar = styled.div<{ isNavLayout?: boolean }>`
   position: sticky;
   left: 0;
   bottom: 0;
@@ -32,7 +32,7 @@ const StyledNavBar = styled.div`
     rgba(0, 0, 0, 1)
   );
   backdrop-filter: blur(6px);
-  padding-top: 75px;
+  padding-top: ${({ isNavLayout }) => (isNavLayout ? "30px" : "75px")};
 `;
 
 const StyledNav = styled.nav`
@@ -63,9 +63,13 @@ export const NavIcon = ({ icon }: StyledNavIconProps) => {
   return <StyledNavIcon icon={icon} />;
 };
 
-export const NavBar = () => {
+type NavBarProps = {
+  isNavLayout?: boolean;
+};
+
+export const NavBar: FC<NavBarProps> = ({ isNavLayout }) => {
   return (
-    <StyledNavBar>
+    <StyledNavBar isNavLayout={isNavLayout}>
       <StyledNav>
         <NavLink to={HOME}>
           <Button

@@ -15,7 +15,7 @@ export const NavLayout = () => {
       <div>
         <Outlet />
       </div>
-      <NavBar />
+      <NavBar isNavLayout={true} />
     </StyledNavLayout>
   );
 };

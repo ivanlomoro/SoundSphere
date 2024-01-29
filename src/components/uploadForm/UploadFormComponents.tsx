@@ -8,7 +8,7 @@ export const ImageContainer = styled.div`
   margin: 0 auto;
   background-color: #767677;
   aspect-ratio: 1/1;
-  height: 30vh;
+  height: 15vh;
   border-radius: 20px;
   margin-bottom: 3em;
 `;
@@ -22,9 +22,9 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 20px;
 `;
 
@@ -71,7 +71,7 @@ export const Input = styled.input`
   border: 1px solid white;
   text-align: center;
   padding-block: 0.25em;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-sm);
   border-radius: var(--radius-sm);
 
   &:focus-visible {
@@ -85,6 +85,24 @@ export const Input = styled.input`
   }
 `;
 
+export const AddSoundButton = styled.button`
+  width: 100%;
+  color: #fff;
+  background: none;
+  padding-block: 0.5em;
+  border: 2px solid var(--clr-accent);
+  border-radius: 20px;
+`;
+
+export const HiddenInput = styled.input`
+  height: 0;
+  width: 0;
+  position: absolute;
+  z-index: -100;
+  visibility: hidden;
+  display: none;
+`;
+
 export const Select = styled.select`
   height: 26px;
   height: var(--space-xxl);
@@ -92,7 +110,7 @@ export const Select = styled.select`
   color: var(--clr-text-secondary);
   background-color: var(--clr-bg-primary);
   text-align: center;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-sm);
   border: none;
   &:focus-visible {
     outline: none;
@@ -114,6 +132,19 @@ export const InputContainer = styled.div`
   position: relative;
 `;
 
+export const AddSoundContainer = styled.div`
+  width: 100%;
+`;
+
+export const HiddenInputContainer = styled.div`
+  position: absolute;
+  z-index: -100;
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  display: none;
+`;
+
 export const ErrorMessage = styled.p`
   color: #dc3545;
   position: absolute;
@@ -130,7 +161,7 @@ export const Submit = styled.button`
   border-radius: var(--radius-sm);
   background-color: var(--clr-accent);
   text-transform: uppercase;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-sm);
   font-weight: bold;
   margin-bottom: 2em;
 `;
