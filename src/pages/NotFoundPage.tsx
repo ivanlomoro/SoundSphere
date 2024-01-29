@@ -17,6 +17,7 @@ function NotFoundPage() {
         allowEscapeKey: false,
         allowEnterKey: true,
         backdrop: false,
+        confirmButtonColor: "#bd00ff",
       });
       if (result.isConfirmed) {
         navigate("/home");

@@ -37,7 +37,9 @@ const AddToPlayList = () => {
       inputValue: "",
       showCancelButton: true,
       background: "#111111",
-      color: "white",
+      color: "#fff",
+      confirmButtonColor: "#bd00ff",
+
       inputValidator: (value) => {
         if (!value) {
           return "You need to write something!";

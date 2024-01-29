@@ -50,7 +50,8 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
       inputValue: editSong.name,
       showCancelButton: true,
       background: "#111111",
-      color: "white",
+      color: "#ffffff",
+      confirmButtonColor: "#bd00ff",
       inputValidator: (value) => {
         if (!value) {
           return "You need to write something!";
@@ -88,7 +89,8 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         inputOptions,
         background: "#111111",
         customClass: "swal2-radio",
-        color: "white",
+        color: "#ffffff",
+        confirmButtonColor: "#bd00ff",
         inputValidator: (value) => {
           if (!value) {
             return "You need to choose something!";
@@ -128,11 +130,11 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         text: "You won't be able to revert this.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#FF3B4B",
         cancelButtonColor: "#677580",
         confirmButtonText: "Yes, delete it!",
         background: "#111111",
-        color: "white",
+        color: "#ffffff",
+        confirmButtonColor: "#bd00ff",
       });
 
       if (result.isConfirmed) {

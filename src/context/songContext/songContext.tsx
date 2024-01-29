@@ -96,7 +96,8 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
             text: "Your song has been deleted.",
             icon: "success",
             background: "#111111",
-            color: "white",
+            color: "#ffffff",
+            confirmButtonColor: "#bd00ff",
           });
         } else {
           console.error(`Error deleting song: ${response.statusText}`);
@@ -124,12 +125,13 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
         const response = await axios.patch(URL, editSong);
         if (response.status === 201) {
           setIsModifiedSong(true);
-          Swal.fire({
+          ({
             title: "Updated song!",
             text: "Your song has been updated.",
             icon: "success",
             background: "#111111",
-            color: "white",
+            color: "#fff",
+            confirmButtonColor: "#bd00ff",
           });
         } else {
           console.error(`Error updating song: ${response.statusText}`);

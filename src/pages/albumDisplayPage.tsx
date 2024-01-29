@@ -45,6 +45,7 @@ const AlbumDisplayPage = () => {
         confirmButtonText: "ok",
         background: "#111111",
         color: "white",
+        confirmButtonColor: "#bd00ff",
       });
       throw error;
     }
