@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext } from 'react';
 import { Artist, Songs } from '../../Types/SongsTypes';
 import { Playlist } from '../../Types/PlaylistFormData';

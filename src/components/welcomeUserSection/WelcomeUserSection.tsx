@@ -3,16 +3,16 @@ import { UserAvatar } from "../userAvatar/UserAvatar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { USERPAGE } from "../../routes/paths";
-import { FaUserGear } from "react-icons/fa6";
 import { FC } from "react";
 
 const StyledWelcomeUserSection = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: var(--space-md);
   cursor: pointer;
   margin-top: 0.5rem;
+  margin-inline: 2em;
 `;
 
 const RowContainer = styled.div`
@@ -21,15 +21,11 @@ const RowContainer = styled.div`
   gap: var(--space-md);
 `;
 
-const StyledIconSection = styled.div`
-  margin-left: 2rem;
-`;
-
 type Props = {
   editUserLogo?: boolean;
 };
 
-export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
+export const WelcomeUserSection: FC<Props> = () => {
   const { user } = useAuth0();
   return user ? (
     <Link to={USERPAGE}>
@@ -37,11 +33,6 @@ export const WelcomeUserSection: FC<Props> = ({ editUserLogo }) => {
         <RowContainer>
           <UserAvatar />
         </RowContainer>
-        {editUserLogo && (
-          <StyledIconSection>
-            <FaUserGear className="custom-icon" />
-          </StyledIconSection>
-        )}
       </StyledWelcomeUserSection>
     </Link>
   ) : null;

@@ -3,10 +3,8 @@ import { FC } from "react";
 import Swal from "sweetalert2";
 import { useSongs } from "../../context/songContext/songContext";
 import "./CardContainerButtons.styles.css";
-// import { useGenres } from "../../context/genreContext/genreContext";
 import { Songs } from "../../Types/SongsTypes";
 import styled from "styled-components";
-// import { GenreType } from "../../Types/GenreTypes";
 import { Button } from "..";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -32,16 +30,6 @@ const StyledColumnContainer = styled.div`
 const CardContainerButtons: FC<Props> = ({ song }) => {
   const stringId = song.id.toString();
   const { deleteSong, updateSong } = useSongs();
-  // const { apiGenres } = useGenres();
-
-  // const genreItems = () => {
-  //   const genres: { [key: string]: string } = {};
-  //   apiGenres.map((genre: GenreType) => {
-  //     genres[genre.id] = genre.name;
-  //   });
-  //   return genres;
-  // };
-
   const handleUpdateSong = async (songId: string, editSong: Songs) => {
     const { value: name } = (await Swal.fire({
       title: "Enter the new song name",
@@ -58,25 +46,6 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         }
       },
     })) as { value: string };
-
-    // if (name) {
-    //   const { value: genre } = (await Swal.fire({
-    //     title: "Select field validation",
-    //     input: "select",
-    //     inputValue: editSong.Genre.name,
-    //     background: "#111111",
-    //     color: "white",
-    //     inputOptions: genreItems(),
-    //     inputPlaceholder: "Select your genre",
-    //     customClass: "swal2-select option",
-    //     showCancelButton: true,
-    //     inputValidator: (value) => {
-    //       if (!value) {
-    //         value = editSong.Genre.name;
-    //         return "You need to choose something!";
-    //       }
-    //     },
-    //   })) as { value: string };
 
     if (name) {
       const inputOptions = {
@@ -106,7 +75,6 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
         }
         const editedSong = {
           name: name,
-          // genreId: genre,
           isPublic: newPrivacity,
         };
 

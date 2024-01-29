@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import { HeaderSection } from "../components";
 import { PlaylistType } from "../interfaces/PlaylistType";
-// import { useRenderer } from "../hooks/useRenderer";
 import { AlbumSongCard } from "../components/card/AlbumSongCard";
 import { ListSongsContainer } from "./albumDisplayPage";
 import { useInteractions } from "../context/userContext/InteractionContext";
@@ -20,10 +19,6 @@ const PlaylistDisplayPage = () => {
     null
   );
   const { addToRecents } = useInteractions();
-  // const { renderSongs: renderPlaylistSongs } = useRenderer({
-  //   songs: songs,
-  //   layout: "list",
-  // });
 
   useEffect(() => {
     if (userPlaylists) {
@@ -50,11 +45,6 @@ const PlaylistDisplayPage = () => {
       {selectedPlaylist && <PlaylistHeader playlist={selectedPlaylist} />}
 
       <div>
-        {/* {selectedPlaylist && (
-          <>
-            <ul>{renderPlaylistSongs()}</ul>
-          </>
-        )} */}
         {selectedPlaylist && (
           <ListSongsContainer className="list-none">
             {songs.map((song, index) => (

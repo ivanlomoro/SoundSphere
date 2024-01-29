@@ -5,7 +5,6 @@
   background-color: #fff;
   height: var(--space-xl);
   border-radius: var(--radius-sm);
-  margin-inline: 2em;
 }
 
 .search__input {
@@ -13,10 +12,11 @@
   padding-left: var(--space-xxl);
   padding-right: var(--space-sm);
   background-color: #747474;
-  color: white;
+  color: var(--clr-bg-elements);
   background: none;
   border: none;
   font-family: inherit;
+  margin-inline: 4em;
 }
 
 .search__input::placeholder {

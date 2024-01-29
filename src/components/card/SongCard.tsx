@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-
 import {
   GridCard,
   ListCard,
@@ -75,21 +73,6 @@ export function SongCard({ song, variant = "card", songs }: SongCardProps) {
       <DescriptionComponent>
         <SongName>{song.name}</SongName>
       </DescriptionComponent>
-      {/* {variant != "grid" && (
-          <CommonButtonContainer>
-            <FaveButton
-              onClick={() => {
-                toggleFavorite(song);
-              }}
-            >
-              {isFavorite(song.id) ? <FullHeart /> : <EmptyHeart />}
-            </FaveButton>
-            <FaveButton onClick={() => setSongForPlaylist(song)}>
-              <Plus />
-            </FaveButton>
-          </CommonButtonContainer>
-        )}
-      */}
       {location.pathname === MYSONGSPAGE && (
         <CardContainerButtons song={song} />
       )}

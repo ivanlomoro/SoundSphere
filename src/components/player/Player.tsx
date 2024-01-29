@@ -57,15 +57,6 @@ const Player = () => {
     setCurrentList(updatedCurrentList);
   }, [updatedCurrentList]);
 
-  // const handleProgressClick = (event: CustomEventType) => {
-  //   const progressBar = event.target;
-  //   const clickPosition = event.nativeEvent.offsetX;
-  //   const progressBarWidth = progressBar.clientWidth;
-  //   const fraction = clickPosition / progressBarWidth;
-  //   console.log(fraction);
-  //   playerRef.current && playerRef.current.seekTo(fraction, "fraction");
-  // };
-
   const handleProgressBar = (position: number) => {
     playerRef.current && playerRef.current.seekTo(position);
   };
