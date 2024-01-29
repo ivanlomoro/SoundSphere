@@ -72,7 +72,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
 
   const getSongById = async (songId: string) => {
     if (songId != null) {
-      const URL = `${apiUrl}/song/${songId}`;
+      const URL = `${apiUrl}song/${songId}`;
       try {
         const response = await axios.get(URL);
         const song: Songs = response.data;
