@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 const Cage = styled.div`
-  height: 5em;
   padding: 13px;
   background-color: #f0f0f0;
   border-radius: 5px;
   font-size: 1.5em;
+  aspect-ratio: 2/1;
   @media only screen and (max-width: 400px) {
     font-size: 1em;
   }

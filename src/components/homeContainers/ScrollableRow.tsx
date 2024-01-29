@@ -1,11 +1,11 @@
-import React, { type ReactNode } from 'react'
-import styled from 'styled-components'
+import React, { type ReactNode } from "react";
+import styled from "styled-components";
 
 const ScrollableRow = styled.ul`
   display: flex;
   padding-inline-start: 0px;
   width: 95vw;
-  overflow-x: auto;
+  overflow-x: scroll;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 
@@ -15,15 +15,15 @@ const ScrollableRow = styled.ul`
 
   scrollbar-width: none;
   -ms-overflow-style: none;
-`
+`;
 
 interface ScrollableRowProps {
-  children: ReactNode
-  style?: React.CSSProperties
+  children: ReactNode;
+  style?: React.CSSProperties;
 }
 
 export const ScrollableRowComponent: React.FC<ScrollableRowProps> = ({
-  children
+  children,
 }) => {
-  return <ScrollableRow>{children}</ScrollableRow>
-}
+  return <ScrollableRow>{children}</ScrollableRow>;
+};

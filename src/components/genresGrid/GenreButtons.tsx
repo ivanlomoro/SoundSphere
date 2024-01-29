@@ -13,10 +13,11 @@ const LinkButton = styled.div`
   color: white;
   border-radius: 0.6rem;
   font-size: 1em;
-  flex: 1;
   display: flex;
   justify-content: center;
   margin: 1em;
+  padding-inline: var(--space-sm);
+  width: 10rem;
 `;
 
 function GenreButtons() {

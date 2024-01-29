@@ -112,6 +112,14 @@ const CardContainerButtons: FC<Props> = ({ song }) => {
 
         try {
           updateSong(songId, editedSong);
+          Swal.fire({
+            title: "Updated song!",
+            text: "Your song has been updated.",
+            icon: "success",
+            background: "#111111",
+            color: "#ffffff",
+            confirmButtonColor: "#bd00ff",
+          });
         } catch (error) {
           console.error(error);
           Swal.fire(
