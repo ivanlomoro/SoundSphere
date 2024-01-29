@@ -28,7 +28,7 @@ const WelcomeText = styled.h1`
   color: var(--cl-text-secondary);
 ;`
 
-export const NavbarHome = () => {
+const NavbarHome = () => {
   const { user, isLoading } = useAuth0();
 
   return (
@@ -44,3 +44,5 @@ export const NavbarHome = () => {
     </NavbarContainer>
   );
 };
+
+export default NavbarHome
