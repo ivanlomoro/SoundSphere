@@ -82,6 +82,11 @@ const StyledInvisibleButton = styled(StyledButton)`
   color: var(--clr-text-primary);
 `;
 
+export const StyledInvisibleUnderLinedButton = styled(StyledInvisibleButton)`
+  text-decoration: underline;
+  font-size: var(--fs-sm);
+`;
+
 const StyledButtonNav = styled.button`
   cursor: pointer;
   position: relative;

@@ -8,10 +8,13 @@ import { ListSongsContainer } from "./albumDisplayPage";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { PlayerContext } from "../context/playerContext/playerContext";
 import { PlaylistHeader } from "../components/albumHeader/albumHeader";
+import deleteData from "../api/deleteApi";
+import toast from "react-hot-toast";
+import { StyledInvisibleUnderLinedButton } from "../components/button/Button";
 
 const PlaylistDisplayPage = () => {
   const { playlistId } = useParams();
-  const { getMusicByPlaylist, userPlaylists, songs } =
+  const { getMusicByPlaylist, userPlaylists, songs, setUserPlaylists } =
     useContext(PlaylistContext);
   const { setCurrentSong, setCurrentList, setPlaying } =
     useContext(PlayerContext);
@@ -19,6 +22,26 @@ const PlaylistDisplayPage = () => {
     null
   );
   const { addToRecents } = useInteractions();
+
+  const navigate = useNavigate();
+
+  const handlePlaylistDelete = async () => {
+    const res = await deleteData(`playlist/${playlistId}`);
+    if (typeof res === "string") toast.error("Can't delete this playlist");
+    if (typeof res !== "string") {
+      setUserPlaylists((prevUserPlaylist: PlaylistType[] | null) => {
+        return (
+          prevUserPlaylist &&
+          prevUserPlaylist.filter((playlist) => {
+            return playlist.id !== playlistId;
+          })
+        );
+      });
+
+      await toast.success("Playlist deleted successfully");
+      navigate("/favorites");
+    }
+  };
 
   useEffect(() => {
     if (userPlaylists) {
@@ -32,8 +55,6 @@ const PlaylistDisplayPage = () => {
     }
   }, [playlistId, userPlaylists]);
 
-  const navigate = useNavigate();
-
   return (
     <>
       <HeaderSection
@@ -41,6 +62,16 @@ const PlaylistDisplayPage = () => {
         withBackButton={true}
         arrowBackAction={() => navigate(-1)}
       />
+
+      {playlistId && (
+        <StyledInvisibleUnderLinedButton
+          onClick={() => {
+            handlePlaylistDelete();
+          }}
+        >
+          Delete Playlist
+        </StyledInvisibleUnderLinedButton>
+      )}
 
       {selectedPlaylist && <PlaylistHeader playlist={selectedPlaylist} />}
 

@@ -15,7 +15,7 @@ const deleteData = async (url: string) => {
     );
     return { deletedPlaylist, statusText };
   } catch (error) {
-    return error;
+    return "Can't delete playlist";
   }
 };
 
