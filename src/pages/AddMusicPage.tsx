@@ -9,6 +9,11 @@ import { useForm } from "react-hook-form";
 import { SongUploadData } from "../context/songContext/ApiCalls";
 import { genres } from "../interfaces/uploadTypes";
 import { HiddenInputContainer } from "../components/uploadForm/UploadFormComponents";
+import { AddSoundLabel } from "../components/uploadForm/UploadFormComponents";
+import {
+  AddSoundContainer,
+  AddSoundButton,
+} from "../components/uploadForm/UploadFormComponents";
 import {
   ImageContainer,
   Image,
@@ -233,12 +238,12 @@ export const AddMusicPage = () => {
                 onChange: soundUpload,
               })}
             />
-            <InputContainer>
-              <label htmlFor="sound-upload">
-                <StyledButtonOutline as="span">Add Sound</StyledButtonOutline>
-              </label>
+            <AddSoundContainer>
+              <AddSoundLabel htmlFor="sound-upload">
+                <AddSoundButton as="span">Add Sound</AddSoundButton>
+              </AddSoundLabel>
               {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
-            </InputContainer>
+            </AddSoundContainer>
           </ButtonContainer>
           <InputContainer>
             <Input

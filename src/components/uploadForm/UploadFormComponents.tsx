@@ -85,6 +85,11 @@ export const Input = styled.input`
   }
 `;
 
+export const AddSoundLabel = styled.label`
+  display: block;
+  width: 100%;
+`;
+
 export const AddSoundButton = styled.button`
   width: 100%;
   color: #fff;
@@ -92,6 +97,8 @@ export const AddSoundButton = styled.button`
   padding-block: 0.5em;
   border: 2px solid var(--clr-accent);
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
 `;
 
 export const HiddenInput = styled.input`
