@@ -225,7 +225,7 @@ export const AddMusicPage = () => {
             />
             <AddSoundContainer>
               <label htmlFor="sound-upload">
-                <AddSoundButton>Add Sound</AddSoundButton>
+                <AddSoundButton as="span">Add Sound</AddSoundButton>
               </label>
               {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
             </AddSoundContainer>
