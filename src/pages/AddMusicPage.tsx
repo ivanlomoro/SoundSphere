@@ -8,6 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useForm } from "react-hook-form";
 import { SongUploadData } from "../context/songContext/ApiCalls";
 import { genres } from "../interfaces/uploadTypes";
+import { HiddenInputContainer } from "../components/uploadForm/UploadFormComponents";
 import {
   ImageContainer,
   Image,
@@ -18,7 +19,6 @@ import {
   ErrorMessage,
   Submit,
   InputContainer,
-  AddSoundContainer,
 } from "../components/uploadForm/UploadFormComponents";
 import getData from "../api/getApi";
 import toast from "react-hot-toast";
@@ -26,8 +26,6 @@ import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
 import { Artist, Songs } from "../Types/SongsTypes";
 import { GenreType } from "../Types/GenreTypes";
-import { HiddenInputContainer } from "../components/uploadForm/UploadFormComponents";
-import { AddSoundButton } from "../components/uploadForm/UploadFormComponents";
 
 export interface Album {
   id: string;
@@ -57,7 +55,7 @@ export const AddMusicPage = () => {
   const [axiosLoading, setAxiosLoading] = useState(false);
   const selectedGenre = watch("genreId");
   const selectedAlbum = watch("albumId");
-  const uploadImageRef = useRef<HTMLInputElement>(null);
+  const uploadImageRef = useRef<HTMLLabelElement>(null);
 
   useEffect(() => {
     if (user) {
@@ -175,6 +173,19 @@ export const AddMusicPage = () => {
   const genreValidation = (value: string) =>
     value !== "" || "Please select a genre.";
 
+  // const albumValidation = (value: string) =>
+  //   value !== "" || "Please select an album or create a new one.";
+
+  // const newAlbumValidation = (value: string) => {
+  //   if (watch("albumId") == "newAlbum") {
+  //     return (
+  //       (value && value.length > 3) ||
+  //       "New album name should be more than 3 characters long."
+  //     );
+  //   }
+  //   return true;
+  // };
+
   return (
     <section>
       <HeaderSection text="Upload" />
@@ -184,7 +195,7 @@ export const AddMusicPage = () => {
             {imageSrc ? (
               <Image src={imageSrc} alt="uploaded image" />
             ) : (
-              <AiOutlineCamera size={40} />
+              <AiOutlineCamera size={70} />
             )}
           </ImageContainer>
           <ButtonContainer>
@@ -200,10 +211,9 @@ export const AddMusicPage = () => {
                 },
                 onChange: imageUpload,
               })}
-              ref={uploadImageRef}
             />
             <HiddenInputContainer>
-              <label htmlFor="image-upload">
+              <label htmlFor="image-upload" ref={uploadImageRef}>
                 <StyledButtonOutline as="span">Add Image</StyledButtonOutline>
               </label>
               {errors.thumbnail && (
@@ -223,12 +233,12 @@ export const AddMusicPage = () => {
                 onChange: soundUpload,
               })}
             />
-            <AddSoundContainer>
+            <InputContainer>
               <label htmlFor="sound-upload">
-                <AddSoundButton as="span">Add Sound</AddSoundButton>
+                <StyledButtonOutline as="span">Add Sound</StyledButtonOutline>
               </label>
               {errors.url && <ErrorMessage>{errors.url.message}</ErrorMessage>}
-            </AddSoundContainer>
+            </InputContainer>
           </ButtonContainer>
           <InputContainer>
             <Input

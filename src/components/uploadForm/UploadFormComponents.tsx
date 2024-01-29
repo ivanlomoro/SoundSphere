@@ -151,7 +151,7 @@ export const ErrorMessage = styled.p`
   top: 2.25em;
 `;
 
-export const Submit = styled.input`
+export const Submit = styled.button`
   bottom: 80px;
   width: 80vw;
   margin: auto;

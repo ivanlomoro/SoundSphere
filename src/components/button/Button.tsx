@@ -20,6 +20,10 @@ export const StyledButtonOutline = styled(StyledButton)`
   font-weight: bold;
 `;
 
+export const UploadSoundBtn = styled(StyledButtonOutline)`
+  width: 100%;
+`;
+
 const StyledButtonPill = styled(StyledButton)`
   margin-top: 1em;
   font-size: var(--fs-md);
