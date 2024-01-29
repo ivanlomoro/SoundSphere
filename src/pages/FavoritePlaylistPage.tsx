@@ -9,10 +9,7 @@ import {
   CardPlaylist,
 } from "../components/card/card.styled.components";
 
-import {
-  CardDescription,
-} from "../components/card/card.styled.components";
-
+import { CardDescription } from "../components/card/card.styled.components";
 
 const PlaylistName = styled.div`
   font-size: var(--fs-md);
@@ -20,12 +17,14 @@ const PlaylistName = styled.div`
   justify-content: center;
 `;
 
-
 const AlbumsContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-sm);
+  gap: 1em;
   justify-items: center;
+  min-width: 90%;
+  width: 100%;
+  overflow-x: hidden;
 `;
 
 const StyledLink = styled(Link)`

@@ -48,7 +48,30 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+p {
+  user-select: none;
+}
+span {
+  user-select: none;
+}
+h1{
+  user-select: none;
+}
+h2{
+  user-select: none;
+}
+h3{
+  user-select: none;
+}
+h4{
+  user-select: none;
+}
+h5{
+  user-select: none;
+}
+h6{
+  user-select: none;
+}
 button,
 input {
   font-family: inherit;

@@ -62,7 +62,13 @@ export const Card = styled.li`
   margin: var(--space-sm);
 `;
 
-export const CardPlaylist = styled(Card)`
+export const CardForLibrary = styled(Card)`
+  min-width: 80%;
+  margin: 0;
+  width: 100%;
+`;
+
+export const CardPlaylist = styled(CardForLibrary)`
   width: 65%;
   aspect-ratio: 1/1;
 `;
