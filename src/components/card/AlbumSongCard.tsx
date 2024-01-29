@@ -33,6 +33,13 @@ const ButtonsContainer = styled(CommonButtonContainer)`
 `;
 
 const SongTitle = styled.div`
+  width: 65%;
+`;
+
+const SongHeading = styled.h3`
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 `;
 
@@ -44,7 +51,7 @@ export const AlbumSongCard: FC<Props> = ({ song, isPlaylist }) => {
   return (
     <InlineContiner>
       <SongTitle>
-        <h3>{name}</h3>
+        <SongHeading>{name}</SongHeading>
       </SongTitle>
       <ButtonsContainer>
         <FaveButton

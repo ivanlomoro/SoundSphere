@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 import { useParams } from "react-router-dom";
 import { Album } from "./AddMusicPage";
 import { AlbumHeader } from "../components/albumHeader/albumHeader";

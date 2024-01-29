@@ -4,7 +4,9 @@ import { useSongs } from "../context/songContext/songContext";
 import { UserContext } from "../context/userContext/UserContext";
 import { Link } from "react-router-dom";
 import { ADDMUSICPAGE } from "../routes/paths";
-import { Container, HeaderSection, WelcomeUserSection } from "../components";
+import { WelcomeUserSection } from "../components/welcomeUserSection";
+import { Container } from "../components/containers/Container";
+import { HeaderSection } from "../components/header/Header";
 import { UserContainer } from "../components/containers/UserContainer";
 import Loader from "../components/Loader/Loader";
 

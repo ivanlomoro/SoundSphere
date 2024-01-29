@@ -1,11 +1,12 @@
-import { HeaderSection, ScrollableRowComponent } from "../components";
+import { HeaderSection } from "../components/header/Header";
+import { ScrollableRowComponent } from "../components/homeContainers/ScrollableRow";
 import GenreButtons from "../components/genresGrid/GenreButtons";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
 import { ArtistCard } from "../components/card/ArtistCard";
 import { AlbumCard } from "../components/card/AlbumCard";
-import { RecentGrid } from "../components";
+import { RecentGrid } from "../components/homeContainers/FavoritesGrid";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 

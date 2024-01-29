@@ -2,7 +2,7 @@ import { Button } from "../components/button/Button";
 import { WelcomeUserSection } from "../components/welcomeUserSection/WelcomeUserSection";
 import { UserDetails } from "../components/userDetails/UserDetails";
 import { UserContainer } from "../components/containers/UserContainer";
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 import { useAuth0 } from "@auth0/auth0-react";
 import { styled } from "styled-components";
 
@@ -18,7 +18,7 @@ const StyledProfileContainer = styled.div`
 
 export const UserPage = () => {
   const { logout } = useAuth0();
-  
+
   return (
     <>
       <HeaderSection text="Profile" />
@@ -27,7 +27,12 @@ export const UserPage = () => {
           <WelcomeUserSection />
           <UserDetails />
         </UserContainer>
-        <Button content="Log out" onClick={ () =>logout({ logoutParams: { returnTo: window.location.origin } })} />
+        <Button
+          content="Log out"
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+        />
       </StyledProfileContainer>
     </>
   );

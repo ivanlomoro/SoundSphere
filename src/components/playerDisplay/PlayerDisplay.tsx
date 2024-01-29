@@ -9,12 +9,12 @@ import { FullHeart } from "../card/card.styled.components";
 import { EmptyHeart } from "../card/card.styled.components";
 import { Songs } from "../../Types/SongsTypes";
 import { FaRandom } from "react-icons/fa";
+import { HeaderSection } from "../header/Header";
 
 import {
   DurationType,
   ProgressType,
 } from "../../context/playerContext/playerContext";
-import { HeaderSection } from "..";
 import VolumeController from "../volumeController/VolumeController";
 
 export type CustomEventType = {

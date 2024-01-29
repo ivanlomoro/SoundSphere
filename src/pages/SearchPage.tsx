@@ -1,4 +1,4 @@
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import GenresGrid from "../components/genresGrid/GenresGrid";
 

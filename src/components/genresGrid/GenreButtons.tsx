@@ -1,10 +1,9 @@
 import { genres } from "../../interfaces/uploadTypes";
 import styled from "styled-components";
-import { ScrollableRowComponent } from "..";
 import axios from "axios";
 import { useState } from "react";
 import { Songs } from "../../Types/SongsTypes";
-
+import { ScrollableRowComponent } from "../homeContainers/ScrollableRow";
 import { useRenderer } from "../../hooks/useRenderer";
 useRenderer;
 

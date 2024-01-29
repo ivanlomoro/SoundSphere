@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
-import { Button, HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
+import { Button } from "../components/button/Button";
 import { useContext } from "react";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
 import styled from "styled-components";

@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import { HeaderSection } from "../components";
 import { AiOutlineCamera } from "react-icons/ai";
 import postData from "../api/postApi";
 import axios, { AxiosResponse } from "axios";
@@ -31,6 +30,7 @@ import { StyledButtonOutline } from "../components/button/Button";
 import "../components/uploadForm/switch.css";
 import { Artist, Songs } from "../Types/SongsTypes";
 import { GenreType } from "../Types/GenreTypes";
+import { HeaderSection } from "../components/header/Header";
 
 export interface Album {
   id: string;

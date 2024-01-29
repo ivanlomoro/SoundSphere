@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Songs } from "../Types/SongsTypes";
 import { useRenderer } from "../hooks/useRenderer";
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 const GenrePage = () => {
   const [songByGenre, setSongByGenre] = useState<Songs[]>([]);
   const { genreId } = useParams();

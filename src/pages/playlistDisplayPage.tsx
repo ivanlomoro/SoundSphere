@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PlaylistContext } from "../context/playlistContext/PlayListContext";
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 import { PlaylistType } from "../interfaces/PlaylistType";
 import { AlbumSongCard } from "../components/card/AlbumSongCard";
 import { ListSongsContainer } from "./albumDisplayPage";

@@ -5,8 +5,8 @@ import { useSongs } from "../../context/songContext/songContext";
 import "./CardContainerButtons.styles.css";
 import { Songs } from "../../Types/SongsTypes";
 import styled from "styled-components";
-import { Button } from "..";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Button } from "../button/Button";
 
 export type editSongType = {
   name: string;

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 import { useApiCalls } from "../context/songContext/ApiCalls";
 import { useEffect, useState } from "react";
 import axios from "axios";

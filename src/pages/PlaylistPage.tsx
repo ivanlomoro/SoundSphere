@@ -1,6 +1,6 @@
 import { useInteractions } from "../context/userContext/InteractionContext";
 import { useRenderer } from "../hooks/useRenderer";
-import { HeaderSection } from "../components";
+import { HeaderSection } from "../components/header/Header";
 
 const PlaylistPage = () => {
   const { playlists } = useInteractions();
