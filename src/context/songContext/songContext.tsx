@@ -58,7 +58,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
   const getMySongs = async (user: UserInterface | null) => {
     if (user != null) {
       const userId = user.userId;
-      const URL = `${apiUrl}/song/user/${userId}`;
+      const URL = `${apiUrl}song/user/${userId}`;
 
       try {
         const response = await axios.get(URL);
@@ -85,7 +85,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
 
   const deleteSong = async (songId: string) => {
     if (songId != null) {
-      const URL = `${apiUrl}/song/${songId}`;
+      const URL = `${apiUrl}song/${songId}`;
 
       try {
         const response = await axios.delete(URL);
@@ -119,7 +119,7 @@ const SongsProvider: React.FC<SongsProviderProps> = ({ children }) => {
 
   const updateSong = async (songId: string, editSong: editSongType) => {
     if (songId != null) {
-      const URL = `${apiUrl}/song/${songId}`;
+      const URL = `${apiUrl}song/${songId}`;
       try {
         const response = await axios.patch(URL, editSong);
         if (response.status === 201) {
