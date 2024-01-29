@@ -124,9 +124,9 @@ const ApiCallsProvider: React.FC<ProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchSongs(0);
-    fetchArtists(0);
-    fetchAlbums(0);
+    fetchSongs(Math.floor(Math.random() * 45));
+    fetchArtists(Math.floor(Math.random() * 9));
+    fetchAlbums(Math.floor(Math.random() * 25));
   }, []);
 
   return (
