@@ -9,13 +9,12 @@ import { UserContainer } from "../components/containers/UserContainer";
 import Loader from "../components/Loader/Loader";
 
 const MySongsPage = () => {
-  const {
-    mySongs,
-    getMySongs,
-    isModifiedSong,
-  } = useSongs();
+  const { mySongs, getMySongs, isModifiedSong } = useSongs();
   const [isLoading, setLoading] = useState<boolean>(true);
-  const { renderSongs: renderMySongs } = useRenderer({songs: mySongs,layout: "list"});
+  const { renderSongs: renderMySongs } = useRenderer({
+    songs: mySongs,
+    layout: "list",
+  });
   const { user } = useContext(UserContext);
 
   useEffect(() => {

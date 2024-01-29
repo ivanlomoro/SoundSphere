@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import { useApiCalls } from "./ApiCalls";
 import { SongsContextType } from "../../Types/SongsTypes";
 
-const apiUrl = import.meta.env.VITE_AUTH0_AUDIENCE;
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 const SongsContext = createContext<SongsContextType | null>(null);
 
 type SongsProviderProps = {
