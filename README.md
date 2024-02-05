@@ -50,3 +50,12 @@ The SoundSphere Frontend is automatically deployed on [Vercel](https://vercel.co
 - MVC (Model-View-Controller) design pattern.
 - [Vercel](https://vercel.com/) for efficient and automatic deployment.
 - [Cloudinary](https://cloudinary.com/) for media storage and management.
+
+## Preview
+
+<table>
+  <tr>
+    <td><img src="./src/assets/imgs/SoundSphere.png" alt="Mobile Version Photo" width="400"/></td>
+    <td><img src="./src/assets/preview/mobileVersion.gif" alt="Mobile Version Video" width="400"/></td>
+  </tr>
+</table>
