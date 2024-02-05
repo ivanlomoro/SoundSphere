@@ -56,6 +56,6 @@ The SoundSphere Frontend is automatically deployed on [Vercel](https://vercel.co
 <table>
   <tr>
     <td><img src="./src/assets/imgs/SoundSphere.png" alt="Mobile Version Photo" width="400"/></td>
-    <td><img src="./src/assets/preview/mobileVersion.gif" alt="Mobile Version Video" width="400"/></td>
+    <td><img src="./src/assets/imgs/soundsphere.gif" alt="Mobile Version Video" width="400"/></td>
   </tr>
 </table>
